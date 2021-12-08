@@ -9,7 +9,7 @@
 
 **目次**
 - Ethereum
-  - Ethereum/Smart Contractの基礎
+  - Ethereum/コントラクトの基礎
   - EVMの仕様を利用したパズル
   - `tx.origin`の誤用
   - オンチェーンで生成する擬似乱数は予測可能
@@ -40,7 +40,7 @@
   - Same Nonce Attackによる秘密鍵の復元
   - アドレスの総当り
   - 公開鍵の復元
-  - secp256k1における暗号化＆復号
+  - secp256k1における暗号化と復号
   - コンストラクタがtypoでただの関数に（< Solidity 0.5.0）
   - 初期化されていないストレージポインタを利用したストレージ書き換え（< Solidity 0.5.0）
   - その他アドホックな脆弱性・手法
@@ -60,7 +60,7 @@
 - 特定のバージョンで有効で最新のバージョンで有効でない場合は末尾にバージョンを記載。現状Solidityのみ該当。
 - 表記ゆれ回避のため用語は可能な限りSolidityのキーワードで統一し、Ethereum Virtual Machine (EVM)のキーワードは最低限にする。
 
-### Ethereum/Smart Contractの基礎
+### Ethereum/コントラクトの基礎
 - Ethereumの基礎、Solidityの基本的な[言語仕様](https://solidity-ja.readthedocs.io/)、コントラクトの基本的な操作方法について知っていれば解ける。
 
 | 問題                                       | 備考、キーワード        |
@@ -77,7 +77,7 @@
 
 ### EVMの仕様を利用したパズル
 - EVMの仕様を理解していれば解けるパズル系の問題。
-- 特に脆弱性があったり攻撃手法を用いたりはしない。
+- 特に脆弱性を利用したり攻撃手法を用いたりはしない。
 
 | 問題                                      | 備考、キーワード                                                             |
 | ----------------------------------------- | ---------------------------------------------------------------------------- |
@@ -108,11 +108,11 @@
 | Ethernaut: 3. Coin Flip               |                  |
 
 ### ERC-20の基礎
-- [ERC-20: Token Standard]( https://eips.ethereum.org/EIPS/eip-20 )の仕様を理解していれば解ける。
+- [ERC-20: Token Standard](https://eips.ethereum.org/EIPS/eip-20)の仕様を理解していれば解ける。
 
 | 問題                       | 備考、キーワード                      |
 | -------------------------- | ------------------------------------- |
-| Ethernaut: 15. Naught Coin | `transfer`, `approve`, `transferFrom` |
+| Ethernaut: 15. Naught Coin | `transfer`、`approve`、`transferFrom` |
 | Paradigm CTF 2021: Secure  | WETH                                  |
 
 ### `delegatecall`を悪用した任意コード実行
@@ -223,7 +223,7 @@
 
 ### EVMバイトコードのReversing
 - コードが全部あるいは一部だけ与えられていないコントラクトをReversingする。
-- デコンパイラ（[panoramix](https://github.com/eveem-org/panoramix)や[ethervm.io]( https://ethervm.io/decompile ) など）やディスアセンブラ（[ethersplay]( https://github.com/crytic/ethersplay )など）を駆使する。
+- デコンパイラ（[panoramix](https://github.com/eveem-org/panoramix)や[ethervm.io](https://ethervm.io/decompile)など）やディスアセンブラ（[ethersplay](https://github.com/crytic/ethersplay)など）を駆使する。
 
 | 問題                             | 備考、キーワード                |
 | -------------------------------- | ------------------------------- |
@@ -240,7 +240,7 @@
 ### EVMバイトコードゴルフ
 - オペコードの数やバイトコードの長さに制限がある問題。
 
-| 問題名                     | 備考                                                                               |
+| 問題名                     | 備考、キーワード                                                                   |
 | -------------------------- | ---------------------------------------------------------------------------------- |
 | Ethernaut: 18. MagicNumber |                                                                                    |
 | Paradigm CTF 2021: Rever   | 回文判定。さらにそのバイトコードを反転させたコードも回文判定できなくてはならない。 |
@@ -248,7 +248,7 @@
 ### Re-entrancy Attack
 - コントラクトAのある関数内に別のコントラクトBとのインタラクションやBへのEther送金が含まれている場合、一時的にBに制御が移る。
 - この制御の中で、BはAにコールできるため、Aがその関数の実行途中にコールされない前提の設計になっているとバグになる。
-- 例えば、BがAにデポジットしたEtherを引き出す`withdraw`関数を実行したとき、Ether送金でBに制御が移り`withdraw`関数途中にBがもう一度Aの`withdraw`関数を実行できる、といったことが可能になる。単純に2回呼び出すなら限度額以上の引き出しができない設計になっていても、`withdraw`関数の途中に`withdraw`関数が実行されるとその限度額のチェックをバイパスできる設計になってしまっている場合がある。
+- 例えば、BがAにデポジットしたEtherを引き出す`withdraw`関数を実行したとき、Ether送金でBに制御が移り`withdraw`関数途中にBがもう一度Aの`withdraw`関数を実行する、といったことが可能になる。単純に2回呼び出すなら限度額以上の引き出しができない設計になっていても、`withdraw`関数の途中に`withdraw`関数が実行されるとその限度額のチェックをバイパスできる設計になってしまっている場合がある。
 - Re-entrancy Attackを防ぐためにはChecks-Effects-Interactionsパターンを利用する。
 
 | 問題                                      | 備考、キーワード |
@@ -376,12 +376,12 @@
 | ------------------------------ | ---------------------------------------------------------------------------------- |
 | Capture The Ether: Donation    |                                                                                    |
 | Capture The Ether: Fifty years |                                                                                    |
-| Ethernaut: Locked              | [削除]( https://forum.openzeppelin.com/t/ethernaut-locked-with-solidity-0-5/1115 ) |
+| Ethernaut: Locked              | [削除](https://forum.openzeppelin.com/t/ethernaut-locked-with-solidity-0-5/1115) |
 
 ### その他アドホックな脆弱性・手法
-| 問題                       | 備考、キーワード                                                                                |
-| -------------------------- | ----------------------------------------------------------------------------------------------- |
-| Paradigm CTF 2021: Bouncer | バッチ処理に必要な資金が単一処理と同じになってしまっている                                      |
+| 問題                       | 備考、キーワード                                                                                  |
+| -------------------------- | ------------------------------------------------------------------------------------------------- |
+| Paradigm CTF 2021: Bouncer | バッチ処理に必要な資金が単一処理と同じになってしまっている                                        |
 | Paradigm CTF 2021: Market  | Eternal Storageパターンのキーのズレを利用して、あるフィールドの値を別のフィールドの値と認識させる |
 
 ## Bitcoin
