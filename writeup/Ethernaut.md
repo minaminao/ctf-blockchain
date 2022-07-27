@@ -1,7 +1,10 @@
 # Ethernaut Solver with Foundry
-- source: [src](/src)
-- test: [test](/test)
-- deploy: [script](/script)
+Note: All commands below need to be executed in the root directory of this repository.
+
+**Source Files**
+- [Challenge contracts and exploit contracts (/src)](/src)
+- [Scripts to test (/test)](/test)
+- [Scripts to deploy and execute (/script)](/script)
 
 **Table of Contents**
 - [Common Settings](#common-settings)
