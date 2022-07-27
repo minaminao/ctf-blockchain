@@ -3,6 +3,8 @@
 
 問題の並びは適当で難易度順やおすすめ順ではありません。
 
+一部の問題はExploitを公開しています: [writeup/Ethernaut.md](https://github.com/minaminao/ctf-blockchain/blob/main/writeup/Ethernaut.md) 
+
 何か間違い等あればissueかPRで教えて下さい。
 
 ---
