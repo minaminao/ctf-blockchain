@@ -1,7 +1,7 @@
 # Ethernaut Solver with Foundry
-- source: https://github.com/minaminao/ctf-blockchain/tree/main/src
-- test: https://github.com/minaminao/ctf-blockchain/tree/main/test
-- deploy: https://github.com/minaminao/ctf-blockchain/tree/main/script
+- source: [src](/src)
+- test: [test](/test)
+- deploy: [script](/script)
 
 **Table of Contents**
 - [Common Settings](#common-settings)
@@ -49,6 +49,8 @@ forge test
 ```
 
 ## 0. Hello Ethernaut
+[Challenge & Exploit codes](/src/HelloEthernaut)
+
 **Test**
 ```sh
 forge test --match-contract HelloEthernautExploitTest -vvvv
@@ -59,6 +61,8 @@ forge script HelloEthernautExploitScript -vvvv --private-key $PRIVATE_KEY --fork
 ```
 
 ## 1. Fallback
+[Challenge & Exploit codes](/src/Fallback)
+
 **Test**
 ```sh
 forge test --match-contract FallbackExploitTest -vvvv
@@ -69,6 +73,8 @@ forge script FallbackExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $
 ```
 
 ## 2. Fallout
+[Challenge & Exploit codes](/src/Fallout)
+
 **Test**
 ```sh
 forge test --match-contract FalloutExploitTest -vvvv
@@ -80,6 +86,8 @@ forge script FalloutExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $R
 ```
 
 ## 3. Coin Flip
+[Challenge & Exploit codes](/src/CoinFlip)
+
 **Test**
 ```sh
 forge test --match-contract CoinFlipExploitTest -vvvv
@@ -96,6 +104,8 @@ forge script CoinFlipExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $
 ```
 
 ## 4. Telephone
+[Challenge & Exploit codes](/src/Telephone)
+
 **Test**
 ```sh
 forge test --match-contract TelephoneExploitTest -vvvv
@@ -107,6 +117,8 @@ forge script TelephoneExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url 
 ```
 
 ## 5. Token
+[Challenge & Exploit codes](/src/Token)
+
 **Test**
 ```sh
 forge test --match-contract TokenExploitTest -vvvv
@@ -118,6 +130,8 @@ forge script TokenExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC
 ```
 
 ## 6. Delegation
+[Challenge & Exploit codes](/src/Delegation)
+
 **Test**
 ```sh
 forge test --match-contract DelegationExploitTest -vvvv
@@ -129,6 +143,8 @@ forge script DelegationExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url
 ```
 
 ## 7. Force
+[Challenge & Exploit codes](/src/Force)
+
 **Test**
 ```sh
 forge test --match-contract ForceExploitTest -vvvv
@@ -140,6 +156,8 @@ forge script ForceExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC
 ```
 
 ## 8. Vault
+[Challenge & Exploit codes](/src/Vault)
+
 **Test**
 ```sh
 forge test --match-contract VaultExploitTest -vvvv
@@ -156,6 +174,8 @@ cast send --private-key $PRIVATE_KEY <INSTANCE ADDRESS> "unlock(bytes32)" $(cast
 ```
 
 ## 9. King
+[Challenge & Exploit codes](/src/King)
+
 **Test**
 ```sh
 forge test --match-contract KingExploitTest -vvvv
@@ -167,6 +187,8 @@ forge script KingExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_
 ```
 
 ## 10. Re-entrancy
+[Challenge & Exploit codes](/src/Reentrance)
+
 **Test**
 ```sh
 forge test --match-contract ReentranceExploitTest -vvvv
@@ -178,6 +200,8 @@ forge script ReentranceExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url
 ```
 
 ## 11. Elevator
+[Challenge & Exploit codes](/src/Elevator)
+
 **Test**
 ```sh
 forge test --match-contract ElevatorExploitTest -vvvv
@@ -189,6 +213,8 @@ forge script ElevatorExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $
 ```
 
 ## 12. Privacy
+[Challenge & Exploit codes](/src/Privacy)
+
 **Test**
 ```sh
 forge test --match-contract PrivacyExploitTest -vvvv
@@ -200,6 +226,8 @@ forge script PrivacyExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $R
 ```
 
 ## 13. Gatekeeper One
+[Challenge & Exploit codes](/src/GatekeeperOne)
+
 **Test**
 ```sh
 forge test --match-contract GatekeeperOneExploitTest -vvvv
@@ -211,6 +239,8 @@ forge script GatekeeperOneExploitScript -vvvv --private-key $PRIVATE_KEY --fork-
 ```
 
 ## 14. Gatekeeper Two
+[Challenge & Exploit codes](/src/GatekeeperTwo)
+
 **Test**
 ```sh
 forge test --match-contract GatekeeperTwoExploitTest -vvvv
@@ -222,6 +252,8 @@ forge script GatekeeperTwoExploitScript -vvvv --private-key $PRIVATE_KEY --fork-
 ```
 
 ## 15. Naught Coin
+[Challenge & Exploit codes](/src/NaughtCoin)
+
 **Test**
 ```sh
 forge test --match-contract NaughtCoinExploitTest -vvvv
@@ -233,6 +265,8 @@ forge script NaughtCoinExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url
 ```
 
 ## 16. Preservation
+[Challenge & Exploit codes](/src/Preservation)
+
 **Test**
 ```sh
 forge test --match-contract PreservationExploitTest -vvvv
@@ -244,6 +278,8 @@ forge script PreservationtExploitScript -vvvv --private-key $PRIVATE_KEY --fork-
 ```
 
 ## 17. Recovery
+[Challenge & Exploit codes](/src/Recovery)
+
 **Exploit on chain**
 ```sh
 cast send --private-key $PRIVATE_KEY --gas-limit 100000 <INSTANCE ADDRESS> "destroy(address)" <TOKEN ADDRESS>
@@ -251,6 +287,8 @@ cast send --private-key $PRIVATE_KEY --gas-limit 100000 <INSTANCE ADDRESS> "dest
 The token address can be easily found in a blockchain explorer.
 
 ## 18. MagicNumber
+[Challenge & Exploit codes](/src/MagicNumber)
+
 **Test**
 ```sh
 forge test --match-contract MagicNumberExploitTest -vvvv
@@ -262,6 +300,8 @@ forge script MagicNumberExploitScript -vvvv --private-key $PRIVATE_KEY --fork-ur
 ```
 
 ## 19. Alien Codex
+[Challenge & Exploit codes](/src/AlienCodex)
+
 **Test**
 ```sh
 forge test --match-contract AlienCodexExploitTest -vvvv
@@ -273,6 +313,8 @@ forge script AlienCodexExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url
 ```
 
 ## 20. Denial
+[Challenge & Exploit codes](/src/Denial)
+
 **Test**
 ```sh
 forge test --match-contract DenialExploitTest -vvvv
@@ -284,6 +326,8 @@ forge script DenialExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RP
 ```
 
 ## 21. Shop
+[Challenge & Exploit codes](/src/Shop)
+
 **Test**
 ```sh
 forge test --match-contract ShopExploitTest -vvvv
@@ -295,6 +339,8 @@ forge script ShopExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_
 ```
 
 ## 22. Dex
+[Challenge & Exploit codes](/src/Dex)
+
 **Test**
 ```sh
 forge test --match-contract DexExploitTest -vvvv
@@ -306,6 +352,8 @@ forge script DexExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_U
 ```
 
 ## 23. Dex Two
+[Challenge & Exploit codes](/src/DexTwo)
+
 **Test**
 ```sh
 forge test --match-contract DexTwoExploitTest -vvvv
@@ -317,6 +365,8 @@ forge script DexTwoExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RP
 ```
 
 ## 24. Puzzle Wallet
+[Challenge & Exploit codes](/src/PuzzleWallet)
+
 **Test**
 ```sh
 forge test --match-contract PuzzleWalletExploitTest -vvvv
@@ -328,6 +378,8 @@ forge script PuzzleWalletExploitScript -vvvv --private-key $PRIVATE_KEY --fork-u
 ```
 
 ## 25. Motorbike
+[Challenge & Exploit codes](/src/Motorbike)
+
 **Test**
 - Foundry test function cannot detect that the code size has changed to 0.
 - Anvil should be able to test it (WIP).
@@ -338,6 +390,8 @@ forge script MotorbikeExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url 
 ```
 
 ## 26. DoubleEntryPoint
+[Challenge & Exploit codes](/src/DoubleEntryPoint)
+
 **Test**
 ```sh
 forge test --match-contract DoubleEntryPointExploit -vvvv
