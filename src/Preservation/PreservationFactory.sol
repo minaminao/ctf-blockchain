@@ -22,10 +22,7 @@ contract PreservationFactory is Level {
     {
         _player;
         return address(
-            new Preservation(
-                                                                                timeZone1LibraryAddress,
-                                                                                timeZone2LibraryAddress
-                                                                            )
+            new Preservation(timeZone1LibraryAddress, timeZone2LibraryAddress)
         );
     }
 
