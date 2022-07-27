@@ -1,0 +1,67 @@
+{
+    "locked": {
+        "type_string": "bool",
+        "slot": 0,
+        "size": 8,
+        "offset": 0,
+        "value": false
+    },
+    "ID": {
+        "type_string": "uint256",
+        "slot": 1,
+        "size": 256,
+        "offset": 0,
+        "value": 1658568648
+    },
+    "flattening": {
+        "type_string": "uint8",
+        "slot": 2,
+        "size": 8,
+        "offset": 0,
+        "value": 10
+    },
+    "denomination": {
+        "type_string": "uint8",
+        "slot": 2,
+        "size": 8,
+        "offset": 8,
+        "value": 255
+    },
+    "awkwardness": {
+        "type_string": "uint16",
+        "slot": 2,
+        "size": 16,
+        "offset": 16,
+        "value": 49096
+    },
+    "data": {
+        "type_string": "bytes32[3]",
+        "slot": 3,
+        "size": 768,
+        "offset": 0,
+        "elems": {
+            "0": {
+                "type_string": "bytes32",
+                "slot": 3,
+                "size": 256,
+                "offset": 0,
+                "value": "9cef05075dae5c931c0a1b4e5cb2fcd7cc8c7a5e3095e2790d1de9dc96593d6c"
+            },
+            "1": {
+                "type_string": "bytes32",
+                "slot": 4,
+                "size": 256,
+                "offset": 0,
+                "value": "9bf44a52b907047f3ffe64e24e7dbb2a5092cf4f125fae19929731cf81d1d7f1"
+            },
+            "2": {
+                "type_string": "bytes32",
+                "slot": 5,
+                "size": 256,
+                "offset": 0,
+                "value": "e89f1cc0c4820bc74cc3c3845869860b899f1faa06b3f7dbb65512baaf875c66"
+            }
+        },
+        "value": "9cef05075dae5c931c0a1b4e5cb2fcd7cc8c7a5e3095e2790d1de9dc96593d6c"
+    }
+}

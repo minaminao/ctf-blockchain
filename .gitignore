@@ -1,1 +1,13 @@
 .vscode
+
+# Compiler files
+cache/
+out/
+
+# Ignores development broadcast logs
+!/broadcast
+/broadcast/*
+/broadcast/*/31337/
+
+# Ethernaut
+src/Recovery/*
