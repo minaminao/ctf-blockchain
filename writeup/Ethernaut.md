@@ -1,4 +1,7 @@
 # Ethernaut Solver with Foundry
+- source: https://github.com/minaminao/ctf-blockchain/tree/main/src
+- test: https://github.com/minaminao/ctf-blockchain/tree/main/test
+- deploy: https://github.com/minaminao/ctf-blockchain/tree/main/script
 
 **Table of Contents**
 - [Common Settings](#common-settings)
