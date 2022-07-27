@@ -3,8 +3,12 @@ name: test
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'README.md'
   pull_request:
     branches: [ main ]
+    paths-ignore:
+      - 'README.md'
 
 env:
   FOUNDRY_PROFILE: ci
