@@ -8,8 +8,8 @@ Challenges are not ordered by difficulty or by recommendation.
 
 If there are any incorrect statements, I would appreciate it if you could let me know via issue or PR.
 
-| [日本語](README_JA.md) | English |
-| ---------------------- | ------- |
+| English | [日本語](README_JA.md) |
+| ------- | ---------------------- |
 
 ---
 
@@ -87,8 +87,8 @@ Note:
 
 | Challenge                                                               | Note, Keyword                                                                |
 | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Capture The Ether: Guess the new number                                 | `block.number`, `block.timestamp` (Old: `now`)                               |
-| Capture The Ether: Predict the block hash                               | `blockhash` (Old: `block.blockhash`)                                         |
+| Capture The Ether: Guess the new number                                 | `block.number`, `block.timestamp` (formerly: `now`)                               |
+| Capture The Ether: Predict the block hash                               | `blockhash` (formerly: `block.blockhash`)                                         |
 | [Ethernaut: 13. Gatekeeper One](writeup/Ethernaut.md#13-gatekeeper-one) | `msg.sender != tx.origin`, `gasleft().mod(8191) == 0`, type conversion       |
 | [Ethernaut: 14. Gatekeeper Two](writeup/Ethernaut.md#14-gatekeeper-two) | `msg.sender != tx.origin`, `extcodesize(caller()) == 0`                      |
 | Cipher Shastra: Minion                                                  | `msg.sender != tx.origin`, `extcodesize(msg.sender) == 0`, `block.timestamp` |
