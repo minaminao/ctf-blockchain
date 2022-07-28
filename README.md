@@ -1,6 +1,6 @@
 # CTF Blockchain Challenges 🐈
 
-This repository is a compilation of Capture The Flag (CTF) challenges on Blockchain, categorized by genre.
+This repository is a compilation of blockchain challenges in Capture The Flag (CTF), categorized by genre.
 
 Some challenges come with solvers and writeups (currently only [Ethernaut](https://ethernaut.openzeppelin.com/)).
 
@@ -87,8 +87,8 @@ Note:
 
 | Challenge                                                               | Note, Keyword                                                                |
 | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Capture The Ether: Guess the new number                                 | `block.number`, `block.timestamp` (formerly: `now`)                               |
-| Capture The Ether: Predict the block hash                               | `blockhash` (formerly: `block.blockhash`)                                         |
+| Capture The Ether: Guess the new number                                 | `block.number`, `block.timestamp` (formerly: `now`)                          |
+| Capture The Ether: Predict the block hash                               | `blockhash` (formerly: `block.blockhash`)                                    |
 | [Ethernaut: 13. Gatekeeper One](writeup/Ethernaut.md#13-gatekeeper-one) | `msg.sender != tx.origin`, `gasleft().mod(8191) == 0`, type conversion       |
 | [Ethernaut: 14. Gatekeeper Two](writeup/Ethernaut.md#14-gatekeeper-two) | `msg.sender != tx.origin`, `extcodesize(caller()) == 0`                      |
 | Cipher Shastra: Minion                                                  | `msg.sender != tx.origin`, `extcodesize(msg.sender) == 0`, `block.timestamp` |
