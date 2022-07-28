@@ -1,225 +1,230 @@
-# CTF Blockchain問まとめ 🐈
-過去CTFに出題されたBlockchain問のテーマ別まとめです。ネタバレに注意してください。
+# CTF Blockchain Challenges 🐈
 
-問題の並びは適当で難易度順やおすすめ順ではありません。
+This repository is a compilation of Capture The Flag (CTF) challenges on Blockchain, categorized by genre.
 
-一部の問題はExploitを公開しています: [writeup/Ethernaut.md](writeup/Ethernaut.md) 
+Some challenges come with solvers and writeups (currently only [Ethernaut](https://ethernaut.openzeppelin.com/)).
 
-何か間違い等あればissueかPRで教えて下さい。
+Challenges are not ordered by difficulty or by recommendation.
+
+If there are any incorrect statements, I would appreciate it if you could let me know via issue or PR.
+
+| [日本語](README_JA.md) | English |
+| ---------------------- | ------- |
 
 ---
 
-**目次**
-- Ethereum
-  - Ethereum/コントラクトの基礎
-  - EVMの仕様を利用したパズル
-  - `tx.origin`の誤用
-  - オンチェーンで生成する擬似乱数は予測可能
-  - ERC-20の基礎
-  - `delegatecall`を悪用した任意コード実行
-  - 整数のオーバーフロー
-  - コントラクトへの通常のEther送金が必ず実行できるとは限らない
-  - `selfdestruct`によるコントラクトへの強制送金
-  - Ether送金が失敗したあと全ての処理が実行できるとは限らない
-  - インターフェース/抽象コントラクトの関数への`view`/`pure`の指定忘れ
-  - view関数は同じ値が返るとは限らない
-  - `storage`,`memory`の設定ミス
-  - トランザクションの追跡
-  - ステートのReversing（コントラクトに秘密情報を含んではならない）
-  - トランザクションのReversing
-  - EVMバイトコードのReversing
-  - EVMバイトコードゴルフ
-  - Re-entrancy Attack
-  - フラッシュローンの基礎
-  - スナップショット時のフラッシュローン実行による権利の大量獲得
-  - プッシュ型フラッシュローンの返済のバイパス
-  - AMMの価格計算アルゴリズムの穴をついた資金流出
-  - 独自トークンを悪用した資金流出
-  - オラクルの操作による資金流出（フラッシュローン無）
-  - オラクルの操作による資金流出（フラッシュローン有）
-  - Sandwich Attack
-  - Same Nonce Attackによる秘密鍵の復元
-  - アドレスの総当り
-  - 公開鍵の復元
-  - secp256k1における暗号化と復号
-  - 配列の長さを`2^256-1`にすることによる任意ストレージ書き換え（< Solidity 0.6.0）
-  - コンストラクタがtypoでただの関数に（< Solidity 0.5.0）
-  - 初期化されていないストレージポインタを利用したストレージ書き換え（< Solidity 0.5.0）
-  - その他アドホックな脆弱性・手法
-- Bitcoin
-  - Bitcoinの基礎
-  - Same Nonce Attackによる秘密鍵の復元
-  - BitcoinのPoWデータベースを利用した他アプリケーションのPoWバイパス
-- Solana
-- その他ブロックチェーン関連
-  - IPFS
+**Table of Contents**
+- [Ethereum](#ethereum)
+  - [Ethereum/contract basics](#ethereumcontract-basics)
+  - [Puzzles with EVM](#puzzles-with-evm)
+  - [Misuse of `tx.origin`](#misuse-of-txorigin)
+  - [Pseudorandom numbers generated on-chain are predictable](#pseudorandom-numbers-generated-on-chain-are-predictable)
+  - [ERC-20 basics](#erc-20-basics)
+  - [Storage overwrite by `delegatecall`](#storage-overwrite-by-delegatecall)
+  - [Integer overflow](#integer-overflow)
+  - [Ether transfers to a contract are not always executable](#ether-transfers-to-a-contract-are-not-always-executable)
+  - [Forced Ether transfer to a contract via `selfdestruct`](#forced-ether-transfer-to-a-contract-via-selfdestruct)
+  - [Not all procedures can be executed after a contract call](#not-all-procedures-can-be-executed-after-a-contract-call)
+  - [Forgetting to set `view`/`pure` to interface and abstract contract functions](#forgetting-to-set-viewpure-to-interface-and-abstract-contract-functions)
+  - [`view` functions do not always return the same value](#view-functions-do-not-always-return-the-same-value)
+  - [Mistakes in setting `storage` and `memory`](#mistakes-in-setting-storage-and-memory)
+  - [Transaction tracing](#transaction-tracing)
+  - [Reversing states (contract must not contain confidential data)](#reversing-states-contract-must-not-contain-confidential-data)
+  - [Reversing transactions](#reversing-transactions)
+  - [Reversing EVM bytecode](#reversing-evm-bytecode)
+  - [EVM bytecode golf](#evm-bytecode-golf)
+  - [Re-entrancy attack](#re-entrancy-attack)
+  - [Flash loan basics](#flash-loan-basics)
+  - [Massive rights by executing flash loans during snapshots](#massive-rights-by-executing-flash-loans-during-snapshots)
+  - [Bypassing push type flash loan repayments](#bypassing-push-type-flash-loan-repayments)
+  - [Bug in AMM price calculation algorithm](#bug-in-amm-price-calculation-algorithm)
+  - [Attacks using custom tokens](#attacks-using-custom-tokens)
+  - [Funds leakage due to oracle manipulation (no flash loans)](#funds-leakage-due-to-oracle-manipulation-no-flash-loans)
+  - [Funds leakage due to oracle manipulation (with flash loans)](#funds-leakage-due-to-oracle-manipulation-with-flash-loans)
+  - [Sandwich attack](#sandwich-attack)
+  - [Recovery of private key by same nonce attack](#recovery-of-private-key-by-same-nonce-attack)
+  - [Brute-force address](#brute-force-address)
+  - [Recovery of a public key](#recovery-of-a-public-key)
+  - [Encryption and decryption in secp256k1](#encryption-and-decryption-in-secp256k1)
+  - [Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)](#arbitrary-storage-overwriting-by-setting-an-array-length-to-2256-1--solidity-060)
+  - [Constructor is just a function with a typo (< Solidity 0.5.0)](#constructor-is-just-a-function-with-a-typo--solidity-050)
+  - [Storage overwrite via uninitialized storage pointer (< Solidity 0.5.0)](#storage-overwrite-via-uninitialized-storage-pointer--solidity-050)
+  - [Other ad-hoc vulnerabilities and methods](#other-ad-hoc-vulnerabilities-and-methods)
+- [Bitcoin](#bitcoin)
+  - [Bitcoin basics](#bitcoin-basics)
+  - [Recovery of private key by same nonce attack](#recovery-of-private-key-by-same-nonce-attack-1)
+  - [Bypassing PoW of other applications using Bitcoin's PoW database](#bypassing-pow-of-other-applications-using-bitcoins-pow-database)
+- [Solana](#solana)
+- [Other blockchain-related](#other-blockchain-related)
+  - [IPFS](#ipfs)
 
 ---
 
 ## Ethereum
 
-注意点
-- 特定のバージョンで有効で最新のバージョンで有効でない場合は末尾にバージョンを記載。現状Solidityのみ該当。
-- 表記ゆれ回避のため用語は可能な限りSolidityのキーワードで統一し、Ethereum Virtual Machine (EVM)のキーワードは最低限にする。
+Note:
+- If the attack is only valid for a particular version of Solidity and not for the latest version, the version is noted at the end of the title.
+- To avoid notation fluctuations, terminology is unified with the Solidity keyword as much as possible, and the Ethereum Virtual Machine (EVM) keyword is kept to a minimum.
 
-### Ethereum/コントラクトの基礎
-- Ethereumの基礎、Solidityの基本的な[言語仕様](https://solidity-ja.readthedocs.io/)、コントラクトの基本的な操作方法について知っていれば解ける。
+### Ethereum/contract basics
+- These can be solved if you know the basic mechanics of Ethereum, [the basic language specification of Solidity](https://docs.soliditylang.org/en/latest/), and the basic operation of contracts.
 
-| 問題                                       | 備考、キーワード        |
-| ------------------------------------------ | ----------------------- |
-| Capture The Ether: Deploy a contract       | faucet                  |
-| Capture The Ether: Call me                 | コントラクトコール      |
-| Capture The Ether: Guess the number        | コントラクトコール      |
-| Capture The Ether: Guess the secret number | `keccak256`             |
-| Ethernaut: 0. Hello Ethernaut              | コントラクトコール、ABI |
-| Ethernaut: 1. Fallback                     | receive Ether関数       |
-| Paradigm CTF 2021: Hello                   | コントラクトコール      |
-| 0x41414141 CTF: sanity-check               | コントラクトコール      |
-| 0x41414141 CTF: crackme.sol                | コード理解              |
+| Challenge                                  | Note, Keyword          |
+| ------------------------------------------ | ---------------------- |
+| Capture The Ether: Deploy a contract       | faucet                 |
+| Capture The Ether: Call me                 | contract call          |
+| Capture The Ether: Guess the number        | contract call          |
+| Capture The Ether: Guess the secret number | `keccak256`            |
+| Ethernaut: 0. Hello Ethernaut              | contract call, ABI     |
+| Ethernaut: 1. Fallback                     | receive Ether function |
+| Paradigm CTF 2021: Hello                   | contract call          |
+| 0x41414141 CTF: sanity-check               | contract call          |
+| 0x41414141 CTF: crackme.sol                |                        |
 
-### EVMの仕様を利用したパズル
-- EVMの仕様を理解していれば解けるパズル系の問題。
-- 特に脆弱性を利用したり攻撃手法を用いたりはしない。
+### Puzzles with EVM
+- Puzzle challenges that can be solved by understanding the EVM specifications.
+- No vulnerabilities are used to solve these challenges.
 
-| 問題                                      | 備考、キーワード                                                             |
+| Challenge                                 | Note, Keyword                                                                |
 | ----------------------------------------- | ---------------------------------------------------------------------------- |
-| Capture The Ether: Guess the new number   | `block.number`、`block.timestamp` (旧: `now`)                                |
-| Capture The Ether: Predict the block hash | `blockhash` (旧: `block.blockhash`)                                          |
-| Ethernaut: 13. Gatekeeper One             | `msg.sender != tx.origin`、`gasleft().mod(8191) == 0`、型変換                |
-| Ethernaut: 14. Gatekeeper Two             | `msg.sender != tx.origin`、`extcodesize(caller()) == 0`                      |
-| Cipher Shastra: Minion                    | `msg.sender != tx.origin`、`extcodesize(msg.sender) == 0`、`block.timestamp` |
+| Capture The Ether: Guess the new number   | `block.number`, `block.timestamp` (Old: `now`)                               |
+| Capture The Ether: Predict the block hash | `blockhash` (Old: `block.blockhash`)                                         |
+| Ethernaut: 13. Gatekeeper One             | `msg.sender != tx.origin`, `gasleft().mod(8191) == 0`, type conversion       |
+| Ethernaut: 14. Gatekeeper Two             | `msg.sender != tx.origin`, `extcodesize(caller()) == 0`                      |
+| Cipher Shastra: Minion                    | `msg.sender != tx.origin`, `extcodesize(msg.sender) == 0`, `block.timestamp` |
 | SECCON Beginners CTF 2020: C4B            | `block.number`                                                               |
-| Paradigm CTF 2021: Babysandbox            | `staticcall`、`call`、`revert`                                               |
-| Paradigm CTF 2021: Lockbox                | `ecrecover`、`abi.encodePacked`、`msg.data.length`                           |
+| Paradigm CTF 2021: Babysandbox            | `staticcall`, `call`, `revert`                                               |
+| Paradigm CTF 2021: Lockbox                | `ecrecover`, `abi.encodePacked`, `msg.data.length`                           |
 
-### `tx.origin`の誤用
-- `tx.origin`はトランザクションの発行者のアドレスを指し、コントラクトコール元のアドレス（すなわち`msg.sender`）として使ってはならない。
+### Misuse of `tx.origin`
+- The `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
 
-| 問題                    | 備考、キーワード |
-| ----------------------- | ---------------- |
-| Ethernaut: 4. Telephone |                  |
+| Challenge               | Note, Keyword |
+| ----------------------- | ------------- |
+| Ethernaut: 4. Telephone |               |
 
-### オンチェーンで生成する擬似乱数は予測可能
-- プログラムであるコントラクトのバイトコードは公開されているため、オンチェーンで生成が完結する（オフチェーンの情報を利用せずステートだけを利用する）ような擬似乱数は容易に予測できる。
-- 擬似乱数生成器のパラメータが全て公開されていると考えればいかに脆弱かわかる。
-- 誰にも予測不可能な乱数を用いたい場合、乱数機能を持つ分散型オラクルを使用すれば良い。例えばVerifiable Random Function (VRF)を実装した[Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/)など。
+### Pseudorandom numbers generated on-chain are predictable
+- Since the bytecodes of contracts are publicly available, it is easy to predict pseudorandom numbers whose generation is completed on-chain (using only states, not off-chain data).
+- It is equivalent to having all the parameters of a pseudorandom number generator exposed.
+- If you want to use random numbers that are unpredictable to anyone, use a decentralized oracle with a random number function. For example, [Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/), which implements Verifiable Random Function (VRF).
+- 
+| Challenge                             | Note, Keyword |
+| ------------------------------------- | ------------- |
+| Capture The Ether: Predict the future |               |
+| Ethernaut: 3. Coin Flip               |               |
 
-| 問題                                  | 備考、キーワード |
-| ------------------------------------- | ---------------- |
-| Capture The Ether: Predict the future |                  |
-| Ethernaut: 3. Coin Flip               |                  |
+### ERC-20 basics
+- These can be solved with an understanding of the [ERC-20 token standard](https://eips.ethereum.org/EIPS/eip-20).
 
-### ERC-20の基礎
-- [ERC-20: Token Standard](https://eips.ethereum.org/EIPS/eip-20)の仕様を理解していれば解ける。
-
-| 問題                       | 備考、キーワード                      |
+| Challenge                  | Note, Keyword                         |
 | -------------------------- | ------------------------------------- |
-| Ethernaut: 15. Naught Coin | `transfer`、`approve`、`transferFrom` |
+| Ethernaut: 15. Naught Coin | `transfer`, `approve`, `transferFrom` |
 | Paradigm CTF 2021: Secure  | WETH                                  |
 
-### `delegatecall`を悪用した任意コード実行
-- `delegatecall`は呼び出し元コントラクトのステートを利用した任意コード実行が可能であるため脆弱性の原因になりやすい。
+### Storage overwrite by `delegatecall`
+- `delegatecall` is a potential source of vulnerability because the storage of the calling contract can be overwritten.
 
-| 問題                         | 備考、キーワード                                                                                    |
-| ---------------------------- | --------------------------------------------------------------------------------------------------- |
-| Ethernaut: 6. Delegation     | 変数の書き換え                                                                                      |
-| Ethernaut: 16. Preservation  | ストレージの書き換え                                                                                |
-| Ethernaut: 24. Puzzle Wallet | プロキシパターン                                                                                    |
-| Ethernaut: 25. Motorbike     | プロキシパターン、[EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
+| Challenge                    | Note, Keyword                                                                                     |
+| ---------------------------- | ------------------------------------------------------------------------------------------------- |
+| Ethernaut: 6. Delegation     |                                                                                                   |
+| Ethernaut: 16. Preservation  |                                                                                                   |
+| Ethernaut: 24. Puzzle Wallet | proxy contract                                                                                    |
+| Ethernaut: 25. Motorbike     | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
 
-### 整数のオーバーフロー	
-- 例えば`uint`の変数の値が`0`のとき`1`引くと算術オーバーフローする。
-- SafeMathライブラリを使うことで算術オーバーフローのチェックがなされる。
+### Integer overflow
+- For example, subtracting `1` from the value of a variable of `uint` type when the value is `0` causes an arithmetic overflow.
+- Arithmetic overflow has been detected since Solidity v0.8.0.
+- Contracts written in earlier versions can be checked by using the SafeMath library.
 
-| 問題                           | 備考、キーワード |
-| ------------------------------ | ---------------- |
-| Capture The Ether: Token sale  | 掛け算           |
-| Capture The Ether: Token whale | 引き算           |
-| Ethernaut: 5. Token            | 引き算           |
+| Challenge                      | Note, Keyword  |
+| ------------------------------ | -------------- |
+| Capture The Ether: Token sale  | multiplication |
+| Capture The Ether: Token whale | subtraction    |
+| Ethernaut: 5. Token            | subtraction    |
 
-### コントラクトへの通常のEther送金が必ず実行できるとは限らない
-- 宛先アドレスへ必ず通常のEther送金（`.send()`や`.transfer()`）ができる前提でコントラクトを書いてはならない。
-- 宛先がコントラクトでreceive Ether関数及びpayable fallback関数が無い場合、Etherの送金ができない。
-- ただし、通常の送金方法ではなく、後述する`selfdestruct`を用いればそのようなコントラクトにも送金を強制できる。
+### Ether transfers to a contract are not always executable
+- Do not write a contract on the assumption that normal Ether transfer (`.send()` or `.transfer()`) can always be performed to the destination address.
+- If the destination is a contract and there is no receive Ether function or payable fallback function, Ether cannot be transferred.
+- However, instead of the normal transfer method, the `selfdestruct` described below can be used to force such a contract to transfer Ether.
 
-| 問題               | 備考、キーワード |
-| ------------------ | ---------------- |
-| Ethernaut: 9. King |                  |
+| Challenge          | Note, Keyword |
+| ------------------ | ------------- |
+| Ethernaut: 9. King |               |
 
-### `selfdestruct`によるコントラクトへの強制送金
-- コントラクトにreceive Ether関数及びpayable fallback関数が無いならばEtherを受け取らないことが保証されているわけではない。
-- 別のコントラクトが`selfdestruct`を行う際にそのコントラクトが持つEtherを他のコントラクトあるいはEOAに送金でき、この`selfdestruct`による送金は宛先コントラクトにreceive Ether関数及びpayable fallback関数が無くても強制的に送金できる（この送金はそれら関数のチェックを受けない）。
-- 所持するEtherが`0`である前提でアプリケーションを作るとバグになる。
+### Forced Ether transfer to a contract via `selfdestruct`
+- If a contract does not have a receive Ether function and a payable fallback function, it is not guaranteed that Ether will not be received.
+- When a contract performs a `selfdestruct`, it can transfer its Ether to another contract or EOA, and this `selfdestruct` transfer can be forced even if the destination contract does not have the receive Ether function and the payable fallback function. 
+- If the application is built on the assumption that the Ether is `0`, it could be a bug.
 
-| 問題                               | 備考、キーワード |
-| ---------------------------------- | ---------------- |
-| Capture The Ether: Retirement fund |                  |
-| Ethernaut: 7. Force                |                  |
+| Challenge                          | Note, Keyword |
+| ---------------------------------- | ------------- |
+| Capture The Ether: Retirement fund |               |
+| Ethernaut: 7. Force                |               |
 
-### Ether送金が失敗したあと全ての処理が実行できるとは限らない
-- `call`を用いたEther送金が失敗（revert）しても処理を続けられる前提は、`assert(false)`を用いられると破綻する。
-- `call`はrevertされた場合にも実行を継続するが、EVMの`CALL`オペコードによる処理はその時点で利用可能なガスの最大`63/64`を使用でき、`assert(false)`を用いられるとこのガスが全て消費されてしまう。
-- 対策としては`call{gas: 20000}`のようにgasを指定するなどがある。
+### Not all procedures can be executed after a contract call
+- A large amount of gas can be consumed by loops and recursion in `call`, and there may not be enough gas for the rest of the process.
+- Until Solidity v0.8.0, zero division and `assert(false)` could consume a lot of gas.
 
-| 問題                  | 備考、キーワード |
-| --------------------- | ---------------- |
-| Ethernaut: 20. Denial |                  |
+| Challenge             | Note, Keyword |
+| --------------------- | ------------- |
+| Ethernaut: 20. Denial |               |
 
-### インターフェース/抽象コントラクトの関数への`view`/`pure`の指定忘れ
-- 関数に`view`,`pure`を指定したと思い込み、その関数を実行してもステートが変更されないという前提でアプリケーションを設計するとバグになる。
+### Forgetting to set `view`/`pure` to interface and abstract contract functions
+- If you forget to set `view`,`pure` for a function and design your application under the assumption that the state will not change, it will be a bug.
 
-| 問題                    | 備考、キーワード |
-| ----------------------- | ---------------- |
-| Ethernaut: 11. Elevator |                  |
+| Challenge               | Note, Keyword |
+| ----------------------- | ------------- |
+| Ethernaut: 11. Elevator |               |
 
-### view関数は同じ値が返るとは限らない
-- view関数はステートを読み込めるためステートをもとに条件分岐が可能であり同じ値が返るとは限らない。
+### `view` functions do not always return the same value
+- Since view functions can read state, they can be conditionally branched based on state and do not necessarily return the same value.
 
-| 問題                | 備考、キーワード |
-| ------------------- | ---------------- |
-| Ethernaut: 21. Shop |                  |
+| Challenge           | Note, Keyword |
+| ------------------- | ------------- |
+| Ethernaut: 21. Shop |               |
 
-### `storage`,`memory`の設定ミス
-- `storage`,`memory`を適切に設定しなかった場合に古い値を参照してしまったり書き換えが起こらなかったりして脆弱性になる。
+### Mistakes in setting `storage` and `memory`
+- If `storage` and `memory` are not set properly, old values may be referenced or overwriting may not occur, resulting in vulnerability.
 
-| 問題                 | 備考、キーワード                                                                                                                |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| N1CTF 2021: BabyDefi | [Cover Protocolの無限ミントバグ](https://coverprotocol.medium.com/12-28-post-mortem-34c5f9f718d4)とフラッシュローンの組み合わせ |
+| Challenge            | Note, Keyword                                                                                                   |
+| -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| N1CTF 2021: BabyDefi | [Cover Protocol infinite minting](https://coverprotocol.medium.com/12-28-post-mortem-34c5f9f718d4) + flash loan |
 
-### トランザクションの追跡
-- トランザクションの流れを追えば解ける問題。Etherscanが便利。
+### Transaction tracing
+- Various information can be obtained just by following the flow of transaction processing.
+- Blockchain explorers such as Etherscan are useful.
 
-| 問題                    | 備考、キーワード                       |
-| ----------------------- | -------------------------------------- |
-| Ethernaut: 17. Recovery | デプロイしたコントラクトアドレスの紛失 |
+| Challenge               | Note, Keyword                     |
+| ----------------------- | --------------------------------- |
+| Ethernaut: 17. Recovery | loss of deployed contract address |
 
-### ステートのReversing（コントラクトに秘密情報を含んではならない）
-- ステート（とコントラクトのバイトコード）は公開されるため、private変数も含めて全ての変数は読むことが可能。
-- private変数は他のコントラクトから直接読めないことを保証しているだけであり、ブロックチェーン外の存在である我々は読める。
-- トランザクションによって秘密情報を与えている場合、トランザクションを読むことでも解ける。
+### Reversing states (contract must not contain confidential data)
+- Since the state and the bytecodes of contracts are public, all variables, including private variables, are readable.
+- Private variables are only guaranteed not to be directly readable by other contracts, but we, as an entity outside the blockchain, can read them.
+- If there is private data in a transaction, it can also be solved by reading the transaction.
 
-| 問題                                       | 備考、キーワード |
-| ------------------------------------------ | ---------------- |
-| Capture The Ether: Guess the random number |                  |
-| Ethernaut: 8. Vault                        |                  |
-| Ethernaut: 12. Privacy                     |                  |
-| Cipher Shastra: Sherlock                   |                  |
-| 0x41414141 CTF: secure enclave             |                  |
+| Challenge                                  | Note, Keyword |
+| ------------------------------------------ | ------------- |
+| Capture The Ether: Guess the random number |               |
+| Ethernaut: 8. Vault                        |               |
+| Ethernaut: 12. Privacy                     |               |
+| Cipher Shastra: Sherlock                   |               |
+| 0x41414141 CTF: secure enclave             |               |
 
-### トランザクションのReversing
-- トランザクションの中身あるいはトランザクションによってどうステートが変化したかをReversingする。Etherscanが便利。
+### Reversing transactions
+- Reversing the contents of a transaction or how the state has been changed by the transaction.
 
-| 問題                            | 備考、キーワード |
-| ------------------------------- | ---------------- |
-| darkCTF: Secret Of The Contract |                  |
+| Challenge                       | Note, Keyword |
+| ------------------------------- | ------------- |
+| darkCTF: Secret Of The Contract |               |
 
-### EVMバイトコードのReversing
-- コードが全部あるいは一部だけ与えられていないコントラクトをReversingする。
-- デコンパイラ（[panoramix](https://github.com/eveem-org/panoramix)や[ethervm.io](https://ethervm.io/decompile)など）やディスアセンブラ（[ethersplay](https://github.com/crytic/ethersplay)など）を駆使する。
+### Reversing EVM bytecode
+- Reversing a contract for which code is not given in whole or in part.
+- Use decompilers ([panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)など) and disassemblers ([ethersplay](https://github.com/crytic/ethersplay))
 
-| 問題                             | 備考、キーワード                |
+| Challenge                        | Note, Keyword                   |
 | -------------------------------- | ------------------------------- |
-| Incognito 2.0: Ez                | 平文で保持                      |
+| Incognito 2.0: Ez                | keep in plain text              |
 | Real World CTF 3rd: Re:Montagy   | Jump Oriented Programming (JOP) |
 | 0x41414141 CTF: Crypto Casino    |                                 |
 | Paradigm CTF 2021: Babyrev       |                                 |
@@ -229,205 +234,205 @@
 | DEF CON CTF Qualifier 2018: SAG? |                                 |
 | pbctf 2020: pbcoin               |                                 |
 
-### EVMバイトコードゴルフ
-- オペコードの数やバイトコードの長さに制限がある問題。
+### EVM bytecode golf
+- There is a limit to the length of a bytecode.
 
-| 問題名                     | 備考、キーワード                                                                   |
-| -------------------------- | ---------------------------------------------------------------------------------- |
-| Ethernaut: 18. MagicNumber |                                                                                    |
-| Paradigm CTF 2021: Rever   | 回文判定。さらにそのバイトコードを反転させたコードも回文判定できなくてはならない。 |
+| Challenge                  | Note, Keyword                                                                                                  |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Ethernaut: 18. MagicNumber |                                                                                                                |
+| Paradigm CTF 2021: Rever   | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
 
-### Re-entrancy Attack
-- コントラクトAのある関数内に別のコントラクトBとのインタラクションやBへのEther送金が含まれている場合、一時的にBに制御が移る。
-- この制御の中で、BはAにコールできるため、Aがその関数の実行途中にコールされない前提の設計になっているとバグになる。
-- 例えば、BがAにデポジットしたEtherを引き出す`withdraw`関数を実行したとき、Ether送金でBに制御が移り`withdraw`関数途中にBがもう一度Aの`withdraw`関数を実行する、といったことが可能になる。単純に2回呼び出すなら限度額以上の引き出しができない設計になっていても、`withdraw`関数の途中に`withdraw`関数が実行されるとその限度額のチェックをバイパスできる設計になってしまっている場合がある。
-- Re-entrancy Attackを防ぐためにはChecks-Effects-Interactionsパターンを利用する。
+### Re-entrancy attack
+- In case a function of contract A contains an interaction with another contract B or Ether transfer to B, the control is temporarily transferred to B.
+- Since B can call A in this control, it will be a bug if the design is based on the assumption that A is not called in the middle of the execution of that function.
+- For example, when B executes the `withdraw` function to withdraw Ether deposited in A, the Ether transfer triggers a control shift to B, and during the `withdraw` function, B executes A's `withdraw` function again. Even if the `withdraw` function is designed to prevent withdrawal of more than the limit if it is simply called twice, if the `withdraw` function is executed in the middle of the `withdraw` function, it may be designed to bypass the limit check.
+- To prevent Re-entrancy Attack, use the Checks-Effects-Interactions pattern.
 
-| 問題                                      | 備考、キーワード |
-| ----------------------------------------- | ---------------- |
-| Capture The Ether: Token bank             |                  |
-| Ethernaut: 10. Re-entrancy                |                  |
-| Paradigm CTF 2021: Yield Aggregator       |                  |
-| HTB University CTF 2020 Quals: moneyHeist |                  |
+| Challenge                                 | Note, Keyword |
+| ----------------------------------------- | ------------- |
+| Capture The Ether: Token bank             |               |
+| Ethernaut: 10. Re-entrancy                |               |
+| Paradigm CTF 2021: Yield Aggregator       |               |
+| HTB University CTF 2020 Quals: moneyHeist |               |
 
-### フラッシュローンの基礎
-- フラッシュローン（Flash Loan）は、トランザクションの終了までに借りた資産が返却される限り、無担保で資産を借入できるローンのこと。借り手はトランザクション内であれば借りた資産をどのように扱っても良い。
-- 大きな額の資産を動かすことで、DeFiアプリケーションの資金を掠め取る攻撃や、ガバナンスへの参加権を大量に獲得する攻撃が可能。
-- フラッシュローンを用いてオラクルの値を歪める攻撃への対策は分散型オラクルを利用すること。
+### Flash loan basics
+- Flash Loans are uncollateralised loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
+- By making large asset moves, attacks can be made to snatch funds from DeFi applications or to gain large amounts of votes for participation in governance.
+- A solution to attacks that use flash loans to corrupt oracle values is to use a decentralized oracle.
 
-| 問題                                   | 備考、キーワード                                                                                                      |
-| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Damn Vulnerable DeFi: 1. Unstoppable   | 単一トークンのシンプルなフラッシュローン。トークンを直接送信すると破綻。                                              |
-| Damn Vulnerable DeFi: 2. Naivereceiver | `flashLoan`関数に`borrower`を指定できるがreceiver側はTX送信者を認証していないためreceiverの資金を手数料として排出可能 |
-| Damn Vulnerable DeFi: 3. Truster       | コールのターゲットをトークンにし自分宛にapproveすることでトークンを奪取可能                                           |
-| Damn Vulnerable DeFi: 4. Sideentrance  | 各ユーザーがdeposit/withdrawできるフラッシュローン。フラッシュローン時にdepositを行うとノーコストでdepositが可能。    |
+| Challenge                              | Note, Keyword                                                                                                                                                 |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Damn Vulnerable DeFi: 1. Unstoppable   | Simple flash loan with a single token. Failure to send the token directly.                                                                                    |
+| Damn Vulnerable DeFi: 2. Naivereceiver | The `flashLoan` function can specify a `borrower`, but the receiver side does not authenticate the TX sender, so the receiver's funds can be drained as a fee |
+| Damn Vulnerable DeFi: 3. Truster       | The target of a call is made into the token and the token can be taken by approving it to oneself                                                             |
+| Damn Vulnerable DeFi: 4. Sideentrance  | Flash loan that allows each user to make a deposit and a withdrawal. Deposit can be executed at no cost at the time of flash loan.                            |
 
-### スナップショット時のフラッシュローン実行による権利の大量獲得
-- ロジックがスナップショット時のトークン残高を利用して権利を配布するもので、悪意あるユーザーのトランザクションがスナップショットのトリガーになりえる場合、フラッシュローンを利用することで大量の権利を獲得できる。
-- ロック期間を設けることでこの攻撃を回避できる。
+### Massive rights by executing flash loans during snapshots
+- If the algorithm distributes some kind of rights using the token balance at the time of a snapshot, and if a malicious user transaction can trigger a snapshot, a flash loan can be used to obtain a large amount of rights.
+- A period of time to lock the token will avoid this attack.
 
-| 問題                                 | 備考、キーワード                                 |
-| ------------------------------------ | ------------------------------------------------ |
-| Damn Vulnerable DeFi: 5. Therewarder | 預けたトークン残高に応じて報酬のトークンを獲得   |
-| Damn Vulnerable DeFi: 6. Selfie      | 預けたトークン残高に応じてガバナンス参加権を獲得 |
+| Challenge                            | Note, Keyword                                                        |
+| ------------------------------------ | -------------------------------------------------------------------- |
+| Damn Vulnerable DeFi: 5. Therewarder | Get reward tokens based on the deposited token balance.              |
+| Damn Vulnerable DeFi: 6. Selfie      | Get voting power in governance based on the deposited token balance. |
 
-### プッシュ型フラッシュローンの返済のバイパス
-- フラッシュローンにはプッシュ型とプル型があり、プッシュ型はUniswapやAave v1、プル型はAave v2やdYdXに代表される。
-- [EIP-3156: Flash Loans](https://eips.ethereum.org/EIPS/eip-3156)はプル型。
+### Bypassing push type flash loan repayments
+- There are two types of flash loans: push and pull, with the push type represented by Uniswap and Aave v1 and the pull type by Aave v2 and dYdX.
+- [EIP-3156: Flash Loans](https://eips.ethereum.org/EIPS/eip-3156) is a pull type.
 
-| 問題                       | 備考、キーワード                                     |
-| -------------------------- | ---------------------------------------------------- |
-| Paradigm CTF 2021: Upgrade | トークンに実装されたレンディング機能を用いてバイパス |
+| Challenge                  | Note, Keyword                                                     |
+| -------------------------- | ----------------------------------------------------------------- |
+| Paradigm CTF 2021: Upgrade | Bypassed using the lending functionality implemented in the token |
 
-### AMMの価格計算アルゴリズムの穴をついた資金流出
-- Automated Market Maker (AMM)の価格計算アルゴリズムに穴があると単純な取引の組み合わせで資金流出が可能。
+### Bug in AMM price calculation algorithm
+- A bug in the Automated Market Maker (AMM) price calculation algorithm allows a simple combination of trades to drain funds.
 
-| 問題               | 備考、キーワード |
-| ------------------ | ---------------- |
-| Ethernaut: 22. Dex |                  |
+| Challenge          | Note, Keyword |
+| ------------------ | ------------- |
+| Ethernaut: 22. Dex |               |
 
-### 独自トークンを悪用した資金流出
-- アプリケーションが任意のトークンを利用できること自体は悪いことではないが攻撃ベクタになりうる。
-- また、任意のトークンを利用できない前提のホワイトリスト設計であるのに、任意のトークンを利用できてしまうバグがあると資金流出の原因になりうる。
+### Attacks using custom tokens
+- The ability of a protocol to use arbitrary tokens is not in itself a bad thing, but it can be an attack vector.
+- In addition, bugs in the whitelist design, which assumes that arbitrary tokens are not available, could cause funds to drain.
 
-| 問題                   | 備考、キーワード |
-| ---------------------- | ---------------- |
-| Ethernaut: 23. Dex Two |                  |
+| Challenge              | Note, Keyword |
+| ---------------------- | ------------- |
+| Ethernaut: 23. Dex Two |               |
 
-### オラクルの操作による資金流出（フラッシュローン無）
-- オラクルの値を故意に歪め、そのオラクルを参照しているアプリケーションの資金を流出させる。
+### Funds leakage due to oracle manipulation (no flash loans)
+- It corrupts the value of the oracle and drains the funds of applications that refer to that oracle.
 
-| 問題                                 | 備考、キーワード                                                                      |
-| ------------------------------------ | ------------------------------------------------------------------------------------- |
-| Paradigm CTF 2021: Broker            | Uniswapの価格を歪めてその価格を参照するレンディングプラットフォームのポジションを清算 |
-| Damn Vulnerable DeFi: 7. Compromised | オフチェーンで秘密鍵流出＆オラクルの操作                                              |
+| Challenge                            | Note, Keyword                                                                                   |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| Paradigm CTF 2021: Broker            | Distort Uniswap prices and liquidate positions on lending platforms that reference those prices |
+| Damn Vulnerable DeFi: 7. Compromised | Off-chain private key leak & oracle manipulation                                                |
 
-### オラクルの操作による資金流出（フラッシュローン有）
-- フラッシュローンを利用することでオラクルの値を故意に歪め、そのオラクルを参照しているアプリケーションの資金を流出させる。
-- フラッシュローンにより多額の資金を動かすことができるためオラクルを歪めやすく被害が大きくなりやすい。
+### Funds leakage due to oracle manipulation (with flash loans)
+- The use of flash loans distorts the value of the oracle and drains the funds of the protocols that reference that oracle.
+- The ability to move large amounts of funds through a flash loan makes it easy to distort the oracle and cause more damage.
 
-| 問題                            | 備考、キーワード                                                                         |
-| ------------------------------- | ---------------------------------------------------------------------------------------- |
-| Damn Vulnerable DeFi: 8. Puppet | Uniswap V1の価格を歪めてその価格を参照するレンディングプラットフォームからトークンを流出 |
+| Challenge                       | Note, Keyword                                                                                      |
+| ------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Damn Vulnerable DeFi: 8. Puppet | Distort the price of Uniswap V1 and leak tokens from a lending platform that references that price |
 
-### Sandwich Attack
-- 他者の大きな取引を自分のトランザクションで挟んで（サンドイッチして）フロントランニングする攻撃。
-- 例えば、他者のトークンAを売りBを買う取引があったら、その前にAを売りBを買うトランザクションを入れ、後に同量のBを売りAを買うトランザクションを入れることで、最終的に攻撃者はAの量が増加し利益を得られる。
-- 一般的にこのような「マイナーが生成するブロックに含むトランザクションを選択・挿入・並び替えすることで得られる収益」のことをMiner Extractable Value (MEV)という。
+### Sandwich attack
+- A front-running attack in which a large transaction of another person is sandwiched between transactions of oneself.
+- For example, if there is a transaction by another party to sell token A and buy B, the attacker can put in a transaction to sell A and buy B before the transaction, and later put in a transaction to sell the same amount of B and buy A, thereby ultimately increasing the amount of A at a profit.
+- In general, such "revenue earned by selecting, inserting, and reordering transactions contained in a block generated by a miner" is referred to as Miner Extractable Value (MEV). Recently, it is also called Maximal Extractable Value.
 
-| 問題                      | 備考、キーワード                      |
-| ------------------------- | ------------------------------------- |
-| Paradigm CTF 2021: Farmer | COMP→WETH→DAIのトレードをサンドイッチ |
-
-
-### Same Nonce Attackによる秘密鍵の復元
-- 一般的にSame Nonce Attackは楕円曲線DSAにおいて異なるメッセージに対して同一のnonceを利用している場合に有効な攻撃で、秘密鍵が求まってしまう。
-- Ethereumの文脈においてはトランザクションの署名に用いているnonceが同じになってしまっている。
-
-| 問題                                | 備考、キーワード |
-| ----------------------------------- | ---------------- |
-| Capture The Ether: Account Takeover |                  |
-| Paradigm CTF 2021: Babycrypto       |                  |
+| Challenge                 | Note, Keyword                               |
+| ------------------------- | ------------------------------------------- |
+| Paradigm CTF 2021: Farmer | Sandwich the trade from COMP to WETH to DAI |
 
 
-### アドレスの総当り
-- ブルートフォースすればアドレスの先頭や末尾を特定の値にできる。
+### Recovery of private key by same nonce attack
+- In general, same nonce attack is a possible attack when the same nonce is used for different messages in elliptic curve DSA, and the secret key is calculated.
+-  In Ethereum, the nonces used to sign transactions are the same.
 
-| 問題                              | 備考、キーワード |
-| --------------------------------- | ---------------- |
-| Capture The Ether: Fuzzy identity |                  |
+| Challenge                           | Note, Keyword |
+| ----------------------------------- | ------------- |
+| Capture The Ether: Account Takeover |               |
+| Paradigm CTF 2021: Babycrypto       |               |
 
-### 公開鍵の復元
-- アドレスは公開鍵を`keccak256`ハッシュにかけたものであり、アドレスから公開鍵を復元することはできない。
-- トランザクションが一つでも送信されていれば、そこから公開鍵を逆算できる。
-- 具体的にはトランザクションをシリアライズすることでRecursive Length Prefix (RLP)エンコードを施したデータに対して`keccak256`を適用した値と、署名`(r,s,v)`から復元できる。
 
-| 問題                          | 備考、キーワード |
-| ----------------------------- | ---------------- |
-| Capture The Ether: Public Key |                  |
+### Brute-force address
+- Brute force can make the start and end of an address a specific value.
 
-### secp256k1における暗号化と復号
+| Challenge                         | Note, Keyword |
+| --------------------------------- | ------------- |
+| Capture The Ether: Fuzzy identity |               |
 
-| 問題                      | 備考、キーワード                                             |
-| ------------------------- | ------------------------------------------------------------ |
-| 0x41414141 CTF: Rich Club | 鍵ペアを自分で用意。与えた公開鍵で暗号化されたフラグを復号。 |
+### Recovery of a public key
+- The address is the public key applied to a `keccak256` hash, and the public key cannot be recovered from the address.
+- If even one transaction has been sent, the public key can be back-calculated from it.
+- Specifically, it can be recovered from the value of `keccak256` applied to Recursive Length Prefix (RLP)-encoded data by serializing the transaction and the signature `(r,s,v)`.
 
-### 配列の長さを`2^256-1`にすることによる任意ストレージ書き換え（< Solidity 0.6.0）
-- 例えば、配列の長さを負に算術オーバーフローして`2^256-1`にすることで任意のストレージが書き換え可能になる。
-- オーバーフローを起因とする必要はない。
-- v0.6.0から`length`プロパティはread-onlyになった。
+| Challenge                     | Note, Keyword |
+| ----------------------------- | ------------- |
+| Capture The Ether: Public Key |               |
 
-| 問題                       | 備考、キーワード |
-| -------------------------- | ---------------- |
-| Capture The Ether: Mapping |                  |
-| Ethernaut: 19. Alien Codex |                  |
-| Paradigm CTF 2021: Bank    |                  |
+### Encryption and decryption in secp256k1
 
-### コンストラクタがtypoでただの関数に（< Solidity 0.5.0）
-- v0.4.22より前のバージョンだとコンストラクタをコントラクトと同名の関数で定義していたため、コンストラクタ名をtypoするとただの関数になってしまいバグになることがあった。
-- v0.5.0からはこの仕様が廃止され`constructor`キーワードを用いなければならない。
+| Challenge                 | Note, Keyword                                                                          |
+| ------------------------- | -------------------------------------------------------------------------------------- |
+| 0x41414141 CTF: Rich Club | Prepare the key pair oneself. Decrypt the encrypted flag with the public key provided. |
 
-| 問題                                | 備考、キーワード |
-| ----------------------------------- | ---------------- |
-| Capture The Ether: Assume ownership |                  |
-| Ethernaut: 2. Fallout               |                  |
+### Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)
+- For example, any storage can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.
+- It need not be due to overflow.
+- The `length` property has been read-only since v0.6.0.
 
-### 初期化されていないストレージポインタを利用したストレージ書き換え（< Solidity 0.5.0）
-- v0.5.0からは初期化されていないストレージ変数は禁止されるようになったためこのバグは起こり得ない。
+| Challenge                  | Note, Keyword |
+| -------------------------- | ------------- |
+| Capture The Ether: Mapping |               |
+| Ethernaut: 19. Alien Codex |               |
+| Paradigm CTF 2021: Bank    |               |
 
-| 問題                           | 備考、キーワード                                                                       |
-| ------------------------------ | -------------------------------------------------------------------------------------- |
-| Capture The Ether: Donation    |                                                                                        |
-| Capture The Ether: Fifty years |                                                                                        |
-| ~~Ethernaut: Locked~~          | [削除された](https://forum.openzeppelin.com/t/ethernaut-locked-with-solidity-0-5/1115) |
+### Constructor is just a function with a typo (< Solidity 0.5.0)
+- In versions prior to v0.4.22, the constructor is defined as a function with the same name as the contract, so a typo of the constructor name could cause it to become just a function, resulting in a bug.
+- Since v0.5.0, this specification is removed and the `constructor` keyword must be used.
 
-### その他アドホックな脆弱性・手法
-| 問題                       | 備考、キーワード                                                                                  |
-| -------------------------- | ------------------------------------------------------------------------------------------------- |
-| Paradigm CTF 2021: Bouncer | バッチ処理に必要な資金が単一処理と同じになってしまっている                                        |
-| Paradigm CTF 2021: Market  | Eternal Storageパターンのキーのズレを利用して、あるフィールドの値を別のフィールドの値と認識させる |
+| Challenge                           | Note, Keyword |
+| ----------------------------------- | ------------- |
+| Capture The Ether: Assume ownership |               |
+| Ethernaut: 2. Fallout               |               |
+
+### Storage overwrite via uninitialized storage pointer (< Solidity 0.5.0)
+- Since v0.5.0, uninitialized storage variables are forbidden, so this bug cannot occur.
+
+| Challenge                      | Note, Keyword                                                                       |
+| ------------------------------ | ----------------------------------------------------------------------------------- |
+| Capture The Ether: Donation    |                                                                                     |
+| Capture The Ether: Fifty years |                                                                                     |
+| ~~Ethernaut: Locked~~          | [deleted](https://forum.openzeppelin.com/t/ethernaut-locked-with-solidity-0-5/1115) |
+
+### Other ad-hoc vulnerabilities and methods
+| Challenge                  | Note, Keyword                                                                                                                     |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Paradigm CTF 2021: Bouncer | The funds required for batch processing are the same as for single processing.                                                    |
+| Paradigm CTF 2021: Market  | Make the value of one field be recognized as the value of another field by using key misalignment in the Eternal Storage pattern. |
 
 ## Bitcoin
-注意点
-- トランザクションモデルがUnspent Transaction Output (UTXO)であるBitcoinの亜種の問題も含む。
+Note
+- Including challenges of Bitcoin variants whose transaction model is Unspent Transaction Output (UTXO).
 
-### Bitcoinの基礎
-| 問題                                   | 備考、キーワード            |
+### Bitcoin basics
+| Challenge                              | Note, Keyword               |
 | -------------------------------------- | --------------------------- |
-| TsukuCTF 2021: genesis                 | Genesisブロック             |
-| WORMCON 0x01: What's My Wallet Address | Bitcoinアドレス、RIPEMD-160 |
+| TsukuCTF 2021: genesis                 | genesis block               |
+| WORMCON 0x01: What's My Wallet Address | Bitcoin address, RIPEMD-160 |
 
-### Same Nonce Attackによる秘密鍵の復元
-- 実際にバグがあり[RFC6979](https://datatracker.ietf.org/doc/html/rfc6979)を用いて修正済み。
+### Recovery of private key by same nonce attack
+- There was actually a bug and it has been fixed using [RFC6979](https://datatracker.ietf.org/doc/html/rfc6979).
 - https://github.com/daedalus/bitcoin-recover-privkey
 
-| 問題                      | 備考、キーワード |
-| ------------------------- | ---------------- |
-| darkCTF: Duplicacy Within |                  |
+| Challenge                 | Note, Keyword |
+| ------------------------- | ------------- |
+| darkCTF: Duplicacy Within |               |
 
-### BitcoinのPoWデータベースを利用した他アプリケーションのPoWバイパス
-- BitcoinではSHA-256のハッシュ値の先頭に0が連なることをProof of Work (PoW)としているが、他のアプリケーションでも同じような設計をした場合にBitcoinの過去のPoW結果から条件に合うものを選ぶことでPoW時間を大幅に短縮できるケースがある。
+### Bypassing PoW of other applications using Bitcoin's PoW database
+- Bitcoin uses a series of leading zeros in the SHA-256 hash value as a Proof of Work (PoW), but if other applications are designed in the same way, its PoW time can be significantly reduced by choosing one that matches the conditions from Bitcoin's past PoW results 
 
-| 問題                        | 備考、キーワード |
-| --------------------------- | ---------------- |
-| Dragon CTF 2020: Bit Flip 2 | 64ビットのPoW    |
+| Challenge                   | Note, Keyword |
+| --------------------------- | ------------- |
+| Dragon CTF 2020: Bit Flip 2 | 64-bit PoW    |
 
 
 ## Solana
 
-| 問題                          | 備考、キーワード                                                 |
-| ----------------------------- | ---------------------------------------------------------------- |
-| ALLES! CTF 2021: Secret Store | `solana`,`spl-token`コマンドを駆使して条件に合うようトークン操作 |
-| ALLES! CTF 2021: Legit Bank   |                                                                  |
-| ALLES! CTF 2021: Bugchain     |                                                                  |
-| ALLES! CTF 2021: eBPF         | eBPFのReversing                                                  |
+| Challenge                     | Note, Keyword        |
+| ----------------------------- | -------------------- |
+| ALLES! CTF 2021: Secret Store | `solana`,`spl-token` |
+| ALLES! CTF 2021: Legit Bank   |                      |
+| ALLES! CTF 2021: Bugchain     |                      |
+| ALLES! CTF 2021: eBPF         | Reversing eBPF       |
 
-## その他ブロックチェーン関連
-- ブロックチェーンではないがエコシステムの一部になっているもの。
+## Other blockchain-related
+- Something that is not a blockchain but is part of the ecosystem.
 
 ### IPFS
-- InterPlanetary File System (IPFS)。
+- InterPlanetary File System (IPFS)
 
-| 問題                                   | 備考、キーワード            |
-| -------------------------------------- | --------------------------- |
-| TsukuCTF 2021: InterPlanetary Protocol | アドレスはlowercaseのBase32 |
+| Challenge                              | Note, Keyword                  |
+| -------------------------------------- | ------------------------------ |
+| TsukuCTF 2021: InterPlanetary Protocol | Address is Base32 in lowercase |
