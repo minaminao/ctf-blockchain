@@ -47,7 +47,9 @@ contract DoubleEntryPointFactory is Level {
 
         // If user didn't set an DetectionBot, level failed.
         address usersDetectionBot = address(forta.usersDetectionBots(_player));
-        if (usersDetectionBot == address(0)) return false;
+        if (usersDetectionBot == address(0)) {
+            return false;
+        }
 
         address vault = instance.cryptoVault();
         CryptoVault cryptoVault = CryptoVault(vault);

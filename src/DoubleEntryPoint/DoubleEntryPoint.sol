@@ -35,14 +35,18 @@ contract Forta is IForta {
     }
 
     function notify(address user, bytes calldata msgData) external override {
-        if (address(usersDetectionBots[user]) == address(0)) return;
+        if (address(usersDetectionBots[user]) == address(0)) {
+            return;
+        }
         try usersDetectionBots[user].handleTransaction(user, msgData) {
             return;
         } catch {}
     }
 
     function raiseAlert(address user) external override {
-        if (address(usersDetectionBots[user]) != msg.sender) return;
+        if (address(usersDetectionBots[user]) != msg.sender) {
+            return;
+        }
         botRaisedAlerts[msg.sender] += 1;
     }
 }
@@ -138,9 +142,9 @@ contract DoubleEntryPoint is
         _;
 
         // Check if alarms have been raised
-        if (forta.botRaisedAlerts(detectionBot) > previousValue) revert(
-            "Alert has been triggered, reverting"
-        );
+        if (forta.botRaisedAlerts(detectionBot) > previousValue) {
+            revert("Alert has been triggered, reverting");
+        }
     }
 
     function delegateTransfer(address to, uint256 value, address origSender)

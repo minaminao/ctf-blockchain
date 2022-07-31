@@ -36,14 +36,18 @@ contract MagicNumberFactory is Level {
         if (
             magic
                 != 0x000000000000000000000000000000000000000000000000000000000000002a
-        ) return false;
+        ) {
+            return false;
+        }
 
         // Require the solver to have at most 10 opcodes.
         uint256 size;
         assembly {
             size := extcodesize(solver)
         }
-        if (size > 10) return false;
+        if (size > 10) {
+            return false;
+        }
 
         return true;
     }
