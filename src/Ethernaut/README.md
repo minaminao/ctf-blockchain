@@ -1,7 +1,5 @@
 # Ethernaut Solver with Foundry
-Note: All commands below need to be executed in the root directory of this repository.
-
-Challenge contracts and exploit contracts: [/src/Ethernaut](/src/Ethernaut)
+Note: All commands below need to be executed in the root of this repository.
 
 **Table of Contents**
 - [Common Settings](#common-settings)
@@ -49,7 +47,7 @@ forge test
 ```
 
 ## 0. Hello Ethernaut
-[Challenge & Exploit codes](/src/Ethernaut/HelloEthernaut)
+[Challenge & Exploit codes](HelloEthernaut)
 
 **Test**
 ```sh
@@ -61,7 +59,7 @@ forge script HelloEthernautExploitScript -vvvv --private-key $PRIVATE_KEY --fork
 ```
 
 ## 1. Fallback
-[Challenge & Exploit codes](/src/Ethernaut/Fallback)
+[Challenge & Exploit codes](Fallback)
 
 **Test**
 ```sh
@@ -73,7 +71,7 @@ forge script FallbackExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $
 ```
 
 ## 2. Fallout
-[Challenge & Exploit codes](/src/Ethernaut/Fallout)
+[Challenge & Exploit codes](Fallout)
 
 **Test**
 ```sh
@@ -86,7 +84,7 @@ forge script FalloutExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $R
 ```
 
 ## 3. Coin Flip
-[Challenge & Exploit codes](/src/Ethernaut/CoinFlip)
+[Challenge & Exploit codes](CoinFlip)
 
 **Test**
 ```sh
@@ -104,7 +102,7 @@ forge script CoinFlipExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $
 ```
 
 ## 4. Telephone
-[Challenge & Exploit codes](/src/Ethernaut/Telephone)
+[Challenge & Exploit codes](Telephone)
 
 **Test**
 ```sh
@@ -117,7 +115,7 @@ forge script TelephoneExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url 
 ```
 
 ## 5. Token
-[Challenge & Exploit codes](/src/Ethernaut/Token)
+[Challenge & Exploit codes](Token)
 
 **Test**
 ```sh
@@ -130,7 +128,7 @@ forge script TokenExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC
 ```
 
 ## 6. Delegation
-[Challenge & Exploit codes](/src/Ethernaut/Delegation)
+[Challenge & Exploit codes](Delegation)
 
 **Test**
 ```sh
@@ -143,7 +141,7 @@ forge script DelegationExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url
 ```
 
 ## 7. Force
-[Challenge & Exploit codes](/src/Ethernaut/Force)
+[Challenge & Exploit codes](Force)
 
 **Test**
 ```sh
@@ -156,7 +154,7 @@ forge script ForceExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC
 ```
 
 ## 8. Vault
-[Challenge & Exploit codes](/src/Ethernaut/Vault)
+[Challenge & Exploit codes](Vault)
 
 **Test**
 ```sh
@@ -174,7 +172,7 @@ cast send --private-key $PRIVATE_KEY <INSTANCE ADDRESS> "unlock(bytes32)" $(cast
 ```
 
 ## 9. King
-[Challenge & Exploit codes](/src/Ethernaut/King)
+[Challenge & Exploit codes](King)
 
 **Test**
 ```sh
@@ -187,7 +185,7 @@ forge script KingExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_
 ```
 
 ## 10. Re-entrancy
-[Challenge & Exploit codes](/src/Ethernaut/Reentrance)
+[Challenge & Exploit codes](Reentrance)
 
 **Test**
 ```sh
@@ -200,7 +198,7 @@ forge script ReentranceExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url
 ```
 
 ## 11. Elevator
-[Challenge & Exploit codes](/src/Ethernaut/Elevator)
+[Challenge & Exploit codes](Elevator)
 
 **Test**
 ```sh
@@ -213,7 +211,7 @@ forge script ElevatorExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $
 ```
 
 ## 12. Privacy
-[Challenge & Exploit codes](/src/Ethernaut/Privacy)
+[Challenge & Exploit codes](Privacy)
 
 **Test**
 ```sh
@@ -226,7 +224,7 @@ forge script PrivacyExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $R
 ```
 
 ## 13. Gatekeeper One
-[Challenge & Exploit codes](/src/Ethernaut/GatekeeperOne)
+[Challenge & Exploit codes](GatekeeperOne)
 
 **Test**
 ```sh
@@ -239,7 +237,7 @@ forge script GatekeeperOneExploitScript -vvvv --private-key $PRIVATE_KEY --fork-
 ```
 
 ## 14. Gatekeeper Two
-[Challenge & Exploit codes](/src/Ethernaut/GatekeeperTwo)
+[Challenge & Exploit codes](GatekeeperTwo)
 
 **Test**
 ```sh
@@ -252,7 +250,7 @@ forge script GatekeeperTwoExploitScript -vvvv --private-key $PRIVATE_KEY --fork-
 ```
 
 ## 15. Naught Coin
-[Challenge & Exploit codes](/src/Ethernaut/NaughtCoin)
+[Challenge & Exploit codes](NaughtCoin)
 
 **Test**
 ```sh
@@ -265,7 +263,7 @@ forge script NaughtCoinExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url
 ```
 
 ## 16. Preservation
-[Challenge & Exploit codes](/src/Ethernaut/Preservation)
+[Challenge & Exploit codes](Preservation)
 
 **Test**
 ```sh
@@ -278,7 +276,7 @@ forge script PreservationtExploitScript -vvvv --private-key $PRIVATE_KEY --fork-
 ```
 
 ## 17. Recovery
-[Challenge & Exploit codes](/src/Ethernaut/Recovery)
+[Challenge & Exploit codes](Recovery)
 
 **Exploit on chain**
 ```sh
@@ -287,7 +285,7 @@ cast send --private-key $PRIVATE_KEY --gas-limit 100000 <INSTANCE ADDRESS> "dest
 The token address can be easily found in a blockchain explorer.
 
 ## 18. MagicNumber
-[Challenge & Exploit codes](/src/Ethernaut/MagicNumber)
+[Challenge & Exploit codes](MagicNumber)
 
 **Test**
 ```sh
@@ -300,7 +298,7 @@ forge script MagicNumberExploitScript -vvvv --private-key $PRIVATE_KEY --fork-ur
 ```
 
 ## 19. Alien Codex
-[Challenge & Exploit codes](/src/Ethernaut/AlienCodex)
+[Challenge & Exploit codes](AlienCodex)
 
 **Test**
 ```sh
@@ -313,7 +311,7 @@ forge script AlienCodexExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url
 ```
 
 ## 20. Denial
-[Challenge & Exploit codes](/src/Ethernaut/Denial)
+[Challenge & Exploit codes](Denial)
 
 **Test**
 ```sh
@@ -326,7 +324,7 @@ forge script DenialExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RP
 ```
 
 ## 21. Shop
-[Challenge & Exploit codes](/src/Ethernaut/Shop)
+[Challenge & Exploit codes](Shop)
 
 **Test**
 ```sh
@@ -339,7 +337,7 @@ forge script ShopExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_
 ```
 
 ## 22. Dex
-[Challenge & Exploit codes](/src/Ethernaut/Dex)
+[Challenge & Exploit codes](Dex)
 
 **Test**
 ```sh
@@ -352,7 +350,7 @@ forge script DexExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_U
 ```
 
 ## 23. Dex Two
-[Challenge & Exploit codes](/src/Ethernaut/DexTwo)
+[Challenge & Exploit codes](DexTwo)
 
 **Test**
 ```sh
@@ -365,7 +363,7 @@ forge script DexTwoExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RP
 ```
 
 ## 24. Puzzle Wallet
-[Challenge & Exploit codes](/src/Ethernaut/PuzzleWallet)
+[Challenge & Exploit codes](PuzzleWallet)
 
 **Test**
 ```sh
@@ -378,7 +376,7 @@ forge script PuzzleWalletExploitScript -vvvv --private-key $PRIVATE_KEY --fork-u
 ```
 
 ## 25. Motorbike
-[Challenge & Exploit codes](/src/Ethernaut/Motorbike)
+[Challenge & Exploit codes](Motorbike)
 
 **Test**
 - Foundry test function cannot detect that the code size has changed to 0.
@@ -390,7 +388,7 @@ forge script MotorbikeExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url 
 ```
 
 ## 26. DoubleEntryPoint
-[Challenge & Exploit codes](/src/Ethernaut/DoubleEntryPoint)
+[Challenge & Exploit codes](DoubleEntryPoint)
 
 **Test**
 ```sh

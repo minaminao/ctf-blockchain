@@ -75,8 +75,8 @@ Note:
 | Capture The Ether: Call me                                              | contract call          |
 | Capture The Ether: Guess the number                                     | contract call          |
 | Capture The Ether: Guess the secret number                              | `keccak256`            |
-| [Ethernaut: 0. Hello Ethernaut](writeup/Ethernaut.md#0-hello-ethernaut) | contract call, ABI     |
-| [Ethernaut: 1. Fallback](writeup/Ethernaut.md#1-fallback)               | receive Ether function |
+| [Ethernaut: 0. Hello Ethernaut](src/Ethernaut/README.md#0-hello-ethernaut) | contract call, ABI     |
+| [Ethernaut: 1. Fallback](src/Ethernaut/README.md#1-fallback)               | receive Ether function |
 | Paradigm CTF 2021: Hello                                                | contract call          |
 | 0x41414141 CTF: sanity-check                                            | contract call          |
 | 0x41414141 CTF: crackme.sol                                             |                        |
@@ -89,8 +89,8 @@ Note:
 | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | Capture The Ether: Guess the new number                                 | `block.number`, `block.timestamp` (formerly: `now`)                          |
 | Capture The Ether: Predict the block hash                               | `blockhash` (formerly: `block.blockhash`)                                    |
-| [Ethernaut: 13. Gatekeeper One](writeup/Ethernaut.md#13-gatekeeper-one) | `msg.sender != tx.origin`, `gasleft().mod(8191) == 0`, type conversion       |
-| [Ethernaut: 14. Gatekeeper Two](writeup/Ethernaut.md#14-gatekeeper-two) | `msg.sender != tx.origin`, `extcodesize(caller()) == 0`                      |
+| [Ethernaut: 13. Gatekeeper One](src/Ethernaut/README.md#13-gatekeeper-one) | `msg.sender != tx.origin`, `gasleft().mod(8191) == 0`, type conversion       |
+| [Ethernaut: 14. Gatekeeper Two](src/Ethernaut/README.md#14-gatekeeper-two) | `msg.sender != tx.origin`, `extcodesize(caller()) == 0`                      |
 | Cipher Shastra: Minion                                                  | `msg.sender != tx.origin`, `extcodesize(msg.sender) == 0`, `block.timestamp` |
 | SECCON Beginners CTF 2020: C4B                                          | `block.number`                                                               |
 | Paradigm CTF 2021: Babysandbox                                          | `staticcall`, `call`, `revert`                                               |
@@ -101,7 +101,7 @@ Note:
 
 | Challenge                                                   | Note, Keyword |
 | ----------------------------------------------------------- | ------------- |
-| [Ethernaut: 4. Telephone](writeup/Ethernaut.md#4-telephone) |               |
+| [Ethernaut: 4. Telephone](src/Ethernaut/README.md#4-telephone) |               |
 
 ### Pseudorandom numbers generated on-chain are predictable
 - Since the bytecodes of contracts are publicly available, it is easy to predict pseudorandom numbers whose generation is completed on-chain (using only states, not off-chain data).
@@ -111,14 +111,14 @@ Note:
 | Challenge                                                   | Note, Keyword |
 | ----------------------------------------------------------- | ------------- |
 | Capture The Ether: Predict the future                       |               |
-| [Ethernaut: 3. Coin Flip](writeup/Ethernaut.md#3-coin-flip) |               |
+| [Ethernaut: 3. Coin Flip](src/Ethernaut/README.md#3-coin-flip) |               |
 
 ### ERC-20 basics
 - These can be solved with an understanding of the [ERC-20 token standard](https://eips.ethereum.org/EIPS/eip-20).
 
 | Challenge                                                         | Note, Keyword                         |
 | ----------------------------------------------------------------- | ------------------------------------- |
-| [Ethernaut: 15. Naught Coin](writeup/Ethernaut.md#15-naught-coin) | `transfer`, `approve`, `transferFrom` |
+| [Ethernaut: 15. Naught Coin](src/Ethernaut/README.md#15-naught-coin) | `transfer`, `approve`, `transferFrom` |
 | Paradigm CTF 2021: Secure                                         | WETH                                  |
 
 ### Storage overwrite by `delegatecall`
@@ -126,10 +126,10 @@ Note:
 
 | Challenge                                                             | Note, Keyword                                                                                     |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| [Ethernaut: 6. Delegation](writeup/Ethernaut.md#6-delegation)         |                                                                                                   |
-| [Ethernaut: 16. Preservation](writeup/Ethernaut.md#16-preservation)   |                                                                                                   |
-| [Ethernaut: 24. Puzzle Wallet](writeup/Ethernaut.md#24-puzzle-wallet) | proxy contract                                                                                    |
-| [Ethernaut: 25. Motorbike](writeup/Ethernaut.md#25-motorbike)         | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
+| [Ethernaut: 6. Delegation](src/Ethernaut/README.md#6-delegation)         |                                                                                                   |
+| [Ethernaut: 16. Preservation](src/Ethernaut/README.md#16-preservation)   |                                                                                                   |
+| [Ethernaut: 24. Puzzle Wallet](src/Ethernaut/README.md#24-puzzle-wallet) | proxy contract                                                                                    |
+| [Ethernaut: 25. Motorbike](src/Ethernaut/README.md#25-motorbike)         | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
 
 ### Integer overflow
 - For example, subtracting `1` from the value of a variable of `uint` type when the value is `0` causes an arithmetic overflow.
@@ -140,7 +140,7 @@ Note:
 | --------------------------------------------------- | -------------- |
 | Capture The Ether: Token sale                       | multiplication |
 | Capture The Ether: Token whale                      | subtraction    |
-| [Ethernaut: 5. Token](writeup/Ethernaut.md#5-token) | subtraction    |
+| [Ethernaut: 5. Token](src/Ethernaut/README.md#5-token) | subtraction    |
 
 ### Ether transfers to a contract are not always executable
 - Do not write a contract on the assumption that normal Ether transfer (`.send()` or `.transfer()`) can always be performed to the destination address.
@@ -149,7 +149,7 @@ Note:
 
 | Challenge                                         | Note, Keyword |
 | ------------------------------------------------- | ------------- |
-| [Ethernaut: 9. King](writeup/Ethernaut.md#9-king) |               |
+| [Ethernaut: 9. King](src/Ethernaut/README.md#9-king) |               |
 
 ### Forced Ether transfer to a contract via `selfdestruct`
 - If a contract does not have a receive Ether function and a payable fallback function, it is not guaranteed that Ether will not be received.
@@ -159,7 +159,7 @@ Note:
 | Challenge                                           | Note, Keyword |
 | --------------------------------------------------- | ------------- |
 | Capture The Ether: Retirement fund                  |               |
-| [Ethernaut: 7. Force](writeup/Ethernaut.md#7-force) |               |
+| [Ethernaut: 7. Force](src/Ethernaut/README.md#7-force) |               |
 
 ### Not all procedures can be executed after a contract call
 - A large amount of gas can be consumed by loops and recursion in `call`, and there may not be enough gas for the rest of the process.
@@ -167,21 +167,21 @@ Note:
 
 | Challenge                                               | Note, Keyword |
 | ------------------------------------------------------- | ------------- |
-| [Ethernaut: 20. Denial](writeup/Ethernaut.md#20-denial) |               |
+| [Ethernaut: 20. Denial](src/Ethernaut/README.md#20-denial) |               |
 
 ### Forgetting to set `view`/`pure` to interface and abstract contract functions
 - If you forget to set `view`,`pure` for a function and design your application under the assumption that the state will not change, it will be a bug.
 
 | Challenge                                                   | Note, Keyword |
 | ----------------------------------------------------------- | ------------- |
-| [Ethernaut: 11. Elevator](writeup/Ethernaut.md#11-elevator) |               |
+| [Ethernaut: 11. Elevator](src/Ethernaut/README.md#11-elevator) |               |
 
 ### `view` functions do not always return the same value
 - Since view functions can read state, they can be conditionally branched based on state and do not necessarily return the same value.
 
 | Challenge                                           | Note, Keyword |
 | --------------------------------------------------- | ------------- |
-| [Ethernaut: 21. Shop](writeup/Ethernaut.md#21-shop) |               |
+| [Ethernaut: 21. Shop](src/Ethernaut/README.md#21-shop) |               |
 
 ### Mistakes in setting `storage` and `memory`
 - If `storage` and `memory` are not set properly, old values may be referenced or overwriting may not occur, resulting in vulnerability.
@@ -196,7 +196,7 @@ Note:
 
 | Challenge                                                   | Note, Keyword                     |
 | ----------------------------------------------------------- | --------------------------------- |
-| [Ethernaut: 17. Recovery](writeup/Ethernaut.md#17-recovery) | loss of deployed contract address |
+| [Ethernaut: 17. Recovery](src/Ethernaut/README.md#17-recovery) | loss of deployed contract address |
 
 ### Reversing states (contract must not contain confidential data)
 - Since the state and the bytecodes of contracts are public, all variables, including private variables, are readable.
@@ -206,8 +206,8 @@ Note:
 | Challenge                                                 | Note, Keyword |
 | --------------------------------------------------------- | ------------- |
 | Capture The Ether: Guess the random number                |               |
-| [Ethernaut: 8. Vault](writeup/Ethernaut.md#8-vault)       |               |
-| [Ethernaut: 12. Privacy](writeup/Ethernaut.md#12-privacy) |               |
+| [Ethernaut: 8. Vault](src/Ethernaut/README.md#8-vault)       |               |
+| [Ethernaut: 12. Privacy](src/Ethernaut/README.md#12-privacy) |               |
 | Cipher Shastra: Sherlock                                  |               |
 | 0x41414141 CTF: secure enclave                            |               |
 
@@ -239,7 +239,7 @@ Note:
 
 | Challenge                                                         | Note, Keyword                                                                                                  |
 | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| [Ethernaut: 18. MagicNumber](writeup/Ethernaut.md#18-magicnumber) |                                                                                                                |
+| [Ethernaut: 18. MagicNumber](src/Ethernaut/README.md#18-magicnumber) |                                                                                                                |
 | Paradigm CTF 2021: Rever                                          | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
 
 ### Re-entrancy attack
@@ -251,7 +251,7 @@ Note:
 | Challenge                                                         | Note, Keyword |
 | ----------------------------------------------------------------- | ------------- |
 | Capture The Ether: Token bank                                     |               |
-| [Ethernaut: 10. Re-entrancy](writeup/Ethernaut.md#10-re-entrancy) |               |
+| [Ethernaut: 10. Re-entrancy](src/Ethernaut/README.md#10-re-entrancy) |               |
 | Paradigm CTF 2021: Yield Aggregator                               |               |
 | HTB University CTF 2020 Quals: moneyHeist                         |               |
 
@@ -289,7 +289,7 @@ Note:
 
 | Challenge                                         | Note, Keyword |
 | ------------------------------------------------- | ------------- |
-| [Ethernaut: 22. Dex](writeup/Ethernaut.md#22-dex) |               |
+| [Ethernaut: 22. Dex](src/Ethernaut/README.md#22-dex) |               |
 
 ### Attacks using custom tokens
 - The ability of a protocol to use arbitrary tokens is not in itself a bad thing, but it can be an attack vector.
@@ -297,7 +297,7 @@ Note:
 
 | Challenge                                                 | Note, Keyword |
 | --------------------------------------------------------- | ------------- |
-| [Ethernaut: 23. Dex Two](writeup/Ethernaut.md#23-dex-two) |               |
+| [Ethernaut: 23. Dex Two](src/Ethernaut/README.md#23-dex-two) |               |
 
 ### Funds leakage due to oracle manipulation (no flash loans)
 - It corrupts the value of the oracle and drains the funds of applications that refer to that oracle.
@@ -365,7 +365,7 @@ Note:
 | Challenge                                                         | Note, Keyword |
 | ----------------------------------------------------------------- | ------------- |
 | Capture The Ether: Mapping                                        |               |
-| [Ethernaut: 19. Alien Codex](writeup/Ethernaut.md#19-alien-codex) |               |
+| [Ethernaut: 19. Alien Codex](src/Ethernaut/README.md#19-alien-codex) |               |
 | Paradigm CTF 2021: Bank                                           |               |
 
 ### Constructor is just a function with a typo (< Solidity 0.5.0)
@@ -375,7 +375,7 @@ Note:
 | Challenge                                               | Note, Keyword |
 | ------------------------------------------------------- | ------------- |
 | Capture The Ether: Assume ownership                     |               |
-| [Ethernaut: 2. Fallout](writeup/Ethernaut.md#2-fallout) |               |
+| [Ethernaut: 2. Fallout](src/Ethernaut/README.md#2-fallout) |               |
 
 ### Storage overwrite via uninitialized storage pointer (< Solidity 0.5.0)
 - Since v0.5.0, uninitialized storage variables are forbidden, so this bug cannot occur.
