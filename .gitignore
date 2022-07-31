@@ -9,5 +9,6 @@ out/
 /broadcast/*
 /broadcast/*/31337/
 
-# Ethernaut
-src/Recovery/*
+export_api_key.sh
+
+src/EthernautDao
