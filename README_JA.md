@@ -410,7 +410,7 @@
 | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | Paradigm CTF 2021: Bouncer                                        | バッチ処理に必要な資金が単一処理と同じになってしまっている                                        |
 | Paradigm CTF 2021: Market                                         | Eternal Storageパターンのキーのズレを利用して、あるフィールドの値を別のフィールドの値と認識させる |
-| [EthernautDAO: 4. WalletLibrary](src/EthernautDAO/WalletLibrary/) | m-of-nマルチシグウォレットのmとnを変更可能                                                        |
+| [EthernautDAO: 2. WalletLibrary](src/EthernautDAO/WalletLibrary/) | m-of-nマルチシグウォレットのmとnを変更可能                                                        |
 
 ## Bitcoin
 注意点
