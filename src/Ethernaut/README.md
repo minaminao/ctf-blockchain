@@ -1,4 +1,7 @@
-# Ethernaut Solver with Foundry
+# Ethernaut with Foundry
+
+Ethernaut: https://ethernaut.openzeppelin.com/
+
 Note: All commands below need to be executed in the root of this repository.
 
 **Table of Contents**
@@ -43,7 +46,7 @@ export FOUNDRY_ETH_RPC_URL=$RPC_URL
 
 ## Test All Exploit 
 ```sh
-forge test
+forge test --match-path "src/Ethernaut/*"
 ```
 
 ## 0. Hello Ethernaut
