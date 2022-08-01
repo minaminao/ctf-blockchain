@@ -11,4 +11,6 @@ out/
 
 export_api_key.sh
 
-src/EthernautDao
+# Private challenges
+src/_*
+src/*/_*
