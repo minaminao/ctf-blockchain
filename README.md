@@ -399,10 +399,11 @@ Note:
 | ~~Ethernaut: Locked~~          | [deleted](https://forum.openzeppelin.com/t/ethernaut-locked-with-solidity-0-5/1115) |
 
 ### Other ad-hoc vulnerabilities and methods
-| Challenge                  | Note, Keyword                                                                                                                     |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Paradigm CTF 2021: Bouncer | The funds required for batch processing are the same as for single processing.                                                    |
-| Paradigm CTF 2021: Market  | Make the value of one field be recognized as the value of another field by using key misalignment in the Eternal Storage pattern. |
+| Challenge                                                         | Note, Keyword                                                                                                                     |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Paradigm CTF 2021: Bouncer                                        | The funds required for batch processing are the same as for single processing.                                                    |
+| Paradigm CTF 2021: Market                                         | Make the value of one field be recognized as the value of another field by using key misalignment in the Eternal Storage pattern. |
+| [EthernautDAO: 4. WalletLibrary](src/EthernautDAO/WalletLibrary/) | m and n of m-of-n multisig wallet can be changed.                                                                                 |
 
 ## Bitcoin
 Note
