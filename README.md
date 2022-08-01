@@ -123,7 +123,7 @@ Note:
 | Paradigm CTF 2021: Secure                                            | WETH                                  |
 
 ### Storage overwrite by `delegatecall`
-- `delegatecall` is a potential source of vulnerability because the storage of the calling contract can be overwritten.
+- `delegatecall` is a potential source of vulnerability because the storage of the calling contract can be overwritten by the called function.
 
 | Challenge                                                                | Note, Keyword                                                                                     |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
@@ -131,6 +131,13 @@ Note:
 | [Ethernaut: 16. Preservation](src/Ethernaut/README.md#16-preservation)   |                                                                                                   |
 | [Ethernaut: 24. Puzzle Wallet](src/Ethernaut/README.md#24-puzzle-wallet) | proxy contract                                                                                    |
 | [Ethernaut: 25. Motorbike](src/Ethernaut/README.md#25-motorbike)         | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
+
+### Context mismatch in `delegatecall`
+- Functions called in `delegatecall` are executed in the context of the calling contract, but if the function does not carefully consider the context, a bug will be created.
+
+| Challenge                                                 | Note, Keyword              |
+| --------------------------------------------------------- | -------------------------- |
+| [EthernautDAO: 3. CarMarket](src/EthernautDAO/CarMarket/) | Non-use of `address(this)` |
 
 ### Integer overflow
 - For example, subtracting `1` from the value of a variable of `uint` type when the value is `0` causes an arithmetic overflow.

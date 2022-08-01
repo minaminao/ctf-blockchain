@@ -20,6 +20,7 @@
   - オンチェーンで生成する擬似乱数は予測可能
   - ERC-20の基礎
   - `delegatecall`を悪用したストレージ書き換え
+  - `delegatecall`のコンテキスト不一致
   - 整数のオーバーフロー
   - コントラクトへの通常のEther送金が必ず実行できるとは限らない
   - `selfdestruct`によるコントラクトへの強制送金
@@ -122,7 +123,7 @@
 | Paradigm CTF 2021: Secure                                            | WETH                                  |
 
 ### `delegatecall`を悪用したストレージ書き換え
-- `delegatecall`は呼び出し元コントラクトのストレージを書き換え可能であるため脆弱性の原因になりやすい。
+- `delegatecall`は呼び出し先の関数が呼び出し元コントラクトのストレージを書き換え可能であるため脆弱性の原因になりやすい。
 
 | 問題                                                                     | 備考、キーワード                                                                                    |
 | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
@@ -130,6 +131,13 @@
 | [Ethernaut: 16. Preservation](src/Ethernaut/README.md#16-preservation)   | ストレージの書き換え                                                                                |
 | [Ethernaut: 24. Puzzle Wallet](src/Ethernaut/README.md#24-puzzle-wallet) | プロキシパターン                                                                                    |
 | [Ethernaut: 25. Motorbike](src/Ethernaut/README.md#25-motorbike)         | プロキシパターン、[EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
+
+### `delegatecall`のコンテキスト不一致
+- `delegatecall`で呼ばれる関数は、呼び出し元コントラクトのコンテキストで実行されるが、その関数がコンテキストをしっかり考慮していないとバグが生まれる。
+
+| 問題                                                      | 備考、キーワード        |
+| --------------------------------------------------------- | ----------------------- |
+| [EthernautDAO: 3. CarMarket](src/EthernautDAO/CarMarket/) | `address(this)`の不使用 |
 
 ### 整数のオーバーフロー	
 - 例えば`uint`の変数の値が`0`のとき`1`引くと算術オーバーフローする。
