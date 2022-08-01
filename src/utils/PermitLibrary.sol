@@ -13,7 +13,7 @@ library PermitLibrary {
         uint256 value,
         uint256 deadline
     )
-        public
+        internal
         view
         returns (bytes32)
     {
