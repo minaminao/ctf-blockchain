@@ -8,6 +8,7 @@ on:
 
 env:
   FOUNDRY_PROFILE: ci
+  RPC_GOERLI: https://rpc.ankr.com/eth_goerli
 
 jobs:
   check:
