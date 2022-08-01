@@ -3,7 +3,7 @@
 
 問題の並びは適当で難易度順やおすすめ順ではありません。
 
-一部の問題はExploitを公開しています: [src/Ethernaut/README.md](src/Ethernaut/README.md) 
+一部の問題はExploitを公開しています（例: [Ethernaut](src/Ethernaut/README.md)）。
 
 何か間違い等あればissueかPRで教えて下さい。
 
