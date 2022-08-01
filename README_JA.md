@@ -69,38 +69,38 @@
 ### Ethereum/コントラクトの基礎
 - Ethereumの基礎、Solidityの基本的な[言語仕様](https://solidity-ja.readthedocs.io/)、コントラクトの基本的な操作方法について知っていれば解ける。
 
-| 問題                                                                    | 備考、キーワード        |
-| ----------------------------------------------------------------------- | ----------------------- |
-| Capture The Ether: Deploy a contract                                    | faucet                  |
-| Capture The Ether: Call me                                              | コントラクトコール      |
-| Capture The Ether: Guess the number                                     | コントラクトコール      |
-| Capture The Ether: Guess the secret number                              | `keccak256`             |
+| 問題                                                                       | 備考、キーワード        |
+| -------------------------------------------------------------------------- | ----------------------- |
+| Capture The Ether: Deploy a contract                                       | faucet                  |
+| Capture The Ether: Call me                                                 | コントラクトコール      |
+| Capture The Ether: Guess the number                                        | コントラクトコール      |
+| Capture The Ether: Guess the secret number                                 | `keccak256`             |
 | [Ethernaut: 0. Hello Ethernaut](src/Ethernaut/README.md#0-hello-ethernaut) | コントラクトコール、ABI |
 | [Ethernaut: 1. Fallback](src/Ethernaut/README.md#1-fallback)               | receive Ether関数       |
-| Paradigm CTF 2021: Hello                                                | コントラクトコール      |
-| 0x41414141 CTF: sanity-check                                            | コントラクトコール      |
-| 0x41414141 CTF: crackme.sol                                             | コード理解              |
+| Paradigm CTF 2021: Hello                                                   | コントラクトコール      |
+| 0x41414141 CTF: sanity-check                                               | コントラクトコール      |
+| 0x41414141 CTF: crackme.sol                                                | コード理解              |
 
 ### EVMの仕様を利用したパズル
 - EVMの仕様を理解していれば解けるパズル系の問題。
 - 特に脆弱性を利用したり攻撃手法を用いたりはしない。
 
-| 問題                                                                    | 備考、キーワード                                                             |
-| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Capture The Ether: Guess the new number                                 | `block.number`、`block.timestamp` (旧: `now`)                                |
-| Capture The Ether: Predict the block hash                               | `blockhash` (旧: `block.blockhash`)                                          |
+| 問題                                                                       | 備考、キーワード                                                             |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Capture The Ether: Guess the new number                                    | `block.number`、`block.timestamp` (旧: `now`)                                |
+| Capture The Ether: Predict the block hash                                  | `blockhash` (旧: `block.blockhash`)                                          |
 | [Ethernaut: 13. Gatekeeper One](src/Ethernaut/README.md#13-gatekeeper-one) | `msg.sender != tx.origin`、`gasleft().mod(8191) == 0`、型変換                |
 | [Ethernaut: 14. Gatekeeper Two](src/Ethernaut/README.md#14-gatekeeper-two) | `msg.sender != tx.origin`、`extcodesize(caller()) == 0`                      |
-| Cipher Shastra: Minion                                                  | `msg.sender != tx.origin`、`extcodesize(msg.sender) == 0`、`block.timestamp` |
-| SECCON Beginners CTF 2020: C4B                                          | `block.number`                                                               |
-| Paradigm CTF 2021: Babysandbox                                          | `staticcall`、`call`、`revert`                                               |
-| Paradigm CTF 2021: Lockbox                                              | `ecrecover`、`abi.encodePacked`、`msg.data.length`                           |
+| Cipher Shastra: Minion                                                     | `msg.sender != tx.origin`、`extcodesize(msg.sender) == 0`、`block.timestamp` |
+| SECCON Beginners CTF 2020: C4B                                             | `block.number`                                                               |
+| Paradigm CTF 2021: Babysandbox                                             | `staticcall`、`call`、`revert`                                               |
+| Paradigm CTF 2021: Lockbox                                                 | `ecrecover`、`abi.encodePacked`、`msg.data.length`                           |
 
 ### `tx.origin`の誤用
 - `tx.origin`はトランザクションの発行者のアドレスを指し、コントラクトコール元のアドレス（すなわち`msg.sender`）として使ってはならない。
 
-| 問題                                                        | 備考、キーワード |
-| ----------------------------------------------------------- | ---------------- |
+| 問題                                                           | 備考、キーワード |
+| -------------------------------------------------------------- | ---------------- |
 | [Ethernaut: 4. Telephone](src/Ethernaut/README.md#4-telephone) |                  |
 
 ### オンチェーンで生成する擬似乱数は予測可能
@@ -108,24 +108,24 @@
 - 擬似乱数生成器のパラメータが全て公開されていると考えればいかに脆弱かわかる。
 - 誰にも予測不可能な乱数を用いたい場合、乱数機能を持つ分散型オラクルを使用すれば良い。例えばVerifiable Random Function (VRF)を実装した[Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/)など。
 
-| 問題                                                        | 備考、キーワード |
-| ----------------------------------------------------------- | ---------------- |
-| Capture The Ether: Predict the future                       |                  |
+| 問題                                                           | 備考、キーワード |
+| -------------------------------------------------------------- | ---------------- |
+| Capture The Ether: Predict the future                          |                  |
 | [Ethernaut: 3. Coin Flip](src/Ethernaut/README.md#3-coin-flip) |                  |
 
 ### ERC-20の基礎
 - [ERC-20: Token Standard](https://eips.ethereum.org/EIPS/eip-20)の仕様を理解していれば解ける。
 
-| 問題                                                              | 備考、キーワード                      |
-| ----------------------------------------------------------------- | ------------------------------------- |
+| 問題                                                                 | 備考、キーワード                      |
+| -------------------------------------------------------------------- | ------------------------------------- |
 | [Ethernaut: 15. Naught Coin](src/Ethernaut/README.md#15-naught-coin) | `transfer`、`approve`、`transferFrom` |
-| Paradigm CTF 2021: Secure                                         | WETH                                  |
+| Paradigm CTF 2021: Secure                                            | WETH                                  |
 
 ### `delegatecall`を悪用したストレージ書き換え
 - `delegatecall`は呼び出し元コントラクトのストレージを書き換え可能であるため脆弱性の原因になりやすい。
 
-| 問題                                                                  | 備考、キーワード                                                                                    |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| 問題                                                                     | 備考、キーワード                                                                                    |
+| ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
 | [Ethernaut: 6. Delegation](src/Ethernaut/README.md#6-delegation)         | 変数の書き換え                                                                                      |
 | [Ethernaut: 16. Preservation](src/Ethernaut/README.md#16-preservation)   | ストレージの書き換え                                                                                |
 | [Ethernaut: 24. Puzzle Wallet](src/Ethernaut/README.md#24-puzzle-wallet) | プロキシパターン                                                                                    |
@@ -136,10 +136,10 @@
 - Solidity v0.8.0から算術オーバフローを検出するようになった。
 - それ以前のバージョンではSafeMathライブラリを使うことでチェックできる。
 
-| 問題                                                | 備考、キーワード |
-| --------------------------------------------------- | ---------------- |
-| Capture The Ether: Token sale                       | 掛け算           |
-| Capture The Ether: Token whale                      | 引き算           |
+| 問題                                                   | 備考、キーワード |
+| ------------------------------------------------------ | ---------------- |
+| Capture The Ether: Token sale                          | 掛け算           |
+| Capture The Ether: Token whale                         | 引き算           |
 | [Ethernaut: 5. Token](src/Ethernaut/README.md#5-token) | 引き算           |
 
 ### コントラクトへの通常のEther送金が必ず実行できるとは限らない
@@ -147,8 +147,8 @@
 - 宛先がコントラクトでreceive Ether関数及びpayable fallback関数が無い場合、Etherの送金ができない。
 - ただし、通常の送金方法ではなく、後述する`selfdestruct`を用いればそのようなコントラクトにも送金を強制できる。
 
-| 問題                                              | 備考、キーワード |
-| ------------------------------------------------- | ---------------- |
+| 問題                                                 | 備考、キーワード |
+| ---------------------------------------------------- | ---------------- |
 | [Ethernaut: 9. King](src/Ethernaut/README.md#9-king) |                  |
 
 ### `selfdestruct`によるコントラクトへの強制送金
@@ -156,31 +156,31 @@
 - あるコントラクトが`selfdestruct`を行う際にそのコントラクトが持つEtherを他のコントラクトあるいはEOAに送金でき、この`selfdestruct`による送金は宛先コントラクトにreceive Ether関数及びpayable fallback関数が無くても強制的に送金できる（この送金はそれら関数のチェックを受けない）。
 - 所持するEtherが`0`である前提でアプリケーションを作るとバグになる。
 
-| 問題                                                | 備考、キーワード |
-| --------------------------------------------------- | ---------------- |
-| Capture The Ether: Retirement fund                  |                  |
+| 問題                                                   | 備考、キーワード |
+| ------------------------------------------------------ | ---------------- |
+| Capture The Ether: Retirement fund                     |                  |
 | [Ethernaut: 7. Force](src/Ethernaut/README.md#7-force) |                  |
 
 ### コントラクトコール後に全ての処理が実行できるとは限らない
 - `call`先でループや再帰によりガスが大量に消費され、残りの処理のガスが足りなくなる場合がある。
 - Solidity v0.8.0まではゼロ除算や`assert(false)`などでもガスを消費し切れていた。
 
-| 問題                                                    | 備考、キーワード |
-| ------------------------------------------------------- | ---------------- |
+| 問題                                                       | 備考、キーワード |
+| ---------------------------------------------------------- | ---------------- |
 | [Ethernaut: 20. Denial](src/Ethernaut/README.md#20-denial) |                  |
 
 ### インターフェース/抽象コントラクトの関数への`view`/`pure`の指定忘れ
 - 関数に`view`,`pure`を指定したと思い込み、その関数を実行してもステートが変更されないという前提でアプリケーションを設計するとバグになる。
 
-| 問題                                                        | 備考、キーワード |
-| ----------------------------------------------------------- | ---------------- |
+| 問題                                                           | 備考、キーワード |
+| -------------------------------------------------------------- | ---------------- |
 | [Ethernaut: 11. Elevator](src/Ethernaut/README.md#11-elevator) |                  |
 
 ### `view`関数は同じ値が返るとは限らない
 - `view`関数はステートを読み込めるためステートをもとに条件分岐が可能であり同じ値が返るとは限らない。
 
-| 問題                                                | 備考、キーワード |
-| --------------------------------------------------- | ---------------- |
+| 問題                                                   | 備考、キーワード |
+| ------------------------------------------------------ | ---------------- |
 | [Ethernaut: 21. Shop](src/Ethernaut/README.md#21-shop) |                  |
 
 ### `storage`,`memory`の設定ミス
@@ -194,8 +194,8 @@
 - トランザクションの処理の流れを追うだけでも様々な情報が手に入れられる。
 - Etherscanなどのブロックチェーンエクスプローラーが便利。
 
-| 問題                                                        | 備考、キーワード                       |
-| ----------------------------------------------------------- | -------------------------------------- |
+| 問題                                                           | 備考、キーワード                       |
+| -------------------------------------------------------------- | -------------------------------------- |
 | [Ethernaut: 17. Recovery](src/Ethernaut/README.md#17-recovery) | デプロイしたコントラクトアドレスの紛失 |
 
 ### ステートのReversing（コントラクトに秘密情報を含んではならない）
@@ -203,13 +203,13 @@
 - private変数は他のコントラクトから直接読めないことを保証しているだけであり、ブロックチェーン外の存在である我々は読める。
 - トランザクションによって秘密情報を与えている場合、トランザクションを読むことでも解ける。
 
-| 問題                                                      | 備考、キーワード |
-| --------------------------------------------------------- | ---------------- |
-| Capture The Ether: Guess the random number                |                  |
+| 問題                                                         | 備考、キーワード |
+| ------------------------------------------------------------ | ---------------- |
+| Capture The Ether: Guess the random number                   |                  |
 | [Ethernaut: 8. Vault](src/Ethernaut/README.md#8-vault)       |                  |
 | [Ethernaut: 12. Privacy](src/Ethernaut/README.md#12-privacy) |                  |
-| Cipher Shastra: Sherlock                                  |                  |
-| 0x41414141 CTF: secure enclave                            |                  |
+| Cipher Shastra: Sherlock                                     |                  |
+| 0x41414141 CTF: secure enclave                               |                  |
 
 ### トランザクションのReversing
 - トランザクションの中身あるいはトランザクションによってどうステートが変化したかをReversingする。Etherscanが便利。
@@ -237,10 +237,10 @@
 ### EVMバイトコードゴルフ
 - オペコードの数やバイトコードの長さに制限がある問題。
 
-| 問題                                                              | 備考、キーワード                                                                   |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| 問題                                                                 | 備考、キーワード                                                                   |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | [Ethernaut: 18. MagicNumber](src/Ethernaut/README.md#18-magicnumber) |                                                                                    |
-| Paradigm CTF 2021: Rever                                          | 回文判定。さらにそのバイトコードを反転させたコードも回文判定できなくてはならない。 |
+| Paradigm CTF 2021: Rever                                             | 回文判定。さらにそのバイトコードを反転させたコードも回文判定できなくてはならない。 |
 
 ### Re-entrancy Attack
 - コントラクトAのある関数内に別のコントラクトBとのインタラクションやBへのEther送金が含まれている場合、一時的にBに制御が移る。
@@ -248,12 +248,13 @@
 - 例えば、BがAにデポジットしたEtherを引き出す`withdraw`関数を実行したとき、Ether送金でBに制御が移り`withdraw`関数途中にBがもう一度Aの`withdraw`関数を実行する、といったことが可能になる。単純に2回呼び出すなら限度額以上の引き出しができない設計になっていても、`withdraw`関数の途中に`withdraw`関数が実行されるとその限度額のチェックをバイパスできる設計になってしまっている場合がある。
 - Re-entrancy Attackを防ぐためにはChecks-Effects-Interactionsパターンを利用する。
 
-| 問題                                                              | 備考、キーワード |
-| ----------------------------------------------------------------- | ---------------- |
-| Capture The Ether: Token bank                                     |                  |
+| 問題                                                                 | 備考、キーワード |
+| -------------------------------------------------------------------- | ---------------- |
+| Capture The Ether: Token bank                                        |                  |
 | [Ethernaut: 10. Re-entrancy](src/Ethernaut/README.md#10-re-entrancy) |                  |
-| Paradigm CTF 2021: Yield Aggregator                               |                  |
-| HTB University CTF 2020 Quals: moneyHeist                         |                  |
+| Paradigm CTF 2021: Yield Aggregator                                  |                  |
+| HTB University CTF 2020 Quals: moneyHeist                            |                  |
+| [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/)  |                  |
 
 ### フラッシュローンの基礎
 - フラッシュローン（Flash Loan）は、トランザクションの終了までに借りた資産が返却される限り、無担保で資産を借入できるローンのこと。借り手はトランザクション内であれば借りた資産をどのように扱っても良い。
@@ -287,16 +288,16 @@
 ### AMMの価格計算アルゴリズムの穴をついた資金流出
 - Automated Market Maker (AMM)の価格計算アルゴリズムに穴があると単純な取引の組み合わせで資金流出が可能。
 
-| 問題                                              | 備考、キーワード |
-| ------------------------------------------------- | ---------------- |
+| 問題                                                 | 備考、キーワード |
+| ---------------------------------------------------- | ---------------- |
 | [Ethernaut: 22. Dex](src/Ethernaut/README.md#22-dex) |                  |
 
 ### 独自トークンを悪用した資金流出
 - アプリケーションが任意のトークンを利用できること自体は悪いことではないが攻撃ベクタになりうる。
 - また、任意のトークンを利用できない前提のホワイトリスト設計であるのに、任意のトークンを利用できてしまうバグがあると資金流出の原因になりうる。
 
-| 問題                                                      | 備考、キーワード |
-| --------------------------------------------------------- | ---------------- |
+| 問題                                                         | 備考、キーワード |
+| ------------------------------------------------------------ | ---------------- |
 | [Ethernaut: 23. Dex Two](src/Ethernaut/README.md#23-dex-two) |                  |
 
 ### オラクルの操作による資金流出（フラッシュローン無）
@@ -364,26 +365,26 @@
 
 | 問題                                                                     | 備考、キーワード |
 | ------------------------------------------------------------------------ | ---------------- |
-| [EthernautDao: 5. EthernautDaoToken](src/EthernautDao/EthernautDaoToken) |                  |
+| [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken) |                  |
 
 ### 配列の長さを`2^256-1`にすることによる任意ストレージ書き換え（< Solidity 0.6.0）
 - 例えば、配列の長さを負に算術オーバーフローして`2^256-1`にすることで任意のストレージが書き換え可能になる。
 - オーバーフローを起因とする必要はない。
 - v0.6.0から`length`プロパティはread-onlyになった。
 
-| 問題                                                              | 備考、キーワード |
-| ----------------------------------------------------------------- | ---------------- |
-| Capture The Ether: Mapping                                        |                  |
+| 問題                                                                 | 備考、キーワード |
+| -------------------------------------------------------------------- | ---------------- |
+| Capture The Ether: Mapping                                           |                  |
 | [Ethernaut: 19. Alien Codex](src/Ethernaut/README.md#19-alien-codex) |                  |
-| Paradigm CTF 2021: Bank                                           |                  |
+| Paradigm CTF 2021: Bank                                              |                  |
 
 ### コンストラクタがtypoでただの関数に（< Solidity 0.5.0）
 - v0.4.22より前のバージョンだとコンストラクタをコントラクトと同名の関数で定義していたため、コンストラクタ名をtypoするとただの関数になってしまいバグになることがあった。
 - v0.5.0からはこの仕様が廃止され`constructor`キーワードを用いなければならない。
 
-| 問題                                                    | 備考、キーワード |
-| ------------------------------------------------------- | ---------------- |
-| Capture The Ether: Assume ownership                     |                  |
+| 問題                                                       | 備考、キーワード |
+| ---------------------------------------------------------- | ---------------- |
+| Capture The Ether: Assume ownership                        |                  |
 | [Ethernaut: 2. Fallout](src/Ethernaut/README.md#2-fallout) |                  |
 
 ### 初期化されていないストレージポインタを利用したストレージ書き換え（< Solidity 0.5.0）

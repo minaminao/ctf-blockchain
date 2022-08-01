@@ -255,6 +255,7 @@ Note:
 | [Ethernaut: 10. Re-entrancy](src/Ethernaut/README.md#10-re-entrancy) |               |
 | Paradigm CTF 2021: Yield Aggregator                                  |               |
 | HTB University CTF 2020 Quals: moneyHeist                            |               |
+| [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/)  |               |
 
 ### Flash loan basics
 - Flash Loans are uncollateralised loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
@@ -365,7 +366,7 @@ Note:
 
 | Challenge                                                                | Note, Keyword |
 | ------------------------------------------------------------------------ | ------------- |
-| [EthernautDao: 5. EthernautDaoToken](src/EthernautDao/EthernautDaoToken) |               |
+| [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken) |               |
 
 ### Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)
 - For example, any storage can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.
