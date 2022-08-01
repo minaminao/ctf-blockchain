@@ -203,13 +203,14 @@
 - private変数は他のコントラクトから直接読めないことを保証しているだけであり、ブロックチェーン外の存在である我々は読める。
 - トランザクションによって秘密情報を与えている場合、トランザクションを読むことでも解ける。
 
-| 問題                                                         | 備考、キーワード |
-| ------------------------------------------------------------ | ---------------- |
-| Capture The Ether: Guess the random number                   |                  |
-| [Ethernaut: 8. Vault](src/Ethernaut/README.md#8-vault)       |                  |
-| [Ethernaut: 12. Privacy](src/Ethernaut/README.md#12-privacy) |                  |
-| Cipher Shastra: Sherlock                                     |                  |
-| 0x41414141 CTF: secure enclave                               |                  |
+| 問題                                                          | 備考、キーワード |
+| ------------------------------------------------------------- | ---------------- |
+| Capture The Ether: Guess the random number                    |                  |
+| [Ethernaut: 8. Vault](src/Ethernaut/README.md#8-vault)        |                  |
+| [Ethernaut: 12. Privacy](src/Ethernaut/README.md#12-privacy)  |                  |
+| Cipher Shastra: Sherlock                                      |                  |
+| 0x41414141 CTF: secure enclave                                |                  |
+| [EthernautDAO: 1. PrivateData](src/EthernautDAO/PrivateData/) |                  |
 
 ### トランザクションのReversing
 - トランザクションの中身あるいはトランザクションによってどうステートが変化したかをReversingする。Etherscanが便利。
@@ -363,9 +364,9 @@
 - しかし、このとき送られたEtherを即時に回収するbotが動いていると、単純にEtherを送ってもそのEtherが回収されてしまう。
 - Flashbotsのバンドルトランザクションを使用するか、トークンが[EIP-2612 permit](https://eips.ethereum.org/EIPS/eip-2612)に対応しているなら`permit`して`transferFrom`すれば良い。
 
-| 問題                                                                     | 備考、キーワード |
-| ------------------------------------------------------------------------ | ---------------- |
-| [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken) |                  |
+| 問題                                                                      | 備考、キーワード |
+| ------------------------------------------------------------------------- | ---------------- |
+| [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken/) |                  |
 
 ### 配列の長さを`2^256-1`にすることによる任意ストレージ書き換え（< Solidity 0.6.0）
 - 例えば、配列の長さを負に算術オーバーフローして`2^256-1`にすることで任意のストレージが書き換え可能になる。

@@ -204,13 +204,14 @@ Note:
 - Private variables are only guaranteed not to be directly readable by other contracts, but we, as an entity outside the blockchain, can read them.
 - If there is private data in a transaction, it can also be solved by reading the transaction.
 
-| Challenge                                                    | Note, Keyword |
-| ------------------------------------------------------------ | ------------- |
-| Capture The Ether: Guess the random number                   |               |
-| [Ethernaut: 8. Vault](src/Ethernaut/README.md#8-vault)       |               |
-| [Ethernaut: 12. Privacy](src/Ethernaut/README.md#12-privacy) |               |
-| Cipher Shastra: Sherlock                                     |               |
-| 0x41414141 CTF: secure enclave                               |               |
+| Challenge                                                     | Note, Keyword |
+| ------------------------------------------------------------- | ------------- |
+| Capture The Ether: Guess the random number                    |               |
+| [Ethernaut: 8. Vault](src/Ethernaut/README.md#8-vault)        |               |
+| [Ethernaut: 12. Privacy](src/Ethernaut/README.md#12-privacy)  |               |
+| Cipher Shastra: Sherlock                                      |               |
+| 0x41414141 CTF: secure enclave                                |               |
+| [EthernautDAO: 1. PrivateData](src/EthernautDAO/PrivateData/) |               |
 
 ### Reversing transactions
 - Reversing the contents of a transaction or how the state has been changed by the transaction.
@@ -364,9 +365,9 @@ Note:
 - However, if a bot that immediately takes the Ether sent at this time is running, the Ether will be stolen when the Ether is simply sent.
 - We can use Flashbots bundled transactions or just `permit` and `transferFrom` if the token is [EIP-2612 permit](https://eips.ethereum.org/EIPS/eip-2612) friendly.
 
-| Challenge                                                                | Note, Keyword |
-| ------------------------------------------------------------------------ | ------------- |
-| [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken) |               |
+| Challenge                                                                 | Note, Keyword |
+| ------------------------------------------------------------------------- | ------------- |
+| [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken/) |               |
 
 ### Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)
 - For example, any storage can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.
