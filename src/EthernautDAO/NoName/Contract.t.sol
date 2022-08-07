@@ -9,13 +9,15 @@ contract ContractTest is Test {
 
     function setUp() public {
         string memory RPC_GOERLI = vm.envString("RPC_GOERLI");
-        vm.createSelectFork(RPC_GOERLI, 7335645);
+        vm.createSelectFork(RPC_GOERLI, 7335645); 
     }
 
     function test() public {
         Contract instance = Contract(instanceAddress);
-        emit log_uint(instance.lastXDigits());
-        emit log_uint(instance.mod());
+        emit log_uint(instance.lastXDigits()); // 100
+        emit log_uint(instance.mod()); // 45
+
+        // block.number(7335645) % lastXDigits(100) == mod(45)
         instance.cantCallMe();
     }
 }
