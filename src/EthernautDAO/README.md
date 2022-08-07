@@ -65,3 +65,10 @@ forge test --match-contract VendingMachineExploitTest -vvvv
 ```sh
 forge test --match-contract EthernautDaoTokenExploitTest -vvvv
 ```
+
+## 6. (No Name)
+[Challenge & Exploit codes](NoName)
+
+**
+bash src/EthernautDAO/NoName/exploit.sh
+**
