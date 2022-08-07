@@ -12,6 +12,7 @@ Note: All commands below need to be executed in the root of this repository.
 - [3. CarMarket](#3-carmarket)
 - [4. VendingMachine](#4-vendingmachine)
 - [5. EthernautDaoToken](#5-ethernautdaotoken)
+- [6. (No Name)](#6-no-name)
 
 ## Common Setup
 
