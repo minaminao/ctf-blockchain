@@ -96,6 +96,7 @@ Note:
 | SECCON Beginners CTF 2020: C4B                                             | `block.number`                                                               |
 | Paradigm CTF 2021: Babysandbox                                             | `staticcall`, `call`, `revert`                                               |
 | Paradigm CTF 2021: Lockbox                                                 | `ecrecover`, `abi.encodePacked`, `msg.data.length`                           |
+| [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)                     | `block.number`, gas price war                                                |
 
 ### Misuse of `tx.origin`
 - The `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
