@@ -1,12 +1,12 @@
-# CTF Blockchain Challenges 🐈
+# CTF Blockchain Challenges
 
-This repository is a compilation of blockchain challenges in Capture The Flag (CTF), categorized by genre.
+This repository is a compilation of 100+ blockchain challenges in Capture The Flag (CTF), categorized by genre.
 
 Some challenges come with solvers and writeups (for example: [Ethernaut](src/Ethernaut/README.md)).
 
-Challenges are not ordered by difficulty or by recommendation.
+These challenges are not ordered by difficulty or by recommendation.
 
-If there are any incorrect statements, I would appreciate it if you could let me know via issue or PR.
+If there are any incorrect descriptions, I would appreciate it if you could let me know via issue or PR.
 
 | English | [日本語](README_JA.md) |
 | ------- | ---------------------- |
