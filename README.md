@@ -2,9 +2,9 @@
 
 This repository is a compilation of 100+ blockchain challenges in Capture The Flag (CTF), categorized by genre.
 
-Some challenges come with solvers and writeups (for example: [Ethernaut](src/Ethernaut/README.md)).
-
 These challenges are not ordered by difficulty or by recommendation.
+
+Some challenges come with solvers and writeups (for example: [Ethernaut](src/Ethernaut/README.md)).
 
 If there are any incorrect descriptions, I would appreciate it if you could let me know via issue or PR.
 
