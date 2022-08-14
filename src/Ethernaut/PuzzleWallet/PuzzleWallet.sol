@@ -26,10 +26,7 @@ contract PuzzleProxy is ERC1967Proxy {
     }
 
     function approveNewAdmin(address _expectedAdmin) external onlyAdmin {
-        require(
-            pendingAdmin == _expectedAdmin,
-            "Expected new admin by the current admin is not the pending admin"
-        );
+        require(pendingAdmin == _expectedAdmin, "Expected new admin by the current admin is not the pending admin");
         admin = pendingAdmin;
     }
 
@@ -72,22 +69,14 @@ contract PuzzleWallet {
         balances[msg.sender] = balances[msg.sender].add(msg.value);
     }
 
-    function execute(address to, uint256 value, bytes calldata data)
-        external
-        payable
-        onlyWhitelisted
-    {
+    function execute(address to, uint256 value, bytes calldata data) external payable onlyWhitelisted {
         require(balances[msg.sender] >= value, "Insufficient balance");
         balances[msg.sender] = balances[msg.sender].sub(value);
         (bool success,) = to.call{value: value}(data);
         require(success, "Execution failed");
     }
 
-    function multicall(bytes[] calldata data)
-        external
-        payable
-        onlyWhitelisted
-    {
+    function multicall(bytes[] calldata data) external payable onlyWhitelisted {
         bool depositCalled = false;
         for (uint256 i = 0; i < data.length; i++) {
             bytes memory _data = data[i];

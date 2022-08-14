@@ -15,9 +15,7 @@ contract PrivateData {
     uint128 private b;
     uint256 private secretKey;
 
-    event OwnershipTaken(
-        address indexed previousOwner, address indexed newOwner
-    );
+    event OwnershipTaken(address indexed previousOwner, address indexed newOwner);
 
     event Deposit(address _from, uint256 value);
 
@@ -25,11 +23,7 @@ contract PrivateData {
         owner = msg.sender;
 
         // create a random number and store it in a private variable
-        secretKey = uint256(
-            keccak256(
-                abi.encodePacked(blockhash(block.number - 1), block.timestamp, rndString)
-            )
-        );
+        secretKey = uint256(keccak256(abi.encodePacked(blockhash(block.number - 1), block.timestamp, rndString)));
     }
 
     receive() external payable {

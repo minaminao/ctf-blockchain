@@ -10,21 +10,11 @@ interface Solver {
 }
 
 contract MagicNumberFactory is Level {
-    function createInstance(address)
-        public
-        payable
-        override
-        returns (address)
-    {
+    function createInstance(address) public payable override returns (address) {
         return address(new MagicNumber());
     }
 
-    function validateInstance(address payable _instance, address)
-        public
-        view
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address) public view override returns (bool) {
         // Retrieve the instance.
         MagicNumber instance = MagicNumber(_instance);
 
@@ -33,10 +23,7 @@ contract MagicNumberFactory is Level {
 
         // Query the solver for the magic number.
         bytes32 magic = solver.whatIsTheMeaningOfLife();
-        if (
-            magic
-                != 0x000000000000000000000000000000000000000000000000000000000000002a
-        ) {
+        if (magic != 0x000000000000000000000000000000000000000000000000000000000000002a) {
             return false;
         }
 

@@ -9,7 +9,7 @@ import "./interfaces/ICarToken.sol";
  * @title CarFactory
  * @author Jelo
  * @notice This is a contract that handles crucial changes in the car company.
- *         It also gives out flashloans to existing customers of the car company.
+ * It also gives out flashloans to existing customers of the car company.
  */
 contract CarFactory {
     // -- States --
@@ -34,9 +34,7 @@ contract CarFactory {
      */
     function flashLoan(uint256 _amount) external {
         //checks if the address has purchased a car previously.
-        require(
-            carMarket.isExistingCustomer(msg.sender), "Not existing customer"
-        );
+        require(carMarket.isExistingCustomer(msg.sender), "Not existing customer");
 
         //fetches the balance of the carFactory before loaning out.
         uint256 balanceBefore = carToken.balanceOf(carFactory);
@@ -47,9 +45,7 @@ contract CarFactory {
         //transfers the amount to be borrowed to the borrower
         carToken.transfer(msg.sender, _amount);
 
-        (bool success,) = msg.sender.call(
-            abi.encodeWithSignature("receivedCarToken(address)", address(this))
-        );
+        (bool success,) = msg.sender.call(abi.encodeWithSignature("receivedCarToken(address)", address(this)));
         require(success, "Call to target failed");
 
         //fetches the balance of the carFactory after loaning out.

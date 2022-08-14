@@ -6,12 +6,7 @@ import "./DoubleEntryPoint.sol";
 import "../Ethernaut/Level.sol";
 
 contract DoubleEntryPointFactory is Level {
-    function createInstance(address _player)
-        public
-        payable
-        override
-        returns (address)
-    {
+    function createInstance(address _player) public payable override returns (address) {
         // Create legacy token
         LegacyToken oldToken = new LegacyToken();
         // Create a new Forta contract
@@ -37,11 +32,7 @@ contract DoubleEntryPointFactory is Level {
         return address(newToken);
     }
 
-    function validateInstance(address payable _instance, address _player)
-        public
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address _player) public override returns (bool) {
         DoubleEntryPoint instance = DoubleEntryPoint(_instance);
         Forta forta = instance.forta();
 
@@ -62,10 +53,7 @@ contract DoubleEntryPointFactory is Level {
         return swept;
     }
 
-    function __trySweep(CryptoVault cryptoVault, DoubleEntryPoint instance)
-        external
-        returns (bool, bytes memory)
-    {
+    function __trySweep(CryptoVault cryptoVault, DoubleEntryPoint instance) external returns (bool, bytes memory) {
         try cryptoVault.sweepToken(IERC20(instance.delegatedFrom())) {
             return (true, abi.encode(false));
         } catch {

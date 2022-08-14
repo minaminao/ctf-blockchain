@@ -5,22 +5,12 @@ import "../Ethernaut/Level.sol";
 import "./HelloEthernaut.sol";
 
 contract HelloEthernautFactory is Level {
-    function createInstance(address _player)
-        public
-        payable
-        override
-        returns (address)
-    {
+    function createInstance(address _player) public payable override returns (address) {
         _player;
         return address(new Instance("ethernaut0"));
     }
 
-    function validateInstance(address payable _instance, address _player)
-        public
-        view
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address _player) public view override returns (bool) {
         _player;
         Instance instance = Instance(_instance);
         return instance.getCleared();

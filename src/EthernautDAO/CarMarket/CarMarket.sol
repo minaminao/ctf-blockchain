@@ -10,10 +10,10 @@ import "openzeppelin-contracts/contracts/access/Ownable.sol";
  * @title CarMarket
  * @author Jelo
  * @notice CarMarket is a marketplace where people interested in cars can buy directly from the company.
- *         To grow her userbase, the company allows first time users to purchase cars for free.
- *         Getting a free car involves, using the company's tokens which is given to first timers for free.
- *         There is a problem however, malicious users have discovered how to get a second car for free.
- *         Your job is to figure out how to purchase a second car in a clever and ingenious way.
+ * To grow her userbase, the company allows first time users to purchase cars for free.
+ * Getting a free car involves, using the company's tokens which is given to first timers for free.
+ * There is a problem however, malicious users have discovered how to get a second car for free.
+ * Your job is to figure out how to purchase a second car in a clever and ingenious way.
  */
 contract CarMarket is Ownable {
     // -- States --
@@ -66,18 +66,9 @@ contract CarMarket is Ownable {
      * @param _model The model of the car to be purchased
      * @param _plateNumber The plateNumber of the car to be purchased
      */
-    function purchaseCar(
-        string memory _color,
-        string memory _model,
-        string memory _plateNumber
-    )
-        external
-    {
+    function purchaseCar(string memory _color, string memory _model, string memory _plateNumber) external {
         //Ensure that the user has enough money to purchase a car
-        require(
-            carToken.balanceOf(msg.sender) >= _carCost(msg.sender),
-            "Not enough money"
-        );
+        require(carToken.balanceOf(msg.sender) >= _carCost(msg.sender), "Not enough money");
 
         //user must have given approval. Transfers the money used in
         //purchasing the car to the owner of the contract
@@ -87,8 +78,7 @@ contract CarMarket is Ownable {
         uint256 _carCount = ++carCount[msg.sender];
 
         //Allocate a car to the user based on the user's specifications.
-        purchasedCars[msg.sender][_carCount] =
-            Car({color: _color, model: _model, plateNumber: _plateNumber});
+        purchasedCars[msg.sender][_carCount] = Car({color: _color, model: _model, plateNumber: _plateNumber});
     }
 
     /**

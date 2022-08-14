@@ -17,7 +17,7 @@ contract Privacy {
         require(_key == bytes16(data[2]));
         locked = false;
     }
-/*
+    /*
     A bunch of super advanced solidity algorithms...
 
       ,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`

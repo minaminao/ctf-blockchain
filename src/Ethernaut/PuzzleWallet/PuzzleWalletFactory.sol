@@ -6,22 +6,14 @@ import "../Ethernaut/Level.sol";
 import "./PuzzleWallet.sol";
 
 contract PuzzleWalletFactory is Level {
-    function createInstance(address /*_player*/ )
-        public
-        payable
-        override
-        returns (address)
-    {
-        require(
-            msg.value == 0.001 ether, "Must send 0.001 ETH to create instance"
-        );
+    function createInstance(address /*_player*/ ) public payable override returns (address) {
+        require(msg.value == 0.001 ether, "Must send 0.001 ETH to create instance");
 
         // deploy the PuzzleWallet logic
         PuzzleWallet walletLogic = new PuzzleWallet();
 
         // deploy proxy and initialize implementation contract
-        bytes memory data =
-            abi.encodeWithSelector(PuzzleWallet.init.selector, 100 ether);
+        bytes memory data = abi.encodeWithSelector(PuzzleWallet.init.selector, 100 ether);
         PuzzleProxy proxy = new PuzzleProxy(
             address(this),
             address(walletLogic),
@@ -36,12 +28,7 @@ contract PuzzleWalletFactory is Level {
         return address(proxy);
     }
 
-    function validateInstance(address payable _instance, address _player)
-        public
-        view
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address _player) public view override returns (bool) {
         PuzzleProxy proxy = PuzzleProxy(_instance);
 
         return proxy.admin() == _player;

@@ -7,8 +7,7 @@ import "openzeppelin/proxy/utils/Initializable.sol";
 
 contract Motorbike {
     // keccak-256 hash of "eip1967.proxy.implementation" subtracted by 1
-    bytes32 internal constant _IMPLEMENTATION_SLOT =
-        0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
+    bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
 
     struct AddressSlot {
         address value;
@@ -16,13 +15,9 @@ contract Motorbike {
 
     // Initializes the upgradeable proxy with an initial implementation specified by `_logic`.
     constructor(address _logic) {
-        require(
-            Address.isContract(_logic),
-            "ERC1967: new implementation is not a contract"
-        );
+        require(Address.isContract(_logic), "ERC1967: new implementation is not a contract");
         _getAddressSlot(_IMPLEMENTATION_SLOT).value = _logic;
-        (bool success,) =
-            _logic.delegatecall(abi.encodeWithSignature("initialize()"));
+        (bool success,) = _logic.delegatecall(abi.encodeWithSignature("initialize()"));
         require(success, "Call failed");
     }
 
@@ -31,12 +26,11 @@ contract Motorbike {
         // solhint-disable-next-line no-inline-assembly
         assembly {
             calldatacopy(0, 0, calldatasize())
-            let result :=
-                delegatecall(gas(), implementation, 0, calldatasize(), 0, 0)
+            let result := delegatecall(gas(), implementation, 0, calldatasize(), 0, 0)
             returndatacopy(0, 0, returndatasize())
             switch result
-                case 0 { revert(0, returndatasize()) }
-                default { return(0, returndatasize()) }
+            case 0 { revert(0, returndatasize()) }
+            default { return(0, returndatasize()) }
         }
     }
 
@@ -47,11 +41,7 @@ contract Motorbike {
     }
 
     // Returns an `AddressSlot` with member `value` located at `slot`.
-    function _getAddressSlot(bytes32 slot)
-        internal
-        pure
-        returns (AddressSlot storage r)
-    {
+    function _getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {
         assembly {
             r.slot := slot
         }
@@ -60,8 +50,7 @@ contract Motorbike {
 
 contract Engine is Initializable {
     // keccak-256 hash of "eip1967.proxy.implementation" subtracted by 1
-    bytes32 internal constant _IMPLEMENTATION_SLOT =
-        0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
+    bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
 
     address public upgrader;
     uint256 public horsePower;
@@ -77,10 +66,7 @@ contract Engine is Initializable {
 
     // Upgrade the implementation of the proxy to `newImplementation`
     // subsequently execute the function call
-    function upgradeToAndCall(address newImplementation, bytes memory data)
-        external
-        payable
-    {
+    function upgradeToAndCall(address newImplementation, bytes memory data) external payable {
         _authorizeUpgrade();
         _upgradeToAndCall(newImplementation, data);
     }
@@ -91,9 +77,7 @@ contract Engine is Initializable {
     }
 
     // Perform implementation upgrade with security checks for UUPS proxies, and additional setup call.
-    function _upgradeToAndCall(address newImplementation, bytes memory data)
-        internal
-    {
+    function _upgradeToAndCall(address newImplementation, bytes memory data) internal {
         // Initial upgrade and setup call
         _setImplementation(newImplementation);
         if (data.length > 0) {
@@ -104,10 +88,7 @@ contract Engine is Initializable {
 
     // Stores a new address in the EIP1967 implementation slot.
     function _setImplementation(address newImplementation) private {
-        require(
-            Address.isContract(newImplementation),
-            "ERC1967: new implementation is not a contract"
-        );
+        require(Address.isContract(newImplementation), "ERC1967: new implementation is not a contract");
 
         AddressSlot storage r;
         assembly {

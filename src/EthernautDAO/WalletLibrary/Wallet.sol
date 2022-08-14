@@ -28,17 +28,11 @@ contract Wallet {
 
     Transaction[] public transactions;
 
-    constructor(
-        address _walletLibrary,
-        address[] memory _owners,
-        uint256 _numConfirmationsRequired
-    ) {
+    constructor(address _walletLibrary, address[] memory _owners, uint256 _numConfirmationsRequired) {
         walletLibrary = _walletLibrary;
 
         (bool success,) = _walletLibrary.delegatecall(
-            abi.encodeWithSignature(
-                "initWallet(address[],uint256)", _owners, _numConfirmationsRequired
-            )
+            abi.encodeWithSignature("initWallet(address[],uint256)", _owners, _numConfirmationsRequired)
         );
 
         require(success, "initWallet failed");
@@ -69,8 +63,8 @@ contract Wallet {
             returndatacopy(0, 0, returndatasize())
 
             switch result
-                case 0 { revert(0, returndatasize()) }
-                default { return(0, returndatasize()) }
+            case 0 { revert(0, returndatasize()) }
+            default { return(0, returndatasize()) }
         }
     }
 }

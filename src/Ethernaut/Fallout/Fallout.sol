@@ -33,11 +33,7 @@ contract Fallout {
         payable(msg.sender).transfer(address(this).balance);
     }
 
-    function allocatorBalance(address allocator)
-        public
-        view
-        returns (uint256)
-    {
+    function allocatorBalance(address allocator) public view returns (uint256) {
         return allocations[allocator];
     }
 }

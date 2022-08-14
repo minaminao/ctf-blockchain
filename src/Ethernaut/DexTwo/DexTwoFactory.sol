@@ -7,12 +7,7 @@ import "./DexTwo.sol";
 import "openzeppelin/token/ERC20/ERC20.sol";
 
 contract DexTwoFactory is Level {
-    function createInstance(address _player)
-        public
-        payable
-        override
-        returns (address)
-    {
+    function createInstance(address _player) public payable override returns (address) {
         DexTwo instance = new DexTwo();
         address instanceAddress = address(instance);
 
@@ -46,15 +41,9 @@ contract DexTwoFactory is Level {
         return instanceAddress;
     }
 
-    function validateInstance(address payable _instance, address)
-        public
-        view
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address) public view override returns (bool) {
         address token1 = DexTwo(_instance).token1();
         address token2 = DexTwo(_instance).token2();
-        return IERC20(token1).balanceOf(_instance) == 0
-            && ERC20(token2).balanceOf(_instance) == 0;
+        return IERC20(token1).balanceOf(_instance) == 0 && ERC20(token2).balanceOf(_instance) == 0;
     }
 }

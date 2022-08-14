@@ -9,7 +9,7 @@ contract MagicNumber {
     function setSolver(address _solver) public {
         solver = _solver;
     }
-/*
+    /*
     ____________/\\\_______/\\\\\\\\\_____        
      __________/\\\\\_____/\\\///////\\\___       
       ________/\\\/\\\____\///______\//\\\__      

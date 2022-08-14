@@ -7,17 +7,9 @@ import "./ICarToken.sol";
 interface ICarMarket {
     function setCarFactory(address _factory) external;
 
-    function purchaseCar(
-        string memory _color,
-        string memory _model,
-        string memory _plateNumber
-    )
-        external;
+    function purchaseCar(string memory _color, string memory _model, string memory _plateNumber) external;
 
-    function isExistingCustomer(address _customer)
-        external
-        view
-        returns (bool);
+    function isExistingCustomer(address _customer) external view returns (bool);
 
     function getCarFactory() external view returns (address);
 

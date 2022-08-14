@@ -43,8 +43,7 @@ contract Ethernaut is Ownable {
         address instance = _level.createInstance{value: msg.value}(msg.sender);
 
         // Store emitted instance relationship with player and level.
-        emittedInstances[instance] =
-            EmittedInstanceData(msg.sender, _level, false);
+        emittedInstances[instance] = EmittedInstanceData(msg.sender, _level, false);
 
         // Retrieve created instance via logs.
         emit LevelInstanceCreatedLog(msg.sender, instance);

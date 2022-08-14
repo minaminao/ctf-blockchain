@@ -9,8 +9,8 @@ import "openzeppelin-contracts/contracts/access/Ownable.sol";
  * @title CarToken contract
  * @dev This is the implementation of the CarToken contract
  * @notice There is a capped supply of 210,000 tokens.
- *         10,000 tokens is reserved for the public
- *         A user can only mint once
+ * 10,000 tokens is reserved for the public
+ * A user can only mint once
  */
 contract CarToken is ERC20, Ownable {
     // ---- States ----
@@ -45,11 +45,7 @@ contract CarToken is ERC20, Ownable {
      * @param _to Address to mint tokens to
      * @param _amount The amount of tokens to mint to address
      */
-    function priviledgedMint(address _to, uint256 _amount)
-        external
-        onlyOwner
-        hasNotMinted
-    {
+    function priviledgedMint(address _to, uint256 _amount) external onlyOwner hasNotMinted {
         require(_amount + totalSupply() <= MAX_SUPPLY, "Max Supply Reached");
         hasMinted[_to] = true;
         _mint(_to, _amount);

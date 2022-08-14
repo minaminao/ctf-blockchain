@@ -8,12 +8,7 @@ import "./Denial.sol";
 contract DenialFactory is Level {
     uint256 public initialDeposit = 0.001 ether;
 
-    function createInstance(address _player)
-        public
-        payable
-        override
-        returns (address)
-    {
+    function createInstance(address _player) public payable override returns (address) {
         _player;
         require(msg.value >= initialDeposit);
         Denial instance = new Denial();
@@ -22,11 +17,7 @@ contract DenialFactory is Level {
         return address(instance);
     }
 
-    function validateInstance(address payable _instance, address _player)
-        public
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address _player) public override returns (bool) {
         _player;
         Denial instance = Denial(_instance);
         if (address(instance).balance <= 100 wei) {
@@ -34,9 +25,7 @@ contract DenialFactory is Level {
             return false;
         }
         // fix the gas limit for this call
-        (bool result,) = address(instance).call{gas: 1000000}(
-            abi.encodeWithSignature("withdraw()")
-        ); // Must revert
+        (bool result,) = address(instance).call{gas: 1000000}(abi.encodeWithSignature("withdraw()")); // Must revert
         return !result;
     }
 

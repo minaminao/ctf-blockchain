@@ -5,9 +5,7 @@ import "openzeppelin/utils/math/SafeMath.sol";
 
 contract Recovery {
     //generate tokens
-    function generateToken(string memory _name, uint256 _initialSupply)
-        public
-    {
+    function generateToken(string memory _name, uint256 _initialSupply) public {
         new SimpleToken(_name, msg.sender, _initialSupply);
     }
 }

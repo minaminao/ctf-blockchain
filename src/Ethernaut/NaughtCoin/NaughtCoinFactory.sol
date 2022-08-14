@@ -6,21 +6,11 @@ import "../Ethernaut/Level.sol";
 import "./NaughtCoin.sol";
 
 contract NaughtCoinFactory is Level {
-    function createInstance(address _player)
-        public
-        payable
-        override
-        returns (address)
-    {
+    function createInstance(address _player) public payable override returns (address) {
         return address(new NaughtCoin(_player));
     }
 
-    function validateInstance(address payable _instance, address _player)
-        public
-        view
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address _player) public view override returns (bool) {
         NaughtCoin instance = NaughtCoin(_instance);
         return instance.balanceOf(_player) == 0;
     }

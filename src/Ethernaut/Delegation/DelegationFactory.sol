@@ -13,23 +13,13 @@ contract DelegationFactory is Level {
         delegateAddress = address(newDelegate);
     }
 
-    function createInstance(address _player)
-        public
-        payable
-        override
-        returns (address)
-    {
+    function createInstance(address _player) public payable override returns (address) {
         _player;
         Delegation parity = new Delegation(delegateAddress);
         return address(parity);
     }
 
-    function validateInstance(address payable _instance, address _player)
-        public
-        view
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address _player) public view override returns (bool) {
         Delegation parity = Delegation(_instance);
         return parity.owner() == _player;
     }

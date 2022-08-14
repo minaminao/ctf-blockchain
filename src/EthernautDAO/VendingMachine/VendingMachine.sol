@@ -19,10 +19,7 @@ contract VendingMachine {
      * value of false.
      */
     constructor() payable {
-        require(
-            msg.value >= 1 ether,
-            "You need a minimum of reserve of 1 ether before deploying the contract"
-        );
+        require(msg.value >= 1 ether, "You need a minimum of reserve of 1 ether before deploying the contract");
 
         owner = msg.sender;
         reserve = msg.value;
@@ -102,10 +99,7 @@ contract VendingMachine {
      * Only valid when the contract hasn't been hacked.
      */
     function deposit() public payable isStillValid {
-        require(
-            msg.value >= 0.1 ether,
-            "You must have at least 0.1 ether to initiate transaction"
-        );
+        require(msg.value >= 0.1 ether, "You must have at least 0.1 ether to initiate transaction");
         consumersDeposit[msg.sender] += msg.value;
     }
 
@@ -119,14 +113,8 @@ contract VendingMachine {
      * - The contract must have enough peanuts in stock a caller wants to buy/get.
      */
     function getPeanuts(uint256 units) public isStillValid {
-        require(
-            consumersDeposit[msg.sender] >= units * 0.1 ether,
-            "You must pay at least 0.1 ether per peanutToken"
-        );
-        require(
-            peanuts[address(this)] >= units,
-            "Not enough peanuts to fulfill the purchase request"
-        );
+        require(consumersDeposit[msg.sender] >= units * 0.1 ether, "You must pay at least 0.1 ether per peanutToken");
+        require(peanuts[address(this)] >= units, "Not enough peanuts to fulfill the purchase request");
 
         consumersDeposit[msg.sender] -= units * 0.1 ether; // Debits caller's deposit
         peanuts[address(this)] -= units; // Reduce the amount purchased from the peanuts stock
@@ -155,10 +143,7 @@ contract VendingMachine {
 
         uint256 contractBalanceAfterTX = getContractBalance();
 
-        if (
-            (contractBalanceAfterTX < finalContractBalance)
-                && isExtContract(msg.sender)
-        ) {
+        if ((contractBalanceAfterTX < finalContractBalance) && isExtContract(msg.sender)) {
             txCheckLock = true;
         }
     }

@@ -6,12 +6,7 @@ import "../Ethernaut/Level.sol";
 import "./Privacy.sol";
 
 contract PrivacyFactory is Level {
-    function createInstance(address)
-        public
-        payable
-        override
-        returns (address)
-    {
+    function createInstance(address) public payable override returns (address) {
         bytes32[3] memory data;
         data[0] = keccak256(abi.encodePacked(tx.origin, "0"));
         data[1] = keccak256(abi.encodePacked(tx.origin, "1"));
@@ -20,12 +15,7 @@ contract PrivacyFactory is Level {
         return address(instance);
     }
 
-    function validateInstance(address payable _instance, address)
-        public
-        view
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address) public view override returns (bool) {
         Privacy instance = Privacy(_instance);
         return instance.locked() == false;
     }
