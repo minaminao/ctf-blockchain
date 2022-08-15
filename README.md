@@ -231,7 +231,7 @@ Note:
 
 ### Reversing EVM bytecode
 - Reversing a contract for which code is not given in whole or in part.
-- Use decompilers ([panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)など) and disassemblers ([ethersplay](https://github.com/crytic/ethersplay))
+- Use decompilers (e.g., [panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay))
 
 | Challenge                        | Note, Keyword                   |
 | -------------------------------- | ------------------------------- |
@@ -239,7 +239,7 @@ Note:
 | Real World CTF 3rd: Re:Montagy   | Jump Oriented Programming (JOP) |
 | 0x41414141 CTF: Crypto Casino    |                                 |
 | Paradigm CTF 2021: Babyrev       |                                 |
-| Paradigm CTF 2021: JOP           |                                 |
+| Paradigm CTF 2021: JOP           | Jump Oriented Programming (JOP) |
 | 34C3 CTF: Chaingang              |                                 |
 | Blaze CTF 2018: Smart? Contract  |                                 |
 | DEF CON CTF Qualifier 2018: SAG? |                                 |
