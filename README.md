@@ -16,11 +16,12 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
 **Table of Contents**
 - [Ethereum](#ethereum)
   - [Ethereum/contract basics](#ethereumcontract-basics)
-  - [Puzzles with EVM](#puzzles-with-evm)
+  - [EVM puzzles](#evm-puzzles)
   - [Misuse of `tx.origin`](#misuse-of-txorigin)
   - [Pseudorandom numbers generated on-chain are predictable](#pseudorandom-numbers-generated-on-chain-are-predictable)
   - [ERC-20 basics](#erc-20-basics)
   - [Storage overwrite by `delegatecall`](#storage-overwrite-by-delegatecall)
+  - [Context mismatch in `delegatecall`](#context-mismatch-in-delegatecall)
   - [Integer overflow](#integer-overflow)
   - [Ether transfers to a contract are not always executable](#ether-transfers-to-a-contract-are-not-always-executable)
   - [Forced Ether transfer to a contract via `selfdestruct`](#forced-ether-transfer-to-a-contract-via-selfdestruct)
@@ -39,7 +40,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Bypassing push type flash loan repayments](#bypassing-push-type-flash-loan-repayments)
   - [Bug in AMM price calculation algorithm](#bug-in-amm-price-calculation-algorithm)
   - [Attacks using custom tokens](#attacks-using-custom-tokens)
-  - [Funds leakage due to oracle manipulation (no flash loans)](#funds-leakage-due-to-oracle-manipulation-no-flash-loans)
+  - [Funds leakage due to oracle manipulation (without flash loans)](#funds-leakage-due-to-oracle-manipulation-without-flash-loans)
   - [Funds leakage due to oracle manipulation (with flash loans)](#funds-leakage-due-to-oracle-manipulation-with-flash-loans)
   - [Sandwich attack](#sandwich-attack)
   - [Recovery of private key by same nonce attack](#recovery-of-private-key-by-same-nonce-attack)
@@ -82,7 +83,7 @@ Note:
 | 0x41414141 CTF: sanity-check                                               | contract call          |
 | 0x41414141 CTF: crackme.sol                                                |                        |
 
-### Puzzles with EVM
+### EVM puzzles
 - Puzzle challenges that can be solved by understanding the EVM specifications.
 - No vulnerabilities are used to solve these challenges.
 
@@ -109,7 +110,7 @@ Note:
 - Since the bytecodes of contracts are publicly available, it is easy to predict pseudorandom numbers whose generation is completed on-chain (using only states, not off-chain data).
 - It is equivalent to having all the parameters of a pseudorandom number generator exposed.
 - If you want to use random numbers that are unpredictable to anyone, use a decentralized oracle with a random number function. For example, [Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/), which implements Verifiable Random Function (VRF).
-- 
+
 | Challenge                                                      | Note, Keyword |
 | -------------------------------------------------------------- | ------------- |
 | Capture The Ether: Predict the future                          |               |
@@ -310,7 +311,7 @@ Note:
 | ------------------------------------------------------------ | ------------- |
 | [Ethernaut: 23. Dex Two](src/Ethernaut/README.md#23-dex-two) |               |
 
-### Funds leakage due to oracle manipulation (no flash loans)
+### Funds leakage due to oracle manipulation (without flash loans)
 - It corrupts the value of the oracle and drains the funds of applications that refer to that oracle.
 
 | Challenge                            | Note, Keyword                                                                                   |
