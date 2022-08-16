@@ -1,4 +1,6 @@
 ds-test/=lib/forge-std/lib/ds-test/src/
 forge-std/=lib/forge-std/src/
+foundry-huff/=lib/foundry-huff/src/
 openzeppelin-contracts/=lib/openzeppelin-contracts/
 openzeppelin/=lib/openzeppelin-contracts/contracts/
+stringutils/=lib/foundry-huff/lib/solidity-stringutils/
