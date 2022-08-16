@@ -1,6 +1,6 @@
 pragma solidity ^0.8.0;
 
-import "./BabySandbox.sol";
+import "./Babysandbox.sol";
 
 contract Setup {
     BabySandbox public sandbox;
