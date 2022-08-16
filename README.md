@@ -303,7 +303,7 @@ Note:
 | ------------------------------------------ | ------------- |
 | [Ethernaut: 22. Dex](src/Ethernaut#22-dex) |               |
 
-### Attacks using custom tokens
+### Attack using custom tokens
 - The ability of a protocol to use arbitrary tokens is not in itself a bad thing, but it can be an attack vector.
 - In addition, bugs in the whitelist design, which assumes that arbitrary tokens are not available, could cause funds to drain.
 

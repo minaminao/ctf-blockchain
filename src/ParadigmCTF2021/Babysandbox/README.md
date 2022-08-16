@@ -51,7 +51,7 @@ case 1 {
 これを満たすにはsandbox内からcallすれば良い。
 
 `call(0x4000, address(), 0, 0, calldatasize(), 0, 0)`の部分を考える。callの引数は、順に`gas`, `address`, `value`, `argsOffset`, `argsSize`, `retOffset`, `retSize`の7つ。
-`calldatacopy`によってcalldataはメモリにコピー済みであるため、calldata（runの実行部）がそのまま渡されることになる。そしてdelegatecallが`code`に対して実行される。
+`calldatacopy`によってcalldataはメモリにコピー済みであるため、calldata（`run`関数の実行部）がそのまま渡されることになる。そしてdelegatecallが`code`に対して実行される。
 
 そのため、staticcallを無視すれば以下のexploitで良い。
 ```solidity
@@ -129,7 +129,7 @@ contract BabysandboxExploit {
 }
 ```
 
-### Test
+## Test
 
 ```
 bash src/ParadigmCTF2021/Babysandbox/test_exploit.sh
@@ -174,4 +174,9 @@ SOLVED=$(cast call $SETUP_ADDRESS "isSolved()(bool)")
 pkill anvil
 
 echo "Result:" $SOLVED
+```
+
+結果:
+```
+Result: true
 ```
