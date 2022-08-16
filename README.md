@@ -39,7 +39,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Massive rights by executing flash loans during snapshots](#massive-rights-by-executing-flash-loans-during-snapshots)
   - [Bypassing push type flash loan repayments](#bypassing-push-type-flash-loan-repayments)
   - [Bug in AMM price calculation algorithm](#bug-in-amm-price-calculation-algorithm)
-  - [Attacks using custom tokens](#attacks-using-custom-tokens)
+  - [Attack using custom tokens](#attack-using-custom-tokens)
   - [Funds leakage due to oracle manipulation (without flash loans)](#funds-leakage-due-to-oracle-manipulation-without-flash-loans)
   - [Funds leakage due to oracle manipulation (with flash loans)](#funds-leakage-due-to-oracle-manipulation-with-flash-loans)
   - [Sandwich attack](#sandwich-attack)
