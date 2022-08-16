@@ -48,7 +48,7 @@ case 1 {
 ### staticcallを無視したexploit
 一旦staticcallでのステート変化の検知を無視する。
 delegatecallを実行するには、if文の条件「`caller()`と`address()`の一致」を満たす必要がある。
-これは、sandbox内からcallすれば良い。
+これを満たすには、sandbox内からcallすれば良い。
 
 `call(0x4000, address(), 0, 0, calldatasize(), 0, 0)`の部分を考える。callの引数は、順に`gas`, `address`, `value`, `argsOffset`, `argsSize`, `retOffset`, `retSize`の7つ。
 `calldatacopy`によってcalldataはメモリにコピー済みなので、calldata（runの実行部）がそのまま渡されることになる。そしてdelegatecallが`code`に対して実行される。
@@ -64,9 +64,10 @@ contract BabysandboxExploit {
 
 ### staticcallを考慮したexploit
 staticcallによってステートの変化が起きる`selfdestruct`は単純に実行できずrevertされる。
-しかし1回目のコール（staticcall）と2回目のコール（call）を区別する方法はない。
-こういった場合、try/catch文を使えばstaticcallを失敗させずにcallに辿り着き実行を継続させられる。
+最初に実行されるstaticcallと次に実行されるcallをExploit側が区別する方法が必要である。
+これはtry/catch文を使って実際に状態を変化させられるかどうかを試すことで判別できる。
 try文の式には外部関数コールとコントラクト作成のみ指定できるから、外部関数コールで別のコントラクトのステートが変化できるかどうかを試し、もし変化可能ならdelegatecallを実行、そうでないなら何もしない、というようにすれば、staticcallのステート変化検知によるrevertを回避できる。
+そしてstaticcallを失敗させずにcallに辿り着き実行を継続させられる。
 
 例えば、以下のようなコードを思いつく。
 ```solidity
@@ -94,7 +95,7 @@ contract BabysandboxExploit {
 ```
 
 しかし、これは`OutOfGas`になる。callの`0x4000` (`16384`) gasの制限に引っかかるためである。
-これに対処するには`StateChange`の変数を無くし、`selfdestruct`にすると良い。`selfdestruct`を使うことで使えるガス代が増える（関連: [EIP-2200: Structured Definitions for Net Gas Metering ](https://eips.ethereum.org/EIPS/eip-2200), [EIP-3298: Removal of refunds](https://eips.ethereum.org/EIPS/eip-3298)。
+これに対処するには`StateChange`の変数を無くし、`selfdestruct`にすると良い。`selfdestruct`を使うことで使えるガス代が増える。関連: [EIP-2200: Structured Definitions for Net Gas Metering ](https://eips.ethereum.org/EIPS/eip-2200), [EIP-3298: Removal of refunds](https://eips.ethereum.org/EIPS/eip-3298)。
 最終的なexploitは以下。
 
 ```Solidity
@@ -154,7 +155,7 @@ scriptを実行する。
 ```sh
 forge script BabysandboxExploitTestScript --fork-url $RPC_ANVIL --broadcast --private-keys $PRIVATE_KEY_SETUP --private-keys $PRIVATE_KEY_PLAYER --gas-limit 1000000 --gas-estimate-multiplier 200 -vvvvv
 ```
-現在、Forgeのscriptで個別のトランザクションにgasを指定する方法が存在しないため、`--gas-estimate-multiplier 200`を指定する必要がある。関連issue: https://github.com/foundry-rs/foundry/issues/2627 。
+現在、Forgeのscriptで個別のトランザクションにgasを指定する方法が存在しないため、`--gas-estimate-multiplier 200`を指定する必要がある。関連: https://github.com/foundry-rs/foundry/issues/2627 。
 
 
 解けたかどうか`cast call`で確認する。

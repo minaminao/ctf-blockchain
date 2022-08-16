@@ -79,7 +79,7 @@ Note:
 | Capture The Ether: Guess the secret number                       | `keccak256`            |
 | [Ethernaut: 0. Hello Ethernaut](src/Ethernaut#0-hello-ethernaut) | contract call, ABI     |
 | [Ethernaut: 1. Fallback](src/Ethernaut#1-fallback)               | receive Ether function |
-| Paradigm CTF 2021: Hello                                         | contract call          |
+| [Paradigm CTF 2021: Hello](src/ParadigmCTF2021/)                 | contract call          |
 | 0x41414141 CTF: sanity-check                                     | contract call          |
 | 0x41414141 CTF: crackme.sol                                      |                        |
 
@@ -87,17 +87,17 @@ Note:
 - Puzzle challenges that can be solved by understanding the EVM specifications.
 - No vulnerabilities are used to solve these challenges.
 
-| Challenge                                                        | Note, Keyword                                                                |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Capture The Ether: Guess the new number                          | `block.number`, `block.timestamp` (formerly: `now`)                          |
-| Capture The Ether: Predict the block hash                        | `blockhash` (formerly: `block.blockhash`)                                    |
-| [Ethernaut: 13. Gatekeeper One](src/Ethernaut#13-gatekeeper-one) | `msg.sender != tx.origin`, `gasleft().mod(8191) == 0`, type conversion       |
-| [Ethernaut: 14. Gatekeeper Two](src/Ethernaut#14-gatekeeper-two) | `msg.sender != tx.origin`, `extcodesize(caller()) == 0`                      |
-| Cipher Shastra: Minion                                           | `msg.sender != tx.origin`, `extcodesize(msg.sender) == 0`, `block.timestamp` |
-| SECCON Beginners CTF 2020: C4B                                   | `block.number`                                                               |
-| Paradigm CTF 2021: Babysandbox                                   | `staticcall`, `call`, `revert`                                               |
-| Paradigm CTF 2021: Lockbox                                       | `ecrecover`, `abi.encodePacked`, `msg.data.length`                           |
-| [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)           | `block.number`, gas price war                                                |
+| Challenge                                                          | Note, Keyword                                                          |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| Capture The Ether: Guess the new number                            | `block.number`, `block.timestamp` (formerly: `now`)                    |
+| Capture The Ether: Predict the block hash                          | `blockhash` (formerly: `block.blockhash`)                              |
+| [Ethernaut: 13. Gatekeeper One](src/Ethernaut#13-gatekeeper-one)   | `msg.sender != tx.origin`, `gasleft().mod(8191) == 0`, type conversion |
+| [Ethernaut: 14. Gatekeeper Two](src/Ethernaut#14-gatekeeper-two)   | `msg.sender != tx.origin`, `extcodesize` is 0                          |
+| Cipher Shastra: Minion                                             | `msg.sender != tx.origin`, `extcodesize` is 0, `block.timestamp`       |
+| SECCON Beginners CTF 2020: C4B                                     | `block.number`                                                         |
+| [Paradigm CTF 2021: Babysandbox](src/ParadigmCTF2021/Babysandbox/) | `staticcall`, `call`, `delegatecall`, `extcodesize` is 0               |
+| Paradigm CTF 2021: Lockbox                                         | `ecrecover`, `abi.encodePacked`, `msg.data.length`                     |
+| [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)             | `block.number`, gas price war                                          |
 
 ### Misuse of `tx.origin`
 - The `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.

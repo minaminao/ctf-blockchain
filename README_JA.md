@@ -78,7 +78,7 @@
 | Capture The Ether: Guess the secret number                       | `keccak256`             |
 | [Ethernaut: 0. Hello Ethernaut](src/Ethernaut#0-hello-ethernaut) | コントラクトコール、ABI |
 | [Ethernaut: 1. Fallback](src/Ethernaut#1-fallback)               | receive Ether関数       |
-| Paradigm CTF 2021: Hello                                         | コントラクトコール      |
+| [Paradigm CTF 2021: Hello](src/ParadigmCTF2021/)                 | コントラクトコール      |
 | 0x41414141 CTF: sanity-check                                     | コントラクトコール      |
 | 0x41414141 CTF: crackme.sol                                      | コード理解              |
 
@@ -86,17 +86,17 @@
 - EVMの仕様を理解していれば解けるパズル系の問題。
 - 特に脆弱性を利用したり攻撃手法を用いたりはしない。
 
-| 問題                                                             | 備考、キーワード                                                             |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Capture The Ether: Guess the new number                          | `block.number`、`block.timestamp` (旧: `now`)                                |
-| Capture The Ether: Predict the block hash                        | `blockhash` (旧: `block.blockhash`)                                          |
-| [Ethernaut: 13. Gatekeeper One](src/Ethernaut#13-gatekeeper-one) | `msg.sender != tx.origin`、`gasleft().mod(8191) == 0`、型変換                |
-| [Ethernaut: 14. Gatekeeper Two](src/Ethernaut#14-gatekeeper-two) | `msg.sender != tx.origin`、`extcodesize(caller()) == 0`                      |
-| Cipher Shastra: Minion                                           | `msg.sender != tx.origin`、`extcodesize(msg.sender) == 0`、`block.timestamp` |
-| SECCON Beginners CTF 2020: C4B                                   | `block.number`                                                               |
-| Paradigm CTF 2021: Babysandbox                                   | `staticcall`、`call`、`revert`                                               |
-| Paradigm CTF 2021: Lockbox                                       | `ecrecover`、`abi.encodePacked`、`msg.data.length`                           |
-| [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)           | `block.number`, gas price war                                                |
+| 問題                                                               | 備考、キーワード                                                 |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| Capture The Ether: Guess the new number                            | `block.number`、`block.timestamp` (旧: `now`)                    |
+| Capture The Ether: Predict the block hash                          | `blockhash` (旧: `block.blockhash`)                              |
+| [Ethernaut: 13. Gatekeeper One](src/Ethernaut#13-gatekeeper-one)   | `msg.sender != tx.origin`、`gasleft().mod(8191) == 0`、型変換    |
+| [Ethernaut: 14. Gatekeeper Two](src/Ethernaut#14-gatekeeper-two)   | `msg.sender != tx.origin`、`extcodesize`を0に                    |
+| Cipher Shastra: Minion                                             | `msg.sender != tx.origin`、`extcodesize`を0に、`block.timestamp` |
+| SECCON Beginners CTF 2020: C4B                                     | `block.number`                                                   |
+| [Paradigm CTF 2021: Babysandbox](src/ParadigmCTF2021/Babysandbox/) | `staticcall`, `call`, `delegatecall`, `extcodesize`を0に         |
+| Paradigm CTF 2021: Lockbox                                         | `ecrecover`、`abi.encodePacked`、`msg.data.length`               |
+| [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)             | `block.number`, gas price war                                    |
 
 ### `tx.origin`の誤用
 - `tx.origin`はトランザクションの発行者のアドレスを指し、コントラクトコール元のアドレス（すなわち`msg.sender`）として使ってはならない。
