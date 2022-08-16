@@ -95,7 +95,7 @@ contract BabysandboxExploit {
 ```
 
 しかし、これは`OutOfGas`になる。callの`0x4000` (`16384`) gasの制限に引っかかるためである。
-これに対処するには`StateChange`の変数を無くし、`selfdestruct`にすると良い。`selfdestruct`を使うことで使えるガス代が増える。関連: [EIP-2200: Structured Definitions for Net Gas Metering ](https://eips.ethereum.org/EIPS/eip-2200), [EIP-3298: Removal of refunds](https://eips.ethereum.org/EIPS/eip-3298)。
+これに対処するには`StateChange`の変数を無くし、`selfdestruct`にすると良い。`selfdestruct`を使うことで使えるgasが増える。関連: [EIP-2200: Structured Definitions for Net Gas Metering ](https://eips.ethereum.org/EIPS/eip-2200), [EIP-3298: Removal of refunds](https://eips.ethereum.org/EIPS/eip-3298)。
 最終的なexploitは以下。
 
 ```Solidity
