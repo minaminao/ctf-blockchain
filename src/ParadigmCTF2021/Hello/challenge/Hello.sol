@@ -5,6 +5,5 @@ contract Hello {
 
     function solve() public {
         solved = true;
-
     }
 }
