@@ -6,4 +6,4 @@
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
 [submodule "lib/foundry-huff"]
 	path = lib/foundry-huff
-	url = https://github.com/huff-language/foundry-huff.git
+	url = https://github.com/huff-language/foundry-huff
