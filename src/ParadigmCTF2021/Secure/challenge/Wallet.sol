@@ -1,35 +1,35 @@
 pragma solidity ^0.8.13;
 
 interface ERC20Like {
-    function transfer(address dst, uint qty) external returns (bool);
-    function transferFrom(address src, address dst, uint qty) external returns (bool);
-    function approve(address dst, uint qty) external returns (bool);
-    
-    function balanceOf(address who) external view returns (uint);
+    function transfer(address dst, uint256 qty) external returns (bool);
+    function transferFrom(address src, address dst, uint256 qty) external returns (bool);
+    function approve(address dst, uint256 qty) external returns (bool);
+
+    function balanceOf(address who) external view returns (uint256);
 }
 
 contract TokenModule {
-    function deposit(ERC20Like token, address from, uint amount) public {
+    function deposit(ERC20Like token, address from, uint256 amount) public {
         token.transferFrom(from, address(this), amount);
     }
 
-    function withdraw(ERC20Like token, address to, uint amount) public {
+    function withdraw(ERC20Like token, address to, uint256 amount) public {
         token.transfer(to, amount);
     }
 }
 
 contract Wallet {
     address public owner = msg.sender;
-    
+
     mapping(address => bool) _allowed;
     mapping(address => bool) _operators;
 
-    modifier onlyOwner {
+    modifier onlyOwner() {
         require(msg.sender == owner);
         _;
     }
 
-    modifier onlyOwnerOrOperators {
+    modifier onlyOwnerOrOperators() {
         require(msg.sender == owner || _operators[msg.sender]);
         _;
     }
