@@ -121,7 +121,7 @@
 | 問題                                                       | 備考、キーワード                      |
 | ---------------------------------------------------------- | ------------------------------------- |
 | [Ethernaut: 15. Naught Coin](src/Ethernaut#15-naught-coin) | `transfer`、`approve`、`transferFrom` |
-| Paradigm CTF 2021: Secure                                  | WETH                                  |
+| [Paradigm CTF 2021: Secure](src/ParadigmCTF2021)           | WETH                                  |
 
 ### `delegatecall`を悪用したストレージ書き換え
 - `delegatecall`は呼び出し先の関数が呼び出し元コントラクトのストレージを書き換え可能であるため脆弱性の原因になりやすい。

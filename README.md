@@ -122,7 +122,7 @@ Note:
 | Challenge                                                  | Note, Keyword                         |
 | ---------------------------------------------------------- | ------------------------------------- |
 | [Ethernaut: 15. Naught Coin](src/Ethernaut#15-naught-coin) | `transfer`, `approve`, `transferFrom` |
-| Paradigm CTF 2021: Secure                                  | WETH                                  |
+| [Paradigm CTF 2021: Secure](src/ParadigmCTF2021)           | WETH                                  |
 
 ### Storage overwrite by `delegatecall`
 - `delegatecall` is a potential source of vulnerability because the storage of the calling contract can be overwritten by the called function.
