@@ -9,3 +9,8 @@ forge test --match-contract HelloExploitTest
 
 ## Babysandbox
 -> [Babysandbox](Babysandbox)
+
+## Secure
+```
+forge test --match-contract SecureExploitTest -vvvv
+```
