@@ -46,14 +46,14 @@ case 1 {
 ```
 
 ### staticcallを無視したexploit
-一旦staticcallでのステート変化の検知を無視する。
-delegatecallを実行するには、if文の条件「`caller()`と`address()`の一致」を満たす必要がある。
-これを満たすには、sandbox内からcallすれば良い。
+簡単のためにstaticcallでのステート変化の検知を無視した場合を考えてみる。
+このときdelegatecallを実行するには、if文の条件「`caller()`と`address()`の一致」を満たす必要がある。
+これを満たすにはsandbox内からcallすれば良い。
 
 `call(0x4000, address(), 0, 0, calldatasize(), 0, 0)`の部分を考える。callの引数は、順に`gas`, `address`, `value`, `argsOffset`, `argsSize`, `retOffset`, `retSize`の7つ。
-`calldatacopy`によってcalldataはメモリにコピー済みなので、calldata（runの実行部）がそのまま渡されることになる。そしてdelegatecallが`code`に対して実行される。
+`calldatacopy`によってcalldataはメモリにコピー済みであるため、calldata（runの実行部）がそのまま渡されることになる。そしてdelegatecallが`code`に対して実行される。
 
-なので、staticcallを無視すれば、以下のexploitで良い。
+そのため、staticcallを無視すれば以下のexploitで良い。
 ```solidity
 contract BabysandboxExploit {
     fallback() external {
@@ -64,9 +64,15 @@ contract BabysandboxExploit {
 
 ### staticcallを考慮したexploit
 staticcallによってステートの変化が起きる`selfdestruct`は単純に実行できずrevertされる。
-最初に実行されるstaticcallと次に実行されるcallをExploit側が区別する方法が必要である。
+最初に実行されるstaticcallと次に実行されるcallをexploit側が区別する方法が必要である。
 これはtry/catch文を使って実際に状態を変化させられるかどうかを試すことで判別できる。
-try文の式には外部関数コールとコントラクト作成のみ指定できるから、外部関数コールで別のコントラクトのステートが変化できるかどうかを試し、もし変化可能ならdelegatecallを実行、そうでないなら何もしない、というようにすれば、staticcallのステート変化検知によるrevertを回避できる。
+try文の式には外部関数コールとコントラクト作成のみ指定できるから、
+
+- 外部関数コールで別のコントラクトのステートが変化できるかどうかを試し、
+- もし変化可能ならdelegatecallを実行、
+- そうでないなら何もしない
+
+というようにすれば、staticcallのステート変化検知によるrevertを回避できる。
 そしてstaticcallを失敗させずにcallに辿り着き実行を継続させられる。
 
 例えば、以下のようなコードを思いつく。
