@@ -252,6 +252,7 @@ Note:
 | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | [Ethernaut: 18. MagicNumber](src/Ethernaut#18-magicnumber) |                                                                                                                |
 | Paradigm CTF 2021: Rever                                   | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
+| [Huff Challenge: Challenge #1](src/HuffChallenge)          |                                                                                                                |
 
 ### Re-entrancy attack
 - In case a function of contract A contains an interaction with another contract B or Ether transfer to B, the control is temporarily transferred to B.

@@ -5,7 +5,7 @@ Ethernaut: https://ethernaut.openzeppelin.com/
 Note: All commands below need to be executed in the root of this repository.
 
 **Table of Contents**
-- [Common Settings](#common-settings)
+- [Common Setup](#common-setup)
 - [Test All Exploit](#test-all-exploit)
 - [0. Hello Ethernaut](#0-hello-ethernaut)
 - [1. Fallback](#1-fallback)
@@ -289,6 +289,8 @@ The token address can be easily found in a blockchain explorer.
 
 ## 18. MagicNumber
 [Challenge & Exploit codes](MagicNumber)
+
+Exploit written in Huff: https://github.com/minaminao/huff-ethernaut-magic-number
 
 **Test**
 ```sh
