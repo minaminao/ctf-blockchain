@@ -4,6 +4,6 @@
 [submodule "lib/openzeppelin-contracts"]
 	path = lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
-[submodule "lib/foundry-huff.git"]
-	path = lib/foundry-huff.git
+[submodule "lib/foundry-huff"]
+	path = lib/foundry-huff
 	url = https://github.com/huff-language/foundry-huff.git
