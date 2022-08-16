@@ -132,7 +132,7 @@ bash src/ParadigmCTF2021/Babysandbox/test_exploit.sh
 **Testの解説**
 
 Forgeのtestはtransaction-baseであるため、テストの間は`extcodesize`の結果が変わらない。
-Forgeのscript機能とAnvilを組み合わせることでテストを行う。まずはsetup用とplayer用の2つのアカウントを決める。今回はAnvilのデフォルトアカウント（0番目と1番目）を使う。
+よってtest機能は使わず、Forgeのscript機能とAnvilを組み合わせることでテストを行う。まずはsetup用とplayer用の2つのアカウントを決める。今回はAnvilのデフォルトアカウント（0番目と1番目）を使う。
 
 ```sh
 export RPC_ANVIL=http://127.0.0.1:8545
