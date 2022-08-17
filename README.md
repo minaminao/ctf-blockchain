@@ -37,7 +37,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Re-entrancy attack](#re-entrancy-attack)
   - [Flash loan basics](#flash-loan-basics)
   - [Massive rights by executing flash loans during snapshots](#massive-rights-by-executing-flash-loans-during-snapshots)
-  - [Bypassing push type flash loan repayments](#bypassing-push-type-flash-loan-repayments)
+  - [Bypassing repayments of push architecture flash loans](#bypassing-repayments-of-push-architecture-flash-loans)
   - [Bug in AMM price calculation algorithm](#bug-in-amm-price-calculation-algorithm)
   - [Attack using custom tokens](#attack-using-custom-tokens)
   - [Funds leakage due to oracle manipulation (without flash loans)](#funds-leakage-due-to-oracle-manipulation-without-flash-loans)
@@ -231,7 +231,7 @@ Note:
 
 ### Reversing EVM bytecode
 - Reversing a contract for which code is not given in whole or in part.
-- Use decompilers (e.g., [panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay))
+- Use decompilers (e.g., [panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
 
 | Challenge                        | Note, Keyword                   |
 | -------------------------------- | ------------------------------- |
@@ -289,13 +289,13 @@ Note:
 | Damn Vulnerable DeFi: 5. Therewarder | Get reward tokens based on the deposited token balance.              |
 | Damn Vulnerable DeFi: 6. Selfie      | Get voting power in governance based on the deposited token balance. |
 
-### Bypassing push type flash loan repayments
-- There are two types of flash loans: push and pull, with the push type represented by Uniswap and Aave v1 and the pull type by Aave v2 and dYdX.
-- [EIP-3156: Flash Loans](https://eips.ethereum.org/EIPS/eip-3156) is a pull type.
+### Bypassing repayments of push architecture flash loans
+- There are two architectures of flash loans: push and pull, with push architectures represented by Uniswap and Aave v1 and pull architectures by Aave v2 and dYdX.
+- [EIP-3156: Flash Loans](https://eips.ethereum.org/EIPS/eip-3156) is a pull architecture.
 
-| Challenge                  | Note, Keyword                                                     |
-| -------------------------- | ----------------------------------------------------------------- |
-| Paradigm CTF 2021: Upgrade | Bypassed using the lending functionality implemented in the token |
+| Challenge                  | Note, Keyword                                                   |
+| -------------------------- | --------------------------------------------------------------- |
+| Paradigm CTF 2021: Upgrade | Bypass using the lending functionality implemented in the token |
 
 ### Bug in AMM price calculation algorithm
 - A bug in the Automated Market Maker (AMM) price calculation algorithm allows a simple combination of trades to drain funds.
