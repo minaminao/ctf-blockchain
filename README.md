@@ -98,6 +98,7 @@ Note:
 | [Paradigm CTF 2021: Babysandbox](src/ParadigmCTF2021/Babysandbox/) | `staticcall`, `call`, `delegatecall`, `extcodesize` is 0               |
 | Paradigm CTF 2021: Lockbox                                         | `ecrecover`, `abi.encodePacked`, `msg.data.length`                     |
 | [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)             | `block.number`, gas price war                                          |
+| [fvictorio's EVM Puzzles](src/fvictorioEVMPuzzles/)                |                                                                        |
 
 ### Misuse of `tx.origin`
 - The `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
