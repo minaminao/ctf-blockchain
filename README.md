@@ -412,7 +412,7 @@ Note:
 ### Other ad-hoc vulnerabilities and methods
 | Challenge                                                         | Note, Keyword                                                                                                                     |
 | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Paradigm CTF 2021: Bouncer                                        | The funds required for batch processing are the same as for single processing.                                                    |
+| [Paradigm CTF 2021: Bouncer](src/ParadigmCTF2021/Bouncer/)        | The funds required for batch processing are the same as for single processing.                                                    |
 | Paradigm CTF 2021: Market                                         | Make the value of one field be recognized as the value of another field by using key misalignment in the Eternal Storage pattern. |
 | [EthernautDAO: 2. WalletLibrary](src/EthernautDAO/WalletLibrary/) | m and n of m-of-n multisig wallet can be changed.                                                                                 |
 
