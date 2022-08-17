@@ -173,7 +173,7 @@ sleep 1
 ```
 `sleep`は使いたくないが、これを挟んでAnvilが完全に起動するまで待たないと次に実行する`forge script`でRPCのエラーが起きる。
 
-EVMのバージョンを`MuirGlacier`ではなく`Istanbul`にしているのは、FoundryがMuir Glacierの指定に対応しておらず、`forge script`実行時に`Spec Not supported`のパニックが起きるからである（下記参照）。
+EVMのバージョンを`MuirGlacier`ではなく`Istanbul`にしているのは、FoundryがMuir Glacierの指定に対応しておらず（https://github.com/foundry-rs/foundry/issues/2260 ）、`forge script`実行時に`Spec Not supported`のパニックが起きるからである（下記参照）。
 
 ```rs
 pub fn evm_inner<'a, DB: Database, const INSPECT: bool>(
