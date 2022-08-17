@@ -44,5 +44,5 @@ jobs:
 
       - name: Run Forge tests
         run: |
-          forge test -vvv --ffi
+          forge test -vvv
         id: test

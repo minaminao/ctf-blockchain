@@ -1,5 +1,5 @@
 test:
-	forge test --force --ffi
+	forge test --force
 
 test-action:
 	act --secret RPC_GOERLI=$(RPC_GOERLI)
