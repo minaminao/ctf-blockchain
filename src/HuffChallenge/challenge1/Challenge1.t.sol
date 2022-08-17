@@ -7,15 +7,16 @@ import "forge-std/Test.sol";
 contract Challenge1Test is Test {
     function test() public {
         // 6 bytes
-        Challenge challenge = Challenge(HuffDeployer.deploy("HuffChallenge/challenge1/Challenge1"));
-        emit log_uint(address(challenge).code.length);
+        Solver solver = Solver(HuffDeployer.deploy("HuffChallenge/challenge1/Solver"));
+        emit log_uint(address(solver).code.length);
 
-        uint32 blockNumber = challenge.blockNumber();
+        // 14 gas
+        uint32 blockNumber = solver.blockNumber();
 
         assertEq(blockNumber, block.number);
     }
 }
 
-interface Challenge {
+interface Solver {
     function blockNumber() external returns (uint32);
 }
