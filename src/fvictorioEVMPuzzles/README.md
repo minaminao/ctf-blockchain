@@ -2,6 +2,10 @@
 
 https://github.com/fvictorio/evm-puzzles
 
+EVMバイトコードが与えられる。
+このEVMバイトコードが正常に終了するようなvalueやcalldataを組むパズル。
+`REVERT`させずに`STOP`を実行させれば良い。
+
 **Table of Contents**
 - [Puzzle 1](#puzzle-1)
 - [Puzzle 2](#puzzle-2)
