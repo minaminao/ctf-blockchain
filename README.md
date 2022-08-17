@@ -34,6 +34,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Reversing transactions](#reversing-transactions)
   - [Reversing EVM bytecode](#reversing-evm-bytecode)
   - [EVM bytecode golf](#evm-bytecode-golf)
+  - [Gas optimization](#gas-optimization)
   - [Re-entrancy attack](#re-entrancy-attack)
   - [Flash loan basics](#flash-loan-basics)
   - [Massive rights by executing flash loans during snapshots](#massive-rights-by-executing-flash-loans-during-snapshots)
@@ -254,6 +255,11 @@ Note:
 | [Ethernaut: 18. MagicNumber](src/Ethernaut#18-magicnumber) |                                                                                                                |
 | Paradigm CTF 2021: Rever                                   | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
 | [Huff Challenge: Challenge #1](src/HuffChallenge)          |                                                                                                                |
+
+### Gas optimization
+| Challenge                                         | Note, Keyword |
+| ------------------------------------------------- | ------------- |
+| [Huff Challenge: Challenge #2](src/HuffChallenge) |               |
 
 ### Re-entrancy attack
 - In case a function of contract A contains an interaction with another contract B or Ether transfer to B, the control is temporarily transferred to B.

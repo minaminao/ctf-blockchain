@@ -33,6 +33,7 @@
   - トランザクションのReversing
   - EVMバイトコードのReversing
   - EVMバイトコードゴルフ
+  - Gas最適化
   - Re-entrancy Attack
   - フラッシュローンの基礎
   - スナップショット時のフラッシュローン実行による権利の大量獲得
@@ -253,6 +254,11 @@
 | [Ethernaut: 18. MagicNumber](src/Ethernaut#18-magicnumber) |                                                                                    |
 | Paradigm CTF 2021: Rever                                   | 回文判定。さらにそのバイトコードを反転させたコードも回文判定できなくてはならない。 |
 | [Huff Challenge: Challenge #1](src/HuffChallenge)          |
+
+### Gas最適化
+| 問題                                              | 備考、キーワード |
+| ------------------------------------------------- | ---------------- |
+| [Huff Challenge: Challenge #2](src/HuffChallenge) |                  |
 
 ### Re-entrancy Attack
 - コントラクトAのある関数内に別のコントラクトBとのインタラクションやBへのEther送金が含まれている場合、一時的にBに制御が移る。
