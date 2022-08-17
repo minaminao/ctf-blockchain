@@ -14,3 +14,8 @@ forge test --match-contract HelloExploitTest
 ```
 forge test --match-contract SecureExploitTest -vvvv
 ```
+
+## Babycrypto
+```
+python exploit.py
+```

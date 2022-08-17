@@ -342,10 +342,10 @@ Note:
 - In general, same nonce attack is a possible attack when the same nonce is used for different messages in elliptic curve DSA, and the secret key is calculated.
 -  In Ethereum, the nonces used to sign transactions are the same.
 
-| Challenge                           | Note, Keyword |
-| ----------------------------------- | ------------- |
-| Capture The Ether: Account Takeover |               |
-| Paradigm CTF 2021: Babycrypto       |               |
+| Challenge                                            | Note, Keyword |
+| ---------------------------------------------------- | ------------- |
+| Capture The Ether: Account Takeover                  |               |
+| [Paradigm CTF 2021: Babycrypto](src/ParadigmCTF2021) |               |
 
 
 ### Brute-force address

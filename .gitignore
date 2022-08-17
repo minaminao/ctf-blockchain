@@ -14,3 +14,6 @@ export_api_key.sh
 # Private challenges
 src/_*
 src/*/_*
+
+# Python
+__pycache__

@@ -341,10 +341,10 @@
 - 一般的にSame Nonce Attackは楕円曲線DSAにおいて異なるメッセージに対して同一のnonceを利用している場合に有効な攻撃で、秘密鍵が求まってしまう。
 - Ethereumの文脈においてはトランザクションの署名に用いているnonceが同じになってしまっている。
 
-| 問題                                | 備考、キーワード |
-| ----------------------------------- | ---------------- |
-| Capture The Ether: Account Takeover |                  |
-| Paradigm CTF 2021: Babycrypto       |                  |
+| 問題                                                 | 備考、キーワード |
+| ---------------------------------------------------- | ---------------- |
+| Capture The Ether: Account Takeover                  |                  |
+| [Paradigm CTF 2021: Babycrypto](src/ParadigmCTF2021) |                  |
 
 
 ### アドレスの総当り
