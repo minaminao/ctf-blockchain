@@ -12,7 +12,6 @@ contract Challenge1Test is Test {
 
         // 14 gas
         uint32 blockNumber = solver.blockNumber();
-
         assertEq(blockNumber, block.number);
     }
 }
