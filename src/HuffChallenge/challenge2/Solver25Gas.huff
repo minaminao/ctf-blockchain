@@ -1,4 +1,4 @@
-// https://twitter.com/zac_aztec/status/1560058998992343040?s=21&t=q96esdm1xePf4Ygj0j516A
+// https://twitter.com/zac_aztec/status/1560058998992343040
 #define macro MAIN() = takes (0) returns (0) {
     returndatasize  // [0]
     calldataload    // [calldata]
