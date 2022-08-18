@@ -227,8 +227,8 @@ Note:
 ### Reversing transactions
 - Reversing the contents of a transaction or how the state has been changed by the transaction.
 
-| Challenge                                           | Note, Keyword |
-| --------------------------------------------------- | ------------- |
+| Challenge                                       | Note, Keyword |
+| ----------------------------------------------- | ------------- |
 | [darkCTF: Secret Of The Contract](src/DarkCTF/) |               |
 
 ### Reversing EVM bytecode
@@ -253,7 +253,7 @@ Note:
 | Challenge                                                  | Note, Keyword                                                                                                  |
 | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | [Ethernaut: 18. MagicNumber](src/Ethernaut#18-magicnumber) |                                                                                                                |
-| Paradigm CTF 2021: Rever                                   | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
+| [Paradigm CTF 2021: Rever](src/ParadigmCTF2021/Rever/)     | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
 | [Huff Challenge: Challenge #1](src/HuffChallenge)          |                                                                                                                |
 
 ### Gas optimization
@@ -436,8 +436,8 @@ Note
 - There was actually a bug and it has been fixed using [RFC6979](https://datatracker.ietf.org/doc/html/rfc6979).
 - https://github.com/daedalus/bitcoin-recover-privkey
 
-| Challenge                                     | Note, Keyword |
-| --------------------------------------------- | ------------- |
+| Challenge                                 | Note, Keyword |
+| ----------------------------------------- | ------------- |
 | [darkCTF: Duplicacy Within](src/DarkCTF/) |               |
 
 ### Bypassing PoW of other applications using Bitcoin's PoW database
