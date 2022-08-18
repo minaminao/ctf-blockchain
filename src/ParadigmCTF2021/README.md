@@ -25,3 +25,8 @@ python exploit.py
 
 ## Rever
 -> [Rever](Rever)
+
+## Farmer
+```
+forge test --match-contract FarmerExploitTest -vvvv
+```
