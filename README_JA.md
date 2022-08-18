@@ -98,7 +98,7 @@
 | [Paradigm CTF 2021: Babysandbox](src/ParadigmCTF2021/Babysandbox/) | `staticcall`, `call`, `delegatecall`, `extcodesize`を0に         |
 | Paradigm CTF 2021: Lockbox                                         | `ecrecover`、`abi.encodePacked`、`msg.data.length`               |
 | [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)             | `block.number`, gas price war                                    |
-| [fvictorio's EVM Puzzles](src/fvictorioEVMPuzzles/)                |                                                                  |
+| [fvictorio's EVM Puzzles](src/FvictorioEVMPuzzles/)                |                                                                  |
 
 ### `tx.origin`の誤用
 - `tx.origin`はトランザクションの発行者のアドレスを指し、コントラクトコール元のアドレス（すなわち`msg.sender`）として使ってはならない。
@@ -226,9 +226,9 @@
 ### トランザクションのReversing
 - トランザクションの中身あるいはトランザクションによってどうステートが変化したかをReversingする。Etherscanが便利。
 
-| 問題                            | 備考、キーワード |
-| ------------------------------- | ---------------- |
-| darkCTF: Secret Of The Contract |                  |
+| 問題                                            | 備考、キーワード |
+| ----------------------------------------------- | ---------------- |
+| [darkCTF: Secret Of The Contract](src/DarkCTF/) |                  |
 
 ### EVMバイトコードのReversing
 - コードが全部あるいは一部だけ与えられていないコントラクトをReversingする。
@@ -435,9 +435,9 @@
 - 実際にバグがあり[RFC6979](https://datatracker.ietf.org/doc/html/rfc6979)を用いて修正済み。
 - https://github.com/daedalus/bitcoin-recover-privkey
 
-| 問題                      | 備考、キーワード |
-| ------------------------- | ---------------- |
-| darkCTF: Duplicacy Within |                  |
+| 問題                                      | 備考、キーワード |
+| ----------------------------------------- | ---------------- |
+| [darkCTF: Duplicacy Within](src/DarkCTF/) |                  |
 
 ### BitcoinのPoWデータベースを利用した他アプリケーションのPoWバイパス
 - BitcoinではSHA-256のハッシュ値の先頭に0が連なることをProof of Work (PoW)としているが、他のアプリケーションでも同じような設計をした場合にBitcoinの過去のPoW結果から条件に合うものを選ぶことでPoW時間を大幅に短縮できるケースがある。

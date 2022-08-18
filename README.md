@@ -99,7 +99,7 @@ Note:
 | [Paradigm CTF 2021: Babysandbox](src/ParadigmCTF2021/Babysandbox/) | `staticcall`, `call`, `delegatecall`, `extcodesize` is 0               |
 | Paradigm CTF 2021: Lockbox                                         | `ecrecover`, `abi.encodePacked`, `msg.data.length`                     |
 | [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)             | `block.number`, gas price war                                          |
-| [fvictorio's EVM Puzzles](src/fvictorioEVMPuzzles/)                |                                                                        |
+| [fvictorio's EVM Puzzles](src/FvictorioEVMPuzzles/)                |                                                                        |
 
 ### Misuse of `tx.origin`
 - The `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
@@ -227,9 +227,9 @@ Note:
 ### Reversing transactions
 - Reversing the contents of a transaction or how the state has been changed by the transaction.
 
-| Challenge                       | Note, Keyword |
-| ------------------------------- | ------------- |
-| darkCTF: Secret Of The Contract |               |
+| Challenge                                           | Note, Keyword |
+| --------------------------------------------------- | ------------- |
+| [darkCTF: Secret Of The Contract](src/DarkCTF/) |               |
 
 ### Reversing EVM bytecode
 - Reversing a contract for which code is not given in whole or in part.
@@ -436,9 +436,9 @@ Note
 - There was actually a bug and it has been fixed using [RFC6979](https://datatracker.ietf.org/doc/html/rfc6979).
 - https://github.com/daedalus/bitcoin-recover-privkey
 
-| Challenge                 | Note, Keyword |
-| ------------------------- | ------------- |
-| darkCTF: Duplicacy Within |               |
+| Challenge                                     | Note, Keyword |
+| --------------------------------------------- | ------------- |
+| [darkCTF: Duplicacy Within](src/DarkCTF/) |               |
 
 ### Bypassing PoW of other applications using Bitcoin's PoW database
 - Bitcoin uses a series of leading zeros in the SHA-256 hash value as a Proof of Work (PoW), but if other applications are designed in the same way, its PoW time can be significantly reduced by choosing one that matches the conditions from Bitcoin's past PoW results 
