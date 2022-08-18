@@ -13,7 +13,7 @@
 - xorを取る
 - ゼロかどうかを返す
 
-実装すると37バイトになった。
+これをHuffで実装してコンパイルすると37バイトになった。
 `push 0x00`の代わりに`returndatasize`を使ったり、Huffのデフォルトのラベル機能を使わずラベルを1バイトにしたりして、できるだけサイズを小さくなるようにした。
 
 ```js
@@ -42,7 +42,7 @@ label03:
     byte            // [calldata[s], i, calldata]
     dup2            // [i, calldata[s], i, calldata]
     mstore8         // [i, calldata]
-    0x01            // [1, i, calldata] TODO: 0x01 -> pc
+    0x01            // [1, i, calldata]
     add             // [i <- i + 1, calldata]
     0x03            // [label03, i, calldata]
     jump            // [i, calldata]
@@ -89,3 +89,4 @@ function flip(bytes memory a) private pure returns (bytes memory) {
 bytecode = bytes.concat(bytecode, flip(bytecode));
 ```
 
+ちなみに公式のYul想定解は47 bytesだったからHuffで10 bytes短縮できたことになる。
