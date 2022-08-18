@@ -1,9 +1,10 @@
 #define macro MAIN() = takes (0) returns (0) {
-    returndatasize
-    calldataload
-    0xff
-    shl
-    iszero
-    returndatasize mstore 
+    returndatasize  // [0]
+    calldataload    // [calldata]
+    0xff            // [0xff, calldata]
+    shl             // [calldata << 0xff]
+    iszero          // [!(calldata << 0xff)]
+    returndatasize  // [0, !(calldata << 0xff)]
+    mstore          // []
     msize returndatasize return 
 }

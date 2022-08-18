@@ -1,0 +1,11 @@
+// https://twitter.com/zac_aztec/status/1560058998992343040?s=21&t=q96esdm1xePf4Ygj0j516A
+#define macro MAIN() = takes (0) returns (0) {
+    returndatasize  // [0]
+    calldataload    // [calldata]
+    chainid         // [1, calldata]
+    and             // [calldata & 1]
+    iszero          // [!(calldata & 1)]
+    returndatasize  // [0, !(calldata & 1)]
+    mstore          // []
+    msize returndatasize return
+}
