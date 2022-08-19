@@ -4,7 +4,7 @@ This repository collects blockchain challenges in CTFs and wargames.
 
 These challenges are categorized by topic, but they are not ordered by difficulty or by recommendation.
 
-Some challenges come with my writeups (for example: [Ethernaut](src/Ethernaut)).
+Some challenges come with my writeups (e.g., [Ethernaut](src/Ethernaut/), [Paradigm CTF 2021](src/ParadigmCTF2021/)).
 
 If there are any incorrect descriptions, I would appreciate it if you could let me know via issue or PR.
 
@@ -30,7 +30,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [`view` functions do not always return the same value](#view-functions-do-not-always-return-the-same-value)
   - [Mistakes in setting `storage` and `memory`](#mistakes-in-setting-storage-and-memory)
   - [Transaction tracing](#transaction-tracing)
-  - [Reversing states (contract must not contain confidential data)](#reversing-states-contract-must-not-contain-confidential-data)
+  - [Reversing states (contracts must not contain confidential data)](#reversing-states-contracts-must-not-contain-confidential-data)
   - [Reversing transactions](#reversing-transactions)
   - [Reversing EVM bytecode](#reversing-evm-bytecode)
   - [EVM bytecode golf](#evm-bytecode-golf)
@@ -44,7 +44,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Funds leakage due to oracle manipulation (without flash loans)](#funds-leakage-due-to-oracle-manipulation-without-flash-loans)
   - [Funds leakage due to oracle manipulation (with flash loans)](#funds-leakage-due-to-oracle-manipulation-with-flash-loans)
   - [Sandwich attack](#sandwich-attack)
-  - [Recovery of private key by same nonce attack](#recovery-of-private-key-by-same-nonce-attack)
+  - [Recovery of a private key by same nonce attack](#recovery-of-a-private-key-by-same-nonce-attack)
   - [Brute-force address](#brute-force-address)
   - [Recovery of a public key](#recovery-of-a-public-key)
   - [Encryption and decryption in secp256k1](#encryption-and-decryption-in-secp256k1)
@@ -55,7 +55,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Other ad-hoc vulnerabilities and methods](#other-ad-hoc-vulnerabilities-and-methods)
 - [Bitcoin](#bitcoin)
   - [Bitcoin basics](#bitcoin-basics)
-  - [Recovery of private key by same nonce attack](#recovery-of-private-key-by-same-nonce-attack-1)
+  - [Recovery of a private key by same nonce attack](#recovery-of-a-private-key-by-same-nonce-attack-1)
   - [Bypassing PoW of other applications using Bitcoin's PoW database](#bypassing-pow-of-other-applications-using-bitcoins-pow-database)
 - [Solana](#solana)
 - [Other blockchain-related](#other-blockchain-related)
@@ -146,8 +146,8 @@ Note:
 
 ### Integer overflow
 - For example, subtracting `1` from the value of a variable of `uint` type when the value is `0` causes an arithmetic overflow.
-- Arithmetic overflow has been detected since Solidity v0.8.0.
-- Contracts written in earlier versions can be checked by using the SafeMath library.
+- Arithmetic overflow has been detected and reverted state since Solidity v0.8.0.
+- Contracts written in earlier versions can be checked by using [the SafeMath library](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v3.4/contracts/math/SafeMath.sol).
 
 | Challenge                                    | Note, Keyword  |
 | -------------------------------------------- | -------------- |
@@ -156,9 +156,9 @@ Note:
 | [Ethernaut: 5. Token](src/Ethernaut#5-token) | subtraction    |
 
 ### Ether transfers to a contract are not always executable
-- Do not write a contract on the assumption that normal Ether transfer (`.send()` or `.transfer()`) can always be performed to the destination address.
-- If the destination is a contract and there is no receive Ether function or payable fallback function, Ether cannot be transferred.
-- However, instead of the normal transfer method, the `selfdestruct` described below can be used to force such a contract to transfer Ether.
+- Do not write a contract on the assumption that normal Ether transfer (`.send()` or `.transfer()`) can always be executed.
+- If a destination is a contract and there is no receive Ether function or payable fallback function, Ether cannot be transferred.
+- However, instead of the normal transfer functions, the `selfdestruct` described below can be used to force such a contract to transfer Ether.
 
 | Challenge                                  | Note, Keyword |
 | ------------------------------------------ | ------------- |
@@ -166,7 +166,7 @@ Note:
 
 ### Forced Ether transfer to a contract via `selfdestruct`
 - If a contract does not have a receive Ether function and a payable fallback function, it is not guaranteed that Ether will not be received.
-- When a contract performs a `selfdestruct`, it can transfer its Ether to another contract or EOA, and this `selfdestruct` transfer can be forced even if the destination contract does not have the receive Ether function and the payable fallback function. 
+- When a contract executes `selfdestruct`, it can transfer its Ether to another contract or EOA, and this `selfdestruct` transfer can be forced even if the destination contract does not have the receive Ether function and the payable fallback function. 
 - If the application is built on the assumption that the Ether is `0`, it could be a bug.
 
 | Challenge                                    | Note, Keyword |
@@ -183,21 +183,21 @@ Note:
 | [Ethernaut: 20. Denial](src/Ethernaut#20-denial) |               |
 
 ### Forgetting to set `view`/`pure` to interface and abstract contract functions
-- If you forget to set `view`,`pure` for a function and design your application under the assumption that the state will not change, it will be a bug.
+- If you forget to set `view` or `pure` for a function and design your application under the assumption that the state will not change, it will be a bug.
 
 | Challenge                                            | Note, Keyword |
 | ---------------------------------------------------- | ------------- |
 | [Ethernaut: 11. Elevator](src/Ethernaut#11-elevator) |               |
 
 ### `view` functions do not always return the same value
-- Since view functions can read state, they can be conditionally branched based on state and do not necessarily return the same value.
+- Since `view` functions can read state, they can be conditionally branched based on state and do not necessarily return the same value.
 
 | Challenge                                    | Note, Keyword |
 | -------------------------------------------- | ------------- |
 | [Ethernaut: 21. Shop](src/Ethernaut#21-shop) |               |
 
 ### Mistakes in setting `storage` and `memory`
-- If `storage` and `memory` are not set properly, old values may be referenced or overwriting may not occur, resulting in vulnerability.
+- If `storage` and `memory` are not set properly, old values may be referenced, or overwriting may not occur, resulting in vulnerability.
 
 | Challenge            | Note, Keyword                                                                                                   |
 | -------------------- | --------------------------------------------------------------------------------------------------------------- |
@@ -211,7 +211,7 @@ Note:
 | ---------------------------------------------------- | --------------------------------- |
 | [Ethernaut: 17. Recovery](src/Ethernaut#17-recovery) | loss of deployed contract address |
 
-### Reversing states (contract must not contain confidential data)
+### Reversing states (contracts must not contain confidential data)
 - Since the state and the bytecodes of contracts are public, all variables, including private variables, are readable.
 - Private variables are only guaranteed not to be directly readable by other contracts, but we, as an entity outside the blockchain, can read them.
 - If there is private data in a transaction, it can also be solved by reading the transaction.
@@ -249,7 +249,7 @@ Note:
 | pbctf 2020: pbcoin               |                                 |
 
 ### EVM bytecode golf
-- There is a limit to the length of a bytecode.
+- These challenges have a limit on the length of the bytecode to be created.
 
 | Challenge                                                  | Note, Keyword                                                                                                  |
 | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -258,15 +258,17 @@ Note:
 | [Huff Challenge: Challenge #1](src/HuffChallenge)          |                                                                                                                |
 
 ### Gas optimization
+- These challenges have a limit on the gas to be consumed.
+
 | Challenge                                         | Note, Keyword |
 | ------------------------------------------------- | ------------- |
 | [Huff Challenge: Challenge #2](src/HuffChallenge) |               |
 
 ### Re-entrancy attack
-- In case a function of contract A contains an interaction with another contract B or Ether transfer to B, the control is temporarily transferred to B.
-- Since B can call A in this control, it will be a bug if the design is based on the assumption that A is not called in the middle of the execution of that function.
-- For example, when B executes the `withdraw` function to withdraw Ether deposited in A, the Ether transfer triggers a control shift to B, and during the `withdraw` function, B executes A's `withdraw` function again. Even if the `withdraw` function is designed to prevent withdrawal of more than the limit if it is simply called twice, if the `withdraw` function is executed in the middle of the `withdraw` function, it may be designed to bypass the limit check.
-- To prevent Re-entrancy Attack, use the Checks-Effects-Interactions pattern.
+- In case a function of contract `A` contains interaction with another contract `B` or Ether transfer to `B`, the control is temporarily transferred to `B`.
+- Since `B` can call `A` in this control, it will be a bug if the design is based on the assumption that `A` is not called in the middle of the execution of that function.
+- For example, when `B` executes the `withdraw` function to withdraw Ether deposited in `A`, the Ether transfer triggers a control shift to `B`, and during the `withdraw` function, `B` executes `A`'s `withdraw` function again. Even if the `withdraw` function is designed to prevent withdrawal of more than the limit if it is simply called twice, if the `withdraw` function is executed in the middle of the `withdraw` function, it may be designed to bypass the limit check.
+- To prevent re-entrancy attacks, use the Checks-Effects-Interactions pattern.
 
 | Challenge                                                           | Note, Keyword |
 | ------------------------------------------------------------------- | ------------- |
@@ -286,7 +288,7 @@ Note:
 | Damn Vulnerable DeFi: 1. Unstoppable   | Simple flash loan with a single token. Failure to send the token directly.                                                                                    |
 | Damn Vulnerable DeFi: 2. Naivereceiver | The `flashLoan` function can specify a `borrower`, but the receiver side does not authenticate the TX sender, so the receiver's funds can be drained as a fee |
 | Damn Vulnerable DeFi: 3. Truster       | The target of a call is made into the token and the token can be taken by approving it to oneself                                                             |
-| Damn Vulnerable DeFi: 4. Sideentrance  | Flash loan that allows each user to make a deposit and a withdrawal. Deposit can be executed at no cost at the time of flash loan.                            |
+| Damn Vulnerable DeFi: 4. Sideentrance  | Flash loan that allows each user to make a deposit and a withdrawal. The deposit can be executed at no cost at the time of the flash loan.                    |
 
 ### Massive rights by executing flash loans during snapshots
 - If the algorithm distributes some kind of rights using the token balance at the time of a snapshot, and if a malicious user transaction can trigger a snapshot, a flash loan can be used to obtain a large amount of rights.
@@ -337,8 +339,7 @@ Note:
 | Damn Vulnerable DeFi: 8. Puppet | Distort the price of Uniswap V1 and leak tokens from a lending platform that references that price |
 
 ### Sandwich attack
-- A front-running attack in which a large transaction of another person is sandwiched between transactions of oneself.
-- For example, if there is a transaction by another party to sell token A and buy B, the attacker can put in a transaction to sell A and buy B before the transaction, and later put in a transaction to sell the same amount of B and buy A, thereby ultimately increasing the amount of A at a profit.
+- For example, if there is a transaction by another party to sell token `A` and buy `B`, the attacker can put in a transaction to sell `A` and buy `B` before the transaction, and later put in a transaction to sell the same amount of `B` and buy `A`, thereby ultimately increasing the amount of `A` at a profit.
 - In general, such "revenue earned by selecting, inserting, and reordering transactions contained in a block generated by a miner" is referred to as Miner Extractable Value (MEV). Recently, it is also called Maximal Extractable Value.
 
 | Challenge                                         | Note, Keyword                               |
@@ -346,9 +347,9 @@ Note:
 | [Paradigm CTF 2021: Farmer](src/ParadigmCTF2021/) | Sandwich the trade from COMP to WETH to DAI |
 
 
-### Recovery of private key by same nonce attack
-- In general, same nonce attack is a possible attack when the same nonce is used for different messages in elliptic curve DSA, and the secret key is calculated.
--  In Ethereum, the nonces used to sign transactions are the same.
+### Recovery of a private key by same nonce attack
+- In general, same nonce attacks are possible attacks when the same nonce is used for different messages in elliptic curve DSA, and the secret key is calculated.
+- In Ethereum, if nonces used to sign transactions are the same, this attack is feasible.
 
 | Challenge                                            | Note, Keyword |
 | ---------------------------------------------------- | ------------- |
@@ -379,7 +380,7 @@ Note:
 | 0x41414141 CTF: Rich Club | Prepare the key pair oneself. Decrypt the encrypted flag with the public key provided. |
 
 ### Bypassing bot and taking an ERC-20 token owned by a wallet with a known private key
-- If a wallet with a known private key has an ERC-20 token but no Ether, it is usually necessary to first send Ether to the wallet and then `transfer` the ERC-20 token in order to get the ERC-20 token.
+- If a wallet with a known private key has an ERC-20 token but no Ether, it is usually necessary to first send Ether to the wallet and then `transfer` the ERC-20 token to get the ERC-20 token.
 - However, if a bot that immediately takes the Ether sent at this time is running, the Ether will be stolen when the Ether is simply sent.
 - We can use Flashbots bundled transactions or just `permit` and `transferFrom` if the token is [EIP-2612 permit](https://eips.ethereum.org/EIPS/eip-2612) friendly.
 
@@ -399,7 +400,7 @@ Note:
 | Paradigm CTF 2021: Bank                                    |               |
 
 ### Constructor is just a function with a typo (< Solidity 0.5.0)
-- In versions prior to v0.4.22, the constructor is defined as a function with the same name as the contract, so a typo of the constructor name could cause it to become just a function, resulting in a bug.
+- In versions before v0.4.22, the constructor is defined as a function with the same name as the contract, so a typo of the constructor name could cause it to become just a function, resulting in a bug.
 - Since v0.5.0, this specification is removed and the `constructor` keyword must be used.
 
 | Challenge                                        | Note, Keyword |
@@ -433,8 +434,8 @@ Note
 | TsukuCTF 2021: genesis                 | genesis block               |
 | WORMCON 0x01: What's My Wallet Address | Bitcoin address, RIPEMD-160 |
 
-### Recovery of private key by same nonce attack
-- There was actually a bug and it has been fixed using [RFC6979](https://datatracker.ietf.org/doc/html/rfc6979).
+### Recovery of a private key by same nonce attack
+- There was a bug and it has been fixed using [RFC6979](https://datatracker.ietf.org/doc/html/rfc6979).
 - https://github.com/daedalus/bitcoin-recover-privkey
 
 | Challenge                                 | Note, Keyword |
