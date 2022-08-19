@@ -66,11 +66,11 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
 ## Ethereum
 
 Note:
-- If the attack is only valid for a particular version of Solidity and not for the latest version, the version is noted at the end of the title.
-- To avoid notation fluctuations, terminology is unified with the Solidity keyword as much as possible, and the Ethereum Virtual Machine (EVM) keyword is kept to a minimum.
+- If an attack is only valid for a particular version of Solidity and not for the latest version, the version is noted at the end of the heading.
+- To avoid notation fluctuations, EVM terms are avoided as much as possible and Solidity terms are used.
 
 ### Ethereum/contract basics
-- These can be solved if you know the basic mechanics of Ethereum, [the basic language specification of Solidity](https://docs.soliditylang.org/en/latest/), and the basic operation of contracts.
+- These challenges can be solved if you know the basic mechanics of Ethereum, [the basic language specification of Solidity](https://docs.soliditylang.org/en/latest/), and the basic operation of contracts.
 
 | Challenge                                                        | Note, Keyword          |
 | ---------------------------------------------------------------- | ---------------------- |
@@ -102,14 +102,14 @@ Note:
 | [fvictorio's EVM Puzzles](src/FvictorioEVMPuzzles/)                |                                                                        |
 
 ### Misuse of `tx.origin`
-- The `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
+- `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
 
 | Challenge                                            | Note, Keyword |
 | ---------------------------------------------------- | ------------- |
 | [Ethernaut: 4. Telephone](src/Ethernaut#4-telephone) |               |
 
 ### Pseudorandom numbers generated on-chain are predictable
-- Since the bytecodes of contracts are publicly available, it is easy to predict pseudorandom numbers whose generation is completed on-chain (using only states, not off-chain data).
+- Since bytecodes of contracts are publicly available, it is easy to predict pseudorandom numbers whose generation is completed on-chain (using only states, not off-chain data).
 - It is equivalent to having all the parameters of a pseudorandom number generator exposed.
 - If you want to use random numbers that are unpredictable to anyone, use a decentralized oracle with a random number function. For example, [Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/), which implements Verifiable Random Function (VRF).
 
@@ -119,7 +119,7 @@ Note:
 | [Ethernaut: 3. Coin Flip](src/Ethernaut#3-coin-flip) |               |
 
 ### ERC-20 basics
-- These can be solved with an understanding of the [ERC-20 token standard](https://eips.ethereum.org/EIPS/eip-20).
+- These challenges can be solved with an understanding of the [ERC-20 token standard](https://eips.ethereum.org/EIPS/eip-20).
 
 | Challenge                                                  | Note, Keyword                         |
 | ---------------------------------------------------------- | ------------------------------------- |
@@ -127,7 +127,7 @@ Note:
 | [Paradigm CTF 2021: Secure](src/ParadigmCTF2021)           | WETH                                  |
 
 ### Storage overwrite by `delegatecall`
-- `delegatecall` is a potential source of vulnerability because the storage of the calling contract can be overwritten by the called function.
+- `delegatecall` is a potential source of vulnerability because the storage of the `delegatecall` caller contract can be overwritten by the called function.
 
 | Challenge                                                      | Note, Keyword                                                                                     |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -137,7 +137,8 @@ Note:
 | [Ethernaut: 25. Motorbike](src/Ethernaut#25-motorbike)         | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
 
 ### Context mismatch in `delegatecall`
-- Functions called in `delegatecall` are executed in the context of the calling contract, but if the function does not carefully consider the context, a bug will be created.
+- Functions called in `delegatecall` are executed in the context of the `delegatecall` caller contract. 
+- If the function does not carefully consider the context, a bug will be created.
 
 | Challenge                                                 | Note, Keyword              |
 | --------------------------------------------------------- | -------------------------- |
