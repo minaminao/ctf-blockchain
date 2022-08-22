@@ -1,16 +1,21 @@
 # [WIP] Paradigm CTF 2022 Writeup
 
 **Table of Contents**
-- [LOCKBOX2](#lockbox2)
-- [MERKLEDROP](#merkledrop)
-- [OTTERWORLD](#otterworld)
-- [OTTERSWAP](#otterswap)
-- [RANDOM](#random)
-- [RIDDLE-OF-THE-SPHINX](#riddle-of-the-sphinx)
-- [SOURCECODE](#sourcecode)
-- [TRAPDOOOR](#trapdooor)
+- [Ethereum](#ethereum)
+  - [LOCKBOX2](#lockbox2)
+  - [MERKLEDROP](#merkledrop)
+  - [RANDOM](#random)
+  - [SOURCECODE](#sourcecode)
+  - [TRAPDOOOR](#trapdooor)
+- [Cairo](#cairo)
+  - [RIDDLE-OF-THE-SPHINX](#riddle-of-the-sphinx)
+- [Solana](#solana)
+  - [OTTERWORLD](#otterworld)
+  - [OTTERSWAP](#otterswap)
 
-## LOCKBOX2
+## Ethereum
+
+### LOCKBOX2
 
 Stage 5 payload:
 ```
@@ -54,7 +59,7 @@ Exploit:
 forge script Lockbox2ExploitScript --fork-url $RPC_PARADIGM --private-keys $PRIVATE_KEY1 --private-keys $PRIVATE_KEY2 --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
 ```
 
-## MERKLEDROP
+### MERKLEDROP
 
 Get vulnerable nodes:
 ```
@@ -84,7 +89,85 @@ forge script MerkleDropExploitScript --fork-url $RPC_PARADIGM --private-key $PRI
 
 Flag `PCTF{N1C3_Pr00F_8r0}`
 
-## OTTERWORLD
+
+### RANDOM
+
+Test:
+```
+forge test -vvvvv --match-contract RandomExploitTest
+```
+
+Exploit:
+```
+forge script RandomExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE_KEY --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
+```
+
+Flag: `PCTF{IT5_C7F_71M3}`
+
+### SOURCECODE
+
+Compile the quine:
+```
+huffc -r Quine.huff
+```
+
+Test:
+```
+forge test -vvvvv --match-contract SourceCodeExploitTest
+```
+
+Exploit:
+```
+forge script SourceCodeExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE_KEY --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
+```
+
+Flag: `PCTF{QUiNE_QuiNe_qU1n3}`
+
+### TRAPDOOOR 
+
+Test:
+```
+export FLAG="FLAG{DUMMY}"
+forge script src/ParadigmCTF2022/Trapdooor/TrapdooorScript.sol:TrapdooorScript -vvvvv
+```
+
+Exploit:
+```
+python exploit.py
+```
+
+Construct the flag:
+```
+python construct_flag.py
+```
+
+Flag: `PCTF{d0n7_y0u_10v3_f1nd1n9_0d4y5_1n_4_c7f}`
+
+
+## Cairo
+
+### RIDDLE-OF-THE-SPHINX
+
+Exploit:
+```
+python exploit.py
+```
+
+Flag: `PCTF{600D_1UCK_H4V3_FUN}`
+
+### CAIRO-PROXY
+
+Exploit:
+```
+starknet-compile almost_erc20.cairo --abi ../../almost_erc20_abi.json
+python exploit.py
+```
+
+Flag: `PCTF{d3f4u17_pu811c_5721k35_4941n}`
+
+## Solana
+
+### OTTERWORLD
 
 ```rs
 #[program]
@@ -111,72 +194,10 @@ pub mod solve {
 
 Flag: `PCTF{0tt3r_w0r1d_8c01j3}`
 
-## OTTERSWAP
+### OTTERSWAP
 
 ```
 python compute_optimal_strategy.py
 ```
 
 Flag: PCTF{l00k_th3_0tt3r_way_z8210}
-
-## RANDOM
-
-Test:
-```
-forge test -vvvvv --match-contract RandomExploitTest
-```
-
-Exploit:
-```
-forge script RandomExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE_KEY --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
-```
-
-Flag: `PCTF{IT5_C7F_71M3}`
-
-## RIDDLE-OF-THE-SPHINX
-
-Exploit:
-```
-python exploit.py
-```
-
-Flag: `PCTF{600D_1UCK_H4V3_FUN}`
-
-## SOURCECODE
-
-Compile the quine:
-```
-huffc -r Quine.huff
-```
-
-Test:
-```
-forge test -vvvvv --match-contract SourceCodeExploitTest
-```
-
-Exploit:
-```
-forge script SourceCodeExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE_KEY --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
-```
-
-Flag: `PCTF{QUiNE_QuiNe_qU1n3}`
-
-## TRAPDOOOR 
-
-Test:
-```
-export FLAG="FLAG{DUMMY}"
-forge script src/ParadigmCTF2022/Trapdooor/TrapdooorScript.sol:TrapdooorScript -vvvvv
-```
-
-Exploit:
-```
-python exploit.py
-```
-
-Construct the flag:
-```
-python construct_flag.py
-```
-
-Flag: `PCTF{d0n7_y0u_10v3_f1nd1n9_0d4y5_1n_4_c7f}`
