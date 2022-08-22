@@ -3,5 +3,5 @@ interface Challenge3 {
 
     function withdraw() external;
 
-    function set_withdrawer() external;
+    function setWithdrawer(address _withdrawer) external payable;
 }

