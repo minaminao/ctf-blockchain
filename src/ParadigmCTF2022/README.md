@@ -109,6 +109,14 @@ pub mod solve {
 
 Flag: `PCTF{0tt3r_w0r1d_8c01j3}`
 
+## OTTERSWAP
+
+```
+python compute_optimal_strategy.py
+```
+
+Flag: PCTF{l00k_th3_0tt3r_way_z8210}
+
 ## RANDOM
 
 Test:
