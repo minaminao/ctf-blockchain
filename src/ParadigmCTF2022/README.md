@@ -33,6 +33,7 @@ I plan to add exploits for challenges that could not be solved soon.
 ## Ethereum
 
 ### LOCKBOX2
+[Challenge & Exploit](Lockbox2)
 
 A same calldata can be sent to five functions from `stage1` to `stage5`. The goal is to satisfy the conditions of all functions.
 
@@ -89,7 +90,7 @@ function stage4(bytes memory a, bytes memory b) external {
     require(tx.origin == address(uint160(uint256(addr.codehash))) && success);
 }
 ```
-This condition can be satisfied by using the algorithm that generates an address ( the hash of a public key).
+This condition can be satisfied by using the algorithm that generates an address (the hash of a public key).
 
 **stage5**
 ```solidity
@@ -154,6 +155,7 @@ forge script Lockbox2ExploitScript --fork-url $RPC_PARADIGM --private-keys $PRIV
 Flag: `PCTF{10ck80x_20ck5}`
 
 ### MERKLEDROP
+[Challenge & Exploit](MerkleDrop)
 
 `claim` function of `MerkleDistributor` is vulnerable. 
 ```solidity
@@ -207,6 +209,12 @@ Flag `PCTF{N1C3_Pr00F_8r0}`
 
 
 ### RANDOM
+[Challenge & Exploit](Random)
+
+Execute the following code.
+```
+Setup(setupAddress).random().solve(4);
+```
 
 **Test**
 ```
@@ -221,6 +229,7 @@ forge script RandomExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE
 Flag: `PCTF{IT5_C7F_71M3}`
 
 ### RESCUE
+[Challenge & Exploit](Rescue)
 
 The goal is to make the WETH balance of `mcHelper` to 0.
 
@@ -250,11 +259,13 @@ forge script RescueExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE
 Flag: `PCTF{MuCH_4PPr3C1473_53r}`
 
 ### SOURCECODE
+[Challenge & Exploit](SourceCode)
 
 The goal is to create a quine with EVM byte code.
 
 There are restrictions on the opcodes that can be used.
 
+A example quine written in the Huff language:
 ```js
 #define macro MAIN() = takes (0) returns (0) {
     0x5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f3 // code
@@ -279,16 +290,12 @@ There are restrictions on the opcodes that can be used.
 
 **Compile the quine**
 ```
-huffc -r Quine.huff
-```
-
-Output:
-```
+$ huffc -r Quine.huff
+⠙ Compiling... 
 7f5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f35b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f3
 ```
 
 [evm.codes playground](https://www.evm.codes/playground?unit=Wei&codeType=Bytecode&code=%277f~y~y%27~zzzzz80x0w2w7f6z5b5b5by00053x41x00f3x60w152x%01wxyz~_)
-
 
 **Test**
 ```
@@ -303,6 +310,8 @@ forge script SourceCodeExploitScript --fork-url $RPC_PARADIGM --private-key $PRI
 Flag: `PCTF{QUiNE_QuiNe_qU1n3}`
 
 ### TRAPDOOOR 
+[Challenge & Exploit](Trapdooor)
+
 The goal is to get the environment variable `FLAG` in Forge script. 
 
 This can be solved by using the Foundry cheatcodes and sending the flag to the specified RPC.
@@ -329,6 +338,7 @@ Flag: `PCTF{d0n7_y0u_10v3_f1nd1n9_0d4y5_1n_4_c7f}`
 ## Cairo
 
 ### RIDDLE-OF-THE-SPHINX
+[Challenge & Exploit](RiddleOfTheSphinx)
 
 Reading `chal.py`, we see that the goal is to make the result of the `solution` function call to the challenge contract `bytes_to_long(b "man")`.
 ```py
@@ -387,6 +397,7 @@ python exploit.py
 Flag: `PCTF{600D_1UCK_H4V3_FUN}`
 
 ### CAIRO-PROXY
+[Challenge & Exploit](CairoProxy)
 
 Reading `chal.py`, we see that the goal is to make the player's balance `int(50000e18)`.
 ```py
@@ -486,6 +497,7 @@ chall::cpi::get_flag(cpi_ctx, 0x1337 * 0x7331)?;
 Flag: `PCTF{0tt3r_w0r1d_8c01j3}`
 
 ### OTTERSWAP
+[Exploit](OtterSwap)
 
 The goal is satisfy the condition `amt_a + amt_b == 3 * AMT - 1` of the `handle_connection` function in `src/ParadigmCTF2022/OtterSwap/_client/framework/src/main.rs`. 
 ```rs
