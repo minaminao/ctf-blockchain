@@ -1,7 +1,7 @@
 // Slots
-#define constant OWNER_SLOT = 0x00;
-#define constant WITHDRAWER_SLOT = 0x01;
-#define constant LAST_DEPOSITER_SLOT = 0x02;
+#define constant OWNER_SLOT = 0x00
+#define constant WITHDRAWER_SLOT = 0x01
+#define constant LAST_DEPOSITER_SLOT = 0x02
 
 // Deposit into the contract.
 #define macro DEPOSIT() = takes (0) returns (0) {
