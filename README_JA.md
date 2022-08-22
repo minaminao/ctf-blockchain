@@ -99,6 +99,7 @@
 | Paradigm CTF 2021: Lockbox                                         | `ecrecover`、`abi.encodePacked`、`msg.data.length`               |
 | [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)             | `block.number`, gas price war                                    |
 | [fvictorio's EVM Puzzles](src/FvictorioEVMPuzzles/)                |                                                                  |
+| [Huff Challenge: Challenge #3](src/HuffChallenge/)                 |                                                                  |
 
 ### `tx.origin`の誤用
 - `tx.origin`はトランザクションの発行者のアドレスを指し、コントラクトコール元のアドレス（すなわち`msg.sender`）として使ってはならない。

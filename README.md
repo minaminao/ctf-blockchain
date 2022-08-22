@@ -100,6 +100,7 @@ Note:
 | Paradigm CTF 2021: Lockbox                                         | `ecrecover`, `abi.encodePacked`, `msg.data.length`                     |
 | [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)             | `block.number`, gas price war                                          |
 | [fvictorio's EVM Puzzles](src/FvictorioEVMPuzzles/)                |                                                                        |
+| [Huff Challenge: Challenge #3](src/HuffChallenge/)                 |                                                                        |
 
 ### Misuse of `tx.origin`
 - `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
@@ -255,14 +256,14 @@ Note:
 | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | [Ethernaut: 18. MagicNumber](src/Ethernaut#18-magicnumber) |                                                                                                                |
 | [Paradigm CTF 2021: Rever](src/ParadigmCTF2021/Rever/)     | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
-| [Huff Challenge: Challenge #1](src/HuffChallenge)          |                                                                                                                |
+| [Huff Challenge: Challenge #1](src/HuffChallenge/)         |                                                                                                                |
 
 ### Gas optimization
 - These challenges have a limit on the gas to be consumed.
 
-| Challenge                                         | Note, Keywords |
-| ------------------------------------------------- | -------------- |
-| [Huff Challenge: Challenge #2](src/HuffChallenge) |                |
+| Challenge                                          | Note, Keywords |
+| -------------------------------------------------- | -------------- |
+| [Huff Challenge: Challenge #2](src/HuffChallenge/) |                |
 
 ### Re-entrancy attack
 - In case a function of contract `A` contains interaction with another contract `B` or Ether transfer to `B`, the control is temporarily transferred to `B`.
