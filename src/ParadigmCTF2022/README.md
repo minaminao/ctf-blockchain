@@ -5,6 +5,7 @@
 - [MERKLEDROP](#merkledrop)
 - [RANDOM](#random)
 - [SOURCECODE](#sourcecode)
+- [TRAPDOOOR](#trapdooor)
 
 ## LOCKBOX2
 
@@ -112,3 +113,23 @@ forge script SourceCodeExploitScript --fork-url $RPC_PARADIGM --private-key $PRI
 ```
 
 Flag: `PCTF{QUiNE_QuiNe_qU1n3}`
+
+## TRAPDOOOR 
+
+Test:
+```
+export FLAG="FLAG{DUMMY}"
+forge script src/ParadigmCTF2022/Trapdooor/TrapdooorScript.sol:TrapdooorScript -vvvvv
+```
+
+Exploit:
+```
+python exploit.py
+```
+
+Construct the flag:
+```
+python construct_flag.py
+```
+
+Flag: `PCTF{d0n7_y0u_10v3_f1nd1n9_0d4y5_1n_4_c7f}`
