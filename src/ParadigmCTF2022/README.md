@@ -99,7 +99,7 @@ function stage5() external {
     }
 }
 ```
-There are a few ways to distinct a `delegatecall` from a `call`, but in this case I use the `GAS` opcode.
+There are a few ways to distinct a `delegatecall` from a `call`. In this case I use the `GAS` opcode.
 
 Payload:
 ```
@@ -302,7 +302,7 @@ forge script SourceCodeExploitScript --fork-url $RPC_PARADIGM --private-key $PRI
 Flag: `PCTF{QUiNE_QuiNe_qU1n3}`
 
 ### TRAPDOOOR 
-The goal is to get environment variables in Forge script. 
+The goal is to get the environment variable `FLAG` in Forge script. 
 
 This can be solved by using the Foundry cheatcodes and sending the flag to the specified RPC.
 

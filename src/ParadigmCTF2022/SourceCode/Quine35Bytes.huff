@@ -1,0 +1,17 @@
+#define macro MAIN() = takes (0) returns (0) {
+    0x806011526000526070600e536023600ef3 // code
+
+    dup1
+    0x11
+    mstore  // mem: 00..000..0code
+    0x0
+    mstore  // mem: 00..00codecode
+
+    0x70
+    0x0E
+    mstore8 // mem: 00..70codecode
+
+    0x23
+    0x0E
+    return
+}
