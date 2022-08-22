@@ -4,7 +4,9 @@
 - [LOCKBOX2](#lockbox2)
 - [MERKLEDROP](#merkledrop)
 - [OTTERWORLD](#otterworld)
+- [OTTERSWAP](#otterswap)
 - [RANDOM](#random)
+- [RIDDLE-OF-THE-SPHINX](#riddle-of-the-sphinx)
 - [SOURCECODE](#sourcecode)
 - [TRAPDOOOR](#trapdooor)
 
@@ -130,6 +132,15 @@ forge script RandomExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE
 ```
 
 Flag: `PCTF{IT5_C7F_71M3}`
+
+## RIDDLE-OF-THE-SPHINX
+
+Exploit:
+```
+python exploit.py
+```
+
+Flag: `PCTF{600D_1UCK_H4V3_FUN}`
 
 ## SOURCECODE
 
