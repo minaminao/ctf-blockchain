@@ -4,7 +4,7 @@ This repository collects blockchain challenges in CTFs and wargames.
 
 These challenges are categorized by topic, but they are not ordered by difficulty or by recommendation.
 
-Some challenges come with my writeups (e.g., [Ethernaut](src/Ethernaut/), [Paradigm CTF 2021](src/ParadigmCTF2021/)).
+Some challenges come with my exploits (e.g., [Ethernaut](src/Ethernaut/), [Paradigm CTF 2021](src/ParadigmCTF2021/)).
 
 If there are any incorrect descriptions, I would appreciate it if you could let me know via issue or PR.
 
@@ -72,7 +72,7 @@ Note:
 ### Ethereum/contract basics
 - These challenges can be solved if you know the basic mechanics of Ethereum, [the basic language specification of Solidity](https://docs.soliditylang.org/en/latest/), and the basic operation of contracts.
 
-| Challenge                                                        | Note, Keyword          |
+| Challenge                                                        | Note, Keywords         |
 | ---------------------------------------------------------------- | ---------------------- |
 | Capture The Ether: Deploy a contract                             | faucet                 |
 | Capture The Ether: Call me                                       | contract call          |
@@ -88,7 +88,7 @@ Note:
 - Puzzle challenges that can be solved by understanding the EVM specifications.
 - No vulnerabilities are used to solve these challenges.
 
-| Challenge                                                          | Note, Keyword                                                          |
+| Challenge                                                          | Note, Keywords                                                         |
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
 | Capture The Ether: Guess the new number                            | `block.number`, `block.timestamp` (formerly: `now`)                    |
 | Capture The Ether: Predict the block hash                          | `blockhash` (formerly: `block.blockhash`)                              |
@@ -104,24 +104,24 @@ Note:
 ### Misuse of `tx.origin`
 - `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
 
-| Challenge                                            | Note, Keyword |
-| ---------------------------------------------------- | ------------- |
-| [Ethernaut: 4. Telephone](src/Ethernaut#4-telephone) |               |
+| Challenge                                            | Note, Keywords |
+| ---------------------------------------------------- | -------------- |
+| [Ethernaut: 4. Telephone](src/Ethernaut#4-telephone) |                |
 
 ### Pseudorandom numbers generated on-chain are predictable
 - Since bytecodes of contracts are publicly available, it is easy to predict pseudorandom numbers whose generation is completed on-chain (using only states, not off-chain data).
 - It is equivalent to having all the parameters of a pseudorandom number generator exposed.
 - If you want to use random numbers that are unpredictable to anyone, use a decentralized oracle with a random number function. For example, [Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/), which implements Verifiable Random Function (VRF).
 
-| Challenge                                            | Note, Keyword |
-| ---------------------------------------------------- | ------------- |
-| Capture The Ether: Predict the future                |               |
-| [Ethernaut: 3. Coin Flip](src/Ethernaut#3-coin-flip) |               |
+| Challenge                                            | Note, Keywords |
+| ---------------------------------------------------- | -------------- |
+| Capture The Ether: Predict the future                |                |
+| [Ethernaut: 3. Coin Flip](src/Ethernaut#3-coin-flip) |                |
 
 ### ERC-20 basics
 - These challenges can be solved with an understanding of the [ERC-20 token standard](https://eips.ethereum.org/EIPS/eip-20).
 
-| Challenge                                                  | Note, Keyword                         |
+| Challenge                                                  | Note, Keywords                        |
 | ---------------------------------------------------------- | ------------------------------------- |
 | [Ethernaut: 15. Naught Coin](src/Ethernaut#15-naught-coin) | `transfer`, `approve`, `transferFrom` |
 | [Paradigm CTF 2021: Secure](src/ParadigmCTF2021)           | WETH                                  |
@@ -129,7 +129,7 @@ Note:
 ### Storage overwrite by `delegatecall`
 - `delegatecall` is a potential source of vulnerability because the storage of the `delegatecall` caller contract can be overwritten by the called function.
 
-| Challenge                                                      | Note, Keyword                                                                                     |
+| Challenge                                                      | Note, Keywords                                                                                    |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | [Ethernaut: 6. Delegation](src/Ethernaut#6-delegation)         |                                                                                                   |
 | [Ethernaut: 16. Preservation](src/Ethernaut#16-preservation)   |                                                                                                   |
@@ -140,7 +140,7 @@ Note:
 - Functions called in `delegatecall` are executed in the context of the `delegatecall` caller contract. 
 - If the function does not carefully consider the context, a bug will be created.
 
-| Challenge                                                 | Note, Keyword              |
+| Challenge                                                 | Note, Keywords             |
 | --------------------------------------------------------- | -------------------------- |
 | [EthernautDAO: 3. CarMarket](src/EthernautDAO/CarMarket/) | Non-use of `address(this)` |
 
@@ -149,7 +149,7 @@ Note:
 - Arithmetic overflow has been detected and reverted state since Solidity v0.8.0.
 - Contracts written in earlier versions can be checked by using [the SafeMath library](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v3.4/contracts/math/SafeMath.sol).
 
-| Challenge                                    | Note, Keyword  |
+| Challenge                                    | Note, Keywords |
 | -------------------------------------------- | -------------- |
 | Capture The Ether: Token sale                | multiplication |
 | Capture The Ether: Token whale               | subtraction    |
@@ -160,46 +160,46 @@ Note:
 - If a destination is a contract and there is no receive Ether function or payable fallback function, Ether cannot be transferred.
 - However, instead of the normal transfer functions, the `selfdestruct` described below can be used to force such a contract to transfer Ether.
 
-| Challenge                                  | Note, Keyword |
-| ------------------------------------------ | ------------- |
-| [Ethernaut: 9. King](src/Ethernaut#9-king) |               |
+| Challenge                                  | Note, Keywords |
+| ------------------------------------------ | -------------- |
+| [Ethernaut: 9. King](src/Ethernaut#9-king) |                |
 
 ### Forced Ether transfer to a contract via `selfdestruct`
 - If a contract does not have a receive Ether function and a payable fallback function, it is not guaranteed that Ether will not be received.
 - When a contract executes `selfdestruct`, it can transfer its Ether to another contract or EOA, and this `selfdestruct` transfer can be forced even if the destination contract does not have the receive Ether function and the payable fallback function. 
 - If the application is built on the assumption that the Ether is `0`, it could be a bug.
 
-| Challenge                                    | Note, Keyword |
-| -------------------------------------------- | ------------- |
-| Capture The Ether: Retirement fund           |               |
-| [Ethernaut: 7. Force](src/Ethernaut#7-force) |               |
+| Challenge                                    | Note, Keywords |
+| -------------------------------------------- | -------------- |
+| Capture The Ether: Retirement fund           |                |
+| [Ethernaut: 7. Force](src/Ethernaut#7-force) |                |
 
 ### Not all procedures can be executed after a contract call
 - A large amount of gas can be consumed by loops and recursion in `call`, and there may not be enough gas for the rest of the process.
 - Until Solidity v0.8.0, zero division and `assert(false)` could consume a lot of gas.
 
-| Challenge                                        | Note, Keyword |
-| ------------------------------------------------ | ------------- |
-| [Ethernaut: 20. Denial](src/Ethernaut#20-denial) |               |
+| Challenge                                        | Note, Keywords |
+| ------------------------------------------------ | -------------- |
+| [Ethernaut: 20. Denial](src/Ethernaut#20-denial) |                |
 
 ### Forgetting to set `view`/`pure` to interface and abstract contract functions
 - If you forget to set `view` or `pure` for a function and design your application under the assumption that the state will not change, it will be a bug.
 
-| Challenge                                            | Note, Keyword |
-| ---------------------------------------------------- | ------------- |
-| [Ethernaut: 11. Elevator](src/Ethernaut#11-elevator) |               |
+| Challenge                                            | Note, Keywords |
+| ---------------------------------------------------- | -------------- |
+| [Ethernaut: 11. Elevator](src/Ethernaut#11-elevator) |                |
 
 ### `view` functions do not always return the same value
 - Since `view` functions can read state, they can be conditionally branched based on state and do not necessarily return the same value.
 
-| Challenge                                    | Note, Keyword |
-| -------------------------------------------- | ------------- |
-| [Ethernaut: 21. Shop](src/Ethernaut#21-shop) |               |
+| Challenge                                    | Note, Keywords |
+| -------------------------------------------- | -------------- |
+| [Ethernaut: 21. Shop](src/Ethernaut#21-shop) |                |
 
 ### Mistakes in setting `storage` and `memory`
 - If `storage` and `memory` are not set properly, old values may be referenced, or overwriting may not occur, resulting in vulnerability.
 
-| Challenge            | Note, Keyword                                                                                                   |
+| Challenge            | Note, Keywords                                                                                                  |
 | -------------------- | --------------------------------------------------------------------------------------------------------------- |
 | N1CTF 2021: BabyDefi | [Cover Protocol infinite minting](https://coverprotocol.medium.com/12-28-post-mortem-34c5f9f718d4) + flash loan |
 
@@ -207,7 +207,7 @@ Note:
 - Various information can be obtained just by following the flow of transaction processing.
 - Blockchain explorers such as Etherscan are useful.
 
-| Challenge                                            | Note, Keyword                     |
+| Challenge                                            | Note, Keywords                    |
 | ---------------------------------------------------- | --------------------------------- |
 | [Ethernaut: 17. Recovery](src/Ethernaut#17-recovery) | loss of deployed contract address |
 
@@ -216,27 +216,27 @@ Note:
 - Private variables are only guaranteed not to be directly readable by other contracts, but we, as an entity outside the blockchain, can read them.
 - If there is private data in a transaction, it can also be solved by reading the transaction.
 
-| Challenge                                                     | Note, Keyword |
-| ------------------------------------------------------------- | ------------- |
-| Capture The Ether: Guess the random number                    |               |
-| [Ethernaut: 8. Vault](src/Ethernaut#8-vault)                  |               |
-| [Ethernaut: 12. Privacy](src/Ethernaut#12-privacy)            |               |
-| Cipher Shastra: Sherlock                                      |               |
-| 0x41414141 CTF: secure enclave                                |               |
-| [EthernautDAO: 1. PrivateData](src/EthernautDAO/PrivateData/) |               |
+| Challenge                                                     | Note, Keywords |
+| ------------------------------------------------------------- | -------------- |
+| Capture The Ether: Guess the random number                    |                |
+| [Ethernaut: 8. Vault](src/Ethernaut#8-vault)                  |                |
+| [Ethernaut: 12. Privacy](src/Ethernaut#12-privacy)            |                |
+| Cipher Shastra: Sherlock                                      |                |
+| 0x41414141 CTF: secure enclave                                |                |
+| [EthernautDAO: 1. PrivateData](src/EthernautDAO/PrivateData/) |                |
 
 ### Reversing transactions
 - Reversing the contents of a transaction or how the state has been changed by the transaction.
 
-| Challenge                                       | Note, Keyword |
-| ----------------------------------------------- | ------------- |
-| [darkCTF: Secret Of The Contract](src/DarkCTF/) |               |
+| Challenge                                       | Note, Keywords |
+| ----------------------------------------------- | -------------- |
+| [darkCTF: Secret Of The Contract](src/DarkCTF/) |                |
 
 ### Reversing EVM bytecode
 - Reversing a contract for which code is not given in whole or in part.
 - Use decompilers (e.g., [panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
 
-| Challenge                        | Note, Keyword                   |
+| Challenge                        | Note, Keywords                  |
 | -------------------------------- | ------------------------------- |
 | Incognito 2.0: Ez                | keep in plain text              |
 | Real World CTF 3rd: Re:Montagy   | Jump Oriented Programming (JOP) |
@@ -251,7 +251,7 @@ Note:
 ### EVM bytecode golf
 - These challenges have a limit on the length of the bytecode to be created.
 
-| Challenge                                                  | Note, Keyword                                                                                                  |
+| Challenge                                                  | Note, Keywords                                                                                                 |
 | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | [Ethernaut: 18. MagicNumber](src/Ethernaut#18-magicnumber) |                                                                                                                |
 | [Paradigm CTF 2021: Rever](src/ParadigmCTF2021/Rever/)     | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
@@ -260,9 +260,9 @@ Note:
 ### Gas optimization
 - These challenges have a limit on the gas to be consumed.
 
-| Challenge                                         | Note, Keyword |
-| ------------------------------------------------- | ------------- |
-| [Huff Challenge: Challenge #2](src/HuffChallenge) |               |
+| Challenge                                         | Note, Keywords |
+| ------------------------------------------------- | -------------- |
+| [Huff Challenge: Challenge #2](src/HuffChallenge) |                |
 
 ### Re-entrancy attack
 - In case a function of contract `A` contains interaction with another contract `B` or Ether transfer to `B`, the control is temporarily transferred to `B`.
@@ -270,20 +270,20 @@ Note:
 - For example, when `B` executes the `withdraw` function to withdraw Ether deposited in `A`, the Ether transfer triggers a control shift to `B`, and during the `withdraw` function, `B` executes `A`'s `withdraw` function again. Even if the `withdraw` function is designed to prevent withdrawal of more than the limit if it is simply called twice, if the `withdraw` function is executed in the middle of the `withdraw` function, it may be designed to bypass the limit check.
 - To prevent re-entrancy attacks, use the Checks-Effects-Interactions pattern.
 
-| Challenge                                                           | Note, Keyword |
-| ------------------------------------------------------------------- | ------------- |
-| Capture The Ether: Token bank                                       |               |
-| [Ethernaut: 10. Re-entrancy](src/Ethernaut#10-re-entrancy)          |               |
-| Paradigm CTF 2021: Yield Aggregator                                 |               |
-| HTB University CTF 2020 Quals: moneyHeist                           |               |
-| [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/) |               |
+| Challenge                                                           | Note, Keywords |
+| ------------------------------------------------------------------- | -------------- |
+| Capture The Ether: Token bank                                       |                |
+| [Ethernaut: 10. Re-entrancy](src/Ethernaut#10-re-entrancy)          |                |
+| Paradigm CTF 2021: Yield Aggregator                                 |                |
+| HTB University CTF 2020 Quals: moneyHeist                           |                |
+| [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/) |                |
 
 ### Flash loan basics
-- Flash Loans are uncollateralised loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
+- Flash loans are uncollateralised loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
 - By making large asset moves, attacks can be made to snatch funds from DeFi applications or to gain large amounts of votes for participation in governance.
 - A solution to attacks that use flash loans to corrupt oracle values is to use a decentralized oracle.
 
-| Challenge                              | Note, Keyword                                                                                                                                                 |
+| Challenge                              | Note, Keywords                                                                                                                                                |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Damn Vulnerable DeFi: 1. Unstoppable   | Simple flash loan with a single token. Failure to send the token directly.                                                                                    |
 | Damn Vulnerable DeFi: 2. Naivereceiver | The `flashLoan` function can specify a `borrower`, but the receiver side does not authenticate the TX sender, so the receiver's funds can be drained as a fee |
@@ -294,7 +294,7 @@ Note:
 - If the algorithm distributes some kind of rights using the token balance at the time of a snapshot, and if a malicious user transaction can trigger a snapshot, a flash loan can be used to obtain a large amount of rights.
 - A period of time to lock the token will avoid this attack.
 
-| Challenge                            | Note, Keyword                                                        |
+| Challenge                            | Note, Keywords                                                       |
 | ------------------------------------ | -------------------------------------------------------------------- |
 | Damn Vulnerable DeFi: 5. Therewarder | Get reward tokens based on the deposited token balance.              |
 | Damn Vulnerable DeFi: 6. Selfie      | Get voting power in governance based on the deposited token balance. |
@@ -303,29 +303,29 @@ Note:
 - There are two architectures of flash loans: push and pull, with push architectures represented by Uniswap and Aave v1 and pull architectures by Aave v2 and dYdX.
 - [EIP-3156: Flash Loans](https://eips.ethereum.org/EIPS/eip-3156) is a pull architecture.
 
-| Challenge                  | Note, Keyword                                                   |
+| Challenge                  | Note, Keywords                                                  |
 | -------------------------- | --------------------------------------------------------------- |
 | Paradigm CTF 2021: Upgrade | Bypass using the lending functionality implemented in the token |
 
 ### Bug in AMM price calculation algorithm
 - A bug in the Automated Market Maker (AMM) price calculation algorithm allows a simple combination of trades to drain funds.
 
-| Challenge                                  | Note, Keyword |
-| ------------------------------------------ | ------------- |
-| [Ethernaut: 22. Dex](src/Ethernaut#22-dex) |               |
+| Challenge                                  | Note, Keywords |
+| ------------------------------------------ | -------------- |
+| [Ethernaut: 22. Dex](src/Ethernaut#22-dex) |                |
 
 ### Attack using custom tokens
 - The ability of a protocol to use arbitrary tokens is not in itself a bad thing, but it can be an attack vector.
 - In addition, bugs in the whitelist design, which assumes that arbitrary tokens are not available, could cause funds to drain.
 
-| Challenge                                          | Note, Keyword |
-| -------------------------------------------------- | ------------- |
-| [Ethernaut: 23. Dex Two](src/Ethernaut#23-dex-two) |               |
+| Challenge                                          | Note, Keywords |
+| -------------------------------------------------- | -------------- |
+| [Ethernaut: 23. Dex Two](src/Ethernaut#23-dex-two) |                |
 
 ### Funds leakage due to oracle manipulation (without flash loans)
 - It corrupts the value of the oracle and drains the funds of applications that refer to that oracle.
 
-| Challenge                            | Note, Keyword                                                                                   |
+| Challenge                            | Note, Keywords                                                                                  |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | Paradigm CTF 2021: Broker            | Distort Uniswap prices and liquidate positions on lending platforms that reference those prices |
 | Damn Vulnerable DeFi: 7. Compromised | Off-chain private key leak & oracle manipulation                                                |
@@ -334,7 +334,7 @@ Note:
 - The use of flash loans distorts the value of the oracle and drains the funds of the protocols that reference that oracle.
 - The ability to move large amounts of funds through a flash loan makes it easy to distort the oracle and cause more damage.
 
-| Challenge                       | Note, Keyword                                                                                      |
+| Challenge                       | Note, Keywords                                                                                     |
 | ------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Damn Vulnerable DeFi: 8. Puppet | Distort the price of Uniswap V1 and leak tokens from a lending platform that references that price |
 
@@ -342,7 +342,7 @@ Note:
 - For example, if there is a transaction by another party to sell token `A` and buy `B`, the attacker can put in a transaction to sell `A` and buy `B` before the transaction, and later put in a transaction to sell the same amount of `B` and buy `A`, thereby ultimately increasing the amount of `A` at a profit.
 - In general, such "revenue earned by selecting, inserting, and reordering transactions contained in a block generated by a miner" is referred to as Miner Extractable Value (MEV). Recently, it is also called Maximal Extractable Value.
 
-| Challenge                                         | Note, Keyword                               |
+| Challenge                                         | Note, Keywords                              |
 | ------------------------------------------------- | ------------------------------------------- |
 | [Paradigm CTF 2021: Farmer](src/ParadigmCTF2021/) | Sandwich the trade from COMP to WETH to DAI |
 
@@ -351,31 +351,31 @@ Note:
 - In general, same nonce attacks are possible attacks when the same nonce is used for different messages in elliptic curve DSA, and the secret key is calculated.
 - In Ethereum, if nonces used to sign transactions are the same, this attack is feasible.
 
-| Challenge                                            | Note, Keyword |
-| ---------------------------------------------------- | ------------- |
-| Capture The Ether: Account Takeover                  |               |
-| [Paradigm CTF 2021: Babycrypto](src/ParadigmCTF2021) |               |
+| Challenge                                            | Note, Keywords |
+| ---------------------------------------------------- | -------------- |
+| Capture The Ether: Account Takeover                  |                |
+| [Paradigm CTF 2021: Babycrypto](src/ParadigmCTF2021) |                |
 
 
 ### Brute-force address
 - Brute force can make the start and end of an address a specific value.
 
-| Challenge                         | Note, Keyword |
-| --------------------------------- | ------------- |
-| Capture The Ether: Fuzzy identity |               |
+| Challenge                         | Note, Keywords |
+| --------------------------------- | -------------- |
+| Capture The Ether: Fuzzy identity |                |
 
 ### Recovery of a public key
 - The address is the public key applied to a `keccak256` hash, and the public key cannot be recovered from the address.
 - If even one transaction has been sent, the public key can be back-calculated from it.
 - Specifically, it can be recovered from the value of `keccak256` applied to Recursive Length Prefix (RLP)-encoded data by serializing the transaction and the signature `(r,s,v)`.
 
-| Challenge                     | Note, Keyword |
-| ----------------------------- | ------------- |
-| Capture The Ether: Public Key |               |
+| Challenge                     | Note, Keywords |
+| ----------------------------- | -------------- |
+| Capture The Ether: Public Key |                |
 
 ### Encryption and decryption in secp256k1
 
-| Challenge                 | Note, Keyword                                                                          |
+| Challenge                 | Note, Keywords                                                                         |
 | ------------------------- | -------------------------------------------------------------------------------------- |
 | 0x41414141 CTF: Rich Club | Prepare the key pair oneself. Decrypt the encrypted flag with the public key provided. |
 
@@ -384,41 +384,41 @@ Note:
 - However, if a bot that immediately takes the Ether sent at this time is running, the Ether will be stolen when the Ether is simply sent.
 - We can use Flashbots bundled transactions or just `permit` and `transferFrom` if the token is [EIP-2612 permit](https://eips.ethereum.org/EIPS/eip-2612) friendly.
 
-| Challenge                                                                 | Note, Keyword |
-| ------------------------------------------------------------------------- | ------------- |
-| [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken/) |               |
+| Challenge                                                                 | Note, Keywords |
+| ------------------------------------------------------------------------- | -------------- |
+| [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken/) |                |
 
 ### Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)
 - For example, any storage can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.
 - It need not be due to overflow.
 - The `length` property has been read-only since v0.6.0.
 
-| Challenge                                                  | Note, Keyword |
-| ---------------------------------------------------------- | ------------- |
-| Capture The Ether: Mapping                                 |               |
-| [Ethernaut: 19. Alien Codex](src/Ethernaut#19-alien-codex) |               |
-| Paradigm CTF 2021: Bank                                    |               |
+| Challenge                                                  | Note, Keywords |
+| ---------------------------------------------------------- | -------------- |
+| Capture The Ether: Mapping                                 |                |
+| [Ethernaut: 19. Alien Codex](src/Ethernaut#19-alien-codex) |                |
+| Paradigm CTF 2021: Bank                                    |                |
 
 ### Constructor is just a function with a typo (< Solidity 0.5.0)
 - In versions before v0.4.22, the constructor is defined as a function with the same name as the contract, so a typo of the constructor name could cause it to become just a function, resulting in a bug.
 - Since v0.5.0, this specification is removed and the `constructor` keyword must be used.
 
-| Challenge                                        | Note, Keyword |
-| ------------------------------------------------ | ------------- |
-| Capture The Ether: Assume ownership              |               |
-| [Ethernaut: 2. Fallout](src/Ethernaut#2-fallout) |               |
+| Challenge                                        | Note, Keywords |
+| ------------------------------------------------ | -------------- |
+| Capture The Ether: Assume ownership              |                |
+| [Ethernaut: 2. Fallout](src/Ethernaut#2-fallout) |                |
 
 ### Storage overwrite via uninitialized storage pointer (< Solidity 0.5.0)
 - Since v0.5.0, uninitialized storage variables are forbidden, so this bug cannot occur.
 
-| Challenge                      | Note, Keyword                                                                       |
+| Challenge                      | Note, Keywords                                                                      |
 | ------------------------------ | ----------------------------------------------------------------------------------- |
 | Capture The Ether: Donation    |                                                                                     |
 | Capture The Ether: Fifty years |                                                                                     |
 | ~~Ethernaut: Locked~~          | [deleted](https://forum.openzeppelin.com/t/ethernaut-locked-with-solidity-0-5/1115) |
 
 ### Other ad-hoc vulnerabilities and methods
-| Challenge                                                         | Note, Keyword                                                                                                                     |
+| Challenge                                                         | Note, Keywords                                                                                                                    |
 | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | [Paradigm CTF 2021: Bouncer](src/ParadigmCTF2021/Bouncer/)        | The funds required for batch processing are the same as for single processing.                                                    |
 | Paradigm CTF 2021: Market                                         | Make the value of one field be recognized as the value of another field by using key misalignment in the Eternal Storage pattern. |
@@ -429,7 +429,7 @@ Note
 - Including challenges of Bitcoin variants whose transaction model is Unspent Transaction Output (UTXO).
 
 ### Bitcoin basics
-| Challenge                              | Note, Keyword               |
+| Challenge                              | Note, Keywords              |
 | -------------------------------------- | --------------------------- |
 | TsukuCTF 2021: genesis                 | genesis block               |
 | WORMCON 0x01: What's My Wallet Address | Bitcoin address, RIPEMD-160 |
@@ -438,21 +438,21 @@ Note
 - There was a bug and it has been fixed using [RFC6979](https://datatracker.ietf.org/doc/html/rfc6979).
 - https://github.com/daedalus/bitcoin-recover-privkey
 
-| Challenge                                 | Note, Keyword |
-| ----------------------------------------- | ------------- |
-| [darkCTF: Duplicacy Within](src/DarkCTF/) |               |
+| Challenge                                 | Note, Keywords |
+| ----------------------------------------- | -------------- |
+| [darkCTF: Duplicacy Within](src/DarkCTF/) |                |
 
 ### Bypassing PoW of other applications using Bitcoin's PoW database
 - Bitcoin uses a series of leading zeros in the SHA-256 hash value as a Proof of Work (PoW), but if other applications are designed in the same way, its PoW time can be significantly reduced by choosing one that matches the conditions from Bitcoin's past PoW results 
 
-| Challenge                   | Note, Keyword |
-| --------------------------- | ------------- |
-| Dragon CTF 2020: Bit Flip 2 | 64-bit PoW    |
+| Challenge                   | Note, Keywords |
+| --------------------------- | -------------- |
+| Dragon CTF 2020: Bit Flip 2 | 64-bit PoW     |
 
 
 ## Solana
 
-| Challenge                     | Note, Keyword        |
+| Challenge                     | Note, Keywords       |
 | ----------------------------- | -------------------- |
 | ALLES! CTF 2021: Secret Store | `solana`,`spl-token` |
 | ALLES! CTF 2021: Legit Bank   |                      |
@@ -465,6 +465,6 @@ Note
 ### IPFS
 - InterPlanetary File System (IPFS)
 
-| Challenge                              | Note, Keyword                  |
+| Challenge                              | Note, Keywords                 |
 | -------------------------------------- | ------------------------------ |
 | TsukuCTF 2021: InterPlanetary Protocol | Address is Base32 in lowercase |

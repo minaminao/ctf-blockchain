@@ -16,3 +16,17 @@ src/**/_*
 
 # Python
 __pycache__
+
+# Node
+node_modules
+
+# macOS
+.DS_Store
+
+# Rust
+debug
+target
+Cargo.lock
+
+# Paradigm CTF 2022
+*.zip
