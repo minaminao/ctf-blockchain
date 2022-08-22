@@ -1,6 +1,7 @@
-from ecdsa import ecdsa
-from Crypto.Util.number import isPrime
 import random
+
+from Crypto.Util.number import isPrime
+from ecdsa import ecdsa
 
 
 def gen_key():

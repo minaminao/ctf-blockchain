@@ -1,4 +1,16 @@
-# [WIP] Paradigm CTF 2022 Writeup
+# Paradigm CTF 2022 Writeup
+
+_This writeup is **WIP** and frequently updated._
+
+Paradigm CTF: https://twitter.com/paradigm_ctf
+
+The challenges I solved during the contest are as follows. 
+
+![](solved_challenges.png)
+
+I plan to add exploits for challenges that could not be solved soon.
+
+---
 
 **Table of Contents**
 - [Ethereum](#ethereum)
@@ -15,11 +27,81 @@
   - [OTTERWORLD](#otterworld)
   - [OTTERSWAP](#otterswap)
 
+---
+
 ## Ethereum
 
 ### LOCKBOX2
 
-Stage 5 payload:
+A same calldata can be sent to five functions from `stage1` to `stage5`. The goal is to satisfy the conditions of all functions.
+
+**stage1**
+```solidity
+function stage1() external pure {
+    require(msg.data.length < 500);
+}
+```
+This is easy.
+
+**stage2**
+```solidity
+function stage2(uint256[4] calldata arr) external pure {
+    for (uint256 i = 0; i < arr.length; ++i) {
+        require(arr[i] >= 1);
+        for (uint256 j = 2; j < arr[i]; ++j) {
+            require(arr[i] % j != 0);
+        }
+    }
+}
+```
+All four elements of the uint256 array must be small prime numbers.
+
+**stage3**
+```solidity
+function stage3(uint256 a, uint256 b, uint256 c) external view {
+    assembly {
+        mstore(a, b)
+    }
+    (bool success, bytes memory data) = address(uint160(a + b)).staticcall("");
+    require(success && data.length == c);
+}
+```
+It is impossible to create a contract whose address is `address(uint160(a + b))`.
+
+By overwriting the zero slot using mstore, the condition `data.length == c` can be satisfied.
+
+To learn more about the zero slot, see [the Solidity document](https://docs.soliditylang.org/en/v0.8.16/internals/layout_in_memory.html).
+
+>`0x00` - `0x3f` (64 bytes): scratch space for hashing methods.
+`0x40` - `0x5f` (32 bytes): currently allocated memory size (aka. free memory pointer).
+`0x60` - `0x7f` (32 bytes): zero slot. Scratch space can be used between statements (i.e. within inline assembly). The zero slot is used as initial value for dynamic memory arrays and should never be written to (the free memory pointer points to 0x80 initially).
+
+
+**stage4**
+```solidity
+function stage4(bytes memory a, bytes memory b) external {
+    address addr;
+    assembly {
+        addr := create(0, add(a, 0x20), mload(a))
+    }
+    (bool success,) = addr.staticcall(b);
+    require(tx.origin == address(uint160(uint256(addr.codehash))) && success);
+}
+```
+This condition can be satisfied by using the algorithm that generates an address ( the hash of a public key).
+
+**stage5**
+```solidity
+function stage5() external {
+    if (msg.sender != address(this)) {
+        (bool success,) = address(this).call(abi.encodePacked(this.solve.selector, msg.data[4:]));
+        require(!success);
+    }
+}
+```
+There are a few ways to distinct a `delegatecall` from a `call`, but in this case I use the `GAS` opcode.
+
+Payload:
 ```
 PUSH1
 2
@@ -32,17 +114,21 @@ STOP
 JUMPDEST
 ```
 
-Generate keys and a calldata:
+**Generate keys and a calldata**
 ```
 python gen_calldata.py
 ```
 
+The script outputs the following:
 ```
 private_key = 33066969900863013438679484345314422830357761466446460687128501697697808975449
 public_key_hex = '000f3970c75c7bd01fe93a61b0e00841b983e5755c847a3d97bda0ca8ec8aef53ddbd8cedd0912627192e238d2479938481c78c0e88b532b6e6d64a77d3e40fe'
 
 calldata = '890d690800000000000000000000000000000000000000000000000000000000000000610000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010060025A06600857005b5b5b3060408060153d393df3000f3970c75c7bd01fe93a61b0e00841b983e5755c847a3d97bda0ca8ec8aef53ddbd8cedd0912627192e238d2479938481c78c0e88b532b6e6d64a77d3e40fe0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+```
 
+**Layout of the calldata**
+```
 890d6908
 0000000000000000000000000000000000000000000000000000000000000061 [0x0, 0x20)
 0000000000000000000000000000000000000000000000000000000000000101 [0x20, 0x40)
@@ -56,10 +142,12 @@ e238d2479938481c78c0e88b532b6e6d64a77d3e40fe00000000000000000000 [0xc0, 0xe0)
 0000000000000000000000000000000000000000000000000000000000000000 [0x120, 0x140)
 ```
 
-Exploit:
+**Exploit**
 ```
 forge script Lockbox2ExploitScript --fork-url $RPC_PARADIGM --private-keys $PRIVATE_KEY1 --private-keys $PRIVATE_KEY2 --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
 ```
+
+Flag: `PCTF{10ck80x_20ck5}`
 
 ### MERKLEDROP
 

@@ -39,20 +39,9 @@ contract Lockbox2 {
         require(success && data.length == c);
     }
 
-    event log_bytes(bytes);
-    event log_bytes32(bytes32);
-
     function stage4(bytes memory a, bytes memory b) external {
-        emit log_bytes(a);
-        emit log_bytes(b);
         address addr;
-        address callerOpResult;
-        address addressOpResult;
-        uint256 remainingGas;
         assembly {
-            remainingGas := gas()
-            callerOpResult := caller()
-            addressOpResult := address()
             addr := create(0, add(a, 0x20), mload(a))
         }
         (bool success,) = addr.staticcall(b);
