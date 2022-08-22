@@ -5,6 +5,7 @@ import "foundry-huff/HuffDeployer.sol";
 import "forge-std/Test.sol";
 import "./IChallenge3.sol";
 import "./Challenge3Exploit.sol";
+import "forge-std/console2.sol";
 
 contract Challenge3Test is Test {
     Challenge3 test;
@@ -22,8 +23,10 @@ contract Challenge3Test is Test {
         vm.deal(address(1), 1 ether);
         test.deposit{value: 1}();
         test.setWithdrawer{value: 2}(address(1));
+        assertEq(address(test).balance, 100_000_000_000_000_003);
         test.withdraw();
         vm.stopPrank();
+        assertEq(address(test).balance, 0 ether);
         assertEq(address(1).balance, 1.1 ether);
     }
 }
