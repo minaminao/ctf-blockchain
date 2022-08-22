@@ -8,6 +8,7 @@ import "./Challenge3Exploit.sol";
 import "forge-std/console2.sol";
 
 contract Challenge3Test is Test {
+    address playerAddress = address(10);
     Challenge3 test;
 
     function setUp() public {
@@ -29,4 +30,12 @@ contract Challenge3Test is Test {
         assertEq(address(test).balance, 0 ether);
         assertEq(address(1).balance, 1.1 ether);
     }
+
+    // WIP
+    // function testExploitScript() public {
+    //     vm.deal(playerAddress, 1 ether);
+    //     vm.startPrank(playerAddress, playerAddress);
+    //     playerScript(address(test), address(playerAddress));
+    //     vm.stopPrank();
+    // }
 }
