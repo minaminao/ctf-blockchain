@@ -1,16 +1,3 @@
-def f(pool_a_amount, pool_b_amount, amount, a_to_b):
-    if a_to_b:
-        x = pool_a_amount
-        y = pool_b_amount
-    else:
-        x = pool_b_amount
-        y = pool_a_amount
-
-    for amount in range(1, amount + 1):
-        out_amount = y - (x * y) // (x + amount)
-        print(-amount, out_amount)
-
-
 pool_a_amount = 10
 pool_b_amount = 10
 player_a_amount = 10
@@ -88,7 +75,14 @@ rust_snippet = """
         chall::cpi::swap(cpi_ctx, SECOND_AMOUNT, false)?;
 """
 
-for i in range(6):
+for i in range(100):
     first_amount, second_amount, pool_a_amount, pool_b_amount, player_a_amount, player_b_amount = f(pool_a_amount, pool_b_amount, player_a_amount, player_b_amount)
-    print(rust_snippet.replace("FIRST_AMOUNT", str(first_amount)).replace("SECOND_AMOUNT", str(second_amount)))
-    # print(pool_a_amount, pool_b_amount, player_a_amount, player_b_amount)
+    if False:
+        # print(rust_snippet.replace("FIRST_AMOUNT", str(first_amount)).replace("SECOND_AMOUNT", str(second_amount)))
+        pass
+    else:
+        print(f"sell {first_amount} A tokens")
+        print(f"sell {second_amount} B tokens")
+        print(f"{player_a_amount, player_b_amount=}")
+    if player_a_amount + player_b_amount == 29:
+        break

