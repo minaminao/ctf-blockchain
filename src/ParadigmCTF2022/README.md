@@ -5,10 +5,12 @@
   - [LOCKBOX2](#lockbox2)
   - [MERKLEDROP](#merkledrop)
   - [RANDOM](#random)
+  - [RESCUE](#rescue)
   - [SOURCECODE](#sourcecode)
   - [TRAPDOOOR](#trapdooor)
 - [Cairo](#cairo)
   - [RIDDLE-OF-THE-SPHINX](#riddle-of-the-sphinx)
+  - [CAIRO-PROXY](#cairo-proxy)
 - [Solana](#solana)
   - [OTTERWORLD](#otterworld)
   - [OTTERSWAP](#otterswap)
@@ -67,7 +69,7 @@ python get_vulnerable_node.py
 ```
 
 Example:
-```
+```solidity
 bytes32[] memory merkleProof = new bytes32[](5);
 merkleProof[0] = 0x8920c10a5317ecff2d0de2150d5d18f01cb53a377f4c29a9656785a22a680d1d;
 merkleProof[1] = 0xc999b0a9763c737361256ccc81801b6f759e725e115e4a10aa07e63d27033fde;
@@ -103,6 +105,15 @@ forge script RandomExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE
 ```
 
 Flag: `PCTF{IT5_C7F_71M3}`
+
+### RESCUE
+
+Exploit:
+```
+forge script RescueExploitScript --fork-url $RPC_PARADIGM --private-key $PRIVATE_KEY --gas-limit 10000000 --sig "run(address)" $SETUP_ADDRESS -vvvvv --broadcast
+```
+
+Flag: `PCTF{MuCH_4PPr3C1473_53r}`
 
 ### SOURCECODE
 
@@ -157,9 +168,13 @@ Flag: `PCTF{600D_1UCK_H4V3_FUN}`
 
 ### CAIRO-PROXY
 
-Exploit:
+Generate ABI:
 ```
 starknet-compile almost_erc20.cairo --abi ../../almost_erc20_abi.json
+```
+
+Exploit:
+```
 python exploit.py
 ```
 
@@ -200,4 +215,4 @@ Flag: `PCTF{0tt3r_w0r1d_8c01j3}`
 python compute_optimal_strategy.py
 ```
 
-Flag: PCTF{l00k_th3_0tt3r_way_z8210}
+Flag: `PCTF{l00k_th3_0tt3r_way_z8210}`
