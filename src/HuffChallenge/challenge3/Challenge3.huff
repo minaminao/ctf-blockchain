@@ -1,0 +1,56 @@
+// Slots
+#define constant OWNER_SLOT = 0x00
+#define constant WITHDRAWER_SLOT = 0x01
+#define constant LAST_DEPOSITER_SLOT = 0x02
+
+// Deposit into the contract.
+#define macro DEPOSIT() = takes (0) returns (0) {
+    callvalue iszero error jumpi // revert if msg.value == 0
+    caller [LAST_DEPOSITER_SLOT] sstore // store last depositer 
+    stop
+    error:
+        0x00 0x00 revert
+}
+
+// Withdraw from the contract.
+#define macro WITHDRAW() = takes (0) returns (0) {
+    [WITHDRAWER_SLOT] sload       // get withdrawer
+    caller eq iszero error jumpi  // revert if caller != withdrawer
+
+    // Transfer tokens
+    0x00 0x00 0x00 0x00     // fill stack with 0
+    selfbalance caller gas  // call parameters
+    call                    // send ETH
+    stop
+    error:
+        0x00 0x00 revert
+}
+
+// Allow owner to set withdrawer.
+#define macro SET_WITHDRAWER() = takes (0) returns (0) {
+    caller callvalue sload eq iszero error jumpi // require(msg.sender==owner)
+    0x04 calldataload [WITHDRAWER_SLOT] sstore   // set new withdrawer
+    stop
+    error:
+        0x00 0x00 revert
+}
+
+// Constructor.
+#define macro CONSTRUCTOR() = takes (0) returns (0) {
+    caller [OWNER_SLOT] sstore // set the deploywer as the owner
+}
+
+// Main macro
+#define macro MAIN() = takes (0) returns (0) {
+    0x00 calldataload 0xE0 shr
+    dup1 0xd0e30db0 eq deposit jumpi
+    dup1 0x3ccfd60b eq withdraw jumpi
+    dup1 0x0d174c24 eq set_withdrawer jumpi
+
+    deposit:
+        DEPOSIT()
+    withdraw:
+        WITHDRAW()
+    set_withdrawer:
+        SET_WITHDRAWER()
+}

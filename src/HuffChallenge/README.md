@@ -19,3 +19,14 @@ Write the most efficient possible Huff contract that returns true (1) if the inp
 ```
 forge test --match-contract Challenge2Test -vvvv
 ```
+
+## Challenge #3
+https://twitter.com/huff_language/status/1560750533811376128
+
+>Huff Challenge #3 (a bit harder... and much more real)
+Exploit this contract and steal the Ether inside. It's deployed at `0xae7e201257f3f7918e9e8f2f3de998e3d75f7a1d` and has 0.1 ETH for you :)
+Interface: deposit(), withdraw(), and setWithdrawer(address)
+
+```
+forge test --match-contract Challenge3Test -vvvv
+```

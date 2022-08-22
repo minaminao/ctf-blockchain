@@ -99,6 +99,7 @@
 | Paradigm CTF 2021: Lockbox                                         | `ecrecover`、`abi.encodePacked`、`msg.data.length`               |
 | [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)             | `block.number`, gas price war                                    |
 | [fvictorio's EVM Puzzles](src/FvictorioEVMPuzzles/)                |                                                                  |
+| [Huff Challenge: Challenge #3](src/HuffChallenge/)                 |                                                                  |
 
 ### `tx.origin`の誤用
 - `tx.origin`はトランザクションの発行者のアドレスを指し、コントラクトコール元のアドレス（すなわち`msg.sender`）として使ってはならない。
@@ -253,14 +254,14 @@
 | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | [Ethernaut: 18. MagicNumber](src/Ethernaut#18-magicnumber) |                                                                                    |
 | [Paradigm CTF 2021: Rever](src/ParadigmCTF2021/Rever/)     | 回文判定。さらにそのバイトコードを反転させたコードも回文判定できなくてはならない。 |
-| [Huff Challenge: Challenge #1](src/HuffChallenge)          |
+| [Huff Challenge: Challenge #1](src/HuffChallenge/)         |
 
 ### Gas最適化
 - 使用できるgasに制限がある問題。
 
-| 問題                                              | 備考、キーワード |
-| ------------------------------------------------- | ---------------- |
-| [Huff Challenge: Challenge #2](src/HuffChallenge) |                  |
+| 問題                                               | 備考、キーワード |
+| -------------------------------------------------- | ---------------- |
+| [Huff Challenge: Challenge #2](src/HuffChallenge/) |                  |
 
 ### Re-entrancy Attack
 - コントラクトAのある関数内に別のコントラクトBとのインタラクションやBへのEther送金が含まれている場合、一時的にBに制御が移る。
