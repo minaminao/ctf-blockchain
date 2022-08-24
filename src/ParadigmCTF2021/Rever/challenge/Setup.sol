@@ -17,31 +17,19 @@ contract Challenge {
         while (i < code.length) {
             uint8 op = uint8(code[i]);
             if (
-                op == 0x3B
-                    || // EXTCODECOPY
-                    op == 0x3C
-                    || // EXTCODESIZE
-                    op == 0x3F
-                    || // EXTCODEHASH
-                    op == 0x54
-                    || // SLOAD
-                    op == 0x55
-                    || // SSTORE
-                    op == 0xF0
-                    || // CREATE
-                    op == 0xF1
-                    || // CALL
-                    op == 0xF2
-                    || // CALLCODE
-                    op == 0xF4
-                    || // DELEGATECALL
-                    op == 0xF5
-                    || // CREATE2
-                    op == 0xFA
-                    || // STATICCALL
-                    op == 0xFF
+                op == 0x3B // EXTCODECOPY
+                    || op == 0x3C // EXTCODESIZE
+                    || op == 0x3F // EXTCODEHASH
+                    || op == 0x54 // SLOAD
+                    || op == 0x55 // SSTORE
+                    || op == 0xF0 // CREATE
+                    || op == 0xF1 // CALL
+                    || op == 0xF2 // CALLCODE
+                    || op == 0xF4 // DELEGATECALL
+                    || op == 0xF5 // CREATE2
+                    || op == 0xFA // STATICCALL
+                    || op == 0xFF // SELFDESTRUCT
             ) {
-                // SELFDESTRUCT
                 return false;
             }
 
