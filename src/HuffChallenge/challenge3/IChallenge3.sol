@@ -4,5 +4,5 @@ pragma solidity ^0.8.13;
 interface Challenge3 {
     function deposit() external payable;
     function withdraw() external;
-    function setWithdrawer(address _withdrawer) external payable;
+    function setWithdrawer(address) external payable;
 }
