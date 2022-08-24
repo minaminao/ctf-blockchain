@@ -3,5 +3,6 @@ src = 'src'
 out = 'out'
 libs = ['lib']
 ffi = true
+no_match_path = '*/_*'
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
