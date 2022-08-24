@@ -3,7 +3,7 @@
 _This writeup is **WIP** and frequently updated._
 
 Paradigm CTF: https://twitter.com/paradigm_ctf.
-The source code for the ctf infrastructure is in [paradigmxyz/paradigm-ctf-infrastructure](https://github.com/paradigmxyz/paradigm-ctf-infrastructure).
+The source code of the CTF infrastructure is in [paradigmxyz/paradigm-ctf-infrastructure](https://github.com/paradigmxyz/paradigm-ctf-infrastructure).
 
 The challenges I solved during the contest are as follows. 
 
@@ -263,9 +263,27 @@ Flag: `PCTF{MuCH_4PPr3C1473_53r}`
 
 The goal is to create a quine with EVM byte code.
 
-There are restrictions on the opcodes that can be used.
+There are restrictions on the opcodes that can be used. 
 
-A example quine written in the Huff language:
+These opcodes are disallowed:
+- `0x30` - `0x48`
+- `SLOAD`, `SSTORE`, `CREATE`, `CALL`, `CALLCODE`, `DELEGATECALL`, `CREATE2`, `STATICCALL`, `SELFDESTRUCT`
+
+Thus, for example, the following quine written in the Huff language does not satisfy the condition.
+
+```js
+#define macro MAIN() = takes (0) returns (0) {
+    codesize 
+    returndatasize
+    returndatasize
+    codecopy
+    codesize
+    returndatasize
+    return
+}
+```
+
+An quine satisfying the condition is as follows:
 ```js
 #define macro MAIN() = takes (0) returns (0) {
     0x5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f3 // code
@@ -499,7 +517,7 @@ Flag: `PCTF{0tt3r_w0r1d_8c01j3}`
 ### OTTERSWAP
 [Exploit](OtterSwap)
 
-The goal is satisfy the condition `amt_a + amt_b == 3 * AMT - 1` of the `handle_connection` function in `src/ParadigmCTF2022/OtterSwap/_client/framework/src/main.rs`. 
+The goal is satisfy the condition `amt_a + amt_b == 3 * AMT - 1` of the `handle_connection` function in `framework/src/main.rs`. 
 ```rs
     let in_token_account = chall.read_token_account(user_in_account).await?;
     let out_token_account = chall.read_token_account(user_out_account).await?;
@@ -521,7 +539,7 @@ The goal is satisfy the condition `amt_a + amt_b == 3 * AMT - 1` of the `handle_
 ```
 
 
-The following code of the `swap` function in `src/ParadigmCTF2022/OtterSwap/_client/framework/chall/programs/chall/src/lib.rs` makes it vulnerable to drain tokens from the pool.
+The following code of the `swap` function in `framework/chall/programs/chall/src/lib.rs` makes it vulnerable to drain tokens from the pool.
 ```rs
         let x = in_pool_account.amount;
         let y = out_pool_account.amount;

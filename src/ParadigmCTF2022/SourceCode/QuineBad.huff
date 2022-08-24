@@ -1,0 +1,9 @@
+#define macro MAIN() = takes (0) returns (0) {
+    codesize 
+    returndatasize
+    returndatasize
+    codecopy
+    codesize
+    returndatasize
+    return
+}
