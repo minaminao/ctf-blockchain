@@ -2,8 +2,6 @@
 
 pragma solidity 0.8.16;
 
-import "forge-std/console.sol";
-
 contract Deployer {
     constructor(bytes memory code) {
         assembly {
@@ -15,14 +13,12 @@ contract Deployer {
 contract Challenge {
     bool public solved = false;
 
-    function safe(bytes memory code) private view returns (bool) {
+    function safe(bytes memory code) private pure returns (bool) {
         uint256 i = 0;
         while (i < code.length) {
             uint8 op = uint8(code[i]);
 
             if (op >= 0x30 && op <= 0x48) {
-                console.log(i);
-                console.log(op);
                 return false;
             }
 
