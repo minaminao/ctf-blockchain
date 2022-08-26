@@ -313,7 +313,15 @@ $ huffc -r Quine.huff
 7f5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f35b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f3
 ```
 
-[evm.codes playground](https://www.evm.codes/playground?unit=Wei&codeType=Bytecode&code=%277f~y~y%27~zzzzz80x0w2w7f6z5b5b5by00053x41x00f3x60w152x%01wxyz~_)
+**Trace stack and memory using [erever](https://github.com/minaminao/erever)**
+```c
+$ erever -b "7f5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f35b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f3"
+```
+
+From `0x30`(`DUP1`):
+![](https://i.gyazo.com/b22488fe0b6ee943ac1c44a8fbfc28aa.png)
+
+See also [evm.codes playground](https://www.evm.codes/playground?unit=Wei&codeType=Bytecode&code=%277f~y~y%27~zzzzz80x0w2w7f6z5b5b5by00053x41x00f3x60w152x%01wxyz~_).
 
 **Test**
 ```
