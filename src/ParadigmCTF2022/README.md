@@ -563,8 +563,9 @@ func is_nn{range_check_ptr}(a) -> (res : felt):
 end
 ```
 
-Ref: https://github.com/starkware-libs/cairo-lang/blob/167b28bcd940fd25ea3816204fa882a0b0a49603/src/starkware/cairo/common/math_cmp.cairo
-
+See also:
+- https://github.com/starkware-libs/cairo-lang/blob/167b28bcd940fd25ea3816204fa882a0b0a49603/src/starkware/cairo/common/math_cmp.cairo
+- https://github.com/OpenZeppelin/cairo-contracts/pull/67
 
 Therefore, if `low` is set to `2**128` and execute `raise_bid`, `current_winner` can be updated.
 
