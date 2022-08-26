@@ -135,7 +135,7 @@ contract BabysandboxExploit {
 ### 余談: `selfdestruct`のガス払い戻しの廃止
 
 Paradigm CTF 2021が開催された2021年2月頃は、EVMのバージョンがMuir Glacierだった。
-この時点では、`selfdestruct`はさらにガスを節約できた。
+この時点では、`selfdestruct`はさらにガスを節約できた。ただし、ガスの払い戻しはトランザクションの最後に実行されるため、必要なガスの量が変わるわけではない。
 
 2022年8月現在はGray Glacierであるが、2021年8月のLondonハードフォークでEIP-3529により`selfdestruct`のガス払い戻しが廃止された。
 
