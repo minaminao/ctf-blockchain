@@ -493,6 +493,7 @@ python exploit.py
 Flag: `PCTF{d3f4u17_pu811c_5721k35_4941n}`
 
 ### CAIRO-AUCTION
+[Challenge & Exploit](CairoAuction)
 
 The goal is to win the auction.
 
