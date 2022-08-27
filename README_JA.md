@@ -1,4 +1,4 @@
-# CTF Blockchain問まとめ 🐈
+# [ARCHIVED] CTF Blockchain問まとめ 🐈
 過去CTFに出題されたBlockchain問のテーマ別まとめです。ネタバレに注意してください。
 
 問題の並びは適当で難易度順やおすすめ順ではありません。

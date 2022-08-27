@@ -8,9 +8,6 @@ Some challenges come with my exploits (e.g., [Ethernaut](src/Ethernaut/), [Parad
 
 If there are any incorrect descriptions, I would appreciate it if you could let me know via issue or PR.
 
-| English | [日本語](README_JA.md) |
-| ------- | ---------------------- |
-
 ---
 
 **Table of Contents**
@@ -109,7 +106,7 @@ Note:
 | ---------------------------------------------------- | -------------- |
 | [Ethernaut: 4. Telephone](src/Ethernaut#4-telephone) |                |
 
-### Pseudorandom numbers generated on-chain are predictable
+### Weak sources of randomness from chain attributes
 - Since bytecodes of contracts are publicly available, it is easy to predict pseudorandom numbers whose generation is completed on-chain (using only states, not off-chain data).
 - It is equivalent to having all the parameters of a pseudorandom number generator exposed.
 - If you want to use random numbers that are unpredictable to anyone, use a decentralized oracle with a random number function. For example, [Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/), which implements Verifiable Random Function (VRF).
@@ -212,10 +209,9 @@ Note:
 | ---------------------------------------------------- | --------------------------------- |
 | [Ethernaut: 17. Recovery](src/Ethernaut#17-recovery) | loss of deployed contract address |
 
-### Reversing states (contracts must not contain confidential data)
+### Reversing states 
 - Since the state and the bytecodes of contracts are public, all variables, including private variables, are readable.
 - Private variables are only guaranteed not to be directly readable by other contracts, but we, as an entity outside the blockchain, can read them.
-- If there is private data in a transaction, it can also be solved by reading the transaction.
 
 | Challenge                                                     | Note, Keywords |
 | ------------------------------------------------------------- | -------------- |
