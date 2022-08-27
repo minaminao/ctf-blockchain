@@ -239,17 +239,20 @@ Note:
 - Reversing a contract for which code is not given in whole or in part.
 - Use decompilers (e.g., [panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
 
-| Challenge                        | Note, Keywords                  |
-| -------------------------------- | ------------------------------- |
-| Incognito 2.0: Ez                | keep in plain text              |
-| Real World CTF 3rd: Re:Montagy   | Jump Oriented Programming (JOP) |
-| 0x41414141 CTF: Crypto Casino    |                                 |
-| Paradigm CTF 2021: Babyrev       |                                 |
-| Paradigm CTF 2021: JOP           | Jump Oriented Programming (JOP) |
-| 34C3 CTF: Chaingang              |                                 |
-| Blaze CTF 2018: Smart? Contract  |                                 |
-| DEF CON CTF Qualifier 2018: SAG? |                                 |
-| pbctf 2020: pbcoin               |                                 |
+| Challenge                                  | Note, Keywords                  |
+| ------------------------------------------ | ------------------------------- |
+| Incognito 2.0: Ez                          | keep in plain text              |
+| Real World CTF 3rd: Re:Montagy             | Jump Oriented Programming (JOP) |
+| 0x41414141 CTF: Crypto Casino              |                                 |
+| Paradigm CTF 2021: Babyrev                 |                                 |
+| Paradigm CTF 2021: JOP                     | Jump Oriented Programming (JOP) |
+| 34C3 CTF: Chaingang                        |                                 |
+| Blaze CTF 2018: Smart? Contract            |                                 |
+| DEF CON CTF Qualifier 2018: SAG?           |                                 |
+| pbctf 2020: pbcoin                         |                                 |
+| Paradigm CTF 2022: STEALING-SATS           |                                 |
+| Paradigm CTF 2022: ELECTRIC-SHEEP          |                                 |
+| Paradigm CTF 2022: FUN-REVERSING-CHALLENGE |                                 |
 
 ### EVM bytecode golf
 - These challenges have a limit on the length of the bytecode to be created.
@@ -395,11 +398,16 @@ Note:
 | ----------------------------------------------------- | -------------- |
 | [Paradigm CTF 2022: MERKLEDROP](src/ParadigmCTF2022/) |                |
 
+### Precompiled contracts
+| Challenge                                         | Note, Keywords |
+| ------------------------------------------------- | -------------- |
+| [Paradigm CTF 2022: VANITY](src/ParadigmCTF2022/) |                |
+
 ### Foundry cheatcodes
-| Challenge                                             | Note, Keywords |
-| ----------------------------------------------------- | -------------- |
-| [Paradigm CTF 2022: TRAPDOOOR](src/ParadigmCTF2022/)  |                |
-| [Paradigm CTF 2022: TRAPDOOOOR](src/ParadigmCTF2022/) |                |
+| Challenge                                            | Note, Keywords |
+| ---------------------------------------------------- | -------------- |
+| [Paradigm CTF 2022: TRAPDOOOR](src/ParadigmCTF2022/) |                |
+| Paradigm CTF 2022: TRAPDOOOOR                        |                |
 
 ### Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)
 - For example, any storage can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.
@@ -437,6 +445,8 @@ Note:
 | Paradigm CTF 2021: Market                                         | Make the value of one field be recognized as the value of another field by using key misalignment in the Eternal Storage pattern. |
 | [EthernautDAO: 2. WalletLibrary](src/EthernautDAO/WalletLibrary/) | m and n of m-of-n multisig wallet can be changed.                                                                                 |
 | [Paradigm CTF 2022: RESCUE](src/ParadigmCTF2022/)                 |                                                                                                                                   |
+| Paradigm CTF 2022: JUST-IN-TIME                                   |                                                                                                                                   |
+| Paradigm CTF 2022: 0XMONACO                                       |                                                                                                                                   |
 
 ## Bitcoin
 Note
@@ -479,9 +489,10 @@ Note
 | ALLES! CTF 2021: eBPF                                 | Reversing eBPF       |
 | [Paradigm CTF 2022: OTTERWORLD](src/ParadigmCTF2022/) |                      |
 | [Paradigm CTF 2022: OTTERSWAP](src/ParadigmCTF2022/)  |                      |
-| [Paradigm CTF 2022: SOLHANA-1](src/ParadigmCTF2022/)  |                      |
-| [Paradigm CTF 2022: SOLHANA-2](src/ParadigmCTF2022/)  |                      |
-| [Paradigm CTF 2022: SOLHANA-3](src/ParadigmCTF2022/)  |                      |
+| Paradigm CTF 2022: POOL                               |                      |
+| Paradigm CTF 2022: SOLHANA-1                          |                      |
+| Paradigm CTF 2022: SOLHANA-2                          |                      |
+| Paradigm CTF 2022: SOLHANA-3                          |                      |
 
 ## Other blockchain-related
 - Something that is not a blockchain but is part of the ecosystem.
