@@ -4,7 +4,7 @@ This repository collects blockchain challenges in CTFs and wargames.
 
 These challenges are categorized by topic, but they are not ordered by difficulty or by recommendation.
 
-Some challenges come with my exploits (e.g., [Ethernaut](src/Ethernaut/), [Paradigm CTF 2021](src/ParadigmCTF2021/)).
+Some challenges come with my exploits (e.g., [Ethernaut](src/Ethernaut/), [Paradigm CTF 2022](src/ParadigmCTF2022/)).
 
 If there are any incorrect descriptions, I would appreciate it if you could let me know via issue or PR.
 
@@ -15,7 +15,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Ethereum/contract basics](#ethereumcontract-basics)
   - [EVM puzzles](#evm-puzzles)
   - [Misuse of `tx.origin`](#misuse-of-txorigin)
-  - [Pseudorandom numbers generated on-chain are predictable](#pseudorandom-numbers-generated-on-chain-are-predictable)
+  - [Weak sources of randomness from chain attributes](#weak-sources-of-randomness-from-chain-attributes)
   - [ERC-20 basics](#erc-20-basics)
   - [Storage overwrite by `delegatecall`](#storage-overwrite-by-delegatecall)
   - [Context mismatch in `delegatecall`](#context-mismatch-in-delegatecall)
@@ -27,7 +27,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [`view` functions do not always return the same value](#view-functions-do-not-always-return-the-same-value)
   - [Mistakes in setting `storage` and `memory`](#mistakes-in-setting-storage-and-memory)
   - [Transaction tracing](#transaction-tracing)
-  - [Reversing states (contracts must not contain confidential data)](#reversing-states-contracts-must-not-contain-confidential-data)
+  - [Reversing states](#reversing-states)
   - [Reversing transactions](#reversing-transactions)
   - [Reversing EVM bytecode](#reversing-evm-bytecode)
   - [EVM bytecode golf](#evm-bytecode-golf)
@@ -41,19 +41,22 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Funds leakage due to oracle manipulation (without flash loans)](#funds-leakage-due-to-oracle-manipulation-without-flash-loans)
   - [Funds leakage due to oracle manipulation (with flash loans)](#funds-leakage-due-to-oracle-manipulation-with-flash-loans)
   - [Sandwich attack](#sandwich-attack)
-  - [Recovery of a private key by same nonce attack](#recovery-of-a-private-key-by-same-nonce-attack)
+  - [Recovery of a private key by the same-nonce attack](#recovery-of-a-private-key-by-the-same-nonce-attack)
   - [Brute-force address](#brute-force-address)
   - [Recovery of a public key](#recovery-of-a-public-key)
   - [Encryption and decryption in secp256k1](#encryption-and-decryption-in-secp256k1)
   - [Bypassing bot and taking an ERC-20 token owned by a wallet with a known private key](#bypassing-bot-and-taking-an-erc-20-token-owned-by-a-wallet-with-a-known-private-key)
+  - [Claimable intermediate nodes of a Merkle tree](#claimable-intermediate-nodes-of-a-merkle-tree)
+  - [Foundry cheatcodes](#foundry-cheatcodes)
   - [Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)](#arbitrary-storage-overwriting-by-setting-an-array-length-to-2256-1--solidity-060)
   - [Constructor is just a function with a typo (< Solidity 0.5.0)](#constructor-is-just-a-function-with-a-typo--solidity-050)
   - [Storage overwrite via uninitialized storage pointer (< Solidity 0.5.0)](#storage-overwrite-via-uninitialized-storage-pointer--solidity-050)
   - [Other ad-hoc vulnerabilities and methods](#other-ad-hoc-vulnerabilities-and-methods)
 - [Bitcoin](#bitcoin)
   - [Bitcoin basics](#bitcoin-basics)
-  - [Recovery of a private key by same nonce attack](#recovery-of-a-private-key-by-same-nonce-attack-1)
+  - [Recovery of a private key by the same nonce attack](#recovery-of-a-private-key-by-the-same-nonce-attack-1)
   - [Bypassing PoW of other applications using Bitcoin's PoW database](#bypassing-pow-of-other-applications-using-bitcoins-pow-database)
+- [Cairo](#cairo)
 - [Solana](#solana)
 - [Other blockchain-related](#other-blockchain-related)
   - [IPFS](#ipfs)
@@ -80,6 +83,7 @@ Note:
 | [Paradigm CTF 2021: Hello](src/ParadigmCTF2021/)                 | contract call          |
 | 0x41414141 CTF: sanity-check                                     | contract call          |
 | 0x41414141 CTF: crackme.sol                                      |                        |
+| [Paradigm CTF 2022: RANDOM](src/ParadigmCTF2022/)                |                        |
 
 ### EVM puzzles
 - Puzzle challenges that can be solved by understanding the EVM specifications.
@@ -98,6 +102,8 @@ Note:
 | [EthernautDAO: 6. (No Name)](src/EthernautDAO/NoName/)             | `block.number`, gas price war                                          |
 | [fvictorio's EVM Puzzles](src/FvictorioEVMPuzzles/)                |                                                                        |
 | [Huff Challenge: Challenge #3](src/HuffChallenge/)                 |                                                                        |
+| [Paradigm CTF 2022: LOCKBOX2](src/ParadigmCTF2022/)                |                                                                        |
+| [Paradigm CTF 2022: SOURCECODE](src/ParadigmCTF2022/)              | quine                                                                  |
 
 ### Misuse of `tx.origin`
 - `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
@@ -288,7 +294,7 @@ Note:
 | Damn Vulnerable DeFi: 4. Sideentrance  | Flash loan that allows each user to make a deposit and a withdrawal. The deposit can be executed at no cost at the time of the flash loan.                    |
 
 ### Massive rights by executing flash loans during snapshots
-- If the algorithm distributes some kind of rights using the token balance at the time of a snapshot, and if a malicious user transaction can trigger a snapshot, a flash loan can be used to obtain a large amount of rights.
+- If the algorithm distributes some kind of rights using the token balance at the time of a snapshot, and if a malicious user transaction can trigger a snapshot, a flash loan can be used to obtain massive rights.
 - A period of time to lock the token will avoid this attack.
 
 | Challenge                            | Note, Keywords                                                       |
@@ -344,15 +350,14 @@ Note:
 | [Paradigm CTF 2021: Farmer](src/ParadigmCTF2021/) | Sandwich the trade from COMP to WETH to DAI |
 
 
-### Recovery of a private key by same nonce attack
-- In general, same nonce attacks are possible attacks when the same nonce is used for different messages in elliptic curve DSA, and the secret key is calculated.
+### Recovery of a private key by the same-nonce attack
+- In general, the same-nonce attack is a possible attack when the same nonce is used for different messages in the elliptic curve DSA (ECDSA), and the secret key is calculated.
 - In Ethereum, if nonces used to sign transactions are the same, this attack is feasible.
 
 | Challenge                                            | Note, Keywords |
 | ---------------------------------------------------- | -------------- |
 | Capture The Ether: Account Takeover                  |                |
 | [Paradigm CTF 2021: Babycrypto](src/ParadigmCTF2021) |                |
-
 
 ### Brute-force address
 - Brute force can make the start and end of an address a specific value.
@@ -379,11 +384,22 @@ Note:
 ### Bypassing bot and taking an ERC-20 token owned by a wallet with a known private key
 - If a wallet with a known private key has an ERC-20 token but no Ether, it is usually necessary to first send Ether to the wallet and then `transfer` the ERC-20 token to get the ERC-20 token.
 - However, if a bot that immediately takes the Ether sent at this time is running, the Ether will be stolen when the Ether is simply sent.
-- We can use Flashbots bundled transactions or just `permit` and `transferFrom` if the token is [EIP-2612 permit](https://eips.ethereum.org/EIPS/eip-2612) friendly.
+- We can use [Flashbots](https://docs.flashbots.net/) bundled transactions or just `permit` and `transferFrom` if the token is [EIP-2612 permit](https://eips.ethereum.org/EIPS/eip-2612) friendly.
 
 | Challenge                                                                 | Note, Keywords |
 | ------------------------------------------------------------------------- | -------------- |
 | [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken/) |                |
+
+### Claimable intermediate nodes of a Merkle tree
+| Challenge                                             | Note, Keywords |
+| ----------------------------------------------------- | -------------- |
+| [Paradigm CTF 2022: MERKLEDROP](src/ParadigmCTF2022/) |                |
+
+### Foundry cheatcodes
+| Challenge                                             | Note, Keywords |
+| ----------------------------------------------------- | -------------- |
+| [Paradigm CTF 2022: TRAPDOOOR](src/ParadigmCTF2022/)  |                |
+| [Paradigm CTF 2022: TRAPDOOOOR](src/ParadigmCTF2022/) |                |
 
 ### Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)
 - For example, any storage can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.
@@ -420,6 +436,7 @@ Note:
 | [Paradigm CTF 2021: Bouncer](src/ParadigmCTF2021/Bouncer/)        | The funds required for batch processing are the same as for single processing.                                                    |
 | Paradigm CTF 2021: Market                                         | Make the value of one field be recognized as the value of another field by using key misalignment in the Eternal Storage pattern. |
 | [EthernautDAO: 2. WalletLibrary](src/EthernautDAO/WalletLibrary/) | m and n of m-of-n multisig wallet can be changed.                                                                                 |
+| [Paradigm CTF 2022: RESCUE](src/ParadigmCTF2022/)                 |                                                                                                                                   |
 
 ## Bitcoin
 Note
@@ -431,7 +448,7 @@ Note
 | TsukuCTF 2021: genesis                 | genesis block               |
 | WORMCON 0x01: What's My Wallet Address | Bitcoin address, RIPEMD-160 |
 
-### Recovery of a private key by same nonce attack
+### Recovery of a private key by the same nonce attack
 - There was a bug and it has been fixed using [RFC6979](https://datatracker.ietf.org/doc/html/rfc6979).
 - https://github.com/daedalus/bitcoin-recover-privkey
 
@@ -446,15 +463,25 @@ Note
 | --------------------------- | -------------- |
 | Dragon CTF 2020: Bit Flip 2 | 64-bit PoW     |
 
+## Cairo
+| Challenge                                                       | Note, Keywords |
+| --------------------------------------------------------------- | -------------- |
+| [Paradigm CTF 2022: RIDDLE-OF-THE-SPHINX](src/ParadigmCTF2022/) | contract call  |
+| [Paradigm CTF 2022: CAIRO-PROXY](src/ParadigmCTF2022/)          | overflow       |
+| [Paradigm CTF 2022: CAIRO-AUCTION](src/ParadigmCTF2022/)        | Uint256        |
 
 ## Solana
-
-| Challenge                     | Note, Keywords       |
-| ----------------------------- | -------------------- |
-| ALLES! CTF 2021: Secret Store | `solana`,`spl-token` |
-| ALLES! CTF 2021: Legit Bank   |                      |
-| ALLES! CTF 2021: Bugchain     |                      |
-| ALLES! CTF 2021: eBPF         | Reversing eBPF       |
+| Challenge                                             | Note, Keywords       |
+| ----------------------------------------------------- | -------------------- |
+| ALLES! CTF 2021: Secret Store                         | `solana`,`spl-token` |
+| ALLES! CTF 2021: Legit Bank                           |                      |
+| ALLES! CTF 2021: Bugchain                             |                      |
+| ALLES! CTF 2021: eBPF                                 | Reversing eBPF       |
+| [Paradigm CTF 2022: OTTERWORLD](src/ParadigmCTF2022/) |                      |
+| [Paradigm CTF 2022: OTTERSWAP](src/ParadigmCTF2022/)  |                      |
+| [Paradigm CTF 2022: SOLHANA-1](src/ParadigmCTF2022/)  |                      |
+| [Paradigm CTF 2022: SOLHANA-2](src/ParadigmCTF2022/)  |                      |
+| [Paradigm CTF 2022: SOLHANA-3](src/ParadigmCTF2022/)  |                      |
 
 ## Other blockchain-related
 - Something that is not a blockchain but is part of the ecosystem.
