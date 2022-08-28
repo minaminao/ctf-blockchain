@@ -279,13 +279,14 @@ Note:
 - For example, when `B` executes the `withdraw` function to withdraw Ether deposited in `A`, the Ether transfer triggers a control shift to `B`, and during the `withdraw` function, `B` executes `A`'s `withdraw` function again. Even if the `withdraw` function is designed to prevent withdrawal of more than the limit if it is simply called twice, if the `withdraw` function is executed in the middle of the `withdraw` function, it may be designed to bypass the limit check.
 - To prevent re-entrancy attacks, use the Checks-Effects-Interactions pattern.
 
-| Challenge                                                           | Note, Keywords |
-| ------------------------------------------------------------------- | -------------- |
-| Capture The Ether: Token bank                                       |                |
-| [Ethernaut: 10. Re-entrancy](src/Ethernaut#10-re-entrancy)          |                |
-| Paradigm CTF 2021: Yield Aggregator                                 |                |
-| HTB University CTF 2020 Quals: moneyHeist                           |                |
-| [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/) |                |
+| Challenge                                                                       | Note, Keywords             |
+| ------------------------------------------------------------------------------- | -------------------------- |
+| Capture The Ether: Token bank                                                   |                            |
+| [Ethernaut: 10. Re-entrancy](src/Ethernaut#10-re-entrancy)                      |                            |
+| Paradigm CTF 2021: Yield Aggregator                                             |                            |
+| HTB University CTF 2020 Quals: moneyHeist                                       |                            |
+| [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/)             |                            |
+| [DeFi-Security-Summit-Stanford: InsecureDexLP](src/DeFiSecuritySummitStanford/) | ERC-223, `tokenFallback()` |
 
 ### Flash loan basics
 - Flash loans are uncollateralised loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
