@@ -20,11 +20,11 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Storage overwrite by `delegatecall`](#storage-overwrite-by-delegatecall)
   - [Context mismatch in `delegatecall`](#context-mismatch-in-delegatecall)
   - [Integer overflow](#integer-overflow)
-  - [Ether transfers to a contract are not always executable](#ether-transfers-to-a-contract-are-not-always-executable)
+  - [Non-executable Ether transfers to a contract](#non-executable-ether-transfers-to-a-contract)
   - [Forced Ether transfer to a contract via `selfdestruct`](#forced-ether-transfer-to-a-contract-via-selfdestruct)
-  - [Not all procedures can be executed after a contract call](#not-all-procedures-can-be-executed-after-a-contract-call)
+  - [Large gas consumption by a contract callee](#large-gas-consumption-by-a-contract-callee)
   - [Forgetting to set `view`/`pure` to interface and abstract contract functions](#forgetting-to-set-viewpure-to-interface-and-abstract-contract-functions)
-  - [`view` functions do not always return the same value](#view-functions-do-not-always-return-the-same-value)
+  - [`view` functions that do not always return the same value](#view-functions-that-do-not-always-return-the-same-value)
   - [Mistakes in setting `storage` and `memory`](#mistakes-in-setting-storage-and-memory)
   - [Transaction tracing](#transaction-tracing)
   - [Reversing states](#reversing-states)
@@ -47,9 +47,10 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Encryption and decryption in secp256k1](#encryption-and-decryption-in-secp256k1)
   - [Bypassing bot and taking an ERC-20 token owned by a wallet with a known private key](#bypassing-bot-and-taking-an-erc-20-token-owned-by-a-wallet-with-a-known-private-key)
   - [Claimable intermediate nodes of a Merkle tree](#claimable-intermediate-nodes-of-a-merkle-tree)
+  - [Precompiled contracts](#precompiled-contracts)
   - [Foundry cheatcodes](#foundry-cheatcodes)
   - [Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)](#arbitrary-storage-overwriting-by-setting-an-array-length-to-2256-1--solidity-060)
-  - [Constructor is just a function with a typo (< Solidity 0.5.0)](#constructor-is-just-a-function-with-a-typo--solidity-050)
+  - [Constructor that is just a function by a typo (< Solidity 0.5.0)](#constructor-that-is-just-a-function-by-a-typo--solidity-050)
   - [Storage overwrite via uninitialized storage pointer (< Solidity 0.5.0)](#storage-overwrite-via-uninitialized-storage-pointer--solidity-050)
   - [Other ad-hoc vulnerabilities and methods](#other-ad-hoc-vulnerabilities-and-methods)
 - [Bitcoin](#bitcoin)
@@ -161,8 +162,8 @@ Note:
 | Capture The Ether: Token whale               | subtraction    |
 | [Ethernaut: 5. Token](src/Ethernaut#5-token) | subtraction    |
 
-### Ether transfers to a contract are not always executable
-- Do not write a contract on the assumption that normal Ether transfer (`.send()` or `.transfer()`) can always be executed.
+### Non-executable Ether transfers to a contract
+- Do not create a contract on the assumption that normal Ether transfer (`.send()` or `.transfer()`) can always be executed.
 - If a destination is a contract and there is no receive Ether function or payable fallback function, Ether cannot be transferred.
 - However, instead of the normal transfer functions, the `selfdestruct` described below can be used to force such a contract to transfer Ether.
 
@@ -180,7 +181,7 @@ Note:
 | Capture The Ether: Retirement fund           |                |
 | [Ethernaut: 7. Force](src/Ethernaut#7-force) |                |
 
-### Not all procedures can be executed after a contract call
+### Large gas consumption by a contract callee
 - A large amount of gas can be consumed by loops and recursion in `call`, and there may not be enough gas for the rest of the process.
 - Until Solidity v0.8.0, zero division and `assert(false)` could consume a lot of gas.
 
@@ -195,7 +196,7 @@ Note:
 | ---------------------------------------------------- | -------------- |
 | [Ethernaut: 11. Elevator](src/Ethernaut#11-elevator) |                |
 
-### `view` functions do not always return the same value
+### `view` functions that do not always return the same value
 - Since `view` functions can read state, they can be conditionally branched based on state and do not necessarily return the same value.
 
 | Challenge                                    | Note, Keywords |
@@ -422,7 +423,7 @@ Note:
 | [Ethernaut: 19. Alien Codex](src/Ethernaut#19-alien-codex) |                |
 | Paradigm CTF 2021: Bank                                    |                |
 
-### Constructor is just a function with a typo (< Solidity 0.5.0)
+### Constructor that is just a function by a typo (< Solidity 0.5.0)
 - In versions before v0.4.22, the constructor is defined as a function with the same name as the contract, so a typo of the constructor name could cause it to become just a function, resulting in a bug.
 - Since v0.5.0, this specification is removed and the `constructor` keyword must be used.
 
