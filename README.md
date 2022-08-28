@@ -344,9 +344,10 @@ Note:
 - The use of flash loans distorts the value of the oracle and drains the funds of the protocols that reference that oracle.
 - The ability to move large amounts of funds through a flash loan makes it easy to distort the oracle and cause more damage.
 
-| Challenge                       | Note, Keywords                                                                                     |
-| ------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Damn Vulnerable DeFi: 8. Puppet | Distort the price of Uniswap V1 and leak tokens from a lending platform that references that price |
+| Challenge                                                                                    | Note, Keywords                                                                                     |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Damn Vulnerable DeFi: 8. Puppet                                                              | Distort the price of Uniswap V1 and leak tokens from a lending platform that references that price |
+| [DeFi-Security-Summit-Stanford: BorrowSystemInsecureOracle](src/DeFiSecuritySummitStanford/) | lending protocol                                                                                   |
 
 ### Sandwich attack
 - For example, if there is a transaction by another party to sell token `A` and buy `B`, the attacker can put in a transaction to sell `A` and buy `B` before the transaction, and later put in a transaction to sell the same amount of `B` and buy `A`, thereby ultimately increasing the amount of `A` at a profit.
