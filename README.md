@@ -125,20 +125,22 @@ Note:
 ### ERC-20 basics
 - These challenges can be solved with an understanding of the [ERC-20 token standard](https://eips.ethereum.org/EIPS/eip-20).
 
-| Challenge                                                  | Note, Keywords                        |
-| ---------------------------------------------------------- | ------------------------------------- |
-| [Ethernaut: 15. Naught Coin](src/Ethernaut#15-naught-coin) | `transfer`, `approve`, `transferFrom` |
-| [Paradigm CTF 2021: Secure](src/ParadigmCTF2021)           | WETH                                  |
+| Challenge                                                                | Note, Keywords                        |
+| ------------------------------------------------------------------------ | ------------------------------------- |
+| [Ethernaut: 15. Naught Coin](src/Ethernaut#15-naught-coin)               | `transfer`, `approve`, `transferFrom` |
+| [Paradigm CTF 2021: Secure](src/ParadigmCTF2021)                         | WETH                                  |
+| [DeFi-Security-Summit-Stanford: VToken](src/DeFiSecuritySummitStanford/) |                                       |
 
 ### Storage overwrite by `delegatecall`
 - `delegatecall` is a potential source of vulnerability because the storage of the `delegatecall` caller contract can be overwritten by the called function.
 
-| Challenge                                                      | Note, Keywords                                                                                    |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| [Ethernaut: 6. Delegation](src/Ethernaut#6-delegation)         |                                                                                                   |
-| [Ethernaut: 16. Preservation](src/Ethernaut#16-preservation)   |                                                                                                   |
-| [Ethernaut: 24. Puzzle Wallet](src/Ethernaut#24-puzzle-wallet) | proxy contract                                                                                    |
-| [Ethernaut: 25. Motorbike](src/Ethernaut#25-motorbike)         | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
+| Challenge                                                                              | Note, Keywords                                                                                    |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [Ethernaut: 6. Delegation](src/Ethernaut#6-delegation)                                 |                                                                                                   |
+| [Ethernaut: 16. Preservation](src/Ethernaut#16-preservation)                           |                                                                                                   |
+| [Ethernaut: 24. Puzzle Wallet](src/Ethernaut#24-puzzle-wallet)                         | proxy contract                                                                                    |
+| [Ethernaut: 25. Motorbike](src/Ethernaut#25-motorbike)                                 | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
+| [DeFi-Security-Summit-Stanford: InSecureumLenderPool](src/DeFiSecuritySummitStanford/) | flash loan                                                                                        |
 
 ### Context mismatch in `delegatecall`
 - Functions called in `delegatecall` are executed in the context of the `delegatecall` caller contract. 
