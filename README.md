@@ -73,18 +73,18 @@ Note:
 ### Ethereum/contract basics
 - These challenges can be solved if you know the basic mechanics of Ethereum, [the basic language specification of Solidity](https://docs.soliditylang.org/en/latest/), and the basic operation of contracts.
 
-| Challenge                                                        | Note, Keywords         |
-| ---------------------------------------------------------------- | ---------------------- |
-| Capture The Ether: Deploy a contract                             | faucet                 |
-| Capture The Ether: Call me                                       | contract call          |
-| Capture The Ether: Guess the number                              | contract call          |
-| Capture The Ether: Guess the secret number                       | `keccak256`            |
-| [Ethernaut: 0. Hello Ethernaut](src/Ethernaut#0-hello-ethernaut) | contract call, ABI     |
-| [Ethernaut: 1. Fallback](src/Ethernaut#1-fallback)               | receive Ether function |
-| [Paradigm CTF 2021: Hello](src/ParadigmCTF2021/)                 | contract call          |
-| 0x41414141 CTF: sanity-check                                     | contract call          |
-| 0x41414141 CTF: crackme.sol                                      |                        |
-| [Paradigm CTF 2022: RANDOM](src/ParadigmCTF2022/)                |                        |
+| Challenge                                         | Note, Keywords         |
+| ------------------------------------------------- | ---------------------- |
+| Capture The Ether: Deploy a contract              | faucet                 |
+| Capture The Ether: Call me                        | contract call          |
+| Capture The Ether: Guess the number               | contract call          |
+| Capture The Ether: Guess the secret number        | `keccak256`            |
+| [Ethernaut: 0. Hello Ethernaut](src/Ethernaut/)   | contract call, ABI     |
+| [Ethernaut: 1. Fallback](src/Ethernaut/)          | receive Ether function |
+| [Paradigm CTF 2021: Hello](src/ParadigmCTF2021/)  | contract call          |
+| 0x41414141 CTF: sanity-check                      | contract call          |
+| 0x41414141 CTF: crackme.sol                       |                        |
+| [Paradigm CTF 2022: RANDOM](src/ParadigmCTF2022/) |                        |
 
 ### EVM puzzles
 - Puzzle challenges that can be solved by understanding the EVM specifications.
@@ -94,8 +94,8 @@ Note:
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
 | Capture The Ether: Guess the new number                            | `block.number`, `block.timestamp` (formerly: `now`)                    |
 | Capture The Ether: Predict the block hash                          | `blockhash` (formerly: `block.blockhash`)                              |
-| [Ethernaut: 13. Gatekeeper One](src/Ethernaut#13-gatekeeper-one)   | `msg.sender != tx.origin`, `gasleft().mod(8191) == 0`, type conversion |
-| [Ethernaut: 14. Gatekeeper Two](src/Ethernaut#14-gatekeeper-two)   | `msg.sender != tx.origin`, `extcodesize` is 0                          |
+| [Ethernaut: 13. Gatekeeper One](src/Ethernaut/)                    | `msg.sender != tx.origin`, `gasleft().mod(8191) == 0`, type conversion |
+| [Ethernaut: 14. Gatekeeper Two](src/Ethernaut/)                    | `msg.sender != tx.origin`, `extcodesize` is 0                          |
 | Cipher Shastra: Minion                                             | `msg.sender != tx.origin`, `extcodesize` is 0, `block.timestamp`       |
 | SECCON Beginners CTF 2020: C4B                                     | `block.number`                                                         |
 | [Paradigm CTF 2021: Babysandbox](src/ParadigmCTF2021/Babysandbox/) | `staticcall`, `call`, `delegatecall`, `extcodesize` is 0               |
@@ -109,26 +109,26 @@ Note:
 ### Misuse of `tx.origin`
 - `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
 
-| Challenge                                            | Note, Keywords |
-| ---------------------------------------------------- | -------------- |
-| [Ethernaut: 4. Telephone](src/Ethernaut#4-telephone) |                |
+| Challenge                                 | Note, Keywords |
+| ----------------------------------------- | -------------- |
+| [Ethernaut: 4. Telephone](src/Ethernaut/) |                |
 
 ### Weak sources of randomness from chain attributes
 - Since bytecodes of contracts are publicly available, it is easy to predict pseudorandom numbers whose generation is completed on-chain (using only states, not off-chain data).
 - It is equivalent to having all the parameters of a pseudorandom number generator exposed.
 - If you want to use random numbers that are unpredictable to anyone, use a decentralized oracle with a random number function. For example, [Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/), which implements Verifiable Random Function (VRF).
 
-| Challenge                                            | Note, Keywords |
-| ---------------------------------------------------- | -------------- |
-| Capture The Ether: Predict the future                |                |
-| [Ethernaut: 3. Coin Flip](src/Ethernaut#3-coin-flip) |                |
+| Challenge                                 | Note, Keywords |
+| ----------------------------------------- | -------------- |
+| Capture The Ether: Predict the future     |                |
+| [Ethernaut: 3. Coin Flip](src/Ethernaut/) |                |
 
 ### ERC-20 basics
 - These challenges can be solved with an understanding of the [ERC-20 token standard](https://eips.ethereum.org/EIPS/eip-20).
 
 | Challenge                                                                | Note, Keywords                        |
 | ------------------------------------------------------------------------ | ------------------------------------- |
-| [Ethernaut: 15. Naught Coin](src/Ethernaut#15-naught-coin)               | `transfer`, `approve`, `transferFrom` |
+| [Ethernaut: 15. Naught Coin](src/Ethernaut/)                             | `transfer`, `approve`, `transferFrom` |
 | [Paradigm CTF 2021: Secure](src/ParadigmCTF2021)                         | WETH                                  |
 | [DeFi-Security-Summit-Stanford: VToken](src/DeFiSecuritySummitStanford/) |                                       |
 
@@ -137,10 +137,10 @@ Note:
 
 | Challenge                                                                              | Note, Keywords                                                                                    |
 | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| [Ethernaut: 6. Delegation](src/Ethernaut#6-delegation)                                 |                                                                                                   |
-| [Ethernaut: 16. Preservation](src/Ethernaut#16-preservation)                           |                                                                                                   |
-| [Ethernaut: 24. Puzzle Wallet](src/Ethernaut#24-puzzle-wallet)                         | proxy contract                                                                                    |
-| [Ethernaut: 25. Motorbike](src/Ethernaut#25-motorbike)                                 | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
+| [Ethernaut: 6. Delegation](src/Ethernaut/)                                             |                                                                                                   |
+| [Ethernaut: 16. Preservation](src/Ethernaut/)                                          |                                                                                                   |
+| [Ethernaut: 24. Puzzle Wallet](src/Ethernaut/)                                         | proxy contract                                                                                    |
+| [Ethernaut: 25. Motorbike](src/Ethernaut/)                                             | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
 | [DeFi-Security-Summit-Stanford: InSecureumLenderPool](src/DeFiSecuritySummitStanford/) | flash loan                                                                                        |
 
 ### Context mismatch in `delegatecall`
@@ -156,52 +156,52 @@ Note:
 - Arithmetic overflow has been detected and reverted state since Solidity v0.8.0.
 - Contracts written in earlier versions can be checked by using [the SafeMath library](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v3.4/contracts/math/SafeMath.sol).
 
-| Challenge                                    | Note, Keywords |
-| -------------------------------------------- | -------------- |
-| Capture The Ether: Token sale                | multiplication |
-| Capture The Ether: Token whale               | subtraction    |
-| [Ethernaut: 5. Token](src/Ethernaut#5-token) | subtraction    |
+| Challenge                             | Note, Keywords |
+| ------------------------------------- | -------------- |
+| Capture The Ether: Token sale         | multiplication |
+| Capture The Ether: Token whale        | subtraction    |
+| [Ethernaut: 5. Token](src/Ethernaut/) | subtraction    |
 
 ### Non-executable Ether transfers to a contract
 - Do not create a contract on the assumption that normal Ether transfer (`.send()` or `.transfer()`) can always be executed.
 - If a destination is a contract and there is no receive Ether function or payable fallback function, Ether cannot be transferred.
 - However, instead of the normal transfer functions, the `selfdestruct` described below can be used to force such a contract to transfer Ether.
 
-| Challenge                                  | Note, Keywords |
-| ------------------------------------------ | -------------- |
-| [Ethernaut: 9. King](src/Ethernaut#9-king) |                |
+| Challenge                            | Note, Keywords |
+| ------------------------------------ | -------------- |
+| [Ethernaut: 9. King](src/Ethernaut/) |                |
 
 ### Forced Ether transfer to a contract via `selfdestruct`
 - If a contract does not have a receive Ether function and a payable fallback function, it is not guaranteed that Ether will not be received.
 - When a contract executes `selfdestruct`, it can transfer its Ether to another contract or EOA, and this `selfdestruct` transfer can be forced even if the destination contract does not have the receive Ether function and the payable fallback function. 
 - If the application is built on the assumption that the Ether is `0`, it could be a bug.
 
-| Challenge                                    | Note, Keywords |
-| -------------------------------------------- | -------------- |
-| Capture The Ether: Retirement fund           |                |
-| [Ethernaut: 7. Force](src/Ethernaut#7-force) |                |
+| Challenge                             | Note, Keywords |
+| ------------------------------------- | -------------- |
+| Capture The Ether: Retirement fund    |                |
+| [Ethernaut: 7. Force](src/Ethernaut/) |                |
 
 ### Large gas consumption by a contract callee
 - A large amount of gas can be consumed by loops and recursion in `call`, and there may not be enough gas for the rest of the process.
 - Until Solidity v0.8.0, zero division and `assert(false)` could consume a lot of gas.
 
-| Challenge                                        | Note, Keywords |
-| ------------------------------------------------ | -------------- |
-| [Ethernaut: 20. Denial](src/Ethernaut#20-denial) |                |
+| Challenge                               | Note, Keywords |
+| --------------------------------------- | -------------- |
+| [Ethernaut: 20. Denial](src/Ethernaut/) |                |
 
 ### Forgetting to set `view`/`pure` to interface and abstract contract functions
 - If you forget to set `view` or `pure` for a function and design your application under the assumption that the state will not change, it will be a bug.
 
-| Challenge                                            | Note, Keywords |
-| ---------------------------------------------------- | -------------- |
-| [Ethernaut: 11. Elevator](src/Ethernaut#11-elevator) |                |
+| Challenge                                 | Note, Keywords |
+| ----------------------------------------- | -------------- |
+| [Ethernaut: 11. Elevator](src/Ethernaut/) |                |
 
 ### `view` functions that do not always return the same value
 - Since `view` functions can read state, they can be conditionally branched based on state and do not necessarily return the same value.
 
-| Challenge                                    | Note, Keywords |
-| -------------------------------------------- | -------------- |
-| [Ethernaut: 21. Shop](src/Ethernaut#21-shop) |                |
+| Challenge                             | Note, Keywords |
+| ------------------------------------- | -------------- |
+| [Ethernaut: 21. Shop](src/Ethernaut/) |                |
 
 ### Mistakes in setting `storage` and `memory`
 - If `storage` and `memory` are not set properly, old values may be referenced, or overwriting may not occur, resulting in vulnerability.
@@ -214,9 +214,9 @@ Note:
 - Various information can be obtained just by following the flow of transaction processing.
 - Blockchain explorers such as Etherscan are useful.
 
-| Challenge                                            | Note, Keywords                    |
-| ---------------------------------------------------- | --------------------------------- |
-| [Ethernaut: 17. Recovery](src/Ethernaut#17-recovery) | loss of deployed contract address |
+| Challenge                                 | Note, Keywords                    |
+| ----------------------------------------- | --------------------------------- |
+| [Ethernaut: 17. Recovery](src/Ethernaut/) | loss of deployed contract address |
 
 ### Reversing states 
 - Since the state and the bytecodes of contracts are public, all variables, including private variables, are readable.
@@ -225,8 +225,8 @@ Note:
 | Challenge                                                     | Note, Keywords |
 | ------------------------------------------------------------- | -------------- |
 | Capture The Ether: Guess the random number                    |                |
-| [Ethernaut: 8. Vault](src/Ethernaut#8-vault)                  |                |
-| [Ethernaut: 12. Privacy](src/Ethernaut#12-privacy)            |                |
+| [Ethernaut: 8. Vault](src/Ethernaut/)                         |                |
+| [Ethernaut: 12. Privacy](src/Ethernaut/)                      |                |
 | Cipher Shastra: Sherlock                                      |                |
 | 0x41414141 CTF: secure enclave                                |                |
 | [EthernautDAO: 1. PrivateData](src/EthernautDAO/PrivateData/) |                |
@@ -260,11 +260,11 @@ Note:
 ### EVM bytecode golf
 - These challenges have a limit on the length of the bytecode to be created.
 
-| Challenge                                                  | Note, Keywords                                                                                                 |
-| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| [Ethernaut: 18. MagicNumber](src/Ethernaut#18-magicnumber) |                                                                                                                |
-| [Paradigm CTF 2021: Rever](src/ParadigmCTF2021/Rever/)     | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
-| [Huff Challenge: Challenge #1](src/HuffChallenge/)         |                                                                                                                |
+| Challenge                                              | Note, Keywords                                                                                                 |
+| ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| [Ethernaut: 18. MagicNumber](src/Ethernaut/)           |                                                                                                                |
+| [Paradigm CTF 2021: Rever](src/ParadigmCTF2021/Rever/) | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
+| [Huff Challenge: Challenge #1](src/HuffChallenge/)     |                                                                                                                |
 
 ### Gas optimization
 - These challenges have a limit on the gas to be consumed.
@@ -282,7 +282,7 @@ Note:
 | Challenge                                                                       | Note, Keywords             |
 | ------------------------------------------------------------------------------- | -------------------------- |
 | Capture The Ether: Token bank                                                   |                            |
-| [Ethernaut: 10. Re-entrancy](src/Ethernaut#10-re-entrancy)                      |                            |
+| [Ethernaut: 10. Re-entrancy](src/Ethernaut/)                                    |                            |
 | Paradigm CTF 2021: Yield Aggregator                                             |                            |
 | HTB University CTF 2020 Quals: moneyHeist                                       |                            |
 | [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/)             |                            |
@@ -320,17 +320,17 @@ Note:
 ### Bug in AMM price calculation algorithm
 - A bug in the Automated Market Maker (AMM) price calculation algorithm allows a simple combination of trades to drain funds.
 
-| Challenge                                  | Note, Keywords |
-| ------------------------------------------ | -------------- |
-| [Ethernaut: 22. Dex](src/Ethernaut#22-dex) |                |
+| Challenge                            | Note, Keywords |
+| ------------------------------------ | -------------- |
+| [Ethernaut: 22. Dex](src/Ethernaut/) |                |
 
 ### Attack using custom tokens
 - The ability of a protocol to use arbitrary tokens is not in itself a bad thing, but it can be an attack vector.
 - In addition, bugs in the whitelist design, which assumes that arbitrary tokens are not available, could cause funds to drain.
 
-| Challenge                                          | Note, Keywords |
-| -------------------------------------------------- | -------------- |
-| [Ethernaut: 23. Dex Two](src/Ethernaut#23-dex-two) |                |
+| Challenge                                | Note, Keywords |
+| ---------------------------------------- | -------------- |
+| [Ethernaut: 23. Dex Two](src/Ethernaut/) |                |
 
 ### Funds leakage due to oracle manipulation (without flash loans)
 - It corrupts the value of the oracle and drains the funds of applications that refer to that oracle.
@@ -419,20 +419,20 @@ Note:
 - It need not be due to overflow.
 - The `length` property has been read-only since v0.6.0.
 
-| Challenge                                                  | Note, Keywords |
-| ---------------------------------------------------------- | -------------- |
-| Capture The Ether: Mapping                                 |                |
-| [Ethernaut: 19. Alien Codex](src/Ethernaut#19-alien-codex) |                |
-| Paradigm CTF 2021: Bank                                    |                |
+| Challenge                                    | Note, Keywords |
+| -------------------------------------------- | -------------- |
+| Capture The Ether: Mapping                   |                |
+| [Ethernaut: 19. Alien Codex](src/Ethernaut/) |                |
+| Paradigm CTF 2021: Bank                      |                |
 
 ### Constructor that is just a function by a typo (< Solidity 0.5.0)
 - In versions before v0.4.22, the constructor is defined as a function with the same name as the contract, so a typo of the constructor name could cause it to become just a function, resulting in a bug.
 - Since v0.5.0, this specification is removed and the `constructor` keyword must be used.
 
-| Challenge                                        | Note, Keywords |
-| ------------------------------------------------ | -------------- |
-| Capture The Ether: Assume ownership              |                |
-| [Ethernaut: 2. Fallout](src/Ethernaut#2-fallout) |                |
+| Challenge                               | Note, Keywords |
+| --------------------------------------- | -------------- |
+| Capture The Ether: Assume ownership     |                |
+| [Ethernaut: 2. Fallout](src/Ethernaut/) |                |
 
 ### Storage overwrite via uninitialized storage pointer (< Solidity 0.5.0)
 - Since v0.5.0, uninitialized storage variables are forbidden, so this bug cannot occur.
