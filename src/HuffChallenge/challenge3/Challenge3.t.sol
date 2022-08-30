@@ -7,7 +7,7 @@ import "./IChallenge3.sol";
 import "./Challenge3Exploit.sol";
 
 contract Challenge3Test is Test {
-    address playerAddress = address(10);
+    address playerAddress = makeAddr("player");
     Challenge3 test;
 
     function setUp() public {
