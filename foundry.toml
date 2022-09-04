@@ -3,6 +3,7 @@ src = 'src'
 out = 'out'
 libs = ['lib']
 ffi = true
+match_path = "*/*.t.sol"
 no_match_path = '*/_*'
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
