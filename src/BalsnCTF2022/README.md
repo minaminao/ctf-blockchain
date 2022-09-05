@@ -219,7 +219,7 @@ Flag: `BALSN{safeTransferFrom_ERC20_to_ERC721}`
 
 Decode `t` from the `felt` type.
 
-```
+```python
 from Crypto.Util.number import long_to_bytes
 
 x = 0x42414c534e7b6f032fa620b5c520ff47733c3723ebc79890c26af4
@@ -231,4 +231,4 @@ flag = long_to_bytes(x + t ** 2)
 print(flag)
 ```
 
-Flag: `b'BALSN{read_data_from_cairo}'`
+Flag: `BALSN{read_data_from_cairo}`
