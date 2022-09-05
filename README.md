@@ -283,10 +283,10 @@ Note:
 | Challenge                                                                       | Note, Keywords             |
 | ------------------------------------------------------------------------------- | -------------------------- |
 | [Capture The Ether: Token bank](src/CaptureTheEther/)                           | ERC-223, `tokenFallback()` |
-| [Ethernaut: 10. Re-entrancy](src/Ethernaut/)                                    |                            |
+| [Ethernaut: 10. Re-entrancy](src/Ethernaut/)                                    | `call`                     |
 | Paradigm CTF 2021: Yield Aggregator                                             |                            |
 | HTB University CTF 2020 Quals: moneyHeist                                       |                            |
-| [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/)             |                            |
+| [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/)             | `call`                     |
 | [DeFi-Security-Summit-Stanford: InsecureDexLP](src/DeFiSecuritySummitStanford/) | ERC-223, `tokenFallback()` |
 
 ### Flash loan basics
@@ -453,6 +453,7 @@ Note:
 | [Paradigm CTF 2022: RESCUE](src/ParadigmCTF2022/)                 |                                                                                                                                   |
 | Paradigm CTF 2022: JUST-IN-TIME                                   |                                                                                                                                   |
 | Paradigm CTF 2022: 0XMONACO                                       |                                                                                                                                   |
+| [BalsnCTF 2022](src/BalsnCTF2022/)                                | initialize, `_safeTransferFrom`                                                                                                   |
 
 ## Bitcoin
 Note
@@ -484,7 +485,8 @@ Note
 | --------------------------------------------------------------- | ---------------- |
 | [Paradigm CTF 2022: RIDDLE-OF-THE-SPHINX](src/ParadigmCTF2022/) | contract call    |
 | [Paradigm CTF 2022: CAIRO-PROXY](src/ParadigmCTF2022/)          | integer overflow |
-| [Paradigm CTF 2022: CAIRO-AUCTION](src/ParadigmCTF2022/)        | Uint256          |
+| [Paradigm CTF 2022: CAIRO-AUCTION](src/ParadigmCTF2022/)        | `Uint256`        |
+| [BalsnCTF 2022: Cairo Reverse](src/BalsnCTF2022/)               | reversing        |
 
 ## Solana
 | Challenge                                             | Note, Keywords       |
