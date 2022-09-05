@@ -453,7 +453,7 @@ Note:
 | [Paradigm CTF 2022: RESCUE](src/ParadigmCTF2022/)                 |                                                                                                                                   |
 | Paradigm CTF 2022: JUST-IN-TIME                                   |                                                                                                                                   |
 | Paradigm CTF 2022: 0XMONACO                                       |                                                                                                                                   |
-| [BalsnCTF 2022](src/BalsnCTF2022/)                                | initialize, `_safeTransferFrom`                                                                                                   |
+| [BalsnCTF 2022](src/BalsnCTF2022/)                                | initialize, `_safeTransferFrom`, `CREATE2`                                                                                        |
 
 ## Bitcoin
 Note
