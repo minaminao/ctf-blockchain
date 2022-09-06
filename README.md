@@ -83,9 +83,8 @@ Note:
 | [Ethernaut: 0. Hello Ethernaut](src/Ethernaut/)                    | contract call, ABI     |
 | [Ethernaut: 1. Fallback](src/Ethernaut/)                           | receive Ether function |
 | [Paradigm CTF 2021: Hello](src/ParadigmCTF2021/)                   | contract call          |
-| 0x41414141 CTF: sanity-check                                       | contract call          |
-| 0x41414141 CTF: crackme.sol                                        |                        |
-| [Paradigm CTF 2022: RANDOM](src/ParadigmCTF2022/)                  |                        |
+| [0x41414141 CTF: sanity-check](src/0x41414141CTF/)                 | contract call          |
+| [Paradigm CTF 2022: RANDOM](src/ParadigmCTF2022/)                  | contract call          |
 
 ### EVM puzzles
 - Puzzle challenges that can be solved by understanding the EVM specifications.
@@ -229,7 +228,7 @@ Note:
 | [Ethernaut: 8. Vault](src/Ethernaut/)                              |                |
 | [Ethernaut: 12. Privacy](src/Ethernaut/)                           |                |
 | Cipher Shastra: Sherlock                                           |                |
-| 0x41414141 CTF: secure enclave                                     |                |
+| [0x41414141 CTF: secure enclave](src/0x41414141CTF/)               | log, storage   |
 | [EthernautDAO: 1. PrivateData](src/EthernautDAO/PrivateData/)      |                |
 
 ### Reversing transactions
@@ -243,20 +242,21 @@ Note:
 - Reversing a contract for which code is not given in whole or in part.
 - Use decompilers (e.g., [panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
 
-| Challenge                                  | Note, Keywords                  |
-| ------------------------------------------ | ------------------------------- |
-| Incognito 2.0: Ez                          | keep in plain text              |
-| Real World CTF 3rd: Re:Montagy             | Jump Oriented Programming (JOP) |
-| 0x41414141 CTF: Crypto Casino              |                                 |
-| Paradigm CTF 2021: Babyrev                 |                                 |
-| Paradigm CTF 2021: JOP                     | Jump Oriented Programming (JOP) |
-| 34C3 CTF: Chaingang                        |                                 |
-| Blaze CTF 2018: Smart? Contract            |                                 |
-| DEF CON CTF Qualifier 2018: SAG?           |                                 |
-| pbctf 2020: pbcoin                         |                                 |
-| Paradigm CTF 2022: STEALING-SATS           |                                 |
-| Paradigm CTF 2022: ELECTRIC-SHEEP          |                                 |
-| Paradigm CTF 2022: FUN-REVERSING-CHALLENGE |                                 |
+| Challenge                                           | Note, Keywords                  |
+| --------------------------------------------------- | ------------------------------- |
+| Incognito 2.0: Ez                                   | keep in plain text              |
+| Real World CTF 3rd: Re:Montagy                      | Jump Oriented Programming (JOP) |
+| [0x41414141 CTF: crackme.sol](src/0x41414141CTF/)   | decompile                       |
+| [0x41414141 CTF: Crypto Casino](src/0x41414141CTF/) | bypass condition check          |
+| Paradigm CTF 2021: Babyrev                          |                                 |
+| Paradigm CTF 2021: JOP                              | Jump Oriented Programming (JOP) |
+| 34C3 CTF: Chaingang                                 |                                 |
+| Blaze CTF 2018: Smart? Contract                     |                                 |
+| DEF CON CTF Qualifier 2018: SAG?                    |                                 |
+| pbctf 2020: pbcoin                                  |                                 |
+| Paradigm CTF 2022: STEALING-SATS                    |                                 |
+| Paradigm CTF 2022: ELECTRIC-SHEEP                   |                                 |
+| Paradigm CTF 2022: FUN-REVERSING-CHALLENGE          |                                 |
 
 ### EVM bytecode golf
 - These challenges have a limit on the length of the bytecode to be created.
@@ -386,9 +386,9 @@ Note:
 
 ### Encryption and decryption in secp256k1
 
-| Challenge                 | Note, Keywords                                                                         |
-| ------------------------- | -------------------------------------------------------------------------------------- |
-| 0x41414141 CTF: Rich Club | Prepare the key pair oneself. Decrypt the encrypted flag with the public key provided. |
+| Challenge                                       | Note, Keywords  |
+| ----------------------------------------------- | --------------- |
+| [0x41414141 CTF: Rich Club](src/0x41414141CTF/) | DEX, flash loan |
 
 ### Bypassing bot and taking an ERC-20 token owned by a wallet with a known private key
 - If a wallet with a known private key has an ERC-20 token but no Ether, it is usually necessary to first send Ether to the wallet and then `transfer` the ERC-20 token to get the ERC-20 token.
