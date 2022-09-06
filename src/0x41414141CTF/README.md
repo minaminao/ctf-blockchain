@@ -7,6 +7,7 @@ Network: Rinkeby
 - [secure enclave](#secure-enclave)
 - [crackme.sol](#crackmesol)
 - [Crypto Casino](#crypto-casino)
+- [Rich Club](#rich-club)
 
 ## sanity check
 
