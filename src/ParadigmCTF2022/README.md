@@ -1,7 +1,5 @@
 # Paradigm CTF 2022 Writeup
 
-_This writeup is **WIP** and frequently updated._
-
 Paradigm CTF: https://twitter.com/paradigm_ctf.
 The source code of the CTF infrastructure is in [paradigmxyz/paradigm-ctf-infrastructure](https://github.com/paradigmxyz/paradigm-ctf-infrastructure).
 
