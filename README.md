@@ -288,6 +288,7 @@ Note:
 | HTB University CTF 2020 Quals: moneyHeist                                       |                            |
 | [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/)             | `call`                     |
 | [DeFi-Security-Summit-Stanford: InsecureDexLP](src/DeFiSecuritySummitStanford/) | ERC-223, `tokenFallback()` |
+| [MapleCTF 2022: maplebacoin](src/MapleCTF/)                                     |                            |
 
 ### Flash loan basics
 - Flash loans are uncollateralised loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
