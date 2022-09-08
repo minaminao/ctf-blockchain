@@ -5,6 +5,6 @@ libs = ['lib']
 ffi = true
 match_path = "*/*.t.sol"
 no_match_path = '*/_*'
-fs_permissions = [{ access = "read", path = "./"}]
+fs_permissions = [{ access = "read", path = "./out"}]
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
