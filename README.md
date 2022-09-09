@@ -48,6 +48,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Bypassing bot and taking an ERC-20 token owned by a wallet with a known private key](#bypassing-bot-and-taking-an-erc-20-token-owned-by-a-wallet-with-a-known-private-key)
   - [Claimable intermediate nodes of a Merkle tree](#claimable-intermediate-nodes-of-a-merkle-tree)
   - [Precompiled contracts](#precompiled-contracts)
+  - [Faking errors](#faking-errors)
   - [Foundry cheatcodes](#foundry-cheatcodes)
   - [Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)](#arbitrary-storage-overwriting-by-setting-an-array-length-to-2256-1--solidity-060)
   - [Constructor that is just a function by a typo (< Solidity 0.5.0)](#constructor-that-is-just-a-function-by-a-typo--solidity-050)
@@ -409,6 +410,11 @@ Note:
 | Challenge                                         | Note, Keywords |
 | ------------------------------------------------- | -------------- |
 | [Paradigm CTF 2022: VANITY](src/ParadigmCTF2022/) |                |
+
+### Faking errors
+| Challenge                                         | Note, Keywords |
+| ------------------------------------------------- | -------------- |
+|[Ethernaut: 27. Good Samaritan](src/Ethernaut/)   |                |
 
 ### Foundry cheatcodes
 | Challenge                                            | Note, Keywords |
