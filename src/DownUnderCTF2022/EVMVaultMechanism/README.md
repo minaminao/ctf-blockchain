@@ -9,7 +9,7 @@ export INSTANCE_ADDRESS=0x6E4198C61C75D1B4D1cbcd00707aAC7d76867cF8
 export FOUNDRY_ETH_RPC_URL=https://blockchain-evmvault-1a2ea45a5f20b79f-eth.2022.ductf.dev:443/
 ```
 
-If the blocks is examined using `cast`, several transactions can be found.
+If the blocks are examined using `cast`, several transactions can be found.
 Reading those transactions, we can find that the contract is deployed at address `0x6E4198C61C75D1B4D1cbcd00707aAC7d76867cF8`.
 
 Get the bytecode of the contract:
@@ -101,7 +101,7 @@ $ erever -f src/DownUnderCTF2022/EVMVaultMechanism/contract.txt --symbolic | gre
 0x2bc: SSTORE(0x1337, (SLOAD(0x1337) ^ 0xc4))
 ```
 
-There are six locations for the process to write to slot 0x1337 using `SSTORE`.
+There are six locations for the process to write to slot `0x1337` using `SSTORE`.
 These `SSTORE`s can be expected to correspond to processes that will be executed once the conditions of each function are satisfied.
 
 List of function signatures and function start locations:
@@ -119,6 +119,18 @@ $ erever -f src/DownUnderCTF2022/EVMVaultMechanism/contract.txt --symbolic --ent
 0x1c7: REVERT(0x00, 0x00)
 0x1cb: JUMP(0x02c0)
 ```
+
+
+The table is summarized as follows.
+
+| Function Signature | Start Location | XOR  |
+| ------------------ | -------------- | ---- |
+| 0x41414141         | 0x01cc         | 0x4a |
+| 0x42424242         | 0x01ea         | 0xd1 |
+| 0x43434343         | 0x020e         | 0x64 |
+| 0x44444444         | 0x0232         | 0xb2 |
+| 0x45454545         | 0x0256         | 0x63 |
+| 0x46464646         | 0x02a0         | 0xc4 |
 
 Calculate which of a set of functions consisting of six functions should be executed to set the slot `0x1337` to `0xff`:
 ```py
@@ -394,7 +406,7 @@ Flag: `DUCTF{b3y0nd_th3_v4ult_li3s_a_w3ll_d3serv3d_fl4g}`
 
 
 **Appendix: a code for `forge test --debug`:**
-``solidity
+```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
