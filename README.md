@@ -50,6 +50,8 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Precompiled contracts](#precompiled-contracts)
   - [Faking errors](#faking-errors)
   - [Foundry cheatcodes](#foundry-cheatcodes)
+- [Front-running](#front-running)
+- [Head Overflow Bug in Calldata Tuple ABI-Reencoding (< Solidity 0.8.16)](#head-overflow-bug-in-calldata-tuple-abi-reencoding--solidity-0816)
   - [Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)](#arbitrary-storage-overwriting-by-setting-an-array-length-to-2256-1--solidity-060)
   - [Constructor that is just a function by a typo (< Solidity 0.5.0)](#constructor-that-is-just-a-function-by-a-typo--solidity-050)
   - [Storage overwrite via uninitialized storage pointer (< Solidity 0.5.0)](#storage-overwrite-via-uninitialized-storage-pointer--solidity-050)
@@ -86,6 +88,7 @@ Note:
 | [Paradigm CTF 2021: Hello](src/ParadigmCTF2021/)                   | contract call          |
 | [0x41414141 CTF: sanity-check](src/0x41414141CTF/)                 | contract call          |
 | [Paradigm CTF 2022: RANDOM](src/ParadigmCTF2022/)                  | contract call          |
+| [DownUnderCTF 2022: Solve Me](src/DownUnderCTF2022/)               |                        |
 
 ### EVM puzzles
 - Puzzle challenges that can be solved by understanding the EVM specifications.
@@ -119,10 +122,11 @@ Note:
 - It is equivalent to having all the parameters of a pseudorandom number generator exposed.
 - If you want to use random numbers that are unpredictable to anyone, use a decentralized oracle with a random number function. For example, [Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/), which implements Verifiable Random Function (VRF).
 
-| Challenge                                 | Note, Keywords |
-| ----------------------------------------- | -------------- |
-| Capture The Ether: Predict the future     |                |
-| [Ethernaut: 3. Coin Flip](src/Ethernaut/) |                |
+| Challenge                                                 | Note, Keywords |
+| --------------------------------------------------------- | -------------- |
+| Capture The Ether: Predict the future                     |                |
+| [Ethernaut: 3. Coin Flip](src/Ethernaut/)                 |                |
+| [DownUnderCTF 2022: Crypto Casino](src/DownUnderCTF2022/) |                |
 
 ### ERC-20 basics
 - These challenges can be solved with an understanding of the [ERC-20 token standard](https://eips.ethereum.org/EIPS/eip-20).
@@ -235,29 +239,32 @@ Note:
 ### Reversing transactions
 - Reversing the contents of a transaction or how the state has been changed by the transaction.
 
-| Challenge                                       | Note, Keywords |
-| ----------------------------------------------- | -------------- |
-| [darkCTF: Secret Of The Contract](src/DarkCTF/) |                |
+| Challenge                                                        | Note, Keywords |
+| ---------------------------------------------------------------- | -------------- |
+| [darkCTF: Secret Of The Contract](src/DarkCTF/)                  |                |
+| [DownUnderCTF 2022: Secret and Ephemeral](src/DownUnderCTF2022/) |                |
+
 
 ### Reversing EVM bytecode
 - Reversing a contract for which code is not given in whole or in part.
 - Use decompilers (e.g., [panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
 
-| Challenge                                           | Note, Keywords                  |
-| --------------------------------------------------- | ------------------------------- |
-| Incognito 2.0: Ez                                   | keep in plain text              |
-| Real World CTF 3rd: Re:Montagy                      | Jump Oriented Programming (JOP) |
-| [0x41414141 CTF: crackme.sol](src/0x41414141CTF/)   | decompile                       |
-| [0x41414141 CTF: Crypto Casino](src/0x41414141CTF/) | bypass condition check          |
-| Paradigm CTF 2021: Babyrev                          |                                 |
-| Paradigm CTF 2021: JOP                              | Jump Oriented Programming (JOP) |
-| 34C3 CTF: Chaingang                                 |                                 |
-| Blaze CTF 2018: Smart? Contract                     |                                 |
-| DEF CON CTF Qualifier 2018: SAG?                    |                                 |
-| pbctf 2020: pbcoin                                  |                                 |
-| Paradigm CTF 2022: STEALING-SATS                    |                                 |
-| Paradigm CTF 2022: ELECTRIC-SHEEP                   |                                 |
-| Paradigm CTF 2022: FUN-REVERSING-CHALLENGE          |                                 |
+| Challenge                                                       | Note, Keywords                  |
+| --------------------------------------------------------------- | ------------------------------- |
+| Incognito 2.0: Ez                                               | keep in plain text              |
+| Real World CTF 3rd: Re:Montagy                                  | Jump Oriented Programming (JOP) |
+| [0x41414141 CTF: crackme.sol](src/0x41414141CTF/)               | decompile                       |
+| [0x41414141 CTF: Crypto Casino](src/0x41414141CTF/)             | bypass condition check          |
+| Paradigm CTF 2021: Babyrev                                      |                                 |
+| Paradigm CTF 2021: JOP                                          | Jump Oriented Programming (JOP) |
+| 34C3 CTF: Chaingang                                             |                                 |
+| Blaze CTF 2018: Smart? Contract                                 |                                 |
+| DEF CON CTF Qualifier 2018: SAG?                                |                                 |
+| pbctf 2020: pbcoin                                              |                                 |
+| Paradigm CTF 2022: STEALING-SATS                                |                                 |
+| Paradigm CTF 2022: ELECTRIC-SHEEP                               |                                 |
+| Paradigm CTF 2022: FUN-REVERSING-CHALLENGE                      |                                 |
+| [DownUnderCTF 2022: EVM Vault Mechanism](src/DownUnderCTF2022/) |                                 |
 
 ### EVM bytecode golf
 - These challenges have a limit on the length of the bytecode to be created.
@@ -412,15 +419,27 @@ Note:
 | [Paradigm CTF 2022: VANITY](src/ParadigmCTF2022/) |                |
 
 ### Faking errors
-| Challenge                                         | Note, Keywords |
-| ------------------------------------------------- | -------------- |
-|[Ethernaut: 27. Good Samaritan](src/Ethernaut/)   |                |
+| Challenge                                       | Note, Keywords |
+| ----------------------------------------------- | -------------- |
+| [Ethernaut: 27. Good Samaritan](src/Ethernaut/) |                |
 
 ### Foundry cheatcodes
 | Challenge                                            | Note, Keywords |
 | ---------------------------------------------------- | -------------- |
 | [Paradigm CTF 2022: TRAPDOOOR](src/ParadigmCTF2022/) |                |
 | Paradigm CTF 2022: TRAPDOOOOR                        |                |
+
+## Front-running
+| Challenge                                               | Note, Keywords |
+| ------------------------------------------------------- | -------------- |
+| [DownUnderCTF 2022: Private Log](src/DownUnderCTF2022/) |                |
+
+## Head Overflow Bug in Calldata Tuple ABI-Reencoding (< Solidity 0.8.16)
+- See: https://blog.soliditylang.org/2022/08/08/calldata-tuple-reencoding-head-overflow-bug/
+
+| Challenge                                                 | Note, Keywords |
+| --------------------------------------------------------- | -------------- |
+| [0CTF 2022: TCTF NFT Market](src/0CTF2022/TctfNftMarket/) |                |
 
 ### Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)
 - For example, any storage can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.

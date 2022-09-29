@@ -11,11 +11,7 @@ library PermitLibrary {
         address spenderAddress,
         uint256 value,
         uint256 deadline
-    )
-        internal
-        view
-        returns (bytes32)
-    {
+    ) internal view returns (bytes32) {
         IERC20Permit token = IERC20Permit(tokenAddress);
 
         bytes32 _PERMIT_TYPEHASH =
