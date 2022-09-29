@@ -86,7 +86,7 @@ def _fallback() payable:
                           require uint32(call.func_hash) >> 224 == 1179010630
                           stor1337 = stor1337 xor 196
 ```
-The result is quite wrong, but it seems that by setting `0xff` to the value in slot `0x1337` and calling the function whose signature is `0x76726679`, the value in slot `0x736f6c766564` is set to `1` and the flag is gotten.
+The result is quite wrong, but it seems that by setting `0xff` to the value in slot `0x1337` and calling the function whose selector is `0x76726679`, the value in slot `0x736f6c766564` is set to `1` and the flag is gotten.
 
 Find out where to write slot `0x1337` using [erever](https://github.com/minaminao/erever):
 
@@ -104,7 +104,7 @@ $ erever -f src/DownUnderCTF2022/EVMVaultMechanism/contract.txt --symbolic | gre
 There are six locations for the process to write to slot `0x1337` using `SSTORE`.
 These `SSTORE`s can be expected to correspond to processes that will be executed once the conditions of each function are satisfied.
 
-List of function signatures and function start locations:
+List of function selectors and function start locations:
 
 ```
 $ erever -f src/DownUnderCTF2022/EVMVaultMechanism/contract.txt --symbolic --entrypoint 0x168 -n 10
@@ -123,14 +123,14 @@ $ erever -f src/DownUnderCTF2022/EVMVaultMechanism/contract.txt --symbolic --ent
 
 The table is summarized as follows.
 
-| Function Signature | Start Location | XOR  |
-| ------------------ | -------------- | ---- |
-| 0x41414141         | 0x01cc         | 0x4a |
-| 0x42424242         | 0x01ea         | 0xd1 |
-| 0x43434343         | 0x020e         | 0x64 |
-| 0x44444444         | 0x0232         | 0xb2 |
-| 0x45454545         | 0x0256         | 0x63 |
-| 0x46464646         | 0x02a0         | 0xc4 |
+| Function Selector | Start Location | XOR  |
+| ----------------- | -------------- | ---- |
+| 0x41414141        | 0x01cc         | 0x4a |
+| 0x42424242        | 0x01ea         | 0xd1 |
+| 0x43434343        | 0x020e         | 0x64 |
+| 0x44444444        | 0x0232         | 0xb2 |
+| 0x45454545        | 0x0256         | 0x63 |
+| 0x46464646        | 0x02a0         | 0xc4 |
 
 Calculate which of a set of functions consisting of six functions should be executed to set the slot `0x1337` to `0xff`:
 ```py
@@ -186,21 +186,21 @@ $ erever -f src/DownUnderCTF2022/EVMVaultMechanism/contract.txt --symbolic --ent
 ```
 
 The above results show that:
-- It is possible to compute parameters that satisfy the condition of the function with the function signature `0x41414141`.
+- It is possible to compute parameters that satisfy the condition of the function with the function selector `0x41414141`.
     - `0x0346d81803d471 == (((var_1 + 0x069b135a06c3) * 0x80) ^ 0x0b3abdcef1f1)`: It can be reversed for `var_1`.
-- It is not possible to compute parameters that satisfy the condition of the function with the function signature `0x42424242`.
+- It is not possible to compute parameters that satisfy the condition of the function with the function selector `0x42424242`.
     - `SHR(0xc8, KECCAK256(0x0f, 0x04)) == 0xfd28448c97d19c`: It is difficult to calculate a parameter that satisfy this.
-- It is possible to compute parameters that satisfy the following conditions of the function with the function signature `0x43434343`.
+- It is possible to compute parameters that satisfy the following conditions of the function with the function selector `0x43434343`.
     - `CALLER() & 0xff) == 0x77`
     - `BALANCE(CALLER()) > 0x0de0b6b3a7640000`
     - `EXTCODESIZE(CALLER()) == SHR(0x18, (EXTCODEHASH(CALLER()) & 0xff000000))`
     - `KECCAK256(0x07, 0x04) & 0xff) == 0x77))`
-- It is possible to compute parameters that satisfy the condition of the function with the function signature `0x44444444`.
+- It is possible to compute parameters that satisfy the condition of the function with the function selector `0x44444444`.
     - `(0x00 == ((0x0101 * (SHR(0x18, var_1) & 0xff)) ^ ((0x02 * (0x07 << SHR(0x08, (var_1 & 0xffff00))) + 0x0d)) + BLOCKHASH((NUMBER() - (0x03 + ((0x02 * (var_1 & 0xff)) & 0xff))))))`
-- Since the function with the function signature `0x45454545` contains a loop, further investigation is needed for this.
-- It is not possible to compute parameters that satisfy the condition of the function with the function signature `0x46464646`.
+- Since the function with the function selector `0x45454545` contains a loop, further investigation is needed for this.
+- It is not possible to compute parameters that satisfy the condition of the function with the function selector `0x46464646`.
 
-Thus, of the two candidates, it is correct to execute the functions with the signatures `0x41414141`, `0x43434343`, `0x44444444`, and `0x45454545`.
+Thus, of the two candidates, it is correct to execute the functions with the selectors `0x41414141`, `0x43434343`, `0x44444444`, and `0x45454545`.
 
 **Solve `0x41414141`:**
 
