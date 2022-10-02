@@ -172,9 +172,10 @@ Note:
 - If a destination is a contract and there is no receive Ether function or payable fallback function, Ether cannot be transferred.
 - However, instead of the normal transfer functions, the `selfdestruct` described below can be used to force such a contract to transfer Ether.
 
-| Challenge                            | Note, Keywords |
-| ------------------------------------ | -------------- |
-| [Ethernaut: 9. King](src/Ethernaut/) |                |
+| Challenge                                                                  | Note, Keywords |
+| -------------------------------------------------------------------------- | -------------- |
+| [Ethernaut: 9. King](src/Ethernaut/)                                       |                |
+| [Project SEKAI CTF 2022: Random Song](src/ProjectSekaiCTF2022/RandomSong/) | Chainlink VRF  |
 
 ### Forced Ether transfer to a contract via `selfdestruct`
 - If a contract does not have a receive Ether function and a payable fallback function, it is not guaranteed that Ether will not be received.
