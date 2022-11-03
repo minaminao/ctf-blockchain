@@ -30,3 +30,14 @@ Interface: deposit(), withdraw(), and setWithdrawer(address)
 ```
 forge test --match-contract Challenge3Test -vvvv
 ```
+
+## Challenge #5
+https://twitter.com/huff_language/status/1586401774927126528
+
+> Huff challenge #5 🗿🍾⛳️ : We got another fun one for ya
+Implement the most gas efficient contract that returns true if the calldata represents a signed message from the sender of the tx. 
+If it isn't, do something that makes the transaction run out of gas.
+
+```
+forge test --match-contract Challenge5Test -vvvv
+```

@@ -1,0 +1,58 @@
+/// https://twitter.com/huff_language/status/1586401774927126528
+#define macro MAIN() = takes (0) returns (0) {
+    /// Check if calldatasize is 97 bytes (MessageHash=32, Signature=65)
+    calldatasize 
+    0x61 eq 
+    extractParamsAndStore jumpi
+
+    oog jump
+        
+    extractParamsAndStore:
+    /// Store the message hash
+    0x00 calldataload
+    0x00 mstore
+
+    /// Store 'v'
+    0x60 calldataload
+    0x3f mstore
+
+    /// Store 'r'
+    0x20 calldataload
+    0x40 mstore 
+    
+    /// Store 's'
+    0x40 calldataload
+    0x60 mstore 
+    
+    /// Prepare stack for 'ecrecover' staticcall 
+    0x20 
+    0x00 
+    0x80 
+    0x00 
+    chainid 
+    gas
+    staticcall validate jumpi
+
+    oog jump
+
+    /// Check if caller==retdata (signer address)
+    validate:
+    0x00 mload 
+    dup1
+    caller 
+    eq valid jumpi
+
+    oog jump
+
+    // Return true
+    valid: 
+    chainid 
+    0x00 mstore
+    0x20 0x00 return
+
+    // out-of-gas
+    oog:
+    0x01 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff mstore
+
+}
+
