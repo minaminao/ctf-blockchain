@@ -3,6 +3,7 @@ pragma solidity ^0.8.13;
 
 import "../Ethernaut/Level.sol";
 import "forge-std/Script.sol";
+import "forge-std/Vm.sol";
 import "./AlienCodex-08.sol";
 
 contract AlienCodexFactory is Level {
