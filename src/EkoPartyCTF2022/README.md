@@ -1,5 +1,11 @@
 # EKOPARTY CTF 2022
 
+## Piggy
+[Exploit](Piggy/PiggyExploit.s.sol)
+
+## Greedy
+[Exploit](Greedy/GreedyExploit.s.sol)
+
 ## SmartRev
 >This contract compute the flag in memory. Can you see it anyway?
 Contract
