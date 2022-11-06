@@ -266,6 +266,7 @@ Note:
 | Paradigm CTF 2022: ELECTRIC-SHEEP                               |                                 |
 | Paradigm CTF 2022: FUN-REVERSING-CHALLENGE                      |                                 |
 | [DownUnderCTF 2022: EVM Vault Mechanism](src/DownUnderCTF2022/) |                                 |
+| [EKOPARTY CTF 2022: Byte](src/EkoPartyCTF2022/)                 | stack tracing                   |
 | [EKOPARTY CTF 2022: SmartRev](src/EkoPartyCTF2022/)             | memory tracing                  |
 
 ### EVM bytecode golf
