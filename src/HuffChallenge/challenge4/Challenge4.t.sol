@@ -4,6 +4,7 @@ pragma solidity 0.8.15;
 import {Test} from "forge-std/Test.sol";
 import {HuffDeployer} from "foundry-huff/HuffDeployer.sol";
 
+// Credits: Philippe Dumonet <philippe@dumo.net>
 contract Challenge4Test is Test {
     address reversooor;
 
