@@ -1,0 +1,31 @@
+// Solution by: Philippe Dumonet <philippe@dumo.net>
+#define constant NEG1 = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+
+#define macro GET_CALLDATA_BYTE() = takes(1) returns(1) {
+  calldataload 0xf8 shr
+}
+
+#define macro MAIN() = takes(0) returns(0) {
+  calldatasize not_empty jumpi
+  returndatasize returndatasize return
+  
+  not_empty:
+  calldatasize
+  returndatasize
+
+  copy_bytes_iter:           // [i, j + 1]
+    swap1                    // [j + 1, i]
+    [NEG1] add               // [j, i]
+    dup2 dup2                // [j, i, j, i]
+    dup2 GET_CALLDATA_BYTE() // [cd[i], j, i, j, i]
+    dup2 GET_CALLDATA_BYTE() // [cd[j], cd[i], j, i, j, i]
+    swap2                    // [j, cd[i], cd[j], i, j, i]
+    mstore8                  // [cd[j], i, j, i]
+    swap1 mstore8            // [j, i]
+    swap1 0x1 add            // [i', j' + 1]
+    dup2 dup2                // [i', j' + 1, i', j' + 1]
+    lt 
+    copy_bytes_iter jumpi
+
+  calldatasize returndatasize return
+}

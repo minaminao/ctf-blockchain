@@ -31,6 +31,16 @@ Interface: deposit(), withdraw(), and setWithdrawer(address)
 forge test --match-contract Challenge3Test -vvvv
 ```
 
+## Challenge #4
+https://twitter.com/huff_language/status/1583894073487654913
+
+>Huff challenge #4 🗿🍾⛳️:
+Write the minimal OR most efficient Huff smart contract that reverses all calldata that it receives
+
+```
+forge test --match-contract Challenge4Test -vvvv
+```
+
 ## Challenge #5
 https://twitter.com/huff_language/status/1586401774927126528
 
