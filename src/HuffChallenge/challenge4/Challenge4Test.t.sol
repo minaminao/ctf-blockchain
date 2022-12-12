@@ -9,7 +9,7 @@ contract Challenge4Test is Test {
     address reversooor;
 
     function setUp() public {
-        reversooor = HuffDeployer.config().deploy("Challenge4");
+        reversooor = HuffDeployer.config().deploy("HuffChallenge/challenge4/Challenge4");
     }
 
     function testReverseDeterministic() public {
