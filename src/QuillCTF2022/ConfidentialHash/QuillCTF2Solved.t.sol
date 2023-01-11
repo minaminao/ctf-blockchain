@@ -23,6 +23,7 @@ contract QuillCTF2Solved is Test {
     function test_exploit() external {
         /**
         Storage layout of the target contract
+        Generated using: https://marketplace.visualstudio.com/items?itemName=PraneshASP.vscode-solidity-inspector
         
         | Name              | Type    | Slot | Offset | Bytes | 
         |-------------------|---------|------|--------|-------| 
