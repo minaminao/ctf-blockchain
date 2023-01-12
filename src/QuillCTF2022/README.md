@@ -7,7 +7,7 @@ Here's the link to the challenges page: https://quillctf.super.site/challenges. 
 **Table of Contents**
 - [QuillHash CTF 2022 Solutions](#quillhash-ctf-2022-solutions)
   - [Road closed:](#road-closed)
-    - [VIP Bank:](#vip-bank)
+  - [VIP Bank:](#vip-bank)
 
 ---
 
