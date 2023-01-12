@@ -29,7 +29,7 @@ contract Exploiter {
     }
 }
 
-contract POC2 is Test {
+contract QuillCTF3Solved is Test {
     ITarget target = ITarget(0x28e42E7c4bdA7c0381dA503240f2E54C70226Be2);
     address manager = 0xE48A248367d3BC49069fA01A26B7517756E32a52;
     Exploiter exploiter;
