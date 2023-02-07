@@ -57,11 +57,7 @@ contract QuillCTF3Solved is Test {
         exploiter.exploit(payable(address(target)));
 
         /// funds got locked!
-        vm.expectRevert(
-            abi.encodePacked(
-                "Cannot withdraw more than 0.5 ETH per transaction"
-            )
-        );
+        vm.expectRevert(abi.encodePacked("Cannot withdraw more than 0.5 ETH per transaction"));
 
         target.withdraw(0.05 ether);
     }

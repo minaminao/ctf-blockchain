@@ -9,9 +9,7 @@ interface UniswapV2RouterLike {
         address[] calldata path,
         address to,
         uint256 deadline
-    )
-        external
-        returns (uint256[] memory amounts);
+    ) external returns (uint256[] memory amounts);
 
     function addLiquidity(
         address tokenA,
@@ -22,9 +20,7 @@ interface UniswapV2RouterLike {
         uint256 amountBMin,
         address to,
         uint256 deadline
-    )
-        external
-        returns (uint256 amountA, uint256 amountB, uint256 liquidity);
+    ) external returns (uint256 amountA, uint256 amountB, uint256 liquidity);
 }
 
 interface UniswapV2PairLike {

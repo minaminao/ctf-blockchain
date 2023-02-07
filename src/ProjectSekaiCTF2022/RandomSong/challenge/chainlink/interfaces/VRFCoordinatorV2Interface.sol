@@ -103,11 +103,11 @@ interface VRFCoordinatorV2Interface {
     function cancelSubscription(uint64 subId, address to) external;
 
     /*
-   * @notice Check to see if there exists a request commitment consumers
-   * for all consumers and keyhashes for a given sub.
-   * @param subId - ID of the subscription
-   * @return true if there exists at least one unfulfilled request for the subscription, false
-   * otherwise.
-   */
+    * @notice Check to see if there exists a request commitment consumers
+    * for all consumers and keyhashes for a given sub.
+    * @param subId - ID of the subscription
+    * @return true if there exists at least one unfulfilled request for the subscription, false
+    * otherwise.
+    */
     function pendingRequestExists(uint64 subId) external view returns (bool);
 }

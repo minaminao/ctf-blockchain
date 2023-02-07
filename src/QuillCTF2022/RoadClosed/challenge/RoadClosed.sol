@@ -19,7 +19,9 @@ contract RoadClosed {
     function isOwner() public view returns (bool) {
         if (msg.sender == owner) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     constructor() {
