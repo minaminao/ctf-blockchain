@@ -8,6 +8,8 @@ Here's the link to the challenges page: https://quillctf.super.site/challenges. 
 - [QuillHash CTF 2022 Solutions](#quillhash-ctf-2022-solutions)
   - [Road closed:](#road-closed)
   - [VIP Bank:](#vip-bank)
+  - [Confidential Hash:](#confidential-hash)
+
 
 ---
 
@@ -25,7 +27,7 @@ forge test --match-contract QuillCTF1Solved -vvvv
 ```
 
 
-### VIP Bank:
+## VIP Bank:
 https://quillctf.super.site/challenges/quillctf-challenges/vip-bank
 
 **Objective:**
@@ -35,4 +37,16 @@ Goerli Link: https://goerli.etherscan.io/address/0x28e42e7c4bda7c0381da503240f2e
 
 ```
 forge test --match-contract QuillCTF3Solved -vvvv
+```
+
+## Confidential Hash:
+https://quillctf.super.site/challenges/quillctf-challenges/ctf02
+
+**Objective**:
+-Find the keccak256 hash of `aliceHash` and `bobHash`. 
+
+Goerli link: https://goerli.etherscan.io/address/0xf8e9327e38ceb39b1ec3d26f5fad09e426888e66
+ 
+```
+forge test --match-contract QuillCTF2Solved -vvvv
 ```
