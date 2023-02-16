@@ -9,6 +9,7 @@ Here's the link to the challenges page: https://quillctf.super.site/challenges. 
   - [Road closed:](#road-closed)
   - [VIP Bank:](#vip-bank)
   - [Confidential Hash:](#confidential-hash)
+  - [D3l3g4t3:](#d3l3g4t3)
 
 
 ---
@@ -49,4 +50,17 @@ Goerli link: https://goerli.etherscan.io/address/0xf8e9327e38ceb39b1ec3d26f5fad0
  
 ```
 forge test --match-contract QuillCTF2Solved -vvvv
+```
+
+## D3l3g4t3:
+https://quillctf.super.site/challenges/quillctf-challenges/d31eg4t3
+
+**Objective**:
+- Become the owner of the contract.
+- Make `canYouHackMe` mapping to `true` for your own address.
+  
+Goerli link: https://goerli.etherscan.io/address/0x971e55f02367dcdd1535a7faed0a500b64f2742d
+ 
+```
+forge test --match-contract D3l3g4t3Solved -vvvv
 ```
