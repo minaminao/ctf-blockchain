@@ -10,6 +10,7 @@ Here's the link to the challenges page: https://quillctf.super.site/challenges. 
   - [VIP Bank:](#vip-bank)
   - [Confidential Hash:](#confidential-hash)
   - [SafeNFT:](#safenft)
+  - [D3l3g4t3:](#d3l3g4t3)
 
 
 ---
@@ -62,4 +63,17 @@ Goerli Link: https://goerli.etherscan.io/address/0xf0337cde99638f8087c670c80a57d
 
 ```
 forge test --match-contract SafeNFTSolved -vvvv
+```
+
+## D3l3g4t3:
+https://quillctf.super.site/challenges/quillctf-challenges/d31eg4t3
+
+**Objective**:
+- Become the owner of the contract.
+- Make `canYouHackMe` mapping to `true` for your own address.
+  
+Goerli link: https://goerli.etherscan.io/address/0x971e55f02367dcdd1535a7faed0a500b64f2742d
+ 
+```
+forge test --match-contract D3l3g4t3Solved -vvvv
 ```

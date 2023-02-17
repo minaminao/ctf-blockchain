@@ -147,6 +147,7 @@ Note:
 | [Ethernaut: 24. Puzzle Wallet](src/Ethernaut/)                                         | proxy contract                                                                                    |
 | [Ethernaut: 25. Motorbike](src/Ethernaut/)                                             | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
 | [DeFi-Security-Summit-Stanford: InSecureumLenderPool](src/DeFiSecuritySummitStanford/) | flash loan                                                                                        |
+| [QuillCTF2023: D3l3g4t3](src/QuillCTF2022/D3l3g4t3) |                                                                                          |
 
 ### Context mismatch in `delegatecall`
 - Functions called in `delegatecall` are executed in the context of the `delegatecall` caller contract. 
