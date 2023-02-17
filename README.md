@@ -51,10 +51,10 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Faking errors](#faking-errors)
   - [Foundry cheatcodes](#foundry-cheatcodes)
   - [Front-running](#front-running)
-  - [Head overflow bug in calldata tuple ABI-reencoding (< Solidity 0.8.16)](#head-overflow-bug-in-calldata-tuple-abi-reencoding--solidity-0816)
-  - [Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)](#arbitrary-storage-overwriting-by-setting-an-array-length-to-2256-1--solidity-060)
-  - [Constructor that is just a function by a typo (< Solidity 0.5.0)](#constructor-that-is-just-a-function-by-a-typo--solidity-050)
-  - [Storage overwrite via uninitialized storage pointer (< Solidity 0.5.0)](#storage-overwrite-via-uninitialized-storage-pointer--solidity-050)
+  - [Head overflow bug in calldata tuple ABI-reencoding (\< Solidity 0.8.16)](#head-overflow-bug-in-calldata-tuple-abi-reencoding--solidity-0816)
+  - [Arbitrary storage overwriting by setting an array length to `2^256-1` (\< Solidity 0.6.0)](#arbitrary-storage-overwriting-by-setting-an-array-length-to-2256-1--solidity-060)
+  - [Constructor that is just a function by a typo (\< Solidity 0.5.0)](#constructor-that-is-just-a-function-by-a-typo--solidity-050)
+  - [Storage overwrite via uninitialized storage pointer (\< Solidity 0.5.0)](#storage-overwrite-via-uninitialized-storage-pointer--solidity-050)
   - [Other ad-hoc vulnerabilities and methods](#other-ad-hoc-vulnerabilities-and-methods)
 - [Bitcoin](#bitcoin)
   - [Bitcoin basics](#bitcoin-basics)
@@ -300,6 +300,8 @@ Note:
 | [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/)             | `call`                     |
 | [DeFi-Security-Summit-Stanford: InsecureDexLP](src/DeFiSecuritySummitStanford/) | ERC-223, `tokenFallback()` |
 | [MapleCTF 2022: maplebacoin](src/MapleCTF/)                                     |                            |
+| [QuillCTF 2023: SafeNFT](src/QuillCTF2022/SafeNFT)                              | ERC721, `safeMint()`       |
+
 
 ### Flash loan basics
 - Flash loans are uncollateralised loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.

@@ -9,6 +9,7 @@ Here's the link to the challenges page: https://quillctf.super.site/challenges. 
   - [Road closed:](#road-closed)
   - [VIP Bank:](#vip-bank)
   - [Confidential Hash:](#confidential-hash)
+  - [SafeNFT:](#safenft)
 
 
 ---
@@ -49,4 +50,16 @@ Goerli link: https://goerli.etherscan.io/address/0xf8e9327e38ceb39b1ec3d26f5fad0
  
 ```
 forge test --match-contract QuillCTF2Solved -vvvv
+```
+
+## SafeNFT:
+https://quillctf.super.site/challenges/quillctf-challenges/bulletproof-nft
+
+**Objective**:
+Claim multiple NFTs for the price of one.
+
+Goerli Link: https://goerli.etherscan.io/address/0xf0337cde99638f8087c670c80a57d470134c3aae
+
+```
+forge test --match-contract SafeNFTSolved -vvvv
 ```
