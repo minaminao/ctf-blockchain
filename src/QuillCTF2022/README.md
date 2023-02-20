@@ -5,12 +5,12 @@ Here's the link to the challenges page: https://quillctf.super.site/challenges. 
 ---
 
 **Table of Contents**
-- [QuillHash CTF 2022 Solutions](#quillhash-ctf-2022-solutions)
-  - [Road closed:](#road-closed)
-  - [VIP Bank:](#vip-bank)
-  - [Confidential Hash:](#confidential-hash)
-  - [SafeNFT:](#safenft)
-  - [D3l3g4t3:](#d3l3g4t3)
+- [Road closed:](#road-closed)
+- [VIP Bank:](#vip-bank)
+- [Confidential Hash:](#confidential-hash)
+- [SafeNFT:](#safenft)
+- [D3l3g4t3:](#d3l3g4t3)
+- [CollatzPuzzle:](#collatzpuzzle)
 
 
 ---
@@ -76,4 +76,16 @@ Goerli link: https://goerli.etherscan.io/address/0x971e55f02367dcdd1535a7faed0a5
  
 ```
 forge test --match-contract D3l3g4t3Solved -vvvv
+```
+
+## CollatzPuzzle:
+https://quillctf.super.site/challenges/quillctf-challenges/collatz-puzzle
+
+**Objective**:
+- Make a successful call to the callMe function.
+- You should be the deployer of the contract at the given addr parameter!
+  
+ 
+```
+forge test -vvvv --match-contract CollatzPuzzleSolved
 ```
