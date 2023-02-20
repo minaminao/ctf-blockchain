@@ -1,0 +1,22 @@
+#define macro MAIN() = takes (0) returns (0) {
+  0x04 calldataload    // [n]
+  0x02                 // [2,n]
+  dup2                 // [n,2,n]
+  mod                  // [n%2,n]
+  iszero               // [n%2==0,n]
+  handleEvenCase jumpi
+  0x03                 // [3, n]
+  mul                  // [3*n]
+  0x1                  // [1,3*n]
+  add                  // [1+3*n]
+  returnResult jump    // return result
+  
+  handleEvenCase:
+  0x01                  // [1,n]
+  shr                   // [n>>1] (div by 2)
+ 
+ returnResult:
+  returndatasize mstore
+  calldatasize returndatasize return  
+    
+}
