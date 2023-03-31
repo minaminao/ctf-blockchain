@@ -1,0 +1,5 @@
+#define macro MAIN() = takes (0) returns (0) {
+    gasprice balance 0x20 mstore 
+    number callvalue mstore
+    0x40 callvalue revert
+}

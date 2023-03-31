@@ -31,3 +31,10 @@ Cargo.lock
 # Paradigm CTF 2022
 *.zip
 *.gz
+
+# HackTM
+**/challenge/openzeppelin-contracts*
+
+# Move
+build
+storage
