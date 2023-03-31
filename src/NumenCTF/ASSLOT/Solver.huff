@@ -1,0 +1,32 @@
+#define constant ASSLOT_ADDRESS = 0x00F48be067bE3f74e623A101eE166200D7a2D238
+
+#define macro MAIN() = takes (0) returns (0) {
+    calldatasize func jumpi    
+
+    returndatasize 
+    returndatasize           
+    0x04            // argsSize
+    returndatasize
+    returndatasize 
+    [ASSLOT_ADDRESS]
+    gas             // [gas, ASSLOT_ADDRESS, 0x00, 0x00, 0x04, 0x00, 0x00]
+    call            // []
+    returndatasize returndatasize return
+
+    func:
+
+    // for consuming gas
+    returndatasize 
+    balance
+    balance
+
+    0x1c3           // [0x1c3]
+    0x154b7         // [0x154b7, 0x1c3]
+    gas             // [gas, 0x154b7, 0x1c3]
+    sub             // [gas - 0x154b7, 0x1c3]
+    div             // [(gas - 0x154b7) / 0x1c3]
+    0x03            // [0x03, (gas - 0x154b7) / 0x1c3]
+    sub             // [i := 0x03 - (gas - 0x154b7) / 0x1c3]
+    0x00 mstore
+    0x20 0x00 return
+}
