@@ -729,7 +729,46 @@ Flag: `0xda0b5e252cfd5b31e5849642f549134fb5304d6c`
 
 The goal of this challenge is to analyze the given Move module for suitable arguments `buffer1` and `data2` to be given to the `ctf_decrypt` function and then reverse engineer the output Linux executable.
 
-First, find `buffer1` and `data2`. This is obtained by brute force. Then, write the following PoC to get the binary.
+First, find `buffer1` and `data2`. This is obtained by the following brute-force script in less than a second. The variable names are very different from `MoveToCrackme.move` (e.g., `a` is renamed to `b`).
+
+```py
+    B = []
+    for b11, b12, b13 in itertools.product(range(29), repeat=3):
+        ok = True
+        for i in range(0, 9, 3):
+            a11 = X[i]
+            a21 = X[i+1]
+            a31 = X[i+2]
+            c11 = ( (b11 * a11) + (b12 * a21) + (b13 * a31) ) % 29
+            if encrypted_flag[i] != c11:
+                ok = False
+                break
+        if ok:
+            count += 1
+            assert count == 1
+            B.extend([b11, b12, b13])
+    (snip)
+    A = []
+    for k in range(len(encrypted_flag) // 3 - 3):
+        count = 0
+        for a1, a2, a3 in itertools.product(range(29), repeat=3):
+            i = 9 + k * 3
+            a11 = a1
+            a21 = a2
+            a31 = a3
+            c11 = ( (b11 * a11) + (b12 * a21) + (b13 * a31) ) % 29
+            c21 = ( (b21 * a11) + (b22 * a21) + (b23 * a31) ) % 29
+            c31 = ( (b31 * a11) + (b32 * a21) + (b33 * a31) ) % 29
+            if encrypted_flag[i] != c11 or encrypted_flag[i + 1] != c21 or encrypted_flag[i + 2] != c31:
+                continue
+            count += 1
+            assert count == 1
+            A.extend([a1, a2, a3])
+```
+
+`A` is `buffer1` and `B` is `data2` (or `buffer2`).
+
+Then, write the following PoC to get the binary.
 
 ```
 script {
