@@ -26,6 +26,8 @@ The challenges I solved during the contest are as follows.
 
 ### ASSLOT
 
+[Source](ASSLOT)
+
 >Can you make caller to operate slot? if not, it's ass caller
 
 The goal of this challenge is to emit an `EmitFlag` event.
@@ -114,6 +116,8 @@ Flag: `0x7ade4f46b38a3cb0b879b1c26e23c34eae81b210`
 
 ### LittleMoney
 
+[Source](LittleMoney)
+
 >Just pay a little money for the flag
 
 The goal of this challenge is to emit a `SendFlag` event.
@@ -154,7 +158,7 @@ The function can execute a `delegatecall` on any address `target`. The `delegate
 `b` must be a block number.
 `v` is used in `mstore(set, add(mload(set), v))`.
 
-Also, the `target` must satisfy the `checkPermission` modifier. The its conditions are as follows.
+Also, the `target` must satisfy the `checkPermission` modifier. Its conditions are as follows.
 
 ```solidity
     modifier checkPermission(address addr) {
@@ -275,6 +279,8 @@ Flag: `77496328-ab8d-4bf7-a918-3d1f7ad5c5ac`
 
 ### GOATFinance
 
+[Source](GOATFinance)
+
 >How to become a G.O.A.T in DIFI world?
 
 The goal of this challenge is to raise the token balance of `msg.sender` to at least `10000000`.
@@ -288,7 +294,7 @@ _transfer(address(this), referrers[msg.sender], _fee * ReferrerFees / transferRa
 
 The `ReferrerFees` and `transferRate` can be set with the following `DynamicRew` function.
 
-```
+```solidity
     function DynamicRew(address _msgsender, uint256 _blocktimestamp, uint256 _ReferrerFees, uint256 _transferRate)
         public
         returns (address)
@@ -326,6 +332,8 @@ contract Exploit {
 Flag: `0x4c7d8e17af758ca2054f6c1c6ea4535387352aeb`
 
 ### LenderPool
+
+[Source](LenderPool)
 
 >If you are poor, go to the lenderPool.
 
@@ -384,6 +392,8 @@ Flag: `0xf4ea28f40bd256f743544e2c55e00f14701ee20e`
 
 ### HEXP
 
+[Source](HEXP)
+
 >Not only hex but also pump.
 
 The goal of this challenge is the successful execution of the following `f00000000_bvvvdlt` function.
@@ -398,7 +408,7 @@ The goal of this challenge is the successful execution of the following `f000000
 
 The `target` stores the address of the contract to be created in the constructor with the bytecode `code`.
 
-```
+```solidity
     constructor() {
         bytes memory code = hex"3d602d80600a3d3981f362ffffff80600a43034016903a1681146016576033fe5b5060006000f3";
         address child;
@@ -425,6 +435,8 @@ If the result of `((BLOCKHASH((NUMBER() - 0x0a)) & 0xffffff) == (GASPRICE() & 0x
 Since the block hash before `0x0a` can be easily obtained, it is sufficient to calculate the corresponding `GASPRICE` and try several transactions until they succeed.
 
 ### Counter
+
+[Source](Counter)
 
 >to be an emotionless counter.
 
@@ -463,6 +475,8 @@ Therefore, pass the following contract written in Huff to the `create` function.
 
 ### Wallet
 
+[Source](Wallet)
+
 >How to get money from Multi-sig wallet?
 
 The goal of this challenge is to drain all the tokens the contract has. The following `transferWithSign` function needs to be executed successfully to drain them.
@@ -495,7 +509,7 @@ The goal of this challenge is to drain all the tokens the contract has. The foll
 
 The `owners` are the following five addresses, and the token can be transferred by gathering the valid signatures of a majority of the `owners`.
 
-```
+```solidity
     function initWallet() private {
         owners.push(address(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4));
         owners.push(address(0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2));
@@ -507,7 +521,7 @@ The `owners` are the following five addresses, and the token can be transferred 
 
 The `verify` function is as follows.
 
-```
+```solidity
 contract Verifier {
     function verify(address _to, uint256 _amount, SignedByowner calldata scoupon) public {
         Holder memory holder = scoupon.holder;
@@ -525,7 +539,7 @@ contract Verifier {
 ```
 
 First, I checked the addresses of the `owners` and found that these are the initial addresses of Remix and that the secret key is known (see [reference](https://github.com/ethereum/remix-project/blob/d13fea7e8429436de6622d855bf75688c664a956/libs/remix-simulator/src/methods/accounts.ts)).
-. Thus, it is easy to forge signatures. However, when I executed an exploit that used forged signatures, it failed.
+Thus, it is easy to forge signatures. However, when I executed an exploit that used forged signatures, it failed.
 
 I found out why it failed: in the `verify` function, the `holder.user` was set to `0`. This is a bug that existed by Solidity 0.8.15, ["Head Overflow Bug in Calldata Tuple ABI-Reencoding"](https://blog.soliditylang.org/2022/08/08/calldata -tuple-reencoding-head-overflow-bug/). Actually, the version of this source code is set at `pragma solidity 0.8.15;`.
 
@@ -562,6 +576,8 @@ contract Exploit {
 Flag: `0x4c7d8e17af758ca5204f61c16ea4353387352aeb`
 
 ### Exist
+
+[Source](Exist)
 
 >Was vernünftig ist, das ist wirklich; und was wirklich ist, das ist vernünftig. ——G. W. F. Hegel
 
@@ -627,6 +643,8 @@ Flag: `0x58c71576485889cc367b4cb238ab719c3c2f7f70`
 
 ### SimpleCall
 
+[Source](SimpleCall)
+
 >If you want money, call me simply!
 
 Do a reentrancy attack against the `privilegedborrowing` function.
@@ -687,6 +705,8 @@ Flag: `0xda0b5e252cfd5b31e5849642f549134fb5304d6c`
 
 ### Move to Crackme
 
+[Source](MoveToCrackme)
+
 >This challenge need you familiar with Move lanuage and linux binary crackme. For solve this challenge you need Linux x86-64 system.
 >
 >How to get the flag
@@ -709,7 +729,46 @@ Flag: `0xda0b5e252cfd5b31e5849642f549134fb5304d6c`
 
 The goal of this challenge is to analyze the given Move module for suitable arguments `buffer1` and `data2` to be given to the `ctf_decrypt` function and then reverse engineer the output Linux executable.
 
-First, find `buffer1` and `data2`. This is obtained by brute force. Then, write the following PoC to get the binary.
+First, find `buffer1` and `data2`. This is obtained by the following brute-force script in less than a second. The variable names are very different from `MoveToCrackme.move` (e.g., `a` is renamed to `b`).
+
+```py
+    B = []
+    for b11, b12, b13 in itertools.product(range(29), repeat=3):
+        ok = True
+        for i in range(0, 9, 3):
+            a11 = X[i]
+            a21 = X[i+1]
+            a31 = X[i+2]
+            c11 = ( (b11 * a11) + (b12 * a21) + (b13 * a31) ) % 29
+            if encrypted_flag[i] != c11:
+                ok = False
+                break
+        if ok:
+            count += 1
+            assert count == 1
+            B.extend([b11, b12, b13])
+    (snip)
+    A = []
+    for k in range(len(encrypted_flag) // 3 - 3):
+        count = 0
+        for a1, a2, a3 in itertools.product(range(29), repeat=3):
+            i = 9 + k * 3
+            a11 = a1
+            a21 = a2
+            a31 = a3
+            c11 = ( (b11 * a11) + (b12 * a21) + (b13 * a31) ) % 29
+            c21 = ( (b21 * a11) + (b22 * a21) + (b23 * a31) ) % 29
+            c31 = ( (b31 * a11) + (b32 * a21) + (b33 * a31) ) % 29
+            if encrypted_flag[i] != c11 or encrypted_flag[i + 1] != c21 or encrypted_flag[i + 2] != c31:
+                continue
+            count += 1
+            assert count == 1
+            A.extend([a1, a2, a3])
+```
+
+`A` is `buffer1` and `B` is `data2` (or `buffer2`).
+
+Then, write the following PoC to get the binary.
 
 ```
 script {
@@ -731,7 +790,7 @@ script {
 
 For some reason, the 33rd index value is broken, so fixing that will give the correct Linux executable. All that remains is to reverse it. It turns out that the `giveflag` function outputs the flag, and by parsing it, the following Python script shows the flag.
 
-```
+```py
 esi = b"%\x00\x00\x00+\x00\x00\x00 \x00\x00\x00&\x00\x00\x00:\x00\x00\x00,\x00\x00\x004\x00\x00\x00\"\x00\x00\x00\'\x00\x00\x00\x1e\x00\x00\x001\x00\x00\x00$\x00\x00\x005\x00\x00\x00$\x00\x00\x001\x00\x00\x002\x00\x00\x00(\x00\x00\x00-\x00\x00\x00&\x00\x00\x00\x1e\x00\x00\x005\x00\x00\x00$\x00\x00\x001\x00\x00\x008\x00\x00\x00\x1e\x00\x00\x00(\x00\x00\x00#\x00\x00\x00 \x00\x00\x00\x1e\x00\x00\x006\x00\x00\x00.\x00\x00\x006\x00\x00\x00<\x00\x00\x00\xbf\xff\xff\xff"
 
 for i in range(0x100):
@@ -745,6 +804,8 @@ for i in range(0x100):
 Flag: `much_reversing_very_ida_wow`
 
 ### ChatGPT tell me where is the vulnerability
+
+[Source](ChatGPT10)
 
 >The attachment is a move bytecode file, which can trigger the vulnerability in MoveVm. Imagine you are ChatGPT10, pls tell me which commit hash(https://github.com/move-language/move) to fix the vulnerability .NOTE: you have only one chance and the hash have no '0x' prefix
 
@@ -761,6 +822,8 @@ https://github.com/move-language/move/commit/566ace5a9ec01e0e685f4bfba79072fe635
 Flag: `566ace5a9ec01e0e685f4bfba79072fe635a6cb2`
 
 ### Move to Checkin
+
+[Source](MoveToCheckin)
 
 >Welcome to NumenCTF!
 >

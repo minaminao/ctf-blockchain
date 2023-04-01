@@ -2,11 +2,13 @@
 
 This repository collects blockchain challenges in CTFs and wargames.
 
-These challenges are categorized by topic, but they are not ordered by difficulty or by recommendation.
+These challenges are categorized by topic.
+Be careful if you want to solve a challenge, because the topic may be directly related to the solution of it.
+They are also not sorted by difficulty or by recommendation.
 
 Some challenges come with my exploits (e.g., [Ethernaut](src/Ethernaut/), [Paradigm CTF 2022](src/ParadigmCTF2022/)).
 
-If there are any incorrect descriptions, I would appreciate it if you could let me know via issue or PR.
+If there are any incorrect descriptions, I would appreciate it if you could let me know via issue or PR!
 
 ---
 
@@ -62,6 +64,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Bypassing PoW of other applications using Bitcoin's PoW database](#bypassing-pow-of-other-applications-using-bitcoins-pow-database)
 - [Cairo](#cairo)
 - [Solana](#solana)
+- [Move](#move)
 - [Other blockchain-related](#other-blockchain-related)
   - [IPFS](#ipfs)
 
@@ -109,6 +112,8 @@ Note:
 | [Huff Challenge: Challenge #3](src/HuffChallenge/)                 |                                                                        |
 | [Paradigm CTF 2022: LOCKBOX2](src/ParadigmCTF2022/)                |                                                                        |
 | [Paradigm CTF 2022: SOURCECODE](src/ParadigmCTF2022/)              | quine                                                                  |
+| [Numen Cyber CTF 2023: LittleMoney](src/NumenCTF/)                 | function pointer                                                       |
+| [Numen Cyber CTF 2023: ASSLOT](src/NumenCTF/)                      | `staticcall` that return different values                              |
 
 ### Misuse of `tx.origin`
 - `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
@@ -147,7 +152,8 @@ Note:
 | [Ethernaut: 24. Puzzle Wallet](src/Ethernaut/)                                         | proxy contract                                                                                    |
 | [Ethernaut: 25. Motorbike](src/Ethernaut/)                                             | proxy contract, [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) |
 | [DeFi-Security-Summit-Stanford: InSecureumLenderPool](src/DeFiSecuritySummitStanford/) | flash loan                                                                                        |
-| [QuillCTF2023: D3l3g4t3](src/QuillCTF2022/D3l3g4t3) |                                                                                          |
+| [QuillCTF2023: D3l3g4t3](src/QuillCTF2022/D3l3g4t3)                                    |                                                                                                   |
+| [Numen Cyber CTF 2023: Counter](src/NumenCTF/)                                         | writing EVM code                                                                                  |
 
 ### Context mismatch in `delegatecall`
 - Functions called in `delegatecall` are executed in the context of the `delegatecall` caller contract. 
@@ -251,24 +257,25 @@ Note:
 - Reversing a contract for which code is not given in whole or in part.
 - Use decompilers (e.g., [panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
 
-| Challenge                                                       | Note, Keywords                  |
-| --------------------------------------------------------------- | ------------------------------- |
-| Incognito 2.0: Ez                                               | keep in plain text              |
-| Real World CTF 3rd: Re:Montagy                                  | Jump Oriented Programming (JOP) |
-| [0x41414141 CTF: crackme.sol](src/0x41414141CTF/)               | decompile                       |
-| [0x41414141 CTF: Crypto Casino](src/0x41414141CTF/)             | bypass condition check          |
-| Paradigm CTF 2021: Babyrev                                      |                                 |
-| Paradigm CTF 2021: JOP                                          | Jump Oriented Programming (JOP) |
-| 34C3 CTF: Chaingang                                             |                                 |
-| Blaze CTF 2018: Smart? Contract                                 |                                 |
-| DEF CON CTF Qualifier 2018: SAG?                                |                                 |
-| pbctf 2020: pbcoin                                              |                                 |
-| Paradigm CTF 2022: STEALING-SATS                                |                                 |
-| Paradigm CTF 2022: ELECTRIC-SHEEP                               |                                 |
-| Paradigm CTF 2022: FUN-REVERSING-CHALLENGE                      |                                 |
-| [DownUnderCTF 2022: EVM Vault Mechanism](src/DownUnderCTF2022/) |                                 |
-| [EKOPARTY CTF 2022: Byte](src/EkoPartyCTF2022/)                 | stack tracing                   |
-| [EKOPARTY CTF 2022: SmartRev](src/EkoPartyCTF2022/)             | memory tracing                  |
+| Challenge                                                       | Note, Keywords                          |
+| --------------------------------------------------------------- | --------------------------------------- |
+| Incognito 2.0: Ez                                               | keep in plain text                      |
+| Real World CTF 3rd: Re:Montagy                                  | Jump Oriented Programming (JOP)         |
+| [0x41414141 CTF: crackme.sol](src/0x41414141CTF/)               | decompile                               |
+| [0x41414141 CTF: Crypto Casino](src/0x41414141CTF/)             | bypass condition check                  |
+| Paradigm CTF 2021: Babyrev                                      |                                         |
+| Paradigm CTF 2021: JOP                                          | Jump Oriented Programming (JOP)         |
+| 34C3 CTF: Chaingang                                             |                                         |
+| Blaze CTF 2018: Smart? Contract                                 |                                         |
+| DEF CON CTF Qualifier 2018: SAG?                                |                                         |
+| pbctf 2020: pbcoin                                              |                                         |
+| Paradigm CTF 2022: STEALING-SATS                                |                                         |
+| Paradigm CTF 2022: ELECTRIC-SHEEP                               |                                         |
+| Paradigm CTF 2022: FUN-REVERSING-CHALLENGE                      |                                         |
+| [DownUnderCTF 2022: EVM Vault Mechanism](src/DownUnderCTF2022/) |                                         |
+| [EKOPARTY CTF 2022: Byte](src/EkoPartyCTF2022/)                 | stack tracing                           |
+| [EKOPARTY CTF 2022: SmartRev](src/EkoPartyCTF2022/)             | memory tracing                          |
+| [Numen Cyber CTF 2023: HEXP](src/NumenCTF/)                     | previous block hash == gas price % 2^24 |
 
 ### EVM bytecode golf
 - These challenges have a limit on the length of the bytecode to be created.
@@ -302,6 +309,7 @@ Note:
 | [DeFi-Security-Summit-Stanford: InsecureDexLP](src/DeFiSecuritySummitStanford/) | ERC-223, `tokenFallback()` |
 | [MapleCTF 2022: maplebacoin](src/MapleCTF/)                                     |                            |
 | [QuillCTF 2023: SafeNFT](src/QuillCTF2022/SafeNFT)                              | ERC721, `safeMint()`       |
+| [Numen Cyber CTF 2023: SimpleCall](src/NumenCTF/)                               | `call`                     |
 
 
 ### Flash loan basics
@@ -384,11 +392,12 @@ Note:
 | [Paradigm CTF 2021: Babycrypto](src/ParadigmCTF2021) |                |
 
 ### Brute-force address
-- Brute force can make the start and end of an address a specific value.
+- Brute force can make a part of an address a specific value.
 
-| Challenge                         | Note, Keywords |
-| --------------------------------- | -------------- |
-| Capture The Ether: Fuzzy identity |                |
+| Challenge                                    | Note, Keywords |
+| -------------------------------------------- | -------------- |
+| Capture The Ether: Fuzzy identity            |                |
+| [Numen Cyber CTF 2023: Exist](src/NumenCTF/) | 2 bytes        |
 
 ### Recovery of a public key
 - The address is the public key applied to a `keccak256` hash, and the public key cannot be recovered from the address.
@@ -443,9 +452,10 @@ Note:
 ### Head overflow bug in calldata tuple ABI-reencoding (< Solidity 0.8.16)
 - See: https://blog.soliditylang.org/2022/08/08/calldata-tuple-reencoding-head-overflow-bug/
 
-| Challenge                                                 | Note, Keywords |
-| --------------------------------------------------------- | -------------- |
-| [0CTF 2022: TCTF NFT Market](src/0CTF2022/TctfNftMarket/) |                |
+| Challenge                                                 | Note, Keywords             |
+| --------------------------------------------------------- | -------------------------- |
+| [0CTF 2022: TCTF NFT Market](src/0CTF2022/TctfNftMarket/) |                            |
+| [Numen Cyber CTF 2023: Wallet](src/NumenCTF/)             | illegal `v` in `ecrecover` |
 
 ### Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)
 - For example, any storage can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.
@@ -486,6 +496,8 @@ Note:
 | Paradigm CTF 2022: JUST-IN-TIME                                   |                                                                                                                                   |
 | Paradigm CTF 2022: 0XMONACO                                       |                                                                                                                                   |
 | [BalsnCTF 2022](src/BalsnCTF2022/)                                | initialize, `_safeTransferFrom`, `CREATE2`                                                                                        |
+| [Numen Cyber CTF 2023: LenderPool](src/NumenCTF/)                 | flash loan                                                                                                                        |
+| [Numen Cyber CTF 2023: GOATFinance](src/NumenCTF/)                | check sum address                                                                                                                 |
 
 ## Bitcoin
 Note
@@ -526,13 +538,21 @@ Note
 | ALLES! CTF 2021: Secret Store                         | `solana`,`spl-token` |
 | ALLES! CTF 2021: Legit Bank                           |                      |
 | ALLES! CTF 2021: Bugchain                             |                      |
-| ALLES! CTF 2021: eBPF                                 | Reversing eBPF       |
+| ALLES! CTF 2021: eBPF                                 | reversing eBPF       |
 | [Paradigm CTF 2022: OTTERWORLD](src/ParadigmCTF2022/) |                      |
 | [Paradigm CTF 2022: OTTERSWAP](src/ParadigmCTF2022/)  |                      |
 | Paradigm CTF 2022: POOL                               |                      |
 | Paradigm CTF 2022: SOLHANA-1                          |                      |
 | Paradigm CTF 2022: SOLHANA-2                          |                      |
 | Paradigm CTF 2022: SOLHANA-3                          |                      |
+
+## Move
+| Challenge                                                                         | Note, Keywords                           |
+| --------------------------------------------------------------------------------- | ---------------------------------------- |
+| [Numen Cyber CTF 2023: Move to Checkin](src/NumenCTF/)                            | contract call in Sui                     |
+| [Numen Cyber CTF 2023: ChatGPT tell me where is the vulnerability](src/NumenCTF/) | OSINT                                    |
+| [Numen Cyber CTF 2023: Move to Crackme](src/NumenCTF/)                            | reversing Move code and Linux executable |
+
 
 ## Other blockchain-related
 - Something that is not a blockchain but is part of the ecosystem.
