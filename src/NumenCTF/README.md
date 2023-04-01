@@ -72,7 +72,7 @@ The most difficult of the above conditions is to match the return value of `stat
 Since the state cannot be changed by `staticcall`, some external data must be obtained in the called contract, and `i` must be inferred from them.
 This is easily solved by using the `GAS` opcode.
 As the loop proceeds, the remaining gas decreases, and `i` can be estimated based on that.
-The `GAS` consumed in one loop can be measured locally and hard-coded into the contract.
+The gas consumed in one loop can be measured locally and hard-coded into the contract.
 
 The code of the solver is below.
 Since errors are troublesome, it is easier to insert an opcode that consumes more gas (such as `BALANCE`) as appropriate.
@@ -541,12 +541,12 @@ contract Verifier {
 First, I checked the addresses of the `owners` and found that these are the initial addresses of Remix and that the secret key is known (see [reference](https://github.com/ethereum/remix-project/blob/d13fea7e8429436de6622d855bf75688c664a956/libs/remix-simulator/src/methods/accounts.ts)).
 Thus, it is easy to forge signatures. However, when I executed an exploit that used forged signatures, it failed.
 
-I found out why it failed: in the `verify` function, the `holder.user` was set to `0`. This is a bug that existed by Solidity 0.8.15, ["Head Overflow Bug in Calldata Tuple ABI-Reencoding"](https://blog.soliditylang.org/2022/08/08/calldata -tuple-reencoding-head-overflow-bug/). Actually, the version of this source code is set at `pragma solidity 0.8.15;`.
+I found out why it failed: in the `verify` function, the `holder.user` was set to `0`. This is a bug that existed by Solidity 0.8.15, ["Head Overflow Bug in Calldata Tuple ABI-Reencoding"](https://blog.soliditylang.org/2022/08/08/calldata-tuple-reencoding-head-overflow-bug/). Actually, the version of this source code is set at `pragma solidity 0.8.15;`.
 
 Then, how can the `require` statement be satisfied? The signature `v` given in this `verify` function can be set to any value. If the `v` of the signature is an inappropriate value, the return value of `ecrecover` can be `0`.
 This can be used to satisfy the `require` statement.
 
-Therefore, write the following contraption. As a result, the private keys of `owners` are not needed.
+Therefore, write the following contract. As a result, the private keys of `owners` are not needed.
 
 ```solidity
 contract Exploit {
