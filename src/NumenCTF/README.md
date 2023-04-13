@@ -31,7 +31,7 @@ The challenges I solved during the contest are as follows.
 >Can you make caller to operate slot? if not, it's ass caller
 
 The goal of this challenge is to emit an `EmitFlag` event.
-The `f00000000_bvvvdlt` function needs to be called for emitting it, but the code size of the caller must be less than 64 bytes.
+The `f00000000_bvvvdlt` function needs to be called for emitting it, but the code size of the caller must be less than or equal to 64 bytes.
 
 ```solidity
     function f00000000_bvvvdlt() external {
