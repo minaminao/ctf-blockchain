@@ -3,5 +3,6 @@ forge-std/=lib/forge-std/src/
 foundry-huff/=lib/foundry-huff/src/
 openzeppelin-contracts/=lib/openzeppelin-contracts/
 openzeppelin/=lib/openzeppelin-contracts/contracts/
+@openzeppelin/=lib/openzeppelin-contracts/
 stringutils/=lib/foundry-huff/lib/solidity-stringutils/
 v2-core/=lib/v2-core/contracts/

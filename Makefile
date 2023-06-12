@@ -1,3 +1,7 @@
+setup:
+	foundryup
+	huffup
+
 test:
 	forge test --force
 
