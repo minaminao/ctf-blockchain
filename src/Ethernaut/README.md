@@ -41,8 +41,8 @@ Note: All commands below need to be executed in the root of this repository.
 Execute the following commands:
 ```sh
 export PRIVATE_KEY=<PRIVATE KEY>
-export RPC_RINKEBY=<RPC RINKEBY>
-export FOUNDRY_ETH_RPC_URL=$RPC_RINKEBY
+export RPC_URL=<RPC URL>
+export FOUNDRY_ETH_RPC_URL=$RPC_URL
 ```
 
 ## Test All Exploit 
@@ -59,7 +59,7 @@ forge test --match-contract HelloEthernautExploitTest -vvvv
 ```
 **Exploit on chain**
 ```sh
-forge script HelloEthernautExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script HelloEthernautExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 1. Fallback
@@ -71,7 +71,7 @@ forge test --match-contract FallbackExploitTest -vvvv
 ```
 **Exploit on chain**
 ```sh
-forge script FallbackExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script FallbackExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 2. Fallout
@@ -84,7 +84,7 @@ forge test --match-contract FalloutExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script FalloutExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script FalloutExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 3. Coin Flip
@@ -97,12 +97,12 @@ forge test --match-contract CoinFlipExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script CoinFlipExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --slow --sig "run(address)" $INSTANCE_ADDRESS
+forge script CoinFlipExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --slow --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 Command to work around the bug in https://github.com/foundry-rs/foundry/issues/2489 :
 ```sh
-forge script CoinFlipExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --slow --sig "run(address)" $INSTANCE_ADDRESS --fork-block-number $(python -c "print($(cast block-number)-10)")
+forge script CoinFlipExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --slow --sig "run(address)" $INSTANCE_ADDRESS --fork-block-number $(python -c "print($(cast block-number)-10)")
 ```
 
 ## 4. Telephone
@@ -115,7 +115,7 @@ forge test --match-contract TelephoneExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script TelephoneExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script TelephoneExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 5. Token
@@ -128,7 +128,7 @@ forge test --match-contract TokenExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script TokenExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script TokenExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 6. Delegation
@@ -141,7 +141,7 @@ forge test --match-contract DelegationExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script DelegationExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script DelegationExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 7. Force
@@ -154,7 +154,7 @@ forge test --match-contract ForceExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script ForceExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script ForceExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 8. Vault
@@ -167,7 +167,7 @@ forge test --match-contract VaultExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script VaultExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script VaultExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 `cast` command-only one-liner:
@@ -185,7 +185,7 @@ forge test --match-contract KingExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script KingExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script KingExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 10. Re-entrancy
@@ -198,7 +198,7 @@ forge test --match-contract ReentranceExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script ReentranceExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script ReentranceExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 11. Elevator
@@ -211,7 +211,7 @@ forge test --match-contract ElevatorExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script ElevatorExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script ElevatorExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 12. Privacy
@@ -224,7 +224,7 @@ forge test --match-contract PrivacyExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script PrivacyExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script PrivacyExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 13. Gatekeeper One
@@ -237,7 +237,7 @@ forge test --match-contract GatekeeperOneExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script GatekeeperOneExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script GatekeeperOneExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 14. Gatekeeper Two
@@ -250,7 +250,7 @@ forge test --match-contract GatekeeperTwoExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script GatekeeperTwoExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script GatekeeperTwoExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 15. Naught Coin
@@ -263,7 +263,7 @@ forge test --match-contract NaughtCoinExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script NaughtCoinExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script NaughtCoinExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 16. Preservation
@@ -276,7 +276,7 @@ forge test --match-contract PreservationExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script PreservationtExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script PreservationtExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 17. Recovery
@@ -300,7 +300,7 @@ forge test --match-contract MagicNumberExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script MagicNumberExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script MagicNumberExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 19. Alien Codex
@@ -313,7 +313,7 @@ forge test --match-contract AlienCodexExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script AlienCodexExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script AlienCodexExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 20. Denial
@@ -326,7 +326,7 @@ forge test --match-contract DenialExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script DenialExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script DenialExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 21. Shop
@@ -339,7 +339,7 @@ forge test --match-contract ShopExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script ShopExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script ShopExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 22. Dex
@@ -352,7 +352,7 @@ forge test --match-contract DexExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script DexExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script DexExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 23. Dex Two
@@ -365,7 +365,7 @@ forge test --match-contract DexTwoExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script DexTwoExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script DexTwoExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 24. Puzzle Wallet
@@ -378,7 +378,7 @@ forge test --match-contract PuzzleWalletExploitTest -vvvv
 
 **Exploit on chain**
 ```sh
-forge script PuzzleWalletExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script PuzzleWalletExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 25. Motorbike
@@ -390,7 +390,7 @@ forge script PuzzleWalletExploitScript -vvvv --private-key $PRIVATE_KEY --fork-u
 
 **Exploit**
 ```sh
-forge script MotorbikeExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script MotorbikeExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 26. DoubleEntryPoint
@@ -403,7 +403,7 @@ forge test --match-contract DoubleEntryPointExploit -vvvv
 
 **Exploit on chain**
 ```sh
-forge script DoubleEntryPointExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script DoubleEntryPointExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
 ## 27. Good Samaritan 
@@ -416,5 +416,18 @@ forge test --match-contract GoodSamaritanExploit -vvvv
 
 **Exploit on chain**
 ```sh
-forge script GoodSamaritanExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_RINKEBY --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+forge script GoodSamaritanExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+```
+
+## 28. Gatekeeper Three
+[Challenge & Exploit codes](GatekeeperThree)
+
+**Test**
+```sh
+forge test --match-contract GatekeeperThreeExploit -vvvv
+```
+
+**Exploit on chain**
+```sh
+forge script GatekeeperThreeExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
