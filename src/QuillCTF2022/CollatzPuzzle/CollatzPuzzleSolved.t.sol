@@ -18,11 +18,7 @@ contract CollatzPuzzleSolved is Test {
     /// @dev Setup the testing environment.
     function setUp() public {
         puzzle = new CollatzPuzzle();
-        solution = ICollatzPuzzle(
-            HuffDeployer.deploy(
-                "/QuillCTF2022/CollatzPuzzle/CollatzPuzzleSolution"
-            )
-        );
+        solution = ICollatzPuzzle(HuffDeployer.deploy("/QuillCTF2022/CollatzPuzzle/CollatzPuzzleSolution"));
     }
 
     function testSolution() public {

@@ -8,11 +8,7 @@ contract SafeNFT is ERC721Enumerable {
     uint256 price;
     mapping(address => bool) public canClaim;
 
-    constructor(
-        string memory tokenName,
-        string memory tokenSymbol,
-        uint256 _price
-    ) ERC721(tokenName, tokenSymbol) {
+    constructor(string memory tokenName, string memory tokenSymbol, uint256 _price) ERC721(tokenName, tokenSymbol) {
         price = _price; //price = 0.01 ETH
     }
 

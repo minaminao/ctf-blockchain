@@ -6,12 +6,7 @@ interface ICollatz {
 }
 
 contract CollatzPuzzle is ICollatz {
-    function collatzIteration(uint256 n)
-        public
-        pure
-        override
-        returns (uint256)
-    {
+    function collatzIteration(uint256 n) public pure override returns (uint256) {
         if (n % 2 == 0) {
             return n / 2;
         } else {

