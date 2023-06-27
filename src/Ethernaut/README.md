@@ -35,6 +35,8 @@ Note: All commands below need to be executed in the root of this repository.
 - [25. Motorbike](#25-motorbike)
 - [26. DoubleEntryPoint](#26-doubleentrypoint)
 - [27. Good Samaritan](#27-good-samaritan)
+- [28. Gatekeeper Three](#28-gatekeeper-three)
+- [29. Switch](#29-switch)
 
 ## Common Setup
 
@@ -430,4 +432,17 @@ forge test --match-contract GatekeeperThreeExploit -vvvv
 **Exploit on chain**
 ```sh
 forge script GatekeeperThreeExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
+```
+
+## 29. Switch
+[Challenge & Exploit codes](Switch)
+
+**Test**
+```sh
+forge test --match-contract SwitchExploit -vvvv
+```
+
+**Exploit on chain**
+```sh
+forge script SwitchExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
