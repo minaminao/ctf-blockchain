@@ -10,3 +10,6 @@
 [submodule "lib/foundry-huff"]
 	path = lib/foundry-huff
 	url = https://github.com/huff-language/foundry-huff
+[submodule "lib/solmate"]
+	path = lib/solmate
+	url = https://github.com/transmissions11/solmate
