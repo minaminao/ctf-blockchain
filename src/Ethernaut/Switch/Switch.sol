@@ -19,15 +19,12 @@ contract Switch {
         assembly {
             calldatacopy(selector, 68, 4) // grab function selector from calldata
         }
-        require(
-            selector[0] == offSelector,
-            "Can only call the turnOffSwitch function"
-        );
+        require(selector[0] == offSelector, "Can only call the turnOffSwitch function");
         _;
     }
 
     function flipSwitch(bytes memory _data) public onlyOff {
-        (bool success, ) = address(this).call(_data);
+        (bool success,) = address(this).call(_data);
         require(success, "call failed :(");
     }
 
@@ -38,5 +35,4 @@ contract Switch {
     function turnSwitchOff() public onlyThis {
         switchOn = false;
     }
-
 }

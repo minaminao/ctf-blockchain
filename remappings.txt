@@ -6,3 +6,4 @@ openzeppelin/=lib/openzeppelin-contracts/contracts/
 @openzeppelin/=lib/openzeppelin-contracts/
 stringutils/=lib/foundry-huff/lib/solidity-stringutils/
 v2-core/=lib/v2-core/contracts/
+solmate/=lib/solmate
