@@ -2,11 +2,8 @@
 
 This repository collects blockchain challenges in CTFs and wargames.
 
-These challenges are categorized by topic.
-Be careful if you want to solve a challenge, because the topic may be directly related to the solution of it.
-They are also not sorted by difficulty or by recommendation.
-
-Some challenges come with my exploits (e.g., [Ethernaut](src/Ethernaut/), [Paradigm CTF 2022](src/ParadigmCTF2022/)).
+These challenges are categorized by topic, not by difficulty or recommendation.
+Also, there are my writeups and exploits for some challenges (e.g., [Paradigm CTF 2022](src/ParadigmCTF2022/)).
 
 If there are any incorrect descriptions, I would appreciate it if you could let me know via issue or PR!
 

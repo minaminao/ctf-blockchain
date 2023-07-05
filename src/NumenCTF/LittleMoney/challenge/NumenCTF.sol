@@ -56,9 +56,7 @@ contract Numen {
 
         func memory set;
         set.ptr = renounce;
-        uint256 x;
         assembly {
-            x := mload(set)
             mstore(set, add(mload(set), v))
         }
         set.ptr();
