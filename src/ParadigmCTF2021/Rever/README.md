@@ -65,7 +65,7 @@ label1a:
 function compilePalindromeChecker() public returns (bytes memory) {
     string[] memory cmds = new string[](3);
     cmds[0] = "huffc";
-    cmds[1] = string(string.concat("src/ParadigmCTF2021/Rever/PalindromeChecker.huff"));
+    cmds[1] = "src/ParadigmCTF2021/Rever/PalindromeChecker.huff";
     cmds[2] = "-r";
     bytes memory bytecode = vm.ffi(cmds);
     return bytecode;
