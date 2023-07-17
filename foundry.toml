@@ -6,6 +6,7 @@ ffi = true
 match_path = "*/*.t.sol"
 no_match_path = '*/_*'
 fs_permissions = [{ access = "read", path = "./out" }]
+evm_version = "shanghai"
 ignored_error_codes = [
     "license", # warning[1878]: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
     9302, # warning[9302]: Warning: Return value of low-level calls not used.
