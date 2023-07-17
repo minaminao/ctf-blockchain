@@ -7,12 +7,12 @@
 [submodule "lib/v2-core"]
 	path = lib/v2-core
 	url = https://github.com/Uniswap/v2-core
-[submodule "lib/foundry-huff"]
-	path = lib/foundry-huff
-	url = https://github.com/huff-language/foundry-huff
 [submodule "lib/solmate"]
 	path = lib/solmate
 	url = https://github.com/transmissions11/solmate
 [submodule "lib/solady"]
 	path = lib/solady
 	url = https://github.com/vectorized/solady
+[submodule "lib/foundry-huff"]
+	path = lib/foundry-huff
+	url = https://github.com/huff-language/foundry-huff
