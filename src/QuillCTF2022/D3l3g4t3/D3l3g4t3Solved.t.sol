@@ -48,7 +48,7 @@ contract D3l3g4t3Solved is Test {
         vm.createSelectFork("https://rpc.ankr.com/eth_goerli");
     }
 
-    function test_exploit() external {
+    function testExploit() external {
         Attacker attacker = new Attacker();
 
         attacker.attack(address(target));

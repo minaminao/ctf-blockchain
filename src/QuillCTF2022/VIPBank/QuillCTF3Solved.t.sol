@@ -42,7 +42,7 @@ contract QuillCTF3Solved is Test {
         exploiter = new Exploiter{value: 2 ether}();
     }
 
-    function test_exploit() external {
+    function testExploit() external {
         /// add this address as VIP
         vm.prank(manager);
         target.addVIP(address(this));

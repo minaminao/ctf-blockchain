@@ -20,7 +20,7 @@ contract QuillCTF2Solved is Test {
         vm.createSelectFork(vm.envString("RPC_ANKR_GOERLI"));
     }
 
-    function test_exploit() external {
+    function testExploit() external {
         /**
          * Storage layout of the target contract
          *     Generated using: https://marketplace.visualstudio.com/items?itemName=PraneshASP.vscode-solidity-inspector

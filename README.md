@@ -140,7 +140,7 @@ Note:
 | [DeFi-Security-Summit-Stanford: VToken](src/DeFiSecuritySummitStanford/) |                                       |
 
 ### Storage overwrite by `delegatecall`
-- `delegatecall` is a potential source of vulnerability because the storage of the `delegatecall` caller contract can be overwritten by the called function.
+- `delegatecall` is a potential source of vulnerability because the storage of the `delegatecall` caller contract can be overwritten by the called contract.
 
 | Challenge                                                                              | Note, Keywords                                                                                    |
 | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -153,7 +153,7 @@ Note:
 | [Numen Cyber CTF 2023: Counter](src/NumenCTF/)                                         | writing EVM code                                                                                  |
 
 ### Context mismatch in `delegatecall`
-- Functions called in `delegatecall` are executed in the context of the `delegatecall` caller contract. 
+- Contracts called by `delegatecall` are executed in the context of the `delegatecall` caller contract. 
 - If the function does not carefully consider the context, a bug will be created.
 
 | Challenge                                                 | Note, Keywords             |
@@ -252,7 +252,7 @@ Note:
 
 ### Reversing EVM bytecode
 - Reversing a contract for which code is not given in whole or in part.
-- Use decompilers (e.g., [panoramix](https://github.com/eveem-org/panoramix), [ethervm.io](https://ethervm.io/decompile)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
+- Use decompilers (e.g., [heimdall](https://github.com/Jon-Becker/heimdall-rs), [panoramix](https://github.com/eveem-org/panoramix)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
 
 | Challenge                                                       | Note, Keywords                          |
 | --------------------------------------------------------------- | --------------------------------------- |
@@ -421,27 +421,32 @@ Note:
 | [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken/) |                |
 
 ### Claimable intermediate nodes of a Merkle tree
+
 | Challenge                                             | Note, Keywords |
 | ----------------------------------------------------- | -------------- |
 | [Paradigm CTF 2022: MERKLEDROP](src/ParadigmCTF2022/) |                |
 
 ### Precompiled contracts
+
 | Challenge                                         | Note, Keywords |
 | ------------------------------------------------- | -------------- |
 | [Paradigm CTF 2022: VANITY](src/ParadigmCTF2022/) |                |
 
 ### Faking errors
+
 | Challenge                                       | Note, Keywords |
 | ----------------------------------------------- | -------------- |
 | [Ethernaut: 27. Good Samaritan](src/Ethernaut/) |                |
 
 ### Foundry cheatcodes
+
 | Challenge                                            | Note, Keywords |
 | ---------------------------------------------------- | -------------- |
 | [Paradigm CTF 2022: TRAPDOOOR](src/ParadigmCTF2022/) |                |
 | Paradigm CTF 2022: TRAPDOOOOR                        |                |
 
 ### Front-running
+
 | Challenge                                               | Note, Keywords |
 | ------------------------------------------------------- | -------------- |
 | [DownUnderCTF 2022: Private Log](src/DownUnderCTF2022/) |                |
@@ -484,6 +489,7 @@ Note:
 | ~~Ethernaut: Locked~~          | [deleted](https://forum.openzeppelin.com/t/ethernaut-locked-with-solidity-0-5/1115) |
 
 ### Other ad-hoc vulnerabilities and methods
+
 | Challenge                                                         | Note, Keywords                                                                                                                    |
 | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | [Paradigm CTF 2021: Bouncer](src/ParadigmCTF2021/Bouncer/)        | The funds required for batch processing are the same as for single processing.                                                    |
@@ -501,6 +507,7 @@ Note
 - Including challenges of Bitcoin variants whose transaction model is Unspent Transaction Output (UTXO).
 
 ### Bitcoin basics
+
 | Challenge                              | Note, Keywords              |
 | -------------------------------------- | --------------------------- |
 | TsukuCTF 2021: genesis                 | genesis block               |
@@ -522,6 +529,7 @@ Note
 | Dragon CTF 2020: Bit Flip 2 | 64-bit PoW     |
 
 ## Cairo
+
 | Challenge                                                       | Note, Keywords   |
 | --------------------------------------------------------------- | ---------------- |
 | [Paradigm CTF 2022: RIDDLE-OF-THE-SPHINX](src/ParadigmCTF2022/) | contract call    |
@@ -530,6 +538,7 @@ Note
 | [BalsnCTF 2022: Cairo Reverse](src/BalsnCTF2022/)               | reversing        |
 
 ## Solana
+
 | Challenge                                             | Note, Keywords       |
 | ----------------------------------------------------- | -------------------- |
 | ALLES! CTF 2021: Secret Store                         | `solana`,`spl-token` |
@@ -544,6 +553,7 @@ Note
 | Paradigm CTF 2022: SOLHANA-3                          |                      |
 
 ## Move
+
 | Challenge                                                                         | Note, Keywords                           |
 | --------------------------------------------------------------------------------- | ---------------------------------------- |
 | [Numen Cyber CTF 2023: Move to Checkin](src/NumenCTF/)                            | contract call in Sui                     |

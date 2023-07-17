@@ -41,7 +41,7 @@ contract QuillCTF1Solved is Test {
     }
 
     /// Exploit! Validate if owner == attacker's address
-    function test_exploit() external {
+    function testExploit() external {
         assertEq(_target.isHacked(), true);
         vm.prank(address(_attacker));
         assertEq(_target.isOwner(), true);
