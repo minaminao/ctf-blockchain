@@ -1,5 +1,7 @@
 # Capture The Ether
 
+NOTE: [Capture The Ether](https://capturetheether.com/) was deployed in the Ropsten network, but the network is currently deprecated.
+
 **Challenges**
 - [Warmup](#warmup)
   - [Deploy a contract](#deploy-a-contract)
@@ -10,6 +12,7 @@
   - [Guess the secret number](#guess-the-secret-number)
   - [Guess the random number](#guess-the-random-number)
   - [Guess the new number](#guess-the-new-number)
+  - [Guess the block hash](#guess-the-block-hash)
 - [Math](#math)
   - [Token sale](#token-sale)
   - [Token whale](#token-whale)
@@ -71,6 +74,11 @@ cast send --private-key $PRIVATE_KEY $INSTANCE_ADDRESS "guess(uint8)" 0x66 --val
 ### Guess the new number
 ```
 forge script src/CaptureTheEther/GuessTheNewNumber/Exploit.s.sol:ExploitScript --private-key $PRIVATE_KEY --broadcast -s "run(address)" $INSTANCE_ADDRESS
+```
+
+### Guess the block hash
+```
+forge test --match-path src/CaptureTheEther/PredictTheBlockHash/Exploit.t.sol
 ```
 
 ## Math

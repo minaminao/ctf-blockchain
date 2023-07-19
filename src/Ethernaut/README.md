@@ -373,6 +373,12 @@ forge script DexTwoExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RP
 ## 24. Puzzle Wallet
 [Challenge & Exploit codes](PuzzleWallet)
 
+<!--
+- multicallからmulticallを再度呼び出せる
+  - deposit関数を1回しか呼べないように制限されているが、これにより2回以上呼べてしまう
+- ストレージが衝突している
+-->
+
 **Test**
 ```sh
 forge test --match-contract PuzzleWalletExploitTest -vvvv

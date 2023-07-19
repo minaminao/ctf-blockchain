@@ -96,8 +96,8 @@ Note:
 
 | Challenge                                                          | Note, Keywords                                                         |
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| [Capture The Ether: Guess the new number](src/CaptureTheEther/)    | `block.number`, `block.timestamp` (formerly: `now`)                    |
-| Capture The Ether: Predict the block hash                          | `blockhash` (formerly: `block.blockhash`)                              |
+| [Capture The Ether: Guess the new number](src/CaptureTheEther/)    | `block.number`, `block.timestamp`                                      |
+| [Capture The Ether: Predict the block hash](src/CaptureTheEther/)  | `blockhash`                                                            |
 | [Ethernaut: 13. Gatekeeper One](src/Ethernaut/)                    | `msg.sender != tx.origin`, `gasleft().mod(8191) == 0`, type conversion |
 | [Ethernaut: 14. Gatekeeper Two](src/Ethernaut/)                    | `msg.sender != tx.origin`, `extcodesize` is 0                          |
 | Cipher Shastra: Minion                                             | `msg.sender != tx.origin`, `extcodesize` is 0, `block.timestamp`       |
