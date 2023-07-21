@@ -12,7 +12,8 @@ NOTE: [Capture The Ether](https://capturetheether.com/) was deployed in the Rops
   - [Guess the secret number](#guess-the-secret-number)
   - [Guess the random number](#guess-the-random-number)
   - [Guess the new number](#guess-the-new-number)
-  - [Guess the block hash](#guess-the-block-hash)
+  - [Predict the future](#predict-the-future)
+  - [Predict the block hash](#predict-the-block-hash)
 - [Math](#math)
   - [Token sale](#token-sale)
   - [Token whale](#token-whale)
@@ -76,7 +77,12 @@ cast send --private-key $PRIVATE_KEY $INSTANCE_ADDRESS "guess(uint8)" 0x66 --val
 forge script src/CaptureTheEther/GuessTheNewNumber/Exploit.s.sol:ExploitScript --private-key $PRIVATE_KEY --broadcast -s "run(address)" $INSTANCE_ADDRESS
 ```
 
-### Guess the block hash
+### Predict the future
+```
+forge test --match-path src/CaptureTheEther/PredictTheFuture/Exploit.t.sol
+```
+
+### Predict the block hash
 ```
 forge test --match-path src/CaptureTheEther/PredictTheBlockHash/Exploit.t.sol
 ```

@@ -120,15 +120,16 @@ Note:
 | [Ethernaut: 4. Telephone](src/Ethernaut/) |                |
 
 ### Weak sources of randomness from chain attributes
-- Since bytecodes of contracts are publicly available, it is easy to predict pseudorandom numbers whose generation is completed on-chain (using only states, not off-chain data).
+- Since contract bytecodes are publicly available, it is easy to predict pseudorandom numbers whose generation is completed on-chain (using only states, not off-chain data).
 - It is equivalent to having all the parameters of a pseudorandom number generator exposed.
-- If you want to use random numbers that are unpredictable to anyone, use a decentralized oracle with a random number function. For example, [Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/), which implements Verifiable Random Function (VRF).
+- If you want to use random numbers that are unpredictable to anyone, use a decentralized oracle with a random number function.
+  - For example, [Chainlink VRF](https://docs.chain.link/docs/chainlink-vrf/), which implements Verifiable Random Function (VRF).
 
-| Challenge                                                 | Note, Keywords |
-| --------------------------------------------------------- | -------------- |
-| Capture The Ether: Predict the future                     |                |
-| [Ethernaut: 3. Coin Flip](src/Ethernaut/)                 |                |
-| [DownUnderCTF 2022: Crypto Casino](src/DownUnderCTF2022/) |                |
+| Challenge                                                     | Note, Keywords |
+| ------------------------------------------------------------- | -------------- |
+| [Capture The Ether: Predict the future](src/CaptureTheEther/) |                |
+| [Ethernaut: 3. Coin Flip](src/Ethernaut/)                     |                |
+| [DownUnderCTF 2022: Crypto Casino](src/DownUnderCTF2022/)     |                |
 
 ### ERC-20 basics
 - These challenges can be solved with an understanding of the [ERC-20 token standard](https://eips.ethereum.org/EIPS/eip-20).
