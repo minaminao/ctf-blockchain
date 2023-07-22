@@ -19,6 +19,7 @@ NOTE: [Capture The Ether](https://capturetheether.com/) was deployed in the Rops
   - [Token whale](#token-whale)
   - [Retirement fund](#retirement-fund)
   - [Mapping](#mapping)
+  - [Donation](#donation)
 - [Miscellaneous](#miscellaneous)
   - [Assume ownership](#assume-ownership)
   - [Token bank](#token-bank)
@@ -107,6 +108,11 @@ forge script src/CaptureTheEther/RetirementFund/Exploit.s.sol:ExploitScript --pr
 ### Mapping
 ```
 forge script src/CaptureTheEther/Mapping/Exploit.s.sol:ExploitScript --private-key $PRIVATE_KEY --broadcast -s "run(address)" $INSTANCE_ADDRESS
+```
+
+### Donation
+```
+forge test --match-path src/CaptureTheEther/Donation/Exploit.t.sol
 ```
 
 ## Miscellaneous

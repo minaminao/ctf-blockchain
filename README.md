@@ -28,7 +28,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Transaction tracing](#transaction-tracing)
   - [Reversing states](#reversing-states)
   - [Reversing transactions](#reversing-transactions)
-  - [Reversing EVM bytecode](#reversing-evm-bytecode)
+  - [Reversing EVM bytecodes](#reversing-evm-bytecodes)
   - [EVM bytecode golf](#evm-bytecode-golf)
   - [Gas optimization](#gas-optimization)
   - [Reentrancy attacks](#reentrancy-attacks)
@@ -51,6 +51,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Foundry cheatcodes](#foundry-cheatcodes)
   - [Front-running](#front-running)
   - [Head overflow bug in calldata tuple ABI-reencoding (\< Solidity 0.8.16)](#head-overflow-bug-in-calldata-tuple-abi-reencoding--solidity-0816)
+  - [Storage overwrite via local storage variables (\< Solidity 0.8.1)](#storage-overwrite-via-local-storage-variables--solidity-081)
   - [Arbitrary storage overwriting by setting an array length to `2^256-1` (\< Solidity 0.6.0)](#arbitrary-storage-overwriting-by-setting-an-array-length-to-2256-1--solidity-060)
   - [Constructor that is just a function by a typo (\< Solidity 0.5.0)](#constructor-that-is-just-a-function-by-a-typo--solidity-050)
   - [Storage overwrite via uninitialized storage pointer (\< Solidity 0.5.0)](#storage-overwrite-via-uninitialized-storage-pointer--solidity-050)
@@ -251,7 +252,7 @@ Note:
 | [DownUnderCTF 2022: Secret and Ephemeral](src/DownUnderCTF2022/) |                |
 
 
-### Reversing EVM bytecode
+### Reversing EVM bytecodes
 - Reversing a contract for which code is not given in whole or in part.
 - Use decompilers (e.g., [heimdall](https://github.com/Jon-Becker/heimdall-rs), [panoramix](https://github.com/eveem-org/panoramix)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
 
@@ -459,6 +460,13 @@ Note:
 | --------------------------------------------------------- | -------------------------- |
 | [0CTF 2022: TCTF NFT Market](src/0CTF2022/TctfNftMarket/) |                            |
 | [Numen Cyber CTF 2023: Wallet](src/NumenCTF/)             | illegal `v` in `ecrecover` |
+
+### Storage overwrite via local storage variables (< Solidity 0.8.1)
+- In `Foo storage foo;`, the local variable `foo` is at slot 0.
+
+| Challenge                                           | Note, Keywords |
+| --------------------------------------------------- | -------------- |
+| [Capture The Ether: Donation](src/CaptureTheEther/) |                |
 
 ### Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)
 - For example, any storage can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.

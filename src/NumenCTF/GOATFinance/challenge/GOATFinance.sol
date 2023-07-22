@@ -36,7 +36,7 @@ contract PrivilegeFinance {
         Timeintervallimit += Timeinterval;
     }
 
-    function deposit(address /* token */, uint256 amount, address _ReferrerAddress) public {
+    function deposit(address, /* token */ uint256 amount, address _ReferrerAddress) public {
         require(amount > 0, "amount zero!");
         if (
             msg.sender != address(0) && _ReferrerAddress != address(0) && msg.sender != _ReferrerAddress
@@ -48,7 +48,7 @@ contract PrivilegeFinance {
         balances[address(this)] += amount;
     }
 
-    function withdraw(address /* token */, uint256 amount) public {
+    function withdraw(address, /* token */ uint256 amount) public {
         require(balances[msg.sender] == 0 && block.timestamp >= Timewithdrawlimit, "Collection time not reached");
         require(amount > 0 && amount <= 2000, "Financial restrictions");
         Timewithdrawlimit += Timewithdraw;

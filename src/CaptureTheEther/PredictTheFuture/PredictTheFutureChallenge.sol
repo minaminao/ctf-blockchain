@@ -27,7 +27,7 @@ contract PredictTheFutureChallenge {
         require(msg.sender == guesser);
         require(block.number > settlementBlockNumber);
 
-        uint8 answer = uint8(uint256(keccak256(abi.encodePacked(blockhash(block.number - 1), block.number)))) % 10;
+        uint8 answer = uint8(uint256(keccak256(abi.encodePacked(blockhash(block.number - 1), block.timestamp)))) % 10;
 
         guesser = address(0);
         if (guess == answer) {
