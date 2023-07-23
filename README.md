@@ -11,7 +11,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
 
 **Table of Contents**
 - [Ethereum](#ethereum)
-  - [Ethereum/contract basics](#ethereumcontract-basics)
+  - [Contract basics](#contract-basics)
   - [EVM puzzles](#evm-puzzles)
   - [Misuse of `tx.origin`](#misuse-of-txorigin)
   - [Weak sources of randomness from chain attributes](#weak-sources-of-randomness-from-chain-attributes)
@@ -19,13 +19,13 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Storage overwrite by `delegatecall`](#storage-overwrite-by-delegatecall)
   - [Context mismatch in `delegatecall`](#context-mismatch-in-delegatecall)
   - [Integer overflow](#integer-overflow)
-  - [Non-executable Ether transfers to a contract](#non-executable-ether-transfers-to-a-contract)
-  - [Forced Ether transfer to a contract via `selfdestruct`](#forced-ether-transfer-to-a-contract-via-selfdestruct)
-  - [Large gas consumption by a contract callee](#large-gas-consumption-by-a-contract-callee)
+  - [Non-executable Ether transfers to contracts](#non-executable-ether-transfers-to-contracts)
+  - [Forced Ether transfers to contracts via `selfdestruct`](#forced-ether-transfers-to-contracts-via-selfdestruct)
+  - [Large gas consumption by contract callees](#large-gas-consumption-by-contract-callees)
   - [Forgetting to set `view`/`pure` to interface and abstract contract functions](#forgetting-to-set-viewpure-to-interface-and-abstract-contract-functions)
-  - [`view` functions that do not always return the same value](#view-functions-that-do-not-always-return-the-same-value)
+  - [`view` functions that do not always return same values](#view-functions-that-do-not-always-return-same-values)
   - [Mistakes in setting `storage` and `memory`](#mistakes-in-setting-storage-and-memory)
-  - [Transaction tracing](#transaction-tracing)
+  - [Tracing transactions](#tracing-transactions)
   - [Reversing states](#reversing-states)
   - [Reversing transactions](#reversing-transactions)
   - [Reversing EVM bytecodes](#reversing-evm-bytecodes)
@@ -33,37 +33,37 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Gas optimization](#gas-optimization)
   - [Reentrancy attacks](#reentrancy-attacks)
   - [Flash loan basics](#flash-loan-basics)
-  - [Massive rights by executing flash loans during snapshots](#massive-rights-by-executing-flash-loans-during-snapshots)
+  - [Governance attacks by executing flash loans during snapshots](#governance-attacks-by-executing-flash-loans-during-snapshots)
   - [Bypassing repayments of push architecture flash loans](#bypassing-repayments-of-push-architecture-flash-loans)
   - [Bugs in AMM price calculation algorithm](#bugs-in-amm-price-calculation-algorithm)
   - [Attacks using custom tokens](#attacks-using-custom-tokens)
-  - [Funds leakage due to oracle manipulation (without flash loans)](#funds-leakage-due-to-oracle-manipulation-without-flash-loans)
-  - [Funds leakage due to oracle manipulation (with flash loans)](#funds-leakage-due-to-oracle-manipulation-with-flash-loans)
+  - [Oracle manipulation attacks without flash loans](#oracle-manipulation-attacks-without-flash-loans)
+  - [Oracle manipulation attacks with flash loans](#oracle-manipulation-attacks-with-flash-loans)
   - [Sandwich attacks](#sandwich-attacks)
-  - [Recovery of a private key by the same-nonce attack](#recovery-of-a-private-key-by-the-same-nonce-attack)
-  - [Brute-force address](#brute-force-address)
-  - [Recovery of a public key](#recovery-of-a-public-key)
+  - [Recoveries of private keys by same-nonce attacks](#recoveries-of-private-keys-by-same-nonce-attacks)
+  - [Brute-forcing addresses](#brute-forcing-addresses)
+  - [Recoveries of public keys](#recoveries-of-public-keys)
   - [Encryption and decryption in secp256k1](#encryption-and-decryption-in-secp256k1)
-  - [Bypassing bot and taking an ERC-20 token owned by a wallet with a known private key](#bypassing-bot-and-taking-an-erc-20-token-owned-by-a-wallet-with-a-known-private-key)
-  - [Claimable intermediate nodes of a Merkle tree](#claimable-intermediate-nodes-of-a-merkle-tree)
+  - [Bypassing bots and taking ERC-20 tokens owned by wallets with known private keys](#bypassing-bots-and-taking-erc-20-tokens-owned-by-wallets-with-known-private-keys)
+  - [Claimable intermediate nodes of Merkle trees](#claimable-intermediate-nodes-of-merkle-trees)
   - [Precompiled contracts](#precompiled-contracts)
   - [Faking errors](#faking-errors)
   - [Foundry cheatcodes](#foundry-cheatcodes)
   - [Front-running](#front-running)
-  - [Head overflow bug in calldata tuple ABI-reencoding (\< Solidity 0.8.16)](#head-overflow-bug-in-calldata-tuple-abi-reencoding--solidity-0816)
-  - [Storage overwrite via local storage variables (\< Solidity 0.8.1)](#storage-overwrite-via-local-storage-variables--solidity-081)
-  - [Arbitrary storage overwriting by setting an array length to `2^256-1` (\< Solidity 0.6.0)](#arbitrary-storage-overwriting-by-setting-an-array-length-to-2256-1--solidity-060)
-  - [Constructor that is just a function by a typo (\< Solidity 0.5.0)](#constructor-that-is-just-a-function-by-a-typo--solidity-050)
-  - [Storage overwrite via uninitialized storage pointer (\< Solidity 0.5.0)](#storage-overwrite-via-uninitialized-storage-pointer--solidity-050)
+  - [Head overflow bugs in calldata tuple ABI-reencoding (\< Solidity 0.8.16)](#head-overflow-bugs-in-calldata-tuple-abi-reencoding--solidity-0816)
+  - [Overwriting storage slots via local storage variables (\< Solidity 0.8.1)](#overwriting-storage-slots-via-local-storage-variables--solidity-081)
+  - [Overwriting arbitrary storage slots by setting array lengths to `2^256-1` (\< Solidity 0.6.0)](#overwriting-arbitrary-storage-slots-by-setting-array-lengths-to-2256-1--solidity-060)
+  - [Constructors that is just functions by typos (\< Solidity 0.5.0)](#constructors-that-is-just-functions-by-typos--solidity-050)
+  - [Overwriting storage slots via uninitialized storage pointer (\< Solidity 0.5.0)](#overwriting-storage-slots-via-uninitialized-storage-pointer--solidity-050)
   - [Other ad-hoc vulnerabilities and methods](#other-ad-hoc-vulnerabilities-and-methods)
 - [Bitcoin](#bitcoin)
   - [Bitcoin basics](#bitcoin-basics)
-  - [Recovery of a private key by the same nonce attack](#recovery-of-a-private-key-by-the-same-nonce-attack-1)
+  - [Recoveries of private keys by same-nonce attacks](#recoveries-of-private-keys-by-same-nonce-attacks-1)
   - [Bypassing PoW of other applications using Bitcoin's PoW database](#bypassing-pow-of-other-applications-using-bitcoins-pow-database)
 - [Cairo](#cairo)
 - [Solana](#solana)
 - [Move](#move)
-- [Other blockchain-related](#other-blockchain-related)
+- [Other Blockchain-Related](#other-blockchain-related)
   - [IPFS](#ipfs)
 
 ---
@@ -74,7 +74,7 @@ Note:
 - If an attack is only valid for a particular version of Solidity and not for the latest version, the version is noted at the end of the heading.
 - To avoid notation fluctuations, EVM terms are avoided as much as possible and Solidity terms are used.
 
-### Ethereum/contract basics
+### Contract basics
 - These challenges can be solved if you know the basic mechanics of Ethereum, [the basic language specification of Solidity](https://docs.soliditylang.org/en/latest/), and the basic operation of contracts.
 
 | Challenge                                                          | Note, Keywords         |
@@ -173,7 +173,7 @@ Note:
 | [Capture The Ether: Token whale](src/CaptureTheEther/) | subtraction    |
 | [Ethernaut: 5. Token](src/Ethernaut/)                  | subtraction    |
 
-### Non-executable Ether transfers to a contract
+### Non-executable Ether transfers to contracts
 - Do not create a contract on the assumption that normal Ether transfer (`.send()` or `.transfer()`) can always be executed.
 - If a destination is a contract and there is no receive Ether function or payable fallback function, Ether cannot be transferred.
 - However, instead of the normal transfer functions, the `selfdestruct` described below can be used to force such a contract to transfer Ether.
@@ -183,7 +183,7 @@ Note:
 | [Ethernaut: 9. King](src/Ethernaut/)                                       |                |
 | [Project SEKAI CTF 2022: Random Song](src/ProjectSekaiCTF2022/RandomSong/) | Chainlink VRF  |
 
-### Forced Ether transfer to a contract via `selfdestruct`
+### Forced Ether transfers to contracts via `selfdestruct`
 - If a contract does not have a receive Ether function and a payable fallback function, it is not guaranteed that Ether will not be received.
 - When a contract executes `selfdestruct`, it can transfer its Ether to another contract or EOA, and this `selfdestruct` transfer can be forced even if the destination contract does not have the receive Ether function and the payable fallback function. 
 - If the application is built on the assumption that the Ether is `0`, it could be a bug.
@@ -193,7 +193,7 @@ Note:
 | [Capture The Ether: Retirement fund](src/CaptureTheEther/) | integer overflow |
 | [Ethernaut: 7. Force](src/Ethernaut/)                      |                  |
 
-### Large gas consumption by a contract callee
+### Large gas consumption by contract callees
 - A large amount of gas can be consumed by loops and recursion in `call`, and there may not be enough gas for the rest of the process.
 - Until Solidity v0.8.0, zero division and `assert(false)` could consume a lot of gas.
 
@@ -208,7 +208,7 @@ Note:
 | ----------------------------------------- | -------------- |
 | [Ethernaut: 11. Elevator](src/Ethernaut/) |                |
 
-### `view` functions that do not always return the same value
+### `view` functions that do not always return same values
 - Since `view` functions can read state, they can be conditionally branched based on state and do not necessarily return the same value.
 
 | Challenge                             | Note, Keywords |
@@ -222,7 +222,7 @@ Note:
 | -------------------- | --------------------------------------------------------------------------------------------------------------- |
 | N1CTF 2021: BabyDefi | [Cover Protocol infinite minting](https://coverprotocol.medium.com/12-28-post-mortem-34c5f9f718d4) + flash loan |
 
-### Transaction tracing
+### Tracing transactions
 - Various information can be obtained just by following the flow of transaction processing.
 - Blockchain explorers such as Etherscan are useful.
 
@@ -254,7 +254,7 @@ Note:
 
 ### Reversing EVM bytecodes
 - Reversing a contract for which code is not given in whole or in part.
-- Use decompilers (e.g., [heimdall](https://github.com/Jon-Becker/heimdall-rs), [panoramix](https://github.com/eveem-org/panoramix)) and disassemblers (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
+- Use a decompiler (e.g., [heimdall](https://github.com/Jon-Becker/heimdall-rs), [panoramix](https://github.com/eveem-org/panoramix)) and a disassembler (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
 
 | Challenge                                                       | Note, Keywords                          |
 | --------------------------------------------------------------- | --------------------------------------- |
@@ -323,7 +323,7 @@ Note:
 | Damn Vulnerable DeFi: 3. Truster       | The target of a call is made into the token and the token can be taken by approving it to oneself                                                             |
 | Damn Vulnerable DeFi: 4. Sideentrance  | Flash loan that allows each user to make a deposit and a withdrawal. The deposit can be executed at no cost at the time of the flash loan.                    |
 
-### Massive rights by executing flash loans during snapshots
+### Governance attacks by executing flash loans during snapshots
 - If the algorithm distributes some kind of rights using the token balance at the time of a snapshot, and if a malicious user transaction can trigger a snapshot, a flash loan can be used to obtain massive rights.
 - A period of time to lock the token will avoid this attack.
 
@@ -334,7 +334,7 @@ Note:
 
 ### Bypassing repayments of push architecture flash loans
 - There are two architectures of flash loans: push and pull, with push architectures represented by Uniswap and Aave v1 and pull architectures by Aave v2 and dYdX.
-- [EIP-3156: Flash Loans](https://eips.ethereum.org/EIPS/eip-3156) is a pull architecture.
+- The proposed flash loan in [EIP-3156: Flash Loans](https://eips.ethereum.org/EIPS/eip-3156) is a pull architecture.
 
 | Challenge                  | Note, Keywords                                                  |
 | -------------------------- | --------------------------------------------------------------- |
@@ -355,7 +355,7 @@ Note:
 | ---------------------------------------- | -------------- |
 | [Ethernaut: 23. Dex Two](src/Ethernaut/) |                |
 
-### Funds leakage due to oracle manipulation (without flash loans)
+### Oracle manipulation attacks without flash loans
 - It corrupts the value of the oracle and drains the funds of applications that refer to that oracle.
 
 | Challenge                            | Note, Keywords                                                                                  |
@@ -363,7 +363,7 @@ Note:
 | Paradigm CTF 2021: Broker            | Distort Uniswap prices and liquidate positions on lending platforms that reference those prices |
 | Damn Vulnerable DeFi: 7. Compromised | Off-chain private key leak & oracle manipulation                                                |
 
-### Funds leakage due to oracle manipulation (with flash loans)
+### Oracle manipulation attacks with flash loans
 - The use of flash loans distorts the value of the oracle and drains the funds of the protocols that reference that oracle.
 - The ability to move large amounts of funds through a flash loan makes it easy to distort the oracle and cause more damage.
 
@@ -381,7 +381,7 @@ Note:
 | [Paradigm CTF 2021: Farmer](src/ParadigmCTF2021/) | Sandwich the trade from COMP to WETH to DAI |
 
 
-### Recovery of a private key by the same-nonce attack
+### Recoveries of private keys by same-nonce attacks
 - In general, the same-nonce attack is a possible attack when the same nonce is used for different messages in the elliptic curve DSA (ECDSA), and the secret key is calculated.
 - In Ethereum, if nonces used to sign transactions are the same, this attack is feasible.
 
@@ -390,7 +390,7 @@ Note:
 | Capture The Ether: Account Takeover                  |                |
 | [Paradigm CTF 2021: Babycrypto](src/ParadigmCTF2021) |                |
 
-### Brute-force address
+### Brute-forcing addresses
 - Brute force can make a part of an address a specific value.
 
 | Challenge                                    | Note, Keywords |
@@ -398,7 +398,7 @@ Note:
 | Capture The Ether: Fuzzy identity            |                |
 | [Numen Cyber CTF 2023: Exist](src/NumenCTF/) | 2 bytes        |
 
-### Recovery of a public key
+### Recoveries of public keys
 - The address is the public key applied to a `keccak256` hash, and the public key cannot be recovered from the address.
 - If even one transaction has been sent, the public key can be back-calculated from it.
 - Specifically, it can be recovered from the value of `keccak256` applied to Recursive Length Prefix (RLP)-encoded data by serializing the transaction and the signature `(r,s,v)`.
@@ -413,16 +413,16 @@ Note:
 | ----------------------------------------------- | --------------- |
 | [0x41414141 CTF: Rich Club](src/0x41414141CTF/) | DEX, flash loan |
 
-### Bypassing bot and taking an ERC-20 token owned by a wallet with a known private key
+### Bypassing bots and taking ERC-20 tokens owned by wallets with known private keys
 - If a wallet with a known private key has an ERC-20 token but no Ether, it is usually necessary to first send Ether to the wallet and then `transfer` the ERC-20 token to get the ERC-20 token.
 - However, if a bot that immediately takes the Ether sent at this time is running, the Ether will be stolen when the Ether is simply sent.
-- We can use [Flashbots](https://docs.flashbots.net/) bundled transactions or just `permit` and `transferFrom` if the token is [EIP-2612 permit](https://eips.ethereum.org/EIPS/eip-2612) friendly.
+- In this situation, we can use [Flashbots](https://docs.flashbots.net/) bundled transactions or just `permit` and `transferFrom` if the token is [EIP-2612 permit](https://eips.ethereum.org/EIPS/eip-2612) friendly.
 
 | Challenge                                                                 | Note, Keywords |
 | ------------------------------------------------------------------------- | -------------- |
 | [EthernautDAO: 5. EthernautDaoToken](src/EthernautDAO/EthernautDaoToken/) |                |
 
-### Claimable intermediate nodes of a Merkle tree
+### Claimable intermediate nodes of Merkle trees
 
 | Challenge                                             | Note, Keywords |
 | ----------------------------------------------------- | -------------- |
@@ -453,7 +453,7 @@ Note:
 | ------------------------------------------------------- | -------------- |
 | [DownUnderCTF 2022: Private Log](src/DownUnderCTF2022/) |                |
 
-### Head overflow bug in calldata tuple ABI-reencoding (< Solidity 0.8.16)
+### Head overflow bugs in calldata tuple ABI-reencoding (< Solidity 0.8.16)
 - See: https://blog.soliditylang.org/2022/08/08/calldata-tuple-reencoding-head-overflow-bug/
 
 | Challenge                                                 | Note, Keywords             |
@@ -461,15 +461,15 @@ Note:
 | [0CTF 2022: TCTF NFT Market](src/0CTF2022/TctfNftMarket/) |                            |
 | [Numen Cyber CTF 2023: Wallet](src/NumenCTF/)             | illegal `v` in `ecrecover` |
 
-### Storage overwrite via local storage variables (< Solidity 0.8.1)
-- In `Foo storage foo;`, the local variable `foo` is at slot 0.
+### Overwriting storage slots via local storage variables (< Solidity 0.8.1)
+- In `Foo storage foo;`, the local variable `foo` points to slot 0.
 
 | Challenge                                           | Note, Keywords |
 | --------------------------------------------------- | -------------- |
 | [Capture The Ether: Donation](src/CaptureTheEther/) |                |
 
-### Arbitrary storage overwriting by setting an array length to `2^256-1` (< Solidity 0.6.0)
-- For example, any storage can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.
+### Overwriting arbitrary storage slots by setting array lengths to `2^256-1` (< Solidity 0.6.0)
+- For example, any storage variable can be overwritten by negatively arithmetic overflowing the length of an array to `2^256-1`.
 - It need not be due to overflow.
 - The `length` property has been read-only since v0.6.0.
 
@@ -479,7 +479,7 @@ Note:
 | [Ethernaut: 19. Alien Codex](src/Ethernaut/)       |                |
 | Paradigm CTF 2021: Bank                            |                |
 
-### Constructor that is just a function by a typo (< Solidity 0.5.0)
+### Constructors that is just functions by typos (< Solidity 0.5.0)
 - In versions before v0.4.22, the constructor is defined as a function with the same name as the contract, so a typo of the constructor name could cause it to become just a function, resulting in a bug.
 - Since v0.5.0, this specification is removed and the `constructor` keyword must be used.
 
@@ -488,14 +488,13 @@ Note:
 | [Capture The Ether: Assume ownership](src/CaptureTheEther/) |                |
 | [Ethernaut: 2. Fallout](src/Ethernaut/)                     |                |
 
-### Storage overwrite via uninitialized storage pointer (< Solidity 0.5.0)
+### Overwriting storage slots via uninitialized storage pointer (< Solidity 0.5.0)
 - Since v0.5.0, uninitialized storage variables are forbidden, so this bug cannot occur.
 
-| Challenge                      | Note, Keywords                                                                      |
-| ------------------------------ | ----------------------------------------------------------------------------------- |
-| Capture The Ether: Donation    |                                                                                     |
-| Capture The Ether: Fifty years |                                                                                     |
-| ~~Ethernaut: Locked~~          | [deleted](https://forum.openzeppelin.com/t/ethernaut-locked-with-solidity-0-5/1115) |
+| Challenge                                              | Note, Keywords                                                                      |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| [Capture The Ether: Fifty years](src/CaptureTheEther/) |                                                                                     |
+| ~~Ethernaut: Locked~~                                  | [deleted](https://forum.openzeppelin.com/t/ethernaut-locked-with-solidity-0-5/1115) |
 
 ### Other ad-hoc vulnerabilities and methods
 
@@ -522,7 +521,7 @@ Note
 | TsukuCTF 2021: genesis                 | genesis block               |
 | WORMCON 0x01: What's My Wallet Address | Bitcoin address, RIPEMD-160 |
 
-### Recovery of a private key by the same nonce attack
+### Recoveries of private keys by same-nonce attacks
 - There was a bug and it has been fixed using [RFC6979](https://datatracker.ietf.org/doc/html/rfc6979).
 - https://github.com/daedalus/bitcoin-recover-privkey
 
@@ -570,7 +569,7 @@ Note
 | [Numen Cyber CTF 2023: Move to Crackme](src/NumenCTF/)                            | reversing Move code and Linux executable |
 
 
-## Other blockchain-related
+## Other Blockchain-Related
 - Something that is not a blockchain but is part of the ecosystem.
 
 ### IPFS

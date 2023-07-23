@@ -9,10 +9,26 @@ library Create {
 
     event Log(uint256);
 
+    function create(string memory contractName) external returns (address) {
+        return _create(contractName, 0, "");
+    }
+
     function create(string memory contractName, uint256 value) external returns (address) {
+        return _create(contractName, value, "");
+    }
+
+    function create(string memory contractName, bytes memory data) external returns (address) {
+        return _create(contractName, 0, data);
+    }
+
+    function create(string memory contractName, uint256 value, bytes memory data) external returns (address) {
+        return _create(contractName, value, data);
+    }
+
+    function _create(string memory contractName, uint256 value, bytes memory data) internal returns (address) {
         // Ref: https://book.getfoundry.sh/cheatcodes/get-code#examples
         // Example of contractName: AlienCodex.sol:AlienCodex
-        bytes memory bytecode = abi.encodePacked(vm.getCode(contractName));
+        bytes memory bytecode = abi.encodePacked(vm.getCode(contractName), data);
         address addr;
         assembly {
             addr := create(value, add(bytecode, 0x20), mload(bytecode))
