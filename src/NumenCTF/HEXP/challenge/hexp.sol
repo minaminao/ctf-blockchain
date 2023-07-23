@@ -14,7 +14,7 @@ contract Hexp {
     }
 
     function f00000000_bvvvdlt() external {
-        (bool succ, bytes memory ret) = target.call(hex"");
+        (bool succ, ) = target.call(hex"");
         assert(succ);
         flag = true;
     }

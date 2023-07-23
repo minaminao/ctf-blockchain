@@ -192,18 +192,18 @@ contract Wallet {
         owners.push(address(0x617F2E2fD72FD9D5503197092aC168c91465E7f2));
     }
 
-    function deposit(uint256 _amount) public {
-        require(_amount > 0, "Deposit value of 0 is not allowed");
-        IERC20(token).transferFrom(msg.sender, address(this), _amount);
+    function deposit(uint256 amount) public {
+        require(amount > 0, "Deposit value of 0 is not allowed");
+        IERC20(token).transferFrom(msg.sender, address(this), amount);
         if (contribution[msg.sender] == 0) {
             contributors.push(msg.sender);
         }
-        contribution[msg.sender] += _amount;
+        contribution[msg.sender] += amount;
     }
 
-    function transferWithSign(address _to, uint256 _amount, SignedByowner[] calldata signs) external {
-        require(address(0) != _to, "Please fill in the correct address");
-        require(_amount > 0, "amount must be greater than 0");
+    function transferWithSign(address to, uint256 amount, SignedByowner[] calldata signs) external {
+        require(address(0) != to, "Please fill in the correct address");
+        require(amount > 0, "amount must be greater than 0");
         uint256 len = signs.length;
         require(len > (owners.length / 2), "Not enough signatures");
         Holder memory holder;
@@ -213,15 +213,15 @@ contract Wallet {
             if (holder.approve) {
                 // Prevent zero address
                 require(checkSinger(holder.user), "Signer is not wallet owner");
-                verifier.verify(_to, _amount, signs[i]);
+                verifier.verify(to, amount, signs[i]);
             } else {
                 continue;
             }
             numOfApprove++;
         }
         require(numOfApprove > owners.length / 2, "not enough confirmation");
-        IERC20(token).approve(_to, _amount);
-        IERC20(token).transfer(_to, _amount);
+        IERC20(token).approve(to, amount);
+        IERC20(token).transfer(to, amount);
     }
 
     function checkSinger(address _addr) public view returns (bool res) {
@@ -238,10 +238,10 @@ contract Wallet {
 }
 
 contract Verifier {
-    function verify(address _to, uint256 _amount, SignedByowner calldata scoupon) public {
+    function verify(address to, uint256 amount, SignedByowner calldata scoupon) pure public {
         Holder memory holder = scoupon.holder;
         Signature memory sig = scoupon.signature;
-        bytes memory serialized = abi.encode(_to, _amount, holder.approve, holder.reason);
+        bytes memory serialized = abi.encode(to, amount, holder.approve, holder.reason);
 
         require(
             ecrecover(
