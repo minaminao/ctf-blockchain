@@ -31,6 +31,8 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Reversing EVM bytecodes](#reversing-evm-bytecodes)
   - [EVM bytecode golf](#evm-bytecode-golf)
   - [Gas optimization](#gas-optimization)
+  - [Collisions when using `abi.encodePacked` with variable length arguments](#collisions-when-using-abiencodepacked-with-variable-length-arguments)
+  - [Bypassing verifications with zero iteration loops](#bypassing-verifications-with-zero-iteration-loops)
   - [Reentrancy attacks](#reentrancy-attacks)
   - [Flash loan basics](#flash-loan-basics)
   - [Governance attacks by executing flash loans during snapshots](#governance-attacks-by-executing-flash-loans-during-snapshots)
@@ -64,7 +66,6 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
 - [Solana](#solana)
 - [Move](#move)
 - [Other Blockchain-Related](#other-blockchain-related)
-  - [IPFS](#ipfs)
 
 ---
 
@@ -292,6 +293,18 @@ Note:
 | -------------------------------------------------- | -------------- |
 | [Huff Challenge: Challenge #2](src/HuffChallenge/) |                |
 
+### Collisions when using `abi.encodePacked` with variable length arguments
+
+| Challenge                                                        | Note, Keywords |
+| ---------------------------------------------------------------- | -------------- |
+| [SEETF 2023: Operation Feathered Fortune Fiasco](src/SEETF2023/) |                |
+
+### Bypassing verifications with zero iteration loops
+
+| Challenge                                   | Note, Keywords             |
+| ------------------------------------------- | -------------------------- |
+| [SEETF 2023: Murky SEEPass](src/SEETF2023/) | array length, Merkle proof |
+
 ### Reentrancy attacks
 - In case a function of contract `A` contains interaction with another contract `B` or Ether transfer to `B`, the control is temporarily transferred to `B`.
 - Since `B` can call `A` in this control, it will be a bug if the design is based on the assumption that `A` is not called in the middle of the execution of that function.
@@ -309,7 +322,7 @@ Note:
 | [MapleCTF 2022: maplebacoin](src/MapleCTF/)                                     |                            |
 | [QuillCTF 2023: SafeNFT](src/QuillCTF2022/SafeNFT)                              | ERC721, `safeMint()`       |
 | [Numen Cyber CTF 2023: SimpleCall](src/NumenCTF/)                               | `call`                     |
-
+| [SEETF 2023: PigeonBank](src/SEETF2023/)                                        |                            |
 
 ### Flash loan basics
 - Flash loans are uncollateralised loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
@@ -379,7 +392,6 @@ Note:
 | Challenge                                         | Note, Keywords                              |
 | ------------------------------------------------- | ------------------------------------------- |
 | [Paradigm CTF 2021: Farmer](src/ParadigmCTF2021/) | Sandwich the trade from COMP to WETH to DAI |
-
 
 ### Recoveries of private keys by same-nonce attacks
 - In general, a same-nonce attack is possible when the same nonce is used for different messages in the elliptic curve DSA (ECDSA), and the secret key can be calculated.
@@ -509,6 +521,7 @@ Note:
 | [BalsnCTF 2022](src/BalsnCTF2022/)                                | initialize, `_safeTransferFrom`, `CREATE2`                                                                                        |
 | [Numen Cyber CTF 2023: LenderPool](src/NumenCTF/)                 | flash loan                                                                                                                        |
 | [Numen Cyber CTF 2023: GOATFinance](src/NumenCTF/)                | check sum address                                                                                                                 |
+| [SEETF 2023: Pigeon Vault](src/SEETF2023/)                        | EIP-2535: Diamonds, Multi-Facet Proxy                                                                                             |
 
 ## Bitcoin
 Note
@@ -570,11 +583,8 @@ Note
 
 
 ## Other Blockchain-Related
-- Something that is not a blockchain but is part of the ecosystem.
+- Things that are not directly related to blockchains but are part of the ecosystems.
 
-### IPFS
-- InterPlanetary File System (IPFS)
-
-| Challenge                              | Note, Keywords                 |
-| -------------------------------------- | ------------------------------ |
-| TsukuCTF 2021: InterPlanetary Protocol | Address is Base32 in lowercase |
+| Challenge                              | Note, Keywords                    |
+| -------------------------------------- | --------------------------------- |
+| TsukuCTF 2021: InterPlanetary Protocol | IPFS address, Base32 in lowercase |
