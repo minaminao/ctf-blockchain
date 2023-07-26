@@ -20,6 +20,9 @@ NOTE: [Capture The Ether](https://capturetheether.com/) was deployed in the Rops
   - [Retirement fund](#retirement-fund)
   - [Mapping](#mapping)
   - [Donation](#donation)
+  - [Fifty years](#fifty-years)
+- [Accounts](#accounts)
+  - [Fuzzy identity](#fuzzy-identity)
 - [Miscellaneous](#miscellaneous)
   - [Assume ownership](#assume-ownership)
   - [Token bank](#token-bank)
@@ -128,6 +131,17 @@ forge test --match-path src/CaptureTheEther/Donation/Exploit.t.sol
 -->
 ```
 forge test --match-path src/CaptureTheEther/FiftyYears/Exploit.t.sol
+```
+
+## Accounts
+
+### Fuzzy identity
+<!--
+- CREATE2でデプロイされるアドレスを全探索すればよい
+- 2^28なので1分もかからない
+-->
+```
+forge test --match-path src/CaptureTheEther/FuzzyIdentity/Exploit.t.sol
 ```
 
 ## Miscellaneous

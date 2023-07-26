@@ -23,7 +23,7 @@ contract SmartCounter {
     }
 
     function A_delegateccall(bytes memory data) public {
-        (bool success, ) = target.delegatecall(data);
+        (bool success,) = target.delegatecall(data);
         success;
         require(owner == msg.sender);
         flag = true;

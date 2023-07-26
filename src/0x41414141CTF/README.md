@@ -142,7 +142,7 @@ contract casino {
     bytes32 private seed;
     mapping(address => uint256) public consecutiveWins;
 
-    constructor() public {
+    constructor() {
         seed = keccak256("satoshi nakmoto");
     }
 

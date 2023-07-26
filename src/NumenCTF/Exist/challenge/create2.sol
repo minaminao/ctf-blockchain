@@ -46,7 +46,7 @@ contract Existing {
         _;
     }
 
-    function is_my_family(address account) internal returns (bool) {
+    function is_my_family(address account) internal view returns (bool) {
         bytes20 you = bytes20(account);
 
         bytes20 code = maskcode;

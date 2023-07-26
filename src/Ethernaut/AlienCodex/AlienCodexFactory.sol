@@ -7,7 +7,7 @@ import "src/utils/Create.sol";
 
 contract AlienCodexFactory is Level {
     function createInstance(address /* player */ ) public payable override returns (address) {
-        return Create.create("AlienCodex.sol:AlienCodex");
+        return Create.deploy("AlienCodex.sol:AlienCodex");
     }
 
     function validateInstance(address payable instanceAddr, address playerAddr) public view override returns (bool) {

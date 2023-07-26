@@ -393,10 +393,10 @@ Note:
 ### Brute-forcing addresses
 - Brute force can make a part of an address a specific value.
 
-| Challenge                                    | Note, Keywords |
-| -------------------------------------------- | -------------- |
-| Capture The Ether: Fuzzy identity            |                |
-| [Numen Cyber CTF 2023: Exist](src/NumenCTF/) | 2 bytes        |
+| Challenge                                                 | Note, Keywords   |
+| --------------------------------------------------------- | ---------------- |
+| [Capture The Ether: Fuzzy identity](src/CaptureTheEther/) | 28 bits, CREATE2 |
+| [Numen Cyber CTF 2023: Exist](src/NumenCTF/)              | 16 bits          |
 
 ### Recoveries of public keys
 - The address is the public key applied to a `keccak256` hash, and the public key cannot be recovered from the address.

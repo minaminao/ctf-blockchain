@@ -238,7 +238,7 @@ contract Wallet {
 }
 
 contract Verifier {
-    function verify(address to, uint256 amount, SignedByowner calldata scoupon) pure public {
+    function verify(address to, uint256 amount, SignedByowner calldata scoupon) public pure {
         Holder memory holder = scoupon.holder;
         Signature memory sig = scoupon.signature;
         bytes memory serialized = abi.encode(to, amount, holder.approve, holder.reason);
