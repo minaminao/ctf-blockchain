@@ -1,10 +1,11 @@
-from random import SystemRandom
-from ecdsa import ecdsa
-import sha3
 import binascii
-from typing import Tuple
-import uuid
 import os
+import uuid
+from random import SystemRandom
+from typing import Tuple
+
+from Crypto.Hash import keccak
+from ecdsa import ecdsa
 
 
 def gen_keypair() -> Tuple[ecdsa.Private_key, ecdsa.Public_key]:
@@ -32,8 +33,7 @@ def hash_message(msg: str) -> int:
     """
     hash the message using keccak256, truncate if necessary
     """
-    k = sha3.keccak_256()
-    k.update(msg.encode("utf8"))
+    k = keccak.new(digest_bits=256, data=msg.encode())
     d = k.digest()
     n = int(binascii.hexlify(d), 16)
     olen = ecdsa.generator_secp256k1.order().bit_length() or 1

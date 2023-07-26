@@ -382,13 +382,13 @@ Note:
 
 
 ### Recoveries of private keys by same-nonce attacks
-- In general, the same-nonce attack is a possible attack when the same nonce is used for different messages in the elliptic curve DSA (ECDSA), and the secret key is calculated.
+- In general, a same-nonce attack is possible when the same nonce is used for different messages in the elliptic curve DSA (ECDSA), and the secret key can be calculated.
 - In Ethereum, if nonces used to sign transactions are the same, this attack is feasible.
 
-| Challenge                                            | Note, Keywords |
-| ---------------------------------------------------- | -------------- |
-| Capture The Ether: Account Takeover                  |                |
-| [Paradigm CTF 2021: Babycrypto](src/ParadigmCTF2021) |                |
+| Challenge                                                   | Note, Keywords |
+| ----------------------------------------------------------- | -------------- |
+| [Capture The Ether: Account Takeover](src/CaptureTheEther/) |                |
+| [Paradigm CTF 2021: Babycrypto](src/ParadigmCTF2021)        |                |
 
 ### Brute-forcing addresses
 - Brute force can make a part of an address a specific value.

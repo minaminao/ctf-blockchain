@@ -6,7 +6,7 @@ contract PublicKeyChallenge {
     bool public isComplete;
 
     function authenticate(bytes calldata publicKey) public {
-        require(address(bytes20(keccak256(publicKey))) == owner);
+        require(address(uint160(uint256(keccak256(publicKey)))) == owner, "Wrong public key");
         isComplete = true;
     }
 }

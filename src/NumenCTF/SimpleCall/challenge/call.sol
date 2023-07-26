@@ -56,7 +56,7 @@ contract ExistingStock {
         return true;
     }
 
-    function privilegedborrowing(uint256 value, address /* secure */, address target, bytes memory data) public {
+    function privilegedborrowing(uint256 value, address, /* secure */ address target, bytes memory data) public {
         require(Lock == false && value >= 0 && value <= 1000);
         balanceOf[address(this)] -= value;
         balanceOf[target] += value;

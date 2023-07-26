@@ -1,10 +1,10 @@
-import cairo_sandbox
-
 from pathlib import Path
 
-from starknet_py.net import AccountClient
+import cairo_sandbox
 from starknet_py.contract import Contract
+from starknet_py.net import AccountClient
 from starkware.python.utils import to_bytes
+
 
 async def deploy(client: AccountClient, player_address: int) -> int:
     print("[+] deploying riddle")

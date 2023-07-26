@@ -1,5 +1,6 @@
 import itertools
 
+
 def core1(ss1=[], buffer1=[]):
     len_buffer1 = len(buffer1)
     out_elf = []

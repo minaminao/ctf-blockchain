@@ -1,12 +1,12 @@
-import cairo_sandbox
-
 from pathlib import Path
 
-from starknet_py.net import AccountClient
+import cairo_sandbox
 from starknet_py.contract import Contract
-
+from starknet_py.net import AccountClient
+from starkware.starknet.core.os.contract_address.contract_address import \
+    calculate_contract_address_from_hash
 from starkware.starknet.public.abi import get_storage_var_address
-from starkware.starknet.core.os.contract_address.contract_address import calculate_contract_address_from_hash
+
 
 async def deploy(client: AccountClient, player_address: int) -> int:
     print("[+] deploying erc20")
