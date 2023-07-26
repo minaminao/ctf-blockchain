@@ -23,6 +23,7 @@ NOTE: [Capture The Ether](https://capturetheether.com/) was deployed in the Rops
   - [Fifty years](#fifty-years)
 - [Accounts](#accounts)
   - [Fuzzy identity](#fuzzy-identity)
+  - [Public key](#public-key)
 - [Miscellaneous](#miscellaneous)
   - [Assume ownership](#assume-ownership)
   - [Token bank](#token-bank)
@@ -142,6 +143,11 @@ forge test --match-path src/CaptureTheEther/FiftyYears/Exploit.t.sol
 -->
 ```
 forge test --match-path src/CaptureTheEther/FuzzyIdentity/Exploit.t.sol
+```
+
+### Public key
+```
+forge test --match-path src/CaptureTheEther/PublicKey/Exploit.t.sol
 ```
 
 ## Miscellaneous

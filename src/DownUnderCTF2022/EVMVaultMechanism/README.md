@@ -287,9 +287,8 @@ The dummy data was determined by the following Python script.
 from Crypto.Hash import keccak
 
 for i in range(256**3):
-    k = keccak.new(digest_bits=256)
     data = b"\x62" + i.to_bytes(3, "little")
-    k.update(data)
+    k = keccak.new(digest_bits=256, data=data)
     if k.digest()[-1] == 0x77:
         print(data.hex())
         break
@@ -298,8 +297,7 @@ bytecode = bytes.fromhex("6901020304050607080910624500007f4343434300000000000000
 for i in range(256**10):
     bytecode_ = bytecode.replace(bytes.fromhex("01020304050607080910"), i.to_bytes(10, "little"))
     assert len(bytecode_) == len(bytecode)
-    k = keccak.new(digest_bits=256)
-    k.update(bytecode_)
+    k = keccak.new(digest_bits=256, data=bytecode_)
     if k.digest()[-4] == len(bytecode):
         print(bytecode_.hex(), k.hexdigest(), hex(len(bytecode)))
         break

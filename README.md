@@ -401,11 +401,11 @@ Note:
 ### Recoveries of public keys
 - The address is the public key applied to a `keccak256` hash, and the public key cannot be recovered from the address.
 - If even one transaction has been sent, the public key can be back-calculated from it.
-- Specifically, it can be recovered from the value of `keccak256` applied to Recursive Length Prefix (RLP)-encoded data by serializing the transaction and the signature `(r,s,v)`.
+- Specifically, it can be recovered from the Recursive Length Prefix (RLP)-encoded data `[nonce, gas_price, gas, to, value, data, chain_id, 0, 0]` and the signature `(v,r,s)`.
 
-| Challenge                     | Note, Keywords |
-| ----------------------------- | -------------- |
-| Capture The Ether: Public Key |                |
+| Challenge                                             | Note, Keywords |
+| ----------------------------------------------------- | -------------- |
+| [Capture The Ether: Public Key](src/CaptureTheEther/) | RLP, ECDSA     |
 
 ### Encryption and decryption in secp256k1
 

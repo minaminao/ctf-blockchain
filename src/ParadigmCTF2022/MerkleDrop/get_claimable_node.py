@@ -12,11 +12,10 @@ for account, v in claims.items():
     amount = v['amount']
     assert len(proofs) == 6
 
-    k = keccak.new(digest_bits=256)
     index = ("00" * 32 + index[2:])[-32 * 2:]
     account = ("00" * 20 + account[2:])[-20 * 2:]
     amount = ("00" * 12 + amount[2:])[-12 * 2:]
-    k.update(bytes.fromhex(index + account + amount))
+    k = keccak.new(digest_bits=256, data=bytes.fromhex(index + account + amount))
     node = ("00" * 32 + k.hexdigest())[32 * 2:]
 
     for i, proof in enumerate(proofs):
