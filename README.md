@@ -522,6 +522,7 @@ Note:
 | [Numen Cyber CTF 2023: LenderPool](src/NumenCTF/)                 | flash loan                                                                                                                        |
 | [Numen Cyber CTF 2023: GOATFinance](src/NumenCTF/)                | check sum address                                                                                                                 |
 | [SEETF 2023: Pigeon Vault](src/SEETF2023/)                        | EIP-2535: Diamonds, Multi-Facet Proxy                                                                                             |
+| [corCTF 2023: baby-wallet](src/CorCTF2023/)                       | missing `from != to` check                                                                                                        |
 
 ## Bitcoin
 Note
@@ -572,6 +573,7 @@ Note
 | Paradigm CTF 2022: SOLHANA-1                          |                      |
 | Paradigm CTF 2022: SOLHANA-2                          |                      |
 | Paradigm CTF 2022: SOLHANA-3                          |                      |
+| corCTF 2023: tribunal                                 |                      |
 
 ## Move
 
