@@ -102,7 +102,7 @@ forge test --match-contract CoinFlipExploitTest -vvvv
 forge script CoinFlipExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --slow --sig "run(address)" $INSTANCE_ADDRESS
 ```
 
-Command to work around the bug in https://github.com/foundry-rs/foundry/issues/2489 :
+Command to work around the bugs in https://github.com/foundry-rs/foundry/issues/2489 and https://github.com/foundry-rs/foundry/issues/5512 :
 ```sh
 forge script CoinFlipExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --slow --sig "run(address)" $INSTANCE_ADDRESS --fork-block-number $(python -c "print($(cast block-number)-10)")
 ```
@@ -393,7 +393,7 @@ forge script PuzzleWalletExploitScript -vvvv --private-key $PRIVATE_KEY --fork-u
 [Challenge & Exploit codes](Motorbike)
 
 **Test**
-- Foundry test function cannot detect that the code size has changed to 0.
+- Foundry test functions cannot detect that the code size has changed to 0.
 - Anvil should be able to test it (WIP).
 
 **Exploit**
