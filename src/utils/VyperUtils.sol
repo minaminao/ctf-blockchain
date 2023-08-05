@@ -10,7 +10,6 @@ contract VyperUtils {
         bytes memory code = compile(fileName);
         uint256 value = msg.value;
 
-        vm.prank(msg.sender);
         assembly {
             addr := create(value, add(code, 0x20), mload(code))
         }
