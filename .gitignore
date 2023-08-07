@@ -9,7 +9,9 @@ out/
 /broadcast/*
 /broadcast/*/31337/
 
+# Secret
 export_api_key.sh
+src/MEVShareCTF/.env
 
 # Private challenges
 src/**/_*
