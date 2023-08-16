@@ -52,6 +52,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Faking errors](#faking-errors)
   - [Foundry cheatcodes](#foundry-cheatcodes)
   - [Front-running](#front-running)
+  - [Back-running](#back-running)
   - [Head overflow bugs in calldata tuple ABI-reencoding (\< Solidity 0.8.16)](#head-overflow-bugs-in-calldata-tuple-abi-reencoding--solidity-0816)
   - [Overwriting storage slots via local storage variables (\< Solidity 0.8.1)](#overwriting-storage-slots-via-local-storage-variables--solidity-081)
   - [Overwriting arbitrary storage slots by setting array lengths to `2^256-1` (\< Solidity 0.6.0)](#overwriting-arbitrary-storage-slots-by-setting-array-lengths-to-2256-1--solidity-060)
@@ -464,6 +465,21 @@ Note:
 | Challenge                                               | Note, Keywords |
 | ------------------------------------------------------- | -------------- |
 | [DownUnderCTF 2022: Private Log](src/DownUnderCTF2022/) |                |
+
+### Back-running
+- MEV-Share can be used to create bundled transactions to back-run.
+
+| Challenge                                                           | Note, Keywords |
+| ------------------------------------------------------------------- | -------------- |
+| [MEV-Share CTF: MevShareCTFSimple 1](src/MEVShareCTF/)              |                |
+| [MEV-Share CTF: MevShareCTFSimple 2](src/MEVShareCTF/)              |                |
+| [MEV-Share CTF: MevShareCTFSimple 3](src/MEVShareCTF/)              |                |
+| [MEV-Share CTF: MevShareCTFSimple 4](src/MEVShareCTF/)              |                |
+| [MEV-Share CTF: MevShareCTFMagicNumberV1](src/MEVShareCTF/)         |                |
+| [MEV-Share CTF: MevShareCTFMagicNumberV2](src/MEVShareCTF/)         |                |
+| [MEV-Share CTF: MevShareCTFMagicNumberV3](src/MEVShareCTF/)         |                |
+| [MEV-Share CTF: MevShareCTFNewContract (Address)](src/MEVShareCTF/) |                |
+| [MEV-Share CTF: MevShareCTFNewContract (Salt)](src/MEVShareCTF/)    | CREATE2        |
 
 ### Head overflow bugs in calldata tuple ABI-reencoding (< Solidity 0.8.16)
 - See: https://blog.soliditylang.org/2022/08/08/calldata-tuple-reencoding-head-overflow-bug/

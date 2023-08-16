@@ -10,8 +10,8 @@
 - [Challenge 5: MevShareCTFMagicNumberV1](#challenge-5-mevsharectfmagicnumberv1)
 - [Challenge 6: MevShareCTFMagicNumberV2](#challenge-6-mevsharectfmagicnumberv2)
 - [Challenge 7: MevShareCTFMagicNumberV3](#challenge-7-mevsharectfmagicnumberv3)
-- [Challenge 8: MevShareCTFNewContract (address)](#challenge-8-mevsharectfnewcontract-address)
-- [Challenge 9: MevShareCTFNewContract (salt)](#challenge-9-mevsharectfnewcontract-salt)
+- [Challenge 8: MevShareCTFNewContract (Address)](#challenge-8-mevsharectfnewcontract-address)
+- [Challenge 9: MevShareCTFNewContract (Salt)](#challenge-9-mevsharectfnewcontract-salt)
 - [Challenge 10: MevShareCTFTriple](#challenge-10-mevsharectftriple)
 
 ## What is MEV-Share CTF?
@@ -619,7 +619,7 @@ const mevShareBundle = {
 }
 ```
 
-## Challenge 8: MevShareCTFNewContract (address)
+## Challenge 8: MevShareCTFNewContract (Address)
 
 Challenge contract address: https://goerli.etherscan.io/address/0x5eA0feA0164E5AA58f407dEBb344876b5ee10DEA
 
@@ -699,7 +699,7 @@ The `emit Activate(address(newlyDroppedContract))` in the `activateRewardNewCont
 
 The solver is in the writeup for the next challenge.
 
-## Challenge 9: MevShareCTFNewContract (salt)
+## Challenge 9: MevShareCTFNewContract (Salt)
 
 Challenge contract address: https://goerli.etherscan.io/address/0x5eA0feA0164E5AA58f407dEBb344876b5ee10DEA
 

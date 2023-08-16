@@ -12,7 +12,7 @@ ignored_error_codes = [
     9302, # Warning (9302): Return value of low-level calls not used.
 ]
 
-# For Huff
+# For Huff & Vyper
 ffi = true
 fs_permissions = [{ access = "read", path = "./out" }]
 
