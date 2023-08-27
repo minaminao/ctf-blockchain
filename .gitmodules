@@ -16,3 +16,6 @@
 [submodule "lib/foundry-huff"]
 	path = lib/foundry-huff
 	url = https://github.com/huff-language/foundry-huff
+[submodule "lib/prb-math"]
+	path = lib/prb-math
+	url = https://github.com/PaulRBerg/prb-math
