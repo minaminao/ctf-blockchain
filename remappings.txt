@@ -7,3 +7,4 @@ openzeppelin/=lib/openzeppelin-contracts/contracts/
 stringutils/=lib/foundry-huff/lib/solidity-stringutils/
 v2-core/=lib/v2-core/contracts/
 solmate/=lib/solmate
+@prb/math/=lib/prb-math/src/

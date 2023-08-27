@@ -324,6 +324,7 @@ Note:
 | [QuillCTF 2023: SafeNFT](src/QuillCTF2022/SafeNFT)                              | ERC721, `safeMint()`       |
 | [Numen Cyber CTF 2023: SimpleCall](src/NumenCTF/)                               | `call`                     |
 | [SEETF 2023: PigeonBank](src/SEETF2023/)                                        |                            |
+| [Project SEKAI CTF 2023: Re-Remix](src/ProjectSekaiCTF2023/)                    | Read-Only Reentrancy       |
 
 ### Flash loan basics
 - Flash loans are uncollateralised loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
@@ -590,6 +591,8 @@ Note
 | Paradigm CTF 2022: SOLHANA-2                          |                      |
 | Paradigm CTF 2022: SOLHANA-3                          |                      |
 | corCTF 2023: tribunal                                 |                      |
+| Project SEKAI CTF 2023: The Bidding                   |                      |
+| Project SEKAI CTF 2023: Play for Free                 |                      |
 
 ## Move
 
