@@ -30,6 +30,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Reversing transactions](#reversing-transactions)
   - [Reversing EVM bytecodes](#reversing-evm-bytecodes)
   - [EVM bytecode golf](#evm-bytecode-golf)
+  - [Jump-oriented programming](#jump-oriented-programming)
   - [Gas optimization](#gas-optimization)
   - [Collisions when using `abi.encodePacked` with variable length arguments](#collisions-when-using-abiencodepacked-with-variable-length-arguments)
   - [Bypassing verifications with zero iteration loops](#bypassing-verifications-with-zero-iteration-loops)
@@ -261,11 +262,9 @@ Note:
 | Challenge                                                       | Note, Keywords                          |
 | --------------------------------------------------------------- | --------------------------------------- |
 | Incognito 2.0: Ez                                               | keep in plain text                      |
-| Real World CTF 3rd: Re:Montagy                                  | Jump Oriented Programming (JOP)         |
 | [0x41414141 CTF: crackme.sol](src/0x41414141CTF/)               | decompile                               |
 | [0x41414141 CTF: Crypto Casino](src/0x41414141CTF/)             | bypass condition check                  |
 | Paradigm CTF 2021: Babyrev                                      |                                         |
-| Paradigm CTF 2021: JOP                                          | Jump Oriented Programming (JOP)         |
 | 34C3 CTF: Chaingang                                             |                                         |
 | Blaze CTF 2018: Smart? Contract                                 |                                         |
 | DEF CON CTF Qualifier 2018: SAG?                                |                                         |
@@ -286,6 +285,15 @@ Note:
 | [Ethernaut: 18. MagicNumber](src/Ethernaut/)           |                                                                                                                |
 | [Paradigm CTF 2021: Rever](src/ParadigmCTF2021/Rever/) | Palindrome detection. In addition, the code that inverts the bytecode must also be able to detect palindromes. |
 | [Huff Challenge: Challenge #1](src/HuffChallenge/)     |                                                                                                                |
+
+### Jump-oriented programming
+- Jump-Oriented Programming (JOP)
+
+| Challenge                                                                          | Note, Keywords |
+| ---------------------------------------------------------------------------------- | -------------- |
+| [SECCON CTF 2023 Quals: Tokyo Payload](https://github.com/minaminao/tokyo-payload) |                |
+| Paradigm CTF 2021: JOP                                                             |                |
+| Real World CTF 3rd: Re:Montagy                                                     |                |
 
 ### Gas optimization
 - These challenges have a limit on the gas to be consumed.
