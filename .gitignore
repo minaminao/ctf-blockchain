@@ -1,5 +1,3 @@
-.vscode
-
 # Compiler files
 cache/
 out/
@@ -22,17 +20,10 @@ __pycache__
 # Node
 node_modules
 
-# macOS
-.DS_Store
-
 # Rust
 debug
 target
 Cargo.lock
-
-# Paradigm CTF 2022
-*.zip
-*.gz
 
 # HackTM
 **/challenge/openzeppelin-contracts*
@@ -40,3 +31,10 @@ Cargo.lock
 # Move
 build
 storage
+
+# Paradigm CTF 2022
+*.zip
+*.gz
+
+# Paradigm CTF 2023
+src/ParadigmCTF2023/*-attachment/
