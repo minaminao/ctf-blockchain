@@ -115,6 +115,7 @@ Note:
 | [Paradigm CTF 2022: SOURCECODE](src/ParadigmCTF2022/)              | quine                                                                  |
 | [Numen Cyber CTF 2023: LittleMoney](src/NumenCTF/)                 | function pointer                                                       |
 | [Numen Cyber CTF 2023: ASSLOT](src/NumenCTF/)                      | `staticcall` that return different values                              |
+| [Paradigm CTF 2023: Black Sheep](src/ParadigmCTF2023/)             | Huff                                                                   |
 
 ### Misuse of `tx.origin`
 - `tx.origin` refers to the address of the transaction publisher and should not be used as the address of the contract caller `msg.sender`.
@@ -134,6 +135,7 @@ Note:
 | [Capture The Ether: Predict the future](src/CaptureTheEther/) |                |
 | [Ethernaut: 3. Coin Flip](src/Ethernaut/)                     |                |
 | [DownUnderCTF 2022: Crypto Casino](src/DownUnderCTF2022/)     |                |
+| [Paradigm CTF 2023: SkillBasedGame](src/ParadigmCTF2023/)     |                |
 
 ### ERC-20 basics
 - These challenges can be solved with an understanding of the [ERC-20 token standard](https://eips.ethereum.org/EIPS/eip-20).
