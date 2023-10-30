@@ -1,4 +1,5 @@
 {
+  "license": "UNLICENSED",
 	"devDependencies": {
 		"@types/node": "^20.4.8",
 		"@typescript-eslint/eslint-plugin": "^6.2.1",

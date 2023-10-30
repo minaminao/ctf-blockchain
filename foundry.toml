@@ -5,8 +5,6 @@ libs = ["lib"]
 match_path = "*/*.t.sol"
 no_match_path = "*/_*"
 
-rpc_endpoints = { mainnet = "https://rpc.ankr.com/eth" }
-
 ignored_error_codes = [
     "license", # warning[1878]: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
     3860, # Warning (3860): Contract initcode size is X bytes and exceeds Y bytes (a limit introduced in Shanghai). This contract may not be deployable on Mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
@@ -24,5 +22,9 @@ evm_version = "shanghai"
 # For CREATE2
 bytecode_hash = "none"
 cbor_metadata = false
+
+[profile.default.rpc_endpoints]
+mainnet = "https://rpc.ankr.com/eth"
+goerli = "https://rpc.ankr.com/eth_goerli"
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/crates/config

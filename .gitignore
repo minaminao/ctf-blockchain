@@ -36,5 +36,4 @@ storage
 *.zip
 *.gz
 
-# Paradigm CTF 2023
-src/ParadigmCTF2023/*-attachment/
+attachments/
