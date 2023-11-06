@@ -29,3 +29,7 @@ Currently, only my solver codes for the jeopardy challenges are here.
 [Solver Code](BlackSheep)
 
 ## King of the Hill
+
+### Cosmic Radiation
+
+[Writeup & Solver Code](CosmicRadiation)
