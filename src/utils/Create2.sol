@@ -2,12 +2,12 @@
 pragma solidity ^0.8.0;
 
 library Create2 {
-    function getAddress(address creator, bytes32 salt, bytes memory creationCode) external pure returns (address) {
+    function computeAddr(address creator, bytes32 salt, bytes memory creationCode) external pure returns (address) {
         return
             address(uint160(uint256(keccak256(abi.encodePacked(bytes1(0xff), creator, salt, keccak256(creationCode))))));
     }
 
-    function getAddress(address creator, bytes32 salt, bytes memory creationCode, bytes memory encodedArgs)
+    function computeAddr(address creator, bytes32 salt, bytes memory creationCode, bytes memory encodedArgs)
         internal
         pure
         returns (address)

@@ -82,7 +82,7 @@ This vulnerability can be exploited to take away an NFT by performing the follow
 The address of the Rare NFT contract can be pre-computed as follows because the `create2` opcode is used.
 ```solidity
 library Create2 {
-    function getAddress(address creator, bytes32 salt, bytes memory bytecode, bytes memory encodedArgs) internal pure returns(address) {
+    function computeAddr(address creator, bytes32 salt, bytes memory bytecode, bytes memory encodedArgs) internal pure returns(address) {
         return address(uint160(uint256(keccak256(
             abi.encodePacked(bytes1(0xff), creator, salt, keccak256(abi.encodePacked(bytecode, encodedArgs)))
         ))));
@@ -90,7 +90,7 @@ library Create2 {
 }
 ```
 ```solidity
-address rareNFTAddress = Create2.getAddress(
+address rareNFTAddress = Create2.computeAddr(
     address(nftMarketplace),
     keccak256("rareNFT"),
     nftMarketplace.getNFTVersion(),

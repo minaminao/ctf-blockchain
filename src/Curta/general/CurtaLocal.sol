@@ -2,8 +2,8 @@
 // from: https://github.com/waterfall-mkt/curta/blob/main/src/Curta.sol
 pragma solidity ^0.8.17;
 
-import { ICurta } from "./ICurta.sol";
-import { IPuzzle } from "./IPuzzle.sol";
+import {ICurta} from "./ICurta.sol";
+import {IPuzzle} from "./IPuzzle.sol";
 
 contract Curta is ICurta {
     uint32 public puzzleId;
@@ -17,17 +17,14 @@ contract Curta is ICurta {
             revert IncorrectSolution();
         }
 
-        emit SolvePuzzle({ id: _puzzleId, solver: msg.sender, solution: _solution, phase: 0 });
+        emit SolvePuzzle({id: _puzzleId, solver: msg.sender, solution: _solution, phase: 0});
     }
 
-    function addPuzzle(IPuzzle _puzzle, uint256 /* _tokenId */) external {
+    function addPuzzle(IPuzzle _puzzle, uint256 /* _tokenId */ ) external {
         uint32 curPuzzleId = ++puzzleId;
         unchecked {
-            getPuzzle[curPuzzleId] = PuzzleData({
-                puzzle: _puzzle,
-                addedTimestamp: uint40(block.timestamp),
-                firstSolveTimestamp: 0
-            });
+            getPuzzle[curPuzzleId] =
+                PuzzleData({puzzle: _puzzle, addedTimestamp: uint40(block.timestamp), firstSolveTimestamp: 0});
         }
     }
 

@@ -31,4 +31,16 @@ library Create {
             addr := create(value, add(bytecode, 0x20), mload(bytecode))
         }
     }
+
+    function computeAddr(address deployerAddr, uint256 nonce) public pure returns (address) {
+        bytes memory data;
+        if (nonce == 0x00) {
+            data = abi.encodePacked(bytes1(0xd6), bytes1(0x94), deployerAddr, bytes1(0x80));
+        } else if (nonce <= 0x7f) {
+            data = abi.encodePacked(bytes1(0xd6), bytes1(0x94), deployerAddr, uint8(nonce));
+        } else {
+            data = abi.encodePacked(bytes1(0xd6), bytes1(0x94), deployerAddr, bytes1(0x81), uint16(nonce));
+        }
+        return address(uint160(uint256(keccak256(data))));
+    }
 }
