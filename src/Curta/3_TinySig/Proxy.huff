@@ -1,0 +1,15 @@
+#define constant ADDR = 0xABABABABABABABABABABABABABABABABABABABAB // dummy address
+
+#define macro MAIN() = takes (0) returns (0) {
+    0x60
+    0x00
+    0x00
+    0x00
+    [ADDR]
+    0xFF
+    staticcall // [0x60]
+
+    returndatasize
+    0x00
+    return // []
+}
