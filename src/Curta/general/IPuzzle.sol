@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // from https://github.com/waterfall-mkt/curta/blob/main/src/interfaces/IPuzzle.sol
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.13;
 
 interface IPuzzle {
     function name() external pure returns (string memory);

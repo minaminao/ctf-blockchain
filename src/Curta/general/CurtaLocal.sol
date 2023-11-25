@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // from: https://github.com/waterfall-mkt/curta/blob/main/src/Curta.sol
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.13;
 
 import {ICurta} from "./ICurta.sol";
 import {IPuzzle} from "./IPuzzle.sol";
