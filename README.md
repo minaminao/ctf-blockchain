@@ -259,7 +259,10 @@ Note:
 
 ### Reversing EVM bytecodes
 - Reversing a contract for which code is not given in whole or in part.
-- Use a decompiler (e.g., [heimdall](https://github.com/Jon-Becker/heimdall-rs), [panoramix](https://github.com/eveem-org/panoramix)) and a disassembler (e.g., [ethersplay](https://github.com/crytic/ethersplay)).
+- [evm.codes](https://www.evm.codes/) is very useful.
+- Use a decompiler (e.g., [Dedaub Decompiler](https://app.dedaub.com/decompile), [heimdall](https://github.com/Jon-Becker/heimdall-rs)).
+- Use a disassembler (e.g., [ByteGraph](https://bytegraph.xyz/), [ethersplay](https://github.com/crytic/ethersplay)).
+- Use a debugger (e.g., [Foundry Debugger](https://book.getfoundry.sh/forge/debugger)).
 
 | Challenge                                                       | Note, Keywords                          |
 | --------------------------------------------------------------- | --------------------------------------- |
@@ -337,7 +340,7 @@ Note:
 | [Project SEKAI CTF 2023: Re-Remix](src/ProjectSekaiCTF2023/)                    | Read-Only Reentrancy       |
 
 ### Flash loan basics
-- Flash loans are uncollateralised loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
+- Flash loans are uncollateralized loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
 - By making large asset moves, attacks can be made to snatch funds from DeFi applications or to gain large amounts of votes for participation in governance.
 - A solution to attacks that use flash loans to corrupt oracle values is to use a decentralized oracle.
 
