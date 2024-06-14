@@ -260,7 +260,11 @@ async function backrunAttempt(currentBlockNumber: number, nonce: number, pending
 function transactionIsRelatedToTarget(pendingTx: IPendingTransaction) {
     return (pendingTx.logs || []).some(log => log.address === TARGET_ADDRESS)
 }
+```
 
+The command to execute it is:
+```bash
+npx ts-node 10x/solver.ts
 ```
 
 ## Challenge 2: MevShareCTFSimple 2
