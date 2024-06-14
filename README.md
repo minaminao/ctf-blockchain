@@ -606,18 +606,18 @@ Note
 
 ### CosmWasm
 
-| Challenge                                  | Note, Keywords |
-| ------------------------------------------ | -------------- |
-| Oak Security CosmWasm CTF: 1. Mjolnir      |                |
-| Oak Security CosmWasm CTF: 2. Gungnir      |                |
-| Oak Security CosmWasm CTF: 3. Laevateinn   |                |
-| Oak Security CosmWasm CTF: 4. Gram         |                |
-| Oak Security CosmWasm CTF: 5. Draupnir     |                |
-| Oak Security CosmWasm CTF: 6. Hofund       |                |
-| Oak Security CosmWasm CTF: 7. Tyrfing      |                |
-| Oak Security CosmWasm CTF: 8. Gjallarhorn  |                |
-| Oak Security CosmWasm CTF: 9. Brisingamen  |                |
-| Oak Security CosmWasm CTF: 10. Mistilteinn |                |
+| Challenge                                                                       | Note, Keywords   |
+| ------------------------------------------------------------------------------- | ---------------- |
+| [Oak Security CosmWasm CTF: 1. Mjolnir](src/OakSecurityCosmWasmCTF/01-Mjolnir/) | logic bug        |
+| [Oak Security CosmWasm CTF: 2. Gungnir](src/OakSecurityCosmWasmCTF/02-Gungnir/) | integer overflow |
+| Oak Security CosmWasm CTF: 3. Laevateinn                                        |                  |
+| Oak Security CosmWasm CTF: 4. Gram                                              |                  |
+| Oak Security CosmWasm CTF: 5. Draupnir                                          |                  |
+| Oak Security CosmWasm CTF: 6. Hofund                                            |                  |
+| Oak Security CosmWasm CTF: 7. Tyrfing                                           |                  |
+| Oak Security CosmWasm CTF: 8. Gjallarhorn                                       |                  |
+| Oak Security CosmWasm CTF: 9. Brisingamen                                       |                  |
+| Oak Security CosmWasm CTF: 10. Mistilteinn                                      |                  |
 
 ### Application-specific blockchain
 
