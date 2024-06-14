@@ -64,9 +64,12 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Bitcoin basics](#bitcoin-basics)
   - [Recoveries of private keys by same-nonce attacks](#recoveries-of-private-keys-by-same-nonce-attacks-1)
   - [Bypassing PoW of other applications using Bitcoin's PoW database](#bypassing-pow-of-other-applications-using-bitcoins-pow-database)
-- [Cairo](#cairo)
 - [Solana](#solana)
+- [Cosmos](#cosmos)
+  - [CosmWasm](#cosmwasm)
+  - [Application-specific blockchain](#application-specific-blockchain)
 - [Move](#move)
+- [Cairo](#cairo)
 - [Other Blockchain-Related](#other-blockchain-related)
 
 ---
@@ -581,15 +584,6 @@ Note
 | --------------------------- | -------------- |
 | Dragon CTF 2020: Bit Flip 2 | 64-bit PoW     |
 
-## Cairo
-
-| Challenge                                                       | Note, Keywords   |
-| --------------------------------------------------------------- | ---------------- |
-| [Paradigm CTF 2022: RIDDLE-OF-THE-SPHINX](src/ParadigmCTF2022/) | contract call    |
-| [Paradigm CTF 2022: CAIRO-PROXY](src/ParadigmCTF2022/)          | integer overflow |
-| [Paradigm CTF 2022: CAIRO-AUCTION](src/ParadigmCTF2022/)        | `Uint256`        |
-| [BalsnCTF 2022: Cairo Reverse](src/BalsnCTF2022/)               | reversing        |
-
 ## Solana
 
 | Challenge                                             | Note, Keywords       |
@@ -608,6 +602,29 @@ Note
 | Project SEKAI CTF 2023: The Bidding                   |                      |
 | Project SEKAI CTF 2023: Play for Free                 |                      |
 
+## Cosmos
+
+### CosmWasm
+
+| Challenge                                  | Note, Keywords |
+| ------------------------------------------ | -------------- |
+| Oak Security CosmWasm CTF: 1. Mjolnir      |                |
+| Oak Security CosmWasm CTF: 2. Gungnir      |                |
+| Oak Security CosmWasm CTF: 3. Laevateinn   |                |
+| Oak Security CosmWasm CTF: 4. Gram         |                |
+| Oak Security CosmWasm CTF: 5. Draupnir     |                |
+| Oak Security CosmWasm CTF: 6. Hofund       |                |
+| Oak Security CosmWasm CTF: 7. Tyrfing      |                |
+| Oak Security CosmWasm CTF: 8. Gjallarhorn  |                |
+| Oak Security CosmWasm CTF: 9. Brisingamen  |                |
+| Oak Security CosmWasm CTF: 10. Mistilteinn |                |
+
+### Application-specific blockchain
+
+| Challenge                           | Note, Keywords |
+| ----------------------------------- | -------------- |
+| RealWorld CTF 3rd Finals: Billboard |                |
+
 ## Move
 
 | Challenge                                                                         | Note, Keywords                           |
@@ -616,6 +633,14 @@ Note
 | [Numen Cyber CTF 2023: ChatGPT tell me where is the vulnerability](src/NumenCTF/) | OSINT                                    |
 | [Numen Cyber CTF 2023: Move to Crackme](src/NumenCTF/)                            | reversing Move code and Linux executable |
 
+## Cairo
+
+| Challenge                                                       | Note, Keywords   |
+| --------------------------------------------------------------- | ---------------- |
+| [Paradigm CTF 2022: RIDDLE-OF-THE-SPHINX](src/ParadigmCTF2022/) | contract call    |
+| [Paradigm CTF 2022: CAIRO-PROXY](src/ParadigmCTF2022/)          | integer overflow |
+| [Paradigm CTF 2022: CAIRO-AUCTION](src/ParadigmCTF2022/)        | `Uint256`        |
+| [BalsnCTF 2022: Cairo Reverse](src/BalsnCTF2022/)               | reversing        |
 
 ## Other Blockchain-Related
 - Things that are not directly related to blockchains but are part of the ecosystems.
