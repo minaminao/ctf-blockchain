@@ -14,12 +14,7 @@ contract DoubleEntryPointFactory is Level {
         // Create a new CryptoVault
         CryptoVault vault = new CryptoVault(_player);
         // Create latest token
-        DoubleEntryPoint newToken = new DoubleEntryPoint(
-            address(oldToken),
-            address(vault),
-            address(forta),
-            _player
-        );
+        DoubleEntryPoint newToken = new DoubleEntryPoint(address(oldToken), address(vault), address(forta), _player);
         // Set underlying in CryptoVault
         vault.setUnderlying(address(newToken));
 

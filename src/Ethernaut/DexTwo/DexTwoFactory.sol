@@ -11,18 +11,8 @@ contract DexTwoFactory is Level {
         DexTwo instance = new DexTwo();
         address instanceAddress = address(instance);
 
-        SwappableTokenTwo tokenInstance = new SwappableTokenTwo(
-            instanceAddress,
-            "Token 1",
-            "TKN1",
-            110
-        );
-        SwappableTokenTwo tokenInstanceTwo = new SwappableTokenTwo(
-            instanceAddress,
-            "Token 2",
-            "TKN2",
-            110
-        );
+        SwappableTokenTwo tokenInstance = new SwappableTokenTwo(instanceAddress, "Token 1", "TKN1", 110);
+        SwappableTokenTwo tokenInstanceTwo = new SwappableTokenTwo(instanceAddress, "Token 2", "TKN2", 110);
 
         address tokenInstanceAddress = address(tokenInstance);
         address tokenInstanceTwoAddress = address(tokenInstanceTwo);

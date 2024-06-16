@@ -40,8 +40,7 @@ contract Setup {
         token = new Token();
         uint256 airdropAmount = 75000 * 10 ** 18;
         merkleDistributor = new MerkleDistributor(
-            address(token), 
-            bytes32(0x5176d84267cd453dad23d8f698d704fc7b7ee6283b5131cb3de77e58eb9c3ec3)
+            address(token), bytes32(0x5176d84267cd453dad23d8f698d704fc7b7ee6283b5131cb3de77e58eb9c3ec3)
         );
         token.transfer(address(merkleDistributor), airdropAmount);
     }

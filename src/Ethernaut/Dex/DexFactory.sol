@@ -11,18 +11,8 @@ contract DexFactory is Level {
         Dex instance = new Dex();
         address instanceAddress = address(instance);
 
-        SwappableToken tokenInstance = new SwappableToken(
-            instanceAddress,
-            "Token 1",
-            "TKN1",
-            110
-        );
-        SwappableToken tokenInstanceTwo = new SwappableToken(
-            instanceAddress,
-            "Token 2",
-            "TKN2",
-            110
-        );
+        SwappableToken tokenInstance = new SwappableToken(instanceAddress, "Token 1", "TKN1", 110);
+        SwappableToken tokenInstanceTwo = new SwappableToken(instanceAddress, "Token 2", "TKN2", 110);
 
         address tokenInstanceAddress = address(tokenInstance);
         address tokenInstanceTwoAddress = address(tokenInstanceTwo);

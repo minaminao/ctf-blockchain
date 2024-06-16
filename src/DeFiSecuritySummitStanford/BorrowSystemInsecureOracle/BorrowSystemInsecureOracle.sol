@@ -12,7 +12,6 @@ interface IInsecureDexLP {
  * @dev Codebase heavily inspired by
  * https://github.com/maxsam4/bad-lending-demo/blob/main/contracts/LeBo.sol
  */
-
 contract BorrowSystemInsecureOracle {
     using SafeERC20 for IERC20;
 

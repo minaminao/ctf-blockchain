@@ -7,7 +7,6 @@ pragma solidity ^0.8.0;
  * @author Blue Alder (https://duc.tf)
  *
  */
-
 contract SecretAndEphemeral {
     address private owner;
     int256 public seconds_in_a_year = 60 * 60 * 24 * 365;

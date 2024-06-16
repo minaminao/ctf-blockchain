@@ -14,11 +14,7 @@ contract PuzzleWalletFactory is Level {
 
         // deploy proxy and initialize implementation contract
         bytes memory data = abi.encodeWithSelector(PuzzleWallet.init.selector, 100 ether);
-        PuzzleProxy proxy = new PuzzleProxy(
-            address(this),
-            address(walletLogic),
-            data
-        );
+        PuzzleProxy proxy = new PuzzleProxy(address(this), address(walletLogic), data);
         PuzzleWallet instance = PuzzleWallet(address(proxy));
 
         // whitelist this contract to allow it to deposit ETH
