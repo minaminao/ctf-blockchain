@@ -25,6 +25,5 @@ cbor_metadata = false
 
 [profile.default.rpc_endpoints]
 mainnet = "https://rpc.ankr.com/eth"
-goerli = "https://rpc.ankr.com/eth_goerli"
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/crates/config
