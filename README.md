@@ -337,10 +337,11 @@ Note:
 | [EthernautDAO: 4. VendingMachine](src/EthernautDAO/VendingMachine/)             | `call`                     |
 | [DeFi-Security-Summit-Stanford: InsecureDexLP](src/DeFiSecuritySummitStanford/) | ERC-223, `tokenFallback()` |
 | [MapleCTF 2022: maplebacoin](src/MapleCTF/)                                     |                            |
-| [QuillCTF 2023: SafeNFT](src/QuillCTF2022/SafeNFT)                              | ERC721, `safeMint()`       |
+| [QuillCTF 2022: SafeNFT](src/QuillCTF2022/SafeNFT)                              | ERC721, `_safeMint()`      |
 | [Numen Cyber CTF 2023: SimpleCall](src/NumenCTF/)                               | `call`                     |
 | [SEETF 2023: PigeonBank](src/SEETF2023/)                                        |                            |
 | [Project SEKAI CTF 2023: Re-Remix](src/ProjectSekaiCTF2023/)                    | Read-Only Reentrancy       |
+| [SECCON Beginners CTF 2024: vote4b](src/SECCONBeginnersCTF2024/vote4b/)         | ERC721, `_safeMint()`      |
 
 ### Flash loan basics
 - Flash loans are uncollateralized loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
@@ -632,6 +633,9 @@ Note
 | [Numen Cyber CTF 2023: Move to Checkin](src/NumenCTF/)                            | contract call in Sui                     |
 | [Numen Cyber CTF 2023: ChatGPT tell me where is the vulnerability](src/NumenCTF/) | OSINT                                    |
 | [Numen Cyber CTF 2023: Move to Crackme](src/NumenCTF/)                            | reversing Move code and Linux executable |
+| justCTF 2024 teaser: The Otter Scrolls                                            |                                          |
+| justCTF 2024 teaser: Dark BrOTTERhood                                             |                                          |
+| justCTF 2024 teaser: World of Ottercraft                                          |                                          |
 
 ## Cairo
 
