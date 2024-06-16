@@ -22,14 +22,3 @@ You can use these tests as a base to create your exploit Proof of Concept.
 
 **:star: Goal for the challenge:**
 - Demonstrate how an unprivileged user can achieve an unfair amount of voting power.
-
-## Scoring
-
-This challenge has been assigned a total of **150** points:
-- **40** points will be awarded for a proper description of the finding that allows you to achieve the **Goal** above.
-- **35** points will be awarded for a proper recommendation that fixes the issue.
-- If the report is deemed valid, the remaining **75** additional points will be awarded for a working Proof of Concept exploit of the vulnerability.
-
-:exclamation: The usage of [`cw-multi-test`](https://github.com/CosmWasm/cw-multi-test) is **mandatory** for the PoC, please take the approach of the provided integration tests as a suggestion.
-
-:exclamation: Remember that insider threats and centralization concerns are out of the scope of the CTF.
