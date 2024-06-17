@@ -14,7 +14,7 @@ pub enum ExecuteMsg {
 }
 ```
 
-Please check the challenge's [integration_tests](./src/integration_test.rs) for expected usage examples.
+Please check the challenge's [integration_tests](./src/integration_tests.rs) for expected usage examples.
 You can use these tests as a base to create your exploit Proof of Concept.
 
 **:house: Base scenario:**
