@@ -3,9 +3,7 @@ use cosmwasm_schema::{cw_serde, QueryResponses};
 use crate::state::Lockup;
 
 #[cw_serde]
-pub struct InstantiateMsg {
-    pub count: i32,
-}
+pub struct InstantiateMsg {}
 
 #[cw_serde]
 pub enum ExecuteMsg {
