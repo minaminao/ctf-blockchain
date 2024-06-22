@@ -1,4 +1,4 @@
-all: fmt test
+all: fmt clippy test
 
 fmt:
 	cd 01-* && cargo fmt
@@ -6,6 +6,13 @@ fmt:
 	cd 03-* && cargo fmt
 	cd 04-* && cargo fmt
 	cd 05-* && cargo fmt
+
+clippy:
+	cd 01-* && cargo clippy
+	cd 02-* && cargo clippy
+	cd 03-* && cargo clippy
+	cd 04-* && cargo clippy
+	cd 05-* && cargo clippy -- --allow clippy::no_effect
 
 test:
 	cd 01-* && cargo test
