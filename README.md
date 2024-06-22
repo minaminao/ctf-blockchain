@@ -614,7 +614,7 @@ Note
 | [Oak Security CosmWasm CTF: 3. Laevateinn](src/OakSecurityCosmWasmCTF/03-Laevateinn/) | address validation, uppercase |
 | [Oak Security CosmWasm CTF: 4. Gram](src/OakSecurityCosmWasmCTF/04-Gram/)             | invariant, rounding error     |
 | [Oak Security CosmWasm CTF: 5. Draupnir](src/OakSecurityCosmWasmCTF/05-Draupnir/)     | missing return                |
-| Oak Security CosmWasm CTF: 6. Hofund                                                  |                               |
+| [Oak Security CosmWasm CTF: 6. Hofund](src/OakSecurityCosmWasmCTF/06-Hofund/)         | flash loan, governance        |
 | Oak Security CosmWasm CTF: 7. Tyrfing                                                 |                               |
 | Oak Security CosmWasm CTF: 8. Gjallarhorn                                             |                               |
 | Oak Security CosmWasm CTF: 9. Brisingamen                                             |                               |

@@ -22,6 +22,7 @@ You can use these tests as a base to create your exploit Proof of Concept.
 
 **:house: Base scenario:**
 - The contract is newly instantiated
+- Flash loans are available
 
 **:star: Goal for the challenge:**
 - Demonstrate how a proposer can obtain the owner role without controlling 1/3 of the total supply.
