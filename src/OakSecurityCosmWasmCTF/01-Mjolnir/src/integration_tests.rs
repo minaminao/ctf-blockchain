@@ -18,6 +18,7 @@ pub mod tests {
     }
 
     pub const USER: &str = "user";
+    pub const PLAYER: &str = USER;
     pub const ADMIN: &str = "admin";
 
     pub fn proper_instantiate() -> (App, Addr) {
@@ -36,6 +37,23 @@ pub mod tests {
                 None,
             )
             .unwrap();
+
+        (app, contract_addr)
+    }
+
+    pub fn mint_tokens(mut app: App, recipient: String, amount: Uint128) -> App {
+        app.sudo(cw_multi_test::SudoMsg::Bank(
+            cw_multi_test::BankSudo::Mint {
+                to_address: recipient.to_owned(),
+                amount: vec![coin(amount.u128(), DENOM)],
+            },
+        ))
+        .unwrap();
+        app
+    }
+
+    pub fn base_scenario() -> (App, Addr) {
+        let (mut app, contract_addr) = proper_instantiate();
 
         // mint funds to contract
         app = mint_tokens(
@@ -65,20 +83,9 @@ pub mod tests {
         (app, contract_addr)
     }
 
-    pub fn mint_tokens(mut app: App, recipient: String, amount: Uint128) -> App {
-        app.sudo(cw_multi_test::SudoMsg::Bank(
-            cw_multi_test::BankSudo::Mint {
-                to_address: recipient.to_owned(),
-                amount: vec![coin(amount.u128(), DENOM)],
-            },
-        ))
-        .unwrap();
-        app
-    }
-
     #[test]
     fn basic_flow() {
-        let (mut app, contract_addr) = proper_instantiate();
+        let (mut app, contract_addr) = base_scenario();
 
         let sender = Addr::unchecked(USER);
 

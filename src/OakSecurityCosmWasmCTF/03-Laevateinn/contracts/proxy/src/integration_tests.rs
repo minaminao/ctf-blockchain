@@ -38,7 +38,7 @@ pub mod tests {
         Box::new(contract)
     }
 
-    pub const USER: &str = "user";
+    pub const PLAYER: &str = "player";
     pub const ADMIN: &str = "admin";
 
     pub fn proper_instantiate() -> (App, Addr, Addr, Addr) {

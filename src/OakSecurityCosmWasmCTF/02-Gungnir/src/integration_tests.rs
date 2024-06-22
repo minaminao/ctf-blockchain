@@ -18,6 +18,7 @@ pub mod tests {
     }
 
     pub const USER: &str = "user";
+    pub const PLAYER: &str = USER;
     pub const ADMIN: &str = "admin";
 
     pub fn proper_instantiate() -> (App, Addr) {

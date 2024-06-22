@@ -6,7 +6,6 @@ use cosmwasm_std::{
 
 use crate::error::ContractError;
 use crate::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
-// これがステート
 use crate::state::{Lockup, LAST_ID, LOCKUPS};
 use cw_utils::must_pay;
 
@@ -24,7 +23,6 @@ pub fn instantiate(
     Ok(Response::new().add_attribute("action", "instantiate"))
 }
 
-// execute が entry point になり、deposit か withdraw が実行される
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn execute(
     deps: DepsMut,
