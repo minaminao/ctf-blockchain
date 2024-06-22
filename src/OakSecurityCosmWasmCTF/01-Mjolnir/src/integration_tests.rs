@@ -25,7 +25,7 @@ pub mod tests {
         let cw_template_id = app.store_code(challenge_contract());
 
         // init contract
-        let msg = InstantiateMsg { count: 1i32 };
+        let msg = InstantiateMsg {};
         let contract_addr = app
             .instantiate_contract(
                 cw_template_id,
