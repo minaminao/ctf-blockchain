@@ -52,12 +52,19 @@ pub mod tests {
         app
     }
 
-    #[test]
-    fn basic_flow() {
+    pub fn base_scenario() -> (App, Addr) {
         let (mut app, contract_addr) = proper_instantiate();
 
-        // mint funds to user
+        // mint funds to users
         app = mint_tokens(app, USER.to_owned(), Uint128::new(10_000));
+        app = mint_tokens(app, USER2.to_owned(), Uint128::new(10_000));
+
+        (app, contract_addr)
+    }
+
+    #[test]
+    fn basic_flow() {
+        let (mut app, contract_addr) = base_scenario();
 
         // mint shares for user
         app.execute_contract(
@@ -67,9 +74,6 @@ pub mod tests {
             &[coin(10_000, DENOM)],
         )
         .unwrap();
-
-        // mint funds to user2
-        app = mint_tokens(app, USER2.to_owned(), Uint128::new(10_000));
 
         // mint shares for user2
         app.execute_contract(

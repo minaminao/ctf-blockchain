@@ -51,13 +51,20 @@ pub mod tests {
         app
     }
 
-    #[test]
-    fn basic_flow() {
+    pub const INITIAL_USER_AMOUNT: Uint128 = Uint128::new(1_000);
+
+    pub fn base_scenario() -> (App, Addr) {
         let (mut app, contract_addr) = proper_instantiate();
 
-        let amount = Uint128::new(1_000);
+        app = mint_tokens(app, USER.to_string(), INITIAL_USER_AMOUNT);
 
-        app = mint_tokens(app, USER.to_string(), amount);
+        (app, contract_addr)
+    }
+
+    #[test]
+    fn basic_flow() {
+        let (mut app, contract_addr) = base_scenario();
+
         let sender = Addr::unchecked(USER);
 
         // deposit funds
@@ -66,7 +73,7 @@ pub mod tests {
             sender.clone(),
             contract_addr.clone(),
             &msg,
-            &[coin(amount.u128(), DENOM)],
+            &[coin(INITIAL_USER_AMOUNT.u128(), DENOM)],
         )
         .unwrap();
 
@@ -82,18 +89,18 @@ pub mod tests {
             .wrap()
             .query_wasm_smart(contract_addr.clone(), &msg)
             .unwrap();
-        assert_eq!(user.total_tokens, amount);
+        assert_eq!(user.total_tokens, INITIAL_USER_AMOUNT);
 
         // cannot stake more than deposited
         let msg = ExecuteMsg::Stake {
-            lock_amount: amount.u128() + 1,
+            lock_amount: INITIAL_USER_AMOUNT.u128() + 1,
         };
         app.execute_contract(sender.clone(), contract_addr.clone(), &msg, &[])
             .unwrap_err();
 
         // normal stake
         let msg = ExecuteMsg::Stake {
-            lock_amount: amount.u128(),
+            lock_amount: INITIAL_USER_AMOUNT.u128(),
         };
         app.execute_contract(sender.clone(), contract_addr.clone(), &msg, &[])
             .unwrap();
@@ -106,17 +113,19 @@ pub mod tests {
             .wrap()
             .query_wasm_smart(contract_addr.clone(), &msg)
             .unwrap();
-        assert_eq!(voting_power, amount.u128());
+        assert_eq!(voting_power, INITIAL_USER_AMOUNT.u128());
 
         // cannot unstake before maturity
         let msg = ExecuteMsg::Unstake {
-            unlock_amount: amount.u128(),
+            unlock_amount: INITIAL_USER_AMOUNT.u128(),
         };
         app.execute_contract(sender.clone(), contract_addr.clone(), &msg, &[])
             .unwrap_err();
 
         // cannot withdraw while staked
-        let msg = ExecuteMsg::Withdraw { amount };
+        let msg = ExecuteMsg::Withdraw {
+            amount: INITIAL_USER_AMOUNT,
+        };
         app.execute_contract(sender.clone(), contract_addr.clone(), &msg, &[])
             .unwrap_err();
 
@@ -127,7 +136,7 @@ pub mod tests {
 
         // normal unstake
         let msg = ExecuteMsg::Unstake {
-            unlock_amount: amount.u128(),
+            unlock_amount: INITIAL_USER_AMOUNT.u128(),
         };
         app.execute_contract(sender.clone(), contract_addr.clone(), &msg, &[])
             .unwrap();
@@ -143,12 +152,14 @@ pub mod tests {
         assert_eq!(voting_power, 0_u128);
 
         // normal withdraw
-        let msg = ExecuteMsg::Withdraw { amount };
+        let msg = ExecuteMsg::Withdraw {
+            amount: INITIAL_USER_AMOUNT,
+        };
         app.execute_contract(sender, contract_addr, &msg, &[])
             .unwrap();
 
         // funds are received
         let balance = app.wrap().query_balance(USER, DENOM).unwrap().amount;
-        assert_eq!(balance, amount);
+        assert_eq!(balance, INITIAL_USER_AMOUNT);
     }
 }
