@@ -1,4 +1,4 @@
-all: fmt clippy test
+all: fmt fix clippy test
 
 fmt:
 	cd 01-* && cargo fmt
@@ -6,6 +6,13 @@ fmt:
 	cd 03-* && cargo fmt
 	cd 04-* && cargo fmt
 	cd 05-* && cargo fmt
+
+fix:
+	cd 01-* && cargo fix
+	cd 02-* && cargo fix
+	cd 03-* && cargo fix
+	cd 04-* && cargo fix
+	cd 05-* && cargo fix
 
 clippy:
 	cd 01-* && cargo clippy
