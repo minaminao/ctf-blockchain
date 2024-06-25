@@ -10,7 +10,7 @@ contract Challenge5Test is Test {
 
     function setUp() public {
         // Fork mainnet
-        vm.createSelectFork(vm.envString("RPC_ANKR_MAINNET"));
+        vm.createSelectFork(vm.envString("RPC_MAINNET"));
         solver = HuffDeployer.config().deploy("HuffChallenge/challenge5/Challenge5");
     }
 

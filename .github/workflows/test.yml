@@ -12,6 +12,7 @@ on:
 
 env:
   FOUNDRY_PROFILE: ci
+  RPC_MAINNET: ${{ secrets.RPC_MAINNET }}
 
 jobs:
   check:

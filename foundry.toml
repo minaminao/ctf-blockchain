@@ -13,15 +13,12 @@ ignored_error_codes = [
     9302, # Warning (9302): Return value of low-level calls not used.
 ]
 
-# For Huff & Vyper
+# For Huff
 ffi = true
 fs_permissions = [{ access = "read", path = "./out" }]
 
 # For CREATE2
 bytecode_hash = "none"
 cbor_metadata = false
-
-[profile.default.rpc_endpoints]
-mainnet = "https://rpc.ankr.com/eth"
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/crates/config
