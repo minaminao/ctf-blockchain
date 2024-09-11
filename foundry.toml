@@ -8,8 +8,10 @@ evm_version = "cancun"
 
 ignored_error_codes = [
     "license", # warning[1878]: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+    3628, # Warning (3628): This contract has a payable fallback function, but no receive ether function. Consider adding a receive ether function.
     3860, # Warning (3860): Contract initcode size is X bytes and exceeds Y bytes (a limit introduced in Shanghai). This contract may not be deployable on Mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
     5159, # Warning (5159): "selfdestruct" has been deprecated. The underlying opcode will eventually undergo breaking changes, and its use is not recommended.
+    5574, # Warning (5574): Contract code size is 24870 bytes and exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on Mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
     9302, # Warning (9302): Return value of low-level calls not used.
 ]
 

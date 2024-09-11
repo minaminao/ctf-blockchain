@@ -12,7 +12,7 @@ contract Challenge4Test is Test {
         reversooor = HuffDeployer.config().deploy("HuffChallenge/challenge4/Challenge4");
     }
 
-    function testReverseDeterministic() public {
+    function testReverseDeterministic() public view {
         _reverseCase("", "");
         _reverseCase("a", "a");
         _reverseCase("abc", "cba");
@@ -399,7 +399,7 @@ contract Challenge4Test is Test {
         _reverseCase(hex"7782d616ad0decf57a2ac92e42", hex"422ec92a7af5ec0dad16d68277");
     }
 
-    function _reverseCase(bytes memory _in, bytes memory _expectedOut) internal {
+    function _reverseCase(bytes memory _in, bytes memory _expectedOut) internal view {
         (bool success, bytes memory retData) = reversooor.staticcall(_in);
         assertTrue(success);
         assertEq(retData, _expectedOut, string(abi.encodePacked("meant to reverse: ", _in)));

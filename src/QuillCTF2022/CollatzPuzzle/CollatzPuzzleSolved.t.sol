@@ -21,7 +21,7 @@ contract CollatzPuzzleSolved is Test {
         solution = ICollatzPuzzle(HuffDeployer.deploy("/QuillCTF2022/CollatzPuzzle/CollatzPuzzleSolution"));
     }
 
-    function testSolution() public {
+    function testSolution() public view {
         assertEq(puzzle.callMe(address(solution)), true);
     }
 }
