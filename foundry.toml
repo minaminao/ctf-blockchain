@@ -21,4 +21,7 @@ fs_permissions = [{ access = "read", path = "./out" }]
 bytecode_hash = "none"
 cbor_metadata = false
 
+# For Paradigm CTF 2023 Grains of Sand
+gas_limit = 34359738368 # 2^35
+
 # See more config options https://github.com/foundry-rs/foundry/tree/master/crates/config
