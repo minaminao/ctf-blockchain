@@ -3,16 +3,13 @@ pragma solidity ^0.8.13;
 
 import "openzeppelin/token/ERC20/IERC20.sol";
 import "openzeppelin/token/ERC20/ERC20.sol";
-import "openzeppelin/utils/math/SafeMath.sol";
 import "openzeppelin/access/Ownable.sol";
 
 contract DexTwo is Ownable {
-    using SafeMath for uint256;
-
     address public token1;
     address public token2;
 
-    constructor() {}
+    constructor() Ownable(msg.sender) {}
 
     function setTokens(address _token1, address _token2) public onlyOwner {
         token1 = _token1;

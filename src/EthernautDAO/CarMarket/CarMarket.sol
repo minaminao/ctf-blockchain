@@ -35,7 +35,7 @@ contract CarMarket is Ownable {
      * @notice Sets the car token during deployment.
      * @param _carToken The token used to purchase cars
      */
-    constructor(address _carToken) {
+    constructor(address _carToken) Ownable(msg.sender) {
         carToken = ICarToken(_carToken);
     }
 

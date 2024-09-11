@@ -9,10 +9,10 @@ contract SimpleERC223Token is ERC20 {
         _mint(msg.sender, _supply);
     }
 
-    function _afterTokenTransfer(address from, address to, uint256 amount) internal virtual override {
+    function _update(address from, address to, uint256 amount) internal virtual override {
         // Call parent hook
-        super._afterTokenTransfer(from, to, amount);
-        if (Address.isContract(to)) {
+        super._update(from, to, amount);
+        if (to.code.length > 0) {
             // this is wrong and broken on many ways, but it works for this example
             // instead of a try catch perhaps we should use a ERC165...
             // the tokenFallback function is run if the contract has this function

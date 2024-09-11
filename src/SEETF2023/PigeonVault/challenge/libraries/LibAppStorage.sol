@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.17;
 
-import {Counters} from "@openzeppelin/contracts/utils/Counters.sol";
-
 import {IERC20} from "../interfaces/IERC20.sol";
 import {IDiamondCut} from "../interfaces/IDiamondCut.sol";
 

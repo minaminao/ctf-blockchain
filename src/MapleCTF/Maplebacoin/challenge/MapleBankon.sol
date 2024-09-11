@@ -10,7 +10,7 @@ contract MapleBankon is Ownable {
     mapping(address => bool) syrupTree;
     mapping(address => uint256) balances;
 
-    constructor(address mpbc_addr) {
+    constructor(address mpbc_addr) Ownable(msg.sender) {
         mpbc = MapleBaCoin(mpbc_addr);
     }
 

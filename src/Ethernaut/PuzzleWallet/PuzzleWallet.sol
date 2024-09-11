@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-import "openzeppelin/utils/math/SafeMath.sol";
-import "openzeppelin/proxy/ERC1967/ERC1967Proxy.sol";
+import {ERC1967Proxy, ERC1967Utils} from "openzeppelin/proxy/ERC1967/ERC1967Proxy.sol";
 
 contract PuzzleProxy is ERC1967Proxy {
     address public pendingAdmin;
@@ -29,13 +28,11 @@ contract PuzzleProxy is ERC1967Proxy {
     }
 
     function upgradeTo(address _newImplementation) external onlyAdmin {
-        _upgradeTo(_newImplementation);
+        ERC1967Utils.upgradeToAndCall(_newImplementation, "");
     }
 }
 
 contract PuzzleWallet {
-    using SafeMath for uint256;
-
     address public owner;
     uint256 public maxBalance;
     mapping(address => bool) public whitelisted;
@@ -64,12 +61,12 @@ contract PuzzleWallet {
 
     function deposit() external payable onlyWhitelisted {
         require(address(this).balance <= maxBalance, "Max balance reached");
-        balances[msg.sender] = balances[msg.sender].add(msg.value);
+        balances[msg.sender] = balances[msg.sender] + msg.value;
     }
 
     function execute(address to, uint256 value, bytes calldata data) external payable onlyWhitelisted {
         require(balances[msg.sender] >= value, "Insufficient balance");
-        balances[msg.sender] = balances[msg.sender].sub(value);
+        balances[msg.sender] = balances[msg.sender] - value;
         (bool success,) = to.call{value: value}(data);
         require(success, "Execution failed");
     }

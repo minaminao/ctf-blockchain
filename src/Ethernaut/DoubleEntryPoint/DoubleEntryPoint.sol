@@ -72,6 +72,8 @@ contract CryptoVault {
 contract LegacyToken is ERC20("LegacyToken", "LGT"), Ownable {
     DelegateERC20 public delegate;
 
+    constructor() Ownable(msg.sender) {}
+
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
     }
@@ -95,7 +97,9 @@ contract DoubleEntryPoint is ERC20("DoubleEntryPointToken", "DET"), DelegateERC2
     address public delegatedFrom;
     Forta public forta;
 
-    constructor(address legacyToken, address vaultAddress, address fortaAddress, address playerAddress) {
+    constructor(address legacyToken, address vaultAddress, address fortaAddress, address playerAddress)
+        Ownable(msg.sender)
+    {
         delegatedFrom = legacyToken;
         forta = Forta(fortaAddress);
         player = playerAddress;

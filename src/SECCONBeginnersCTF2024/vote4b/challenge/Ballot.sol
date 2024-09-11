@@ -10,7 +10,7 @@ contract Ballot is ERC721, Ownable {
     mapping(address => bool) private isIssued;
     mapping(address => uint256) public votes;
 
-    constructor(address owner) ERC721("BeginnersBallot", "BB") Ownable() {}
+    constructor(address owner) ERC721("BeginnersBallot", "BB") Ownable(msg.sender) {}
 
     function registerAsResident(address person) public onlyOwner {
         isResident[person] = true;

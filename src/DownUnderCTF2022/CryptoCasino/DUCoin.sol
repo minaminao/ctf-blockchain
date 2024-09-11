@@ -7,7 +7,7 @@ import "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract DUCoin is ERC20, Ownable {
-    constructor() ERC20("DUCoin", "DUC") {}
+    constructor() ERC20("DUCoin", "DUC") Ownable(msg.sender) {}
 
     function freeMoney(address addr) external onlyOwner {
         _mint(addr, 1337);

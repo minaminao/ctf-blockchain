@@ -33,6 +33,6 @@ contract MotorbikeFactory is Level {
 
     function validateInstance(address payable _instance, address _player) public view override returns (bool) {
         _player;
-        return !Address.isContract(engines[_instance]);
+        return !(engines[_instance].code.length > 0);
     }
 }

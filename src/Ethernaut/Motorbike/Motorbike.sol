@@ -2,7 +2,6 @@
 
 pragma solidity ^0.8.13;
 
-import "openzeppelin/utils/Address.sol";
 import "openzeppelin/proxy/utils/Initializable.sol";
 
 contract Motorbike {
@@ -15,7 +14,7 @@ contract Motorbike {
 
     // Initializes the upgradeable proxy with an initial implementation specified by `_logic`.
     constructor(address _logic) {
-        require(Address.isContract(_logic), "ERC1967: new implementation is not a contract");
+        require(_logic.code.length > 0, "ERC1967: new implementation is not a contract");
         _getAddressSlot(_IMPLEMENTATION_SLOT).value = _logic;
         (bool success,) = _logic.delegatecall(abi.encodeWithSignature("initialize()"));
         require(success, "Call failed");
@@ -88,7 +87,7 @@ contract Engine is Initializable {
 
     // Stores a new address in the EIP1967 implementation slot.
     function _setImplementation(address newImplementation) private {
-        require(Address.isContract(newImplementation), "ERC1967: new implementation is not a contract");
+        require(newImplementation.code.length > 0, "ERC1967: new implementation is not a contract");
 
         AddressSlot storage r;
         assembly {

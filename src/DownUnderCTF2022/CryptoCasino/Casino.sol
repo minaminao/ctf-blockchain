@@ -12,7 +12,7 @@ contract Casino is Ownable {
     uint256 lastPlayed = 0;
     mapping(address => uint256) public balances;
 
-    constructor(address token) {
+    constructor(address token) Ownable(msg.sender) {
         ducoin = DUCoin(token);
     }
 

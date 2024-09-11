@@ -21,7 +21,7 @@ contract CarToken is ERC20, Ownable {
     /**
      * @dev Car Company Contract Constructor.
      */
-    constructor() ERC20("Car Company", "CCY") {}
+    constructor() ERC20("Car Company", "CCY") Ownable(msg.sender) {}
 
     /**
      * @dev Checks to see if the user has minted previously.

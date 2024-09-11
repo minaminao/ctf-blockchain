@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/interfaces/IERC20.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
-import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import {MessageHashUtils} from "openzeppelin-contracts/contracts/utils/cryptography/MessageHashUtils.sol";
 import {ud, convert} from "@prb/math/UD60x18.sol";
 
 import "./FreqBand.sol";
@@ -54,7 +55,7 @@ contract MusicRemixer {
         if (usedRedemptionCode[redemptionCode]) {
             revert CodeRedeemed();
         }
-        bytes32 hash = ECDSA.toEthSignedMessageHash(abi.encodePacked("Music Remixer Pro Material"));
+        bytes32 hash = MessageHashUtils.toEthSignedMessageHash(abi.encodePacked("Music Remixer Pro Material"));
         if (ECDSA.recover(hash, redemptionCode) != SIGNER) {
             revert InvalidCode();
         }

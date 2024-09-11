@@ -20,6 +20,8 @@ contract PETH is Ownable {
     mapping(address => uint256) public balanceOf;
     mapping(address => mapping(address => uint256)) public allowance;
 
+    constructor() Ownable(msg.sender) {}
+
     receive() external payable {
         revert("PETH: Do not send ETH directly");
     }
@@ -76,7 +78,7 @@ contract PETH is Ownable {
 
     function flashLoan(address _userAddress, uint256 _wad, bytes calldata data) public onlyOwner {
         require(_wad <= address(this).balance, "PETH: wad exceeds balance");
-        require(Address.isContract(_userAddress), "PETH: Borrower must be a contract");
+        require(_userAddress.code.length > 0, "PETH: Borrower must be a contract");
 
         uint256 userBalanceBefore = address(this).balance;
 

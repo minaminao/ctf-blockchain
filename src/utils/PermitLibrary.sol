@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "openzeppelin-contracts/contracts/token/ERC20/extensions/draft-IERC20Permit.sol";
-import "openzeppelin-contracts/contracts/utils/cryptography/ECDSA.sol";
+import {IERC20Permit} from "openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Permit.sol";
+import {MessageHashUtils} from "openzeppelin-contracts/contracts/utils/cryptography/MessageHashUtils.sol";
 
 library PermitLibrary {
     function getDigest(
@@ -21,6 +21,6 @@ library PermitLibrary {
             keccak256(abi.encode(_PERMIT_TYPEHASH, ownerAddress, spenderAddress, value, nonce, deadline));
 
         bytes32 DOMAIN_SEPARATOR = token.DOMAIN_SEPARATOR();
-        return ECDSA.toTypedDataHash(DOMAIN_SEPARATOR, structHash);
+        return MessageHashUtils.toTypedDataHash(DOMAIN_SEPARATOR, structHash);
     }
 }

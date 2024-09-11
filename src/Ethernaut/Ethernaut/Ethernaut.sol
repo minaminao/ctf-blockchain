@@ -9,6 +9,7 @@ import "openzeppelin/access/Ownable.sol";
 address constant ETHERNAUT_ADDRESS = 0xD991431D8b033ddCb84dAD257f4821E9d5b38C33;
 
 contract Ethernaut is Ownable {
+    constructor() Ownable(msg.sender) {}
     // ----------------------------------
     // Owner interaction
     // ----------------------------------

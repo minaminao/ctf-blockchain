@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-import "openzeppelin-contracts/contracts/utils/Address.sol";
-
 contract GoodSamaritan {
     Wallet public wallet;
     Coin public coin;
@@ -29,8 +27,6 @@ contract GoodSamaritan {
 }
 
 contract Coin {
-    using Address for address;
-
     mapping(address => uint256) public balances;
 
     error InsufficientBalance(uint256 current, uint256 required);
@@ -48,7 +44,7 @@ contract Coin {
             balances[msg.sender] -= amount_;
             balances[dest_] += amount_;
 
-            if (dest_.isContract()) {
+            if (dest_.code.length > 0) {
                 // notify contract
                 INotifyable(dest_).notify(amount_);
             }
