@@ -12,7 +12,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
 
 **Table of Contents**
 - [Ethereum](#ethereum)
-  - [Contract basics](#contract-basics)
+  - [Smart contract basics](#smart-contract-basics)
   - [EVM puzzles](#evm-puzzles)
   - [Misuse of `tx.origin`](#misuse-of-txorigin)
   - [Weak sources of randomness from chain attributes](#weak-sources-of-randomness-from-chain-attributes)
@@ -20,8 +20,8 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Storage overwrite by `delegatecall`](#storage-overwrite-by-delegatecall)
   - [Context mismatch in `delegatecall`](#context-mismatch-in-delegatecall)
   - [Integer overflow](#integer-overflow)
-  - [Non-executable Ether transfers to contracts](#non-executable-ether-transfers-to-contracts)
-  - [Forced Ether transfers to contracts via `selfdestruct`](#forced-ether-transfers-to-contracts-via-selfdestruct)
+  - [Ether transfer failures for non-payable contracts](#ether-transfer-failures-for-non-payable-contracts)
+  - [Forced Ether transfers to non-payable contracts via `selfdestruct`](#forced-ether-transfers-to-non-payable-contracts-via-selfdestruct)
   - [Large gas consumption by contract callees](#large-gas-consumption-by-contract-callees)
   - [Forgetting to set `view`/`pure` to interface and abstract contract functions](#forgetting-to-set-viewpure-to-interface-and-abstract-contract-functions)
   - [`view` functions that do not always return same values](#view-functions-that-do-not-always-return-same-values)
@@ -30,6 +30,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Reversing states](#reversing-states)
   - [Reversing transactions](#reversing-transactions)
   - [Reversing EVM bytecodes](#reversing-evm-bytecodes)
+  - [EVM assembly logic bugs](#evm-assembly-logic-bugs)
   - [EVM bytecode golf](#evm-bytecode-golf)
   - [Jump-oriented programming](#jump-oriented-programming)
   - [Gas optimization](#gas-optimization)
@@ -81,7 +82,7 @@ Note:
 - If an attack is only valid for a particular version of Solidity and not for the latest version, the version is noted at the end of the heading.
 - To avoid notation fluctuations, EVM terms are avoided as much as possible and Solidity terms are used.
 
-### Contract basics
+### Smart contract basics
 - These challenges can be solved if you know the basic mechanics of Ethereum, [the basic language specification of Solidity](https://docs.soliditylang.org/en/latest/), and the basic operation of contracts.
 
 | Challenge                                                          | Note, Keywords         |
@@ -97,6 +98,7 @@ Note:
 | [0x41414141 CTF: sanity-check](src/0x41414141CTF/)                 | contract call          |
 | [Paradigm CTF 2022: RANDOM](src/ParadigmCTF2022/)                  | contract call          |
 | [DownUnderCTF 2022: Solve Me](src/DownUnderCTF2022/)               |                        |
+| [LA CTF 2024: remi's-world](src/LACTF2024/)                        |                        |
 
 ### EVM puzzles
 - Puzzle challenges that can be solved by understanding the EVM specifications.
@@ -182,17 +184,17 @@ Note:
 | [Capture The Ether: Token whale](src/CaptureTheEther/) | subtraction    |
 | [Ethernaut: 5. Token](src/Ethernaut/)                  | subtraction    |
 
-### Non-executable Ether transfers to contracts
+### Ether transfer failures for non-payable contracts
 - Do not create a contract on the assumption that normal Ether transfer (`.send()` or `.transfer()`) can always be executed.
 - If a destination is a contract and there is no receive Ether function or payable fallback function, Ether cannot be transferred.
-- However, instead of the normal transfer functions, the `selfdestruct` described below can be used to force such a contract to transfer Ether.
+- However, instead of the normal transfer functions, the `selfdestruct` described in the next section can be used to force such a contract to transfer Ether.
 
 | Challenge                                                                  | Note, Keywords |
 | -------------------------------------------------------------------------- | -------------- |
 | [Ethernaut: 9. King](src/Ethernaut/)                                       |                |
 | [Project SEKAI CTF 2022: Random Song](src/ProjectSekaiCTF2022/RandomSong/) | Chainlink VRF  |
 
-### Forced Ether transfers to contracts via `selfdestruct`
+### Forced Ether transfers to non-payable contracts via `selfdestruct`
 - If a contract does not have a receive Ether function and a payable fallback function, it is not guaranteed that Ether will not be received.
 - When a contract executes `selfdestruct`, it can transfer its Ether to another contract or EOA, and this `selfdestruct` transfer can be forced even if the destination contract does not have the receive Ether function and the payable fallback function. 
 - If the application is built on the assumption that the Ether is `0`, it could be a bug.
@@ -215,7 +217,7 @@ Note:
 
 | Challenge                                 | Note, Keywords |
 | ----------------------------------------- | -------------- |
-| [Ethernaut: 11. Elevator](src/Ethernaut/) |                |
+| [Ethernaut: 11. Elevator](src/Ethernaut/) | interface      |
 
 ### `view` functions that do not always return same values
 - Since `view` functions can read state, they can be conditionally branched based on state and do not necessarily return the same value.
@@ -260,7 +262,6 @@ Note:
 | [darkCTF: Secret Of The Contract](src/DarkCTF/)                  |                |
 | [DownUnderCTF 2022: Secret and Ephemeral](src/DownUnderCTF2022/) |                |
 
-
 ### Reversing EVM bytecodes
 - Reversing a contract for which code is not given in whole or in part.
 - [evm.codes](https://www.evm.codes/) is very useful.
@@ -285,6 +286,17 @@ Note:
 | [EKOPARTY CTF 2022: Byte](src/EkoPartyCTF2022/)                 | stack tracing                           |
 | [EKOPARTY CTF 2022: SmartRev](src/EkoPartyCTF2022/)             | memory tracing                          |
 | [Numen Cyber CTF 2023: HEXP](src/NumenCTF/)                     | previous block hash == gas price % 2^24 |
+| [BlazCTF 2023: Maze](src/BlazCTF2023/)                          |                                         |
+| [BlazCTF 2023: Jambo](src/BlazCTF2023/)                         |                                         |
+| [BlazCTF 2023: Ghost](src/BlazCTF2023/)                         |                                         |
+| [Curta: Lana](src/Curta/20_Lana/)                               | LLVM                                    |
+
+### EVM assembly logic bugs
+- Logic bugs in assemblies such as Yul
+
+| Challenge                                               | Note, Keywords |
+| ------------------------------------------------------- | -------------- |
+| [Project SEKAI CTF 2024: Zoo](src/ProjectSekaiCTF2024/) | `Pausable`     |
 
 ### EVM bytecode golf
 - These challenges have a limit on the length of the bytecode to be created.
@@ -485,6 +497,7 @@ Note:
 | Challenge                                               | Note, Keywords |
 | ------------------------------------------------------- | -------------- |
 | [DownUnderCTF 2022: Private Log](src/DownUnderCTF2022/) |                |
+| [DiceCTF 2024: Floordrop](src/DiceCTF2024/)             | Geth           |
 
 ### Back-running
 - MEV-Share can be used to create bundled transactions to back-run.
@@ -554,7 +567,7 @@ Note:
 | [Paradigm CTF 2022: RESCUE](src/ParadigmCTF2022/)                 |                                                                                                                                   |
 | Paradigm CTF 2022: JUST-IN-TIME                                   |                                                                                                                                   |
 | Paradigm CTF 2022: 0XMONACO                                       |                                                                                                                                   |
-| [BalsnCTF 2022](src/BalsnCTF2022/)                                | initialize, `_safeTransferFrom`, `CREATE2`                                                                                        |
+| [BalsnCTF 2022: NFT Marketplace](src/BalsnCTF2022/)               | initialize, `_safeTransferFrom`, `CREATE2`                                                                                        |
 | [Numen Cyber CTF 2023: LenderPool](src/NumenCTF/)                 | flash loan                                                                                                                        |
 | [Numen Cyber CTF 2023: GOATFinance](src/NumenCTF/)                | check sum address                                                                                                                 |
 | [SEETF 2023: Pigeon Vault](src/SEETF2023/)                        | EIP-2535: Diamonds, Multi-Facet Proxy                                                                                             |
@@ -562,7 +575,7 @@ Note:
 
 ## Bitcoin
 Note
-- Including challenges of Bitcoin variants whose transaction model is Unspent Transaction Output (UTXO).
+- This section includes challenges of Bitcoin variants whose transaction model is Unspent Transaction Output (UTXO).
 
 ### Bitcoin basics
 
