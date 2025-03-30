@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Golden B(ubble)ridge</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+      body, html {
+        background-color: #ffffd1;
+        color: #b976c2;
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      hgroup {
+        > h1 {
+          margin-bottom: 0;
+        }
+        margin-bottom: 1rem;
+        color: #3f2d5a;
+      }
+      body {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        & > div {
+          transform: translateY(-24px);
+        }
+      }
+
+      form > p {
+        display: flex;
+        max-width: 800px;
+      }
+
+      input {
+        font-family: "Poppins", sans-serif;
+        background-color: #cbfdfa;
+        border-color: #21596b;
+        flex-grow: 1;
+
+        label ~ & {
+          margin-left: 0.5rem;
+        }
+
+        &[type="submit"] {
+          background-color: #c37d4e;
+          border-color: #4f4416;
+          color: #4f4416;
+
+          &:hover {
+            cursor: pointer;
+            background-color: #da9e5f;
+          }
+        }
+      }
+
+      code {
+        font-size: 1rem;
+        font-weight: 800;
+      }
+
+      .disclaimer {
+        display: block;
+        position: absolute;
+        bottom: 1rem;
+        color: #e7d0aa;
+
+        & > a {
+          &, &:visited {
+            font-weight: inherit;
+            color: inherit;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <hgroup>
+        <h1>Golden B(ubble)ridge</h1>
+        <em>No fees. No nonsense. Just Bubbles!&trade;*</em>
+      </hgroup>
+      <br>
+      <h2>Send Ethereum Bubbles to Solana!</h2>
+      <form id="toSol">
+        <p><label for="toSolKey">Ethereum private key (hex):</label> <input id="toSolKey"></p>
+        <p><label for="toSolAmount">Amount:</label> <input id="toSolAmount"></p>
+        <p><label for="toSolTarget">Solana account:</label> <input id="toSolTarget"></p>
+        <input type="submit" value="Submit!">
+      </form>
+      <br>
+      <h2>Send Solana Bubbles to Ethereum!</h2>
+      <form id="toEth">
+        <p><label for="toEthKey">Solana keypair (JSON):</label> <input id="toEthKey"></p>
+        <p><label for="toEthAmount">Amount:</label> <input id="toEthAmount"></p>
+        <p><label for="toEthTarget">Ethereum address:</label> <input id="toEthTarget"></p>
+        <input type="submit" value="Submit!">
+      </form>
+    </div>
+    <em class="disclaimer">*Golden Bridge promises to not use <a href="/player.json">your private keys</a> maliciously. We are currently awaiting an audit from GooseSec.</em>
+    <script>
+      toSol.onsubmit = e => {
+        e.preventDefault()
+        fetch("/toSol", {
+          method: "POST",
+          headers: [["Content-Type", "application/json"]],
+          body: JSON.stringify({
+            key: toSolKey.value,
+            amount: parseInt(toSolAmount.value),
+            target: toSolTarget.value,
+          })
+        }).then(
+          res => {
+            if (res.status == 200) {
+              alert("Success!")
+            } else {
+              res.text().then(x => alert(`oh no: ${x}`), _ => alert("oh no"))
+            }
+          },
+          rej => alert(`oh no: ${rej}`),
+        )
+      }
+      toEth.onsubmit = e => {
+        e.preventDefault()
+        fetch("/toEth", {
+          method: "POST",
+          headers: [["Content-Type", "application/json"]],
+          body: JSON.stringify({
+            key: toEthKey.value,
+            amount: parseInt(toEthAmount.value),
+            target: toEthTarget.value,
+          })
+        }).then(
+          res => {
+            if (res.status == 200) {
+              alert("Success!")
+            } else {
+              res.text().then(x => alert(`oh no: ${x}`), _ => alert("oh no"))
+            }
+          },
+          rej => alert(`oh no: ${rej}`),
+        )
+      }
+    </script>
+  </body>
+</html>
