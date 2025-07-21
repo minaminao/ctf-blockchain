@@ -460,3 +460,11 @@ forge script SwitchExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RP
 ```sh
 forge test --match-contract HigherOrderExploit -vvvv
 ```
+
+## 31. Stake
+[Challenge & Exploit codes](Stake)
+
+**Test**
+```sh
+forge test --match-contract StakeExploit -vvvv
+```

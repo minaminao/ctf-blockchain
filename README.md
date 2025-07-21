@@ -22,6 +22,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
   - [Forced Ether transfers to non-payable contracts via `selfdestruct`](#forced-ether-transfers-to-non-payable-contracts-via-selfdestruct)
   - [Large gas consumption by contract callees](#large-gas-consumption-by-contract-callees)
   - [Forgetting to set `view`/`pure` to interface and abstract contract functions](#forgetting-to-set-viewpure-to-interface-and-abstract-contract-functions)
+  - [Missing success flag checks in low-level calls](#missing-success-flag-checks-in-low-level-calls)
   - [`view` functions that do not always return same values](#view-functions-that-do-not-always-return-same-values)
   - [Mistakes in setting `storage` and `memory`](#mistakes-in-setting-storage-and-memory)
   - [Tracing transactions](#tracing-transactions)
@@ -217,6 +218,13 @@ Note:
 | Challenge                                 | Note, Keywords |
 | ----------------------------------------- | -------------- |
 | [Ethernaut: 11. Elevator](src/Ethernaut/) | interface      |
+
+### Missing success flag checks in low-level calls
+- If a contract performs low-level calls (such as call, delegatecall, or staticcall) without checking the returned success flag, it may mistakenly assume the call succeeded, potentially leading to vulnerabilities.
+
+| Challenge                              | Note, Keywords |
+| -------------------------------------- | -------------- |
+| [Ethernaut: 31. Stake](src/Ethernaut/) |                |
 
 ### `view` functions that do not always return same values
 - Since `view` functions can read state, they can be conditionally branched based on state and do not necessarily return the same value.
