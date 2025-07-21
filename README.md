@@ -46,6 +46,7 @@ If there are any incorrect descriptions, I would appreciate it if you could let 
   - [Oracle manipulation attacks with flash loans](#oracle-manipulation-attacks-with-flash-loans)
   - [Sandwich attacks](#sandwich-attacks)
   - [Recoveries of private keys by same-nonce attacks](#recoveries-of-private-keys-by-same-nonce-attacks)
+  - [ECDSA signature malleability attacks](#ecdsa-signature-malleability-attacks)
   - [Brute-forcing addresses](#brute-forcing-addresses)
   - [Recoveries of public keys](#recoveries-of-public-keys)
   - [Encryption and decryption in secp256k1](#encryption-and-decryption-in-secp256k1)
@@ -434,6 +435,15 @@ Note:
 | [Capture The Ether: Account Takeover](src/CaptureTheEther/) |                |
 | [Paradigm CTF 2021: Babycrypto](src/ParadigmCTF2021)        |                |
 | [MetaTrust CTF: ECDSA](src/MetaTrustCTF/ECDSA/)             |                |
+
+### ECDSA signature malleability attacks
+- ECDSA signatures have a property called malleability, where for a given message and signature `(v, r, s)`, there exists another valid signature `(v', r, -s mod n)` for the same message.
+- This can be exploited in systems that track used signatures, as the alternative signature may not be recognized as already used.
+- In Ethereum's secp256k1 curve, this property can be used to bypass signature verification mechanisms.
+
+| Challenge                                                  | Note, Keywords                           |
+| ---------------------------------------------------------- | ---------------------------------------- |
+| [SmileyCTF: MultisigWallet](src/SmileyCTF/MultisigWallet/) | ECDSA, signature malleability, secp256k1 |
 
 ### Brute-forcing addresses
 - Brute force can make a part of an address a specific value.
