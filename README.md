@@ -289,6 +289,7 @@ Note:
 | [BlazCTF 2023: Jambo](src/BlazCTF2023/)                         |                                         |
 | [BlazCTF 2023: Ghost](src/BlazCTF2023/)                         |                                         |
 | [Curta: Lana](src/Curta/20_Lana/)                               | LLVM                                    |
+| [Ethernaut: 30. HigherOrder](src/Ethernaut/HigherOrder/)        | calldata                                |
 
 ### EVM assembly logic bugs
 - Logic bugs in assemblies such as Yul

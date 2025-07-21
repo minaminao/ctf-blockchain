@@ -452,3 +452,11 @@ forge test --match-contract SwitchExploit -vvvv
 ```sh
 forge script SwitchExploitScript -vvvv --private-key $PRIVATE_KEY --fork-url $RPC_URL --broadcast --sig "run(address)" $INSTANCE_ADDRESS
 ```
+
+## 30. HigherOrder
+[Challenge & Exploit codes](HigherOrder)
+
+**Test**
+```sh
+forge test --match-contract HigherOrderExploit -vvvv
+```
