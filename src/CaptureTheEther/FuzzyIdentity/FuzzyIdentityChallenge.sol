@@ -9,8 +9,8 @@ contract FuzzyIdentityChallenge {
     bool public isComplete;
 
     function authenticate() public {
-        require(isSmarx(msg.sender));
-        require(isBadCode(msg.sender));
+        require(isSmarx(msg.sender), "Not smarx");
+        require(isBadCode(msg.sender), "Not bad code");
 
         isComplete = true;
     }
