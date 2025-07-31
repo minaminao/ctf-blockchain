@@ -1,6 +1,7 @@
 # QuillHash CTF 2022 Solutions
 
-Here's the link to the challenges page: https://quillctf.super.site/challenges. I highly recommend to solve the problems before checking the solutions!
+Here's the link to the challenges page: https://quillctf.super.site/challenges.
+https://quillaudits.notion.site/5fa2aeaa032640fea65b50d8616bb9d9?v=59ddedede7f14024bad19d411316c475
 
 ---
 

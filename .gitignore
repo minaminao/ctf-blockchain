@@ -14,6 +14,8 @@ src/MEVShareCTF/.env
 # Private challenges
 src/**/_*
 
+_*
+
 # Python
 __pycache__
 

@@ -3,12 +3,13 @@
 This repository collects blockchain challenges in CTFs and wargames.
 
 These challenges are categorized by topic, not by difficulty or recommendation.
-Some of them include writeups and solutions (e.g., [Paradigm CTF 2022](src/ParadigmCTF2022/)).
+Some of them include personal writeups and solutions (e.g., [Paradigm CTF 2022](src/ParadigmCTF2022/)).
 Please be aware that these contain spoilers. For contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
 **Table of Contents**
+- [CTF List](#ctf-list)
 - [Ethereum](#ethereum)
   - [Smart contract basics](#smart-contract-basics)
   - [EVM puzzles](#evm-puzzles)
@@ -73,6 +74,67 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 - [Move](#move)
 - [Cairo](#cairo)
 - [Other Blockchain-Related](#other-blockchain-related)
+
+---
+
+## CTF List
+
+**Always-on CTFs / Practice CTFs**
+
+🔗: External link
+
+| CTF Name                                                                      | Note                        |
+| ----------------------------------------------------------------------------- | --------------------------- |
+| [Ethernaut](src/Ethernaut/)                                                   |                             |
+| [Damn Vulnerable DeFi](https://github.com/theredguild/damn-vulnerable-defi) 🔗 |                             |
+| [fvictorio's EVM puzzles](src/FvictorioEVMPuzzles/)                           |                             |
+| [Capture the Ether](src/CaptureTheEther/)                                     |                             |
+| [Oak Security CosmWasm CTF](src/OakSecurityCosmWasmCTF/)                      |                             |
+| [Cipher Shastra](https://ciphershastra.com/) 🔗                                |                             |
+| [ONLYPWNER](https://onlypwner.xyz/) 🔗                                         | No solution sharing allowed |
+
+**Scheduled CTFs**
+
+| CTF Name                                                                                                                   | Event Month          |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| [smileyCTF 2025](src/SmileyCTF/)                                                                                           | 2025-06              |
+| [DiceCTF 2025 Quals](src/DiceCTF2025/)                                                                                     | 2025-03              |
+| [SECCON CTF 13 Quals](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/seccon-ctf-13-quals)                   | 2024-11              |
+| [SCAN 2024 CTF](src/Scan2024CTF/)                                                                                          | 2024-10              |
+| [BlazCTF 2024](src/BlazCTF2024/)                                                                                           | 2024-09              |
+| [The Flare-On Challenge 11](src/FlareOn11/)                                                                                | 2024-09              |
+| [SekaiCTF 2024](src/ProjectSekaiCTF2024/)                                                                                  | 2024-08              |
+| [corCTF2024](src/CorCTF2024/)                                                                                              | 2024-07              |
+| [HITCON CTF 2024 Quals](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/hitcon-ctf-2024-quals/lustrous)      | 2024-07              |
+| [SECCON Beginners CTF 2024](src/SECCONBeginnersCTF2024/)                                                                   | 2024-06              |
+| [osu!gaming CTF 2024](src/Osu!GamingCTF2024)                                                                               | 2024-03              |
+| [DiceCTF 2024 Quals](src/DiceCTF2024/)                                                                                     | 2024-02              |
+| [LA CTF 2024](src/LACTF2024/)                                                                                              | 2024-02              |
+| [BlazCTF 2023](src/BlazCTF2023/)                                                                                           | 2023-12              |
+| [Paradigm CTF 2023](src/ParadigmCTF2023/)                                                                                  | 2023-10              |
+| [MetaTrust Web3 Security CTF](src/MetaTrustCTF/)                                                                           | 2023-09              |
+| [SECCON CTF 2023 Quals](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/seccon-ctf-2023-quals/tokyo-payload) | 2023-09              |
+| [MEV-Share CTF](src/MEVShareCTF/)                                                                                          | 2023-08              |
+| [SekaiCTF 2023](src/ProjectSekaiCTF2023)                                                                                   | 2023-08              |
+| [corCTF 2023](src/CorCTF2023/)                                                                                             | 2023-07              |
+| [SEETF 2023](src/SEETF2023)                                                                                                | 2023-06              |
+| [NumenCTF](src/NumenCTF/)                                                                                                  | 2023-03              |
+| [EKOPARTY CTF 2022](src/EkoPartyCTF2022/)                                                                                  | 2022-11              |
+| [N1CTF 2022](src/N1CTF2022/)                                                                                               | 2022-11              |
+| [SekaiCTF 2022](src/ProjectSekaiCTF2022)                                                                                   | 2022-10              |
+| [0CTF/TCTF 2022](src/0CTF2022/)                                                                                            | 2022-09              |
+| [Balsn CTF 2022](src/BalsnCTF2022)                                                                                         | 2022-09              |
+| [DownUnderCTF 2022](src/DownUnderCTF2022/)                                                                                 | 2022-09              |
+| [DeFi-Security-Summit-Stanford](src/DeFiSecuritySummitStanford/)                                                           | 2022-08              |
+| [MapleCTF 2022](src/MapleCTF2022)                                                                                          | 2022-08              |
+| [Paradigm CTF 2022](src/ParadigmCTF2022/)                                                                                  | 2022-08              |
+| [Paradigm CTF 2021](src/ParadigmCTF2021/)                                                                                  | 2021-02              |
+| [0x41414141 CTF](src/0x41414141CTF/)                                                                                       | 2021-01              |
+| [DarkCTF](src/DarkCTF/)                                                                                                    | 2020-09              |
+| [Curta](src/Curta/)                                                                                                        | Occasional, Inactive |
+| [EthernautDAO](src/EthernautDAO/)                                                                                          | Occasional, Inactive |
+| [HuffChallenge](src/HuffChallenge/)                                                                                        | Occasional, Inactive |
+| [QuillCTF](src/QuillCTF2022/)                                                                                              | Occasional, Inactive |
 
 ---
 
