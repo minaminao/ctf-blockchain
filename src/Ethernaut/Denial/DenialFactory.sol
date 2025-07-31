@@ -8,8 +8,7 @@ import "./Denial.sol";
 contract DenialFactory is Level {
     uint256 public initialDeposit = 0.001 ether;
 
-    function createInstance(address _player) public payable override returns (address) {
-        _player;
+    function createInstance(address /* _player */) public payable override returns (address) {
         require(msg.value >= initialDeposit);
         Denial instance = new Denial();
         (bool result,) = address(instance).call{value: msg.value}("");
@@ -17,8 +16,7 @@ contract DenialFactory is Level {
         return address(instance);
     }
 
-    function validateInstance(address payable _instance, address _player) public override returns (bool) {
-        _player;
+    function validateInstance(address payable _instance, address /* _player */) public override returns (bool) {
         Denial instance = Denial(_instance);
         if (address(instance).balance <= 100 wei) {
             // cheating otherwise

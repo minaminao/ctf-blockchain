@@ -6,8 +6,7 @@ import "../Ethernaut/Level.sol";
 import "./Shop.sol";
 
 contract ShopFactory is Level {
-    function createInstance(address _player) public payable override returns (address) {
-        _player;
+    function createInstance(address /* _player */) public payable override returns (address) {
         Shop _shop = new Shop();
         return address(_shop);
     }

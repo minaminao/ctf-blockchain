@@ -5,13 +5,11 @@ import "../Ethernaut/Level.sol";
 import "./GoodSamaritan.sol";
 
 contract GoodSamaritanFactory is Level {
-    function createInstance(address _player) public payable override returns (address) {
-        _player;
+    function createInstance(address /* _player */) public payable override returns (address) {
         return address(new GoodSamaritan());
     }
 
-    function validateInstance(address payable _instance, address _player) public view override returns (bool) {
-        _player;
+    function validateInstance(address payable _instance, address /* _player */) public view override returns (bool) {
         GoodSamaritan instance = GoodSamaritan(_instance);
         return instance.coin().balances(address(instance.wallet())) == 0;
     }

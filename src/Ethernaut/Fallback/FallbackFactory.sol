@@ -5,8 +5,7 @@ import "./Fallback.sol";
 import "../Ethernaut/Level.sol";
 
 contract FallbackFactory is Level {
-    function createInstance(address _player) public payable override returns (address) {
-        _player;
+    function createInstance(address /* _player */) public payable override returns (address) {
         Fallback instance = new Fallback();
         return address(instance);
     }

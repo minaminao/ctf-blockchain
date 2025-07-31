@@ -14,7 +14,7 @@ contract DWETH is ERC20 {
 contract StakeFactory is Level {
     address _dweth = address(new DWETH());
 
-    function createInstance(address _player) public payable override returns (address) {
+    function createInstance(address /* _player */) public payable override returns (address) {
         return address(new Stake(address(_dweth)));
     }
 

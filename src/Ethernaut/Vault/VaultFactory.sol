@@ -6,8 +6,7 @@ import "../Ethernaut/Level.sol";
 import "./Vault.sol";
 
 contract VaultFactory is Level {
-    function createInstance(address _player) public payable override returns (address) {
-        _player;
+    function createInstance(address /* _player */) public payable override returns (address) {
         bytes32 password = "A very strong secret password :)";
         Vault instance = new Vault(password);
         return address(instance);
