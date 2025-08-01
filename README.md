@@ -78,16 +78,17 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 ---
 
 ## CTF List
+🔗: External link
 
 **Always-on CTFs / Practice CTFs**
-
-🔗: External link
 
 | CTF Name                                                                      | Note                        |
 | ----------------------------------------------------------------------------- | --------------------------- |
 | [Ethernaut](src/Ethernaut/)                                                   |                             |
 | [Damn Vulnerable DeFi](https://github.com/theredguild/damn-vulnerable-defi) 🔗 |                             |
 | [fvictorio's EVM puzzles](src/FvictorioEVMPuzzles/)                           |                             |
+| [Dreamhack](https://dreamhack.io/wargame?category=web3) 🔗                     |                             |
+| [Hack The Box](https://app.hackthebox.com/challenges?category=12) 🔗           |                             |
 | [Capture the Ether](src/CaptureTheEther/)                                     |                             |
 | [Oak Security CosmWasm CTF](src/OakSecurityCosmWasmCTF/)                      |                             |
 | [Cipher Shastra](https://ciphershastra.com/) 🔗                                |                             |
@@ -99,6 +100,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------- |
 | [smileyCTF 2025](src/SmileyCTF/)                                                                                           | 2025-06              |
 | [DiceCTF 2025 Quals](src/DiceCTF2025/)                                                                                     | 2025-03              |
+| [Remedy CTF 2025](https://github.com/hexens/remedy-ctf-2025) 🔗                                                             | 2025-01              |
 | [SECCON CTF 13 Quals](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/seccon-ctf-13-quals)                   | 2024-11              |
 | [SCAN 2024 CTF](src/Scan2024CTF/)                                                                                          | 2024-10              |
 | [BlazCTF 2024](src/BlazCTF2024/)                                                                                           | 2024-09              |
