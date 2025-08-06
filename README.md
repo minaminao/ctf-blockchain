@@ -98,6 +98,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 
 | CTF Name                                                                                                                   | Event Month          |
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| [justCTF 2025](https://github.com/justcatthefish) 🔗                                                                        | 2025-08              |
 | [smileyCTF 2025](src/SmileyCTF/)                                                                                           | 2025-06              |
 | [DiceCTF 2025 Quals](src/DiceCTF2025/)                                                                                     | 2025-03              |
 | [Remedy CTF 2025](https://github.com/hexens/remedy-ctf-2025) 🔗                                                             | 2025-01              |
@@ -106,6 +107,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 | [BlazCTF 2024](src/BlazCTF2024/)                                                                                           | 2024-09              |
 | [The Flare-On Challenge 11](src/FlareOn11/)                                                                                | 2024-09              |
 | [SekaiCTF 2024](src/ProjectSekaiCTF2024/)                                                                                  | 2024-08              |
+| [Wintermute Alpha Challenge](https://github.com/WintermuteResearch/Alpha-Challenge) 🔗                                      | 2024-08              |
 | [corCTF2024](src/CorCTF2024/)                                                                                              | 2024-07              |
 | [HITCON CTF 2024 Quals](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/hitcon-ctf-2024-quals/lustrous)      | 2024-07              |
 | [SECCON Beginners CTF 2024](src/SECCONBeginnersCTF2024/)                                                                   | 2024-06              |
