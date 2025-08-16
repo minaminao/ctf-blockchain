@@ -49,6 +49,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
   - [ECDSA signature malleability attacks](#ecdsa-signature-malleability-attacks)
   - [Brute-forcing addresses](#brute-forcing-addresses)
   - [Recoveries of public keys](#recoveries-of-public-keys)
+  - [`ecrecover` returns `address(0)` for invalid signatures](#ecrecover-returns-address0-for-invalid-signatures)
   - [Encryption and decryption in secp256k1](#encryption-and-decryption-in-secp256k1)
   - [Bypassing bots and taking ERC-20 tokens owned by wallets with known private keys](#bypassing-bots-and-taking-erc-20-tokens-owned-by-wallets-with-known-private-keys)
   - [Claimable intermediate nodes of Merkle trees](#claimable-intermediate-nodes-of-merkle-trees)
@@ -255,10 +256,10 @@ Note:
 - If a destination is a contract and there is no receive Ether function or payable fallback function, Ether cannot be transferred.
 - However, instead of the normal transfer functions, the `selfdestruct` described in the next section can be used to force such a contract to transfer Ether.
 
-| Challenge                                                                  | Note, Keywords |
-| -------------------------------------------------------------------------- | -------------- |
-| [Ethernaut: 9. King](src/Ethernaut/)                                       |                |
-| [Project SEKAI CTF 2022: Random Song](src/ProjectSekaiCTF2022/RandomSong/) | Chainlink VRF  |
+| Challenge                                                         | Note, Keywords |
+| ----------------------------------------------------------------- | -------------- |
+| [Ethernaut: 9. King](src/Ethernaut/)                              |                |
+| [SekaiCTF 2022: Random Song](src/ProjectSekaiCTF2022/RandomSong/) | Chainlink VRF  |
 
 ### Forced Ether transfers to non-payable contracts via `selfdestruct`
 - If a contract does not have a receive Ether function and a payable fallback function, it is not guaranteed that Ether will not be received.
@@ -368,9 +369,9 @@ Note:
 ### EVM assembly logic bugs
 - Logic bugs in assemblies such as Yul
 
-| Challenge                                               | Note, Keywords |
-| ------------------------------------------------------- | -------------- |
-| [Project SEKAI CTF 2024: Zoo](src/ProjectSekaiCTF2024/) | `Pausable`     |
+| Challenge                                      | Note, Keywords |
+| ---------------------------------------------- | -------------- |
+| [SekaiCTF 2024: Zoo](src/ProjectSekaiCTF2024/) | `Pausable`     |
 
 ### EVM bytecode golf
 - These challenges have a limit on the length of the bytecode to be created.
@@ -427,7 +428,7 @@ Note:
 | [QuillCTF 2022: SafeNFT](src/QuillCTF2022/SafeNFT)                              | ERC721, `_safeMint()`      |
 | [Numen Cyber CTF 2023: SimpleCall](src/NumenCTF/)                               | `call`                     |
 | [SEETF 2023: PigeonBank](src/SEETF2023/)                                        |                            |
-| [Project SEKAI CTF 2023: Re-Remix](src/ProjectSekaiCTF2023/)                    | Read-Only Reentrancy       |
+| [SekaiCTF 2023: Re-Remix](src/ProjectSekaiCTF2023/)                             | Read-Only Reentrancy       |
 | [SECCON Beginners CTF 2024: vote4b](src/SECCONBeginnersCTF2024/vote4b/)         | ERC721, `_safeMint()`      |
 
 ### Flash loan basics
@@ -534,6 +535,14 @@ Note:
 | Challenge                                             | Note, Keywords |
 | ----------------------------------------------------- | -------------- |
 | [Capture The Ether: Public Key](src/CaptureTheEther/) | RLP, ECDSA     |
+
+### `ecrecover` returns `address(0)` for invalid signatures
+- The `ecrecover` precompile returns `address(0)` when the signature is invalid or malformed.
+- This behavior can be exploited if contracts don't properly validate the return value of `ecrecover`.
+
+| Challenge                                                          | Note, Keywords |
+| ------------------------------------------------------------------ | -------------- |
+| [SekaiCTF 2024: Play to Earn](src/ProjectSekaiCTF2024/PlayToEarn/) | Burn           |
 
 ### Encryption and decryption in secp256k1
 
@@ -697,8 +706,8 @@ Note
 | Paradigm CTF 2022: SOLHANA-2                          |                      |
 | Paradigm CTF 2022: SOLHANA-3                          |                      |
 | corCTF 2023: tribunal                                 |                      |
-| Project SEKAI CTF 2023: The Bidding                   |                      |
-| Project SEKAI CTF 2023: Play for Free                 |                      |
+| SekaiCTF 2023: The Bidding                            |                      |
+| SekaiCTF 2023: Play for Free                          |                      |
 
 ## Cosmos
 
