@@ -99,6 +99,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 
 | CTF Name                                                                                                                   | Event Month          |
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| [SekaiCTF 2025](https://github.com/project-sekai-ctf) 🔗                                                                    | 2025-08              |
 | [justCTF 2025](https://github.com/justcatthefish) 🔗                                                                        | 2025-08              |
 | [smileyCTF 2025](src/SmileyCTF/)                                                                                           | 2025-06              |
 | [DiceCTF 2025 Quals](src/DiceCTF2025/)                                                                                     | 2025-03              |
