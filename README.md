@@ -102,8 +102,11 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 | [SekaiCTF 2025](https://github.com/project-sekai-ctf) 🔗                                                                    | 2025-08              |
 | [justCTF 2025](https://github.com/justcatthefish) 🔗                                                                        | 2025-08              |
 | [smileyCTF 2025](src/SmileyCTF/)                                                                                           | 2025-06              |
+| [Hack The Box: Global Cyber Skills Benchmark CTF 2025](https://github.com/hackthebox/business-ctf-2025) 🔗                  | 2025-05              |
 | [DiceCTF 2025 Quals](src/DiceCTF2025/)                                                                                     | 2025-03              |
+| [Hack The Box: Cyber Apocalypse CTF 2025](https://github.com/hackthebox/cyber-apocalypse-2025) 🔗                           | 2025-03              |
 | [Remedy CTF 2025](https://github.com/hexens/remedy-ctf-2025) 🔗                                                             | 2025-01              |
+| [Hack The Box: University CTF 2024](https://github.com/hackthebox/university-ctf-2024) 🔗                                   | 2024-12              |
 | [SECCON CTF 13 Quals](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/seccon-ctf-13-quals)                   | 2024-11              |
 | [SCAN 2024 CTF](src/Scan2024CTF/)                                                                                          | 2024-10              |
 | [BlazCTF 2024](src/BlazCTF2024/)                                                                                           | 2024-09              |
@@ -113,7 +116,9 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 | [corCTF2024](src/CorCTF2024/)                                                                                              | 2024-07              |
 | [HITCON CTF 2024 Quals](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/hitcon-ctf-2024-quals/lustrous)      | 2024-07              |
 | [SECCON Beginners CTF 2024](src/SECCONBeginnersCTF2024/)                                                                   | 2024-06              |
+| [Hack The Box: HTB Business CTF 2024](https://github.com/hackthebox/business-ctf-2024) 🔗                                                        | 2024-03              |
 | [osu!gaming CTF 2024](src/Osu!GamingCTF2024)                                                                               | 2024-03              |
+| [Hack The Box: Cyber Apocalypse 2024](https://github.com/hackthebox/cyber-apocalypse-2024) 🔗                               | 2024-03              |
 | [DiceCTF 2024 Quals](src/DiceCTF2024/)                                                                                     | 2024-02              |
 | [LA CTF 2024](src/LACTF2024/)                                                                                              | 2024-02              |
 | [BlazCTF 2023](src/BlazCTF2023/)                                                                                           | 2023-12              |
@@ -134,6 +139,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 | [DeFi-Security-Summit-Stanford](src/DeFiSecuritySummitStanford/)                                                           | 2022-08              |
 | [MapleCTF 2022](src/MapleCTF2022)                                                                                          | 2022-08              |
 | [Paradigm CTF 2022](src/ParadigmCTF2022/)                                                                                  | 2022-08              |
+| [ALLES! CTF 2021](https://github.com/sajjadium/ctf-archives/tree/main/ctfs/ALLES/2021/crypto) 🔗                            | 2021-09              |
 | [Paradigm CTF 2021](src/ParadigmCTF2021/)                                                                                  | 2021-02              |
 | [0x41414141 CTF](src/0x41414141CTF/)                                                                                       | 2021-01              |
 | [DarkCTF](src/DarkCTF/)                                                                                                    | 2020-09              |
