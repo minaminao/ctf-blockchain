@@ -99,6 +99,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 
 | CTF Name                                                                                                                   | Event Month          |
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| [HITCON CTF 2025](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/hitcon-ctf-2025/maximal-extractable-vuln)  | 2025-08              |
 | [SekaiCTF 2025](https://github.com/project-sekai-ctf) 🔗                                                                    | 2025-08              |
 | [justCTF 2025](https://github.com/justcatthefish) 🔗                                                                        | 2025-08              |
 | [smileyCTF 2025](src/SmileyCTF/)                                                                                           | 2025-06              |
@@ -116,7 +117,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 | [corCTF2024](src/CorCTF2024/)                                                                                              | 2024-07              |
 | [HITCON CTF 2024 Quals](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/hitcon-ctf-2024-quals/lustrous)      | 2024-07              |
 | [SECCON Beginners CTF 2024](src/SECCONBeginnersCTF2024/)                                                                   | 2024-06              |
-| [Hack The Box: HTB Business CTF 2024](https://github.com/hackthebox/business-ctf-2024) 🔗                                                        | 2024-03              |
+| [Hack The Box: HTB Business CTF 2024](https://github.com/hackthebox/business-ctf-2024) 🔗                                   | 2024-03              |
 | [osu!gaming CTF 2024](src/Osu!GamingCTF2024)                                                                               | 2024-03              |
 | [Hack The Box: Cyber Apocalypse 2024](https://github.com/hackthebox/cyber-apocalypse-2024) 🔗                               | 2024-03              |
 | [DiceCTF 2024 Quals](src/DiceCTF2024/)                                                                                     | 2024-02              |
