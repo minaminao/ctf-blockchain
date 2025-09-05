@@ -99,6 +99,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 
 | CTF Name                                                                                                                   | Event Month          |
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| [corCTF 2025](https://github.com/Crusaders-of-Rust) 🔗                                                                      | 2025-08              |
 | [Full Weak Engineer CTF](src/FullWeakEngineerCTF/)                                                                         | 2025-08              |
 | [HITCON CTF 2025](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/hitcon-ctf-2025/maximal-extractable-vuln)  | 2025-08              |
 | [SekaiCTF 2025](https://github.com/project-sekai-ctf) 🔗                                                                    | 2025-08              |
