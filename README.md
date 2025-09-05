@@ -99,6 +99,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 
 | CTF Name                                                                                                                   | Event Month          |
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| [Full Weak Engineer CTF](src/FullWeakEngineerCTF/)                                                                         | 2025-08              |
 | [HITCON CTF 2025](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/hitcon-ctf-2025/maximal-extractable-vuln)  | 2025-08              |
 | [SekaiCTF 2025](https://github.com/project-sekai-ctf) 🔗                                                                    | 2025-08              |
 | [justCTF 2025](https://github.com/justcatthefish) 🔗                                                                        | 2025-08              |
@@ -438,6 +439,7 @@ Note:
 | [SEETF 2023: PigeonBank](src/SEETF2023/)                                        |                            |
 | [SekaiCTF 2023: Re-Remix](src/ProjectSekaiCTF2023/)                             | Read-Only Reentrancy       |
 | [SECCON Beginners CTF 2024: vote4b](src/SECCONBeginnersCTF2024/vote4b/)         | ERC721, `_safeMint()`      |
+| [Full Weak Engineer CTF: Save the Kappa](src/FullWeakEngineerCTF/SaveTheKappa/) |                            |
 
 ### Flash loan basics
 - Flash loans are uncollateralized loans that allow the borrowing of an asset, as long as the borrowed assets are returned before the end of the transaction. The borrower can deal with the borrowed assets any way they want within the transaction.
