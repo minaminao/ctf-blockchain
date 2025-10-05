@@ -6,7 +6,7 @@ import "./HigherOrder-8.sol";
 import "src/utils/Create.sol";
 
 contract HigherOrderFactory is Level {
-    function createInstance(address /* _player */) public payable override returns (address) {
+    function createInstance(address /* _player */ ) public payable override returns (address) {
         return Create.deploy("HigherOrder.sol:HigherOrder");
     }
 

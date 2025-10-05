@@ -6,7 +6,7 @@ import "../Ethernaut/Level.sol";
 import "./Fallout.sol";
 
 contract FalloutFactory is Level {
-    function createInstance(address /* _player */) public payable override returns (address) {
+    function createInstance(address /* _player */ ) public payable override returns (address) {
         Fallout instance = new Fallout();
         return address(instance);
     }

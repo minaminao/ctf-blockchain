@@ -6,7 +6,7 @@ import "../Ethernaut/Level.sol";
 import "./GatekeeperOne.sol";
 
 contract GatekeeperOneFactory is Level {
-    function createInstance(address /* _player */) public payable override returns (address) {
+    function createInstance(address /* _player */ ) public payable override returns (address) {
         GatekeeperOne instance = new GatekeeperOne();
         return address(instance);
     }

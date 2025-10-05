@@ -14,7 +14,7 @@ contract PreservationFactory is Level {
         timeZone2LibraryAddress = address(new LibraryContract());
     }
 
-    function createInstance(address /* _player */) public payable override returns (address) {
+    function createInstance(address /* _player */ ) public payable override returns (address) {
         return address(new Preservation(timeZone1LibraryAddress, timeZone2LibraryAddress));
     }
 

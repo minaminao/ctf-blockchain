@@ -58,6 +58,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
   - [Foundry cheatcodes](#foundry-cheatcodes)
   - [Front-running](#front-running)
   - [Back-running](#back-running)
+  - [EIP-7702](#eip-7702)
   - [Head overflow bugs in calldata tuple ABI-reencoding (\< Solidity 0.8.16)](#head-overflow-bugs-in-calldata-tuple-abi-reencoding--solidity-0816)
   - [Overwriting storage slots via local storage variables (\< Solidity 0.8.1)](#overwriting-storage-slots-via-local-storage-variables--solidity-081)
   - [Overwriting arbitrary storage slots by setting array lengths to `2^256-1` (\< Solidity 0.6.0)](#overwriting-arbitrary-storage-slots-by-setting-array-lengths-to-2256-1--solidity-060)
@@ -356,28 +357,29 @@ Note:
 - Use a disassembler (e.g., [ByteGraph](https://bytegraph.xyz/), [ethersplay](https://github.com/crytic/ethersplay)).
 - Use a debugger (e.g., [Foundry Debugger](https://book.getfoundry.sh/forge/debugger)).
 
-| Challenge                                                       | Note, Keywords                          |
-| --------------------------------------------------------------- | --------------------------------------- |
-| Incognito 2.0: Ez                                               | keep in plain text                      |
-| [0x41414141 CTF: crackme.sol](src/0x41414141CTF/)               | decompile                               |
-| [0x41414141 CTF: Crypto Casino](src/0x41414141CTF/)             | bypass condition check                  |
-| Paradigm CTF 2021: Babyrev                                      |                                         |
-| 34C3 CTF: Chaingang                                             |                                         |
-| Blaze CTF 2018: Smart? Contract                                 |                                         |
-| DEF CON CTF Qualifier 2018: SAG?                                |                                         |
-| pbctf 2020: pbcoin                                              |                                         |
-| Paradigm CTF 2022: STEALING-SATS                                |                                         |
-| Paradigm CTF 2022: ELECTRIC-SHEEP                               |                                         |
-| Paradigm CTF 2022: FUN-REVERSING-CHALLENGE                      |                                         |
-| [DownUnderCTF 2022: EVM Vault Mechanism](src/DownUnderCTF2022/) |                                         |
-| [EKOPARTY CTF 2022: Byte](src/EkoPartyCTF2022/)                 | stack tracing                           |
-| [EKOPARTY CTF 2022: SmartRev](src/EkoPartyCTF2022/)             | memory tracing                          |
-| [Numen Cyber CTF 2023: HEXP](src/NumenCTF/)                     | previous block hash == gas price % 2^24 |
-| [BlazCTF 2023: Maze](src/BlazCTF2023/)                          |                                         |
-| [BlazCTF 2023: Jambo](src/BlazCTF2023/)                         |                                         |
-| [BlazCTF 2023: Ghost](src/BlazCTF2023/)                         |                                         |
-| [Curta: Lana](src/Curta/20_Lana/)                               | LLVM                                    |
-| [Ethernaut: 30. HigherOrder](src/Ethernaut/HigherOrder/)        | calldata                                |
+| Challenge                                                                            | Note, Keywords                          |
+| ------------------------------------------------------------------------------------ | --------------------------------------- |
+| Incognito 2.0: Ez                                                                    | keep in plain text                      |
+| [0x41414141 CTF: crackme.sol](src/0x41414141CTF/)                                    | decompile                               |
+| [0x41414141 CTF: Crypto Casino](src/0x41414141CTF/)                                  | bypass condition check                  |
+| Paradigm CTF 2021: Babyrev                                                           |                                         |
+| 34C3 CTF: Chaingang                                                                  |                                         |
+| Blaze CTF 2018: Smart? Contract                                                      |                                         |
+| DEF CON CTF Qualifier 2018: SAG?                                                     |                                         |
+| pbctf 2020: pbcoin                                                                   |                                         |
+| Paradigm CTF 2022: STEALING-SATS                                                     |                                         |
+| Paradigm CTF 2022: ELECTRIC-SHEEP                                                    |                                         |
+| Paradigm CTF 2022: FUN-REVERSING-CHALLENGE                                           |                                         |
+| [DownUnderCTF 2022: EVM Vault Mechanism](src/DownUnderCTF2022/)                      |                                         |
+| [EKOPARTY CTF 2022: Byte](src/EkoPartyCTF2022/)                                      | stack tracing                           |
+| [EKOPARTY CTF 2022: SmartRev](src/EkoPartyCTF2022/)                                  | memory tracing                          |
+| [Numen Cyber CTF 2023: HEXP](src/NumenCTF/)                                          | previous block hash == gas price % 2^24 |
+| [BlazCTF 2023: Maze](src/BlazCTF2023/)                                               |                                         |
+| [BlazCTF 2023: Jambo](src/BlazCTF2023/)                                              |                                         |
+| [BlazCTF 2023: Ghost](src/BlazCTF2023/)                                              |                                         |
+| [Curta: Lana](src/Curta/20_Lana/)                                                    | LLVM                                    |
+| [Ethernaut: 30. HigherOrder](src/Ethernaut/HigherOrder/)                             | calldata                                |
+| [COMPFEST CTF 2025: Synthetic Manipulation](src/Compfest2025/SyntheticManipulation/) |                                         |
 
 ### EVM assembly logic bugs
 - Logic bugs in assemblies such as Yul
@@ -529,9 +531,10 @@ Note:
 - This can be exploited in systems that track used signatures, as the alternative signature may not be recognized as already used.
 - In Ethereum's secp256k1 curve, this property can be used to bypass signature verification mechanisms.
 
-| Challenge                                                  | Note, Keywords                           |
-| ---------------------------------------------------------- | ---------------------------------------- |
-| [SmileyCTF: MultisigWallet](src/SmileyCTF/MultisigWallet/) | ECDSA, signature malleability, secp256k1 |
+| Challenge                                                              | Note, Keywords                           |
+| ---------------------------------------------------------------------- | ---------------------------------------- |
+| [SmileyCTF: MultisigWallet](src/SmileyCTF/MultisigWallet/)             | ECDSA, signature malleability, secp256k1 |
+| [COMPFEST CTF 2025: snake_inception](src/Compfest2025/SnakeInception/) | Vyper                                    |
 
 ### Brute-forcing addresses
 - Brute force can make a part of an address a specific value.
@@ -619,6 +622,13 @@ Note:
 | [MEV-Share CTF: MevShareCTFMagicNumberV3](src/MEVShareCTF/)         |                |
 | [MEV-Share CTF: MevShareCTFNewContract (Address)](src/MEVShareCTF/) |                |
 | [MEV-Share CTF: MevShareCTFNewContract (Salt)](src/MEVShareCTF/)    | CREATE2        |
+
+### EIP-7702
+
+| Challenge                                                                                                                                           | Note, Keywords |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| [HITCON CTF 2025: Maximal Extractable Vuln](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/hitcon-ctf-2025/maximal-extractable-vuln) |                |
+| [COMPFEST CTF 2025: snake_inception](src/Compfest2025/SnakeInception/)                                                                              | Vyper          |
 
 ### Head overflow bugs in calldata tuple ABI-reencoding (< Solidity 0.8.16)
 - See: https://blog.soliditylang.org/2022/08/08/calldata-tuple-reencoding-head-overflow-bug/

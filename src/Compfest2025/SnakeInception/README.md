@@ -1,5 +1,5 @@
 
-Since the contract is using raw_call,  no problem if it goes OOG.
+Since the contract is using raw_call, no problem if it goes OOG.
 
 There are a signature in a past block:
 ```
@@ -20,3 +20,7 @@ Traces:
 Transaction successfully executed.
 Gas used: 68390
 ```
+
+
+Other solutions
+- >minimal proxy with leading zero or eip 7702

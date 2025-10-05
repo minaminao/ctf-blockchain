@@ -6,7 +6,7 @@ import "../Ethernaut/Level.sol";
 import "./CoinFlip.sol";
 
 contract CoinFlipFactory is Level {
-    function createInstance(address /* _player */) public payable override returns (address) {
+    function createInstance(address /* _player */ ) public payable override returns (address) {
         return address(new CoinFlip());
     }
 

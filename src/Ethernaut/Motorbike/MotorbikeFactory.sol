@@ -9,7 +9,7 @@ import "openzeppelin/utils/Address.sol";
 contract MotorbikeFactory is Level {
     mapping(address => address) private engines;
 
-    function createInstance(address /* _player */) public payable override returns (address) {
+    function createInstance(address /* _player */ ) public payable override returns (address) {
         Engine engine = new Engine();
         Motorbike motorbike = new Motorbike(address(engine));
         engines[address(motorbike)] = address(engine);
@@ -29,7 +29,7 @@ contract MotorbikeFactory is Level {
         return address(motorbike);
     }
 
-    function validateInstance(address payable _instance, address /* _player */) public view override returns (bool) {
+    function validateInstance(address payable _instance, address /* _player */ ) public view override returns (bool) {
         return !(engines[_instance].code.length > 0);
     }
 }
