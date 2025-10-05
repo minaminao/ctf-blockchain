@@ -2,7 +2,7 @@ name: test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, ci-test ]
     paths-ignore:
       - "**.md"
   pull_request:
