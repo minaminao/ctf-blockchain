@@ -99,6 +99,8 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 
 | CTF Name                                                                                                                   | Event Month          |
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| [COMPFEST CTF 2025](src/Compfest2025/)                                                                                     | 2025-10              |
+| [ImaginaryCTF 2025](https://github.com/ImaginaryCTF/ImaginaryCTF-2025-Challenges/tree/main/Misc/PBJ) 🔗                     | 2025-09              |
 | [corCTF 2025](https://github.com/Crusaders-of-Rust) 🔗                                                                      | 2025-08              |
 | [Full Weak Engineer CTF](src/FullWeakEngineerCTF/)                                                                         | 2025-08              |
 | [HITCON CTF 2025](https://github.com/minaminao/my-ctf-challenges/tree/main/ctfs/hitcon-ctf-2025/maximal-extractable-vuln)  | 2025-08              |
@@ -142,6 +144,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 | [DeFi-Security-Summit-Stanford](src/DeFiSecuritySummitStanford/)                                                           | 2022-08              |
 | [MapleCTF 2022](src/MapleCTF2022)                                                                                          | 2022-08              |
 | [Paradigm CTF 2022](src/ParadigmCTF2022/)                                                                                  | 2022-08              |
+| [TJCTF 2022](https://github.com/otter-sec/sol-ctf-framework/tree/main/examples/moar-horse-5)                               | 2022-05              |
 | [ALLES! CTF 2021](https://github.com/sajjadium/ctf-archives/tree/main/ctfs/ALLES/2021/crypto) 🔗                            | 2021-09              |
 | [Paradigm CTF 2021](src/ParadigmCTF2021/)                                                                                  | 2021-02              |
 | [0x41414141 CTF](src/0x41414141CTF/)                                                                                       | 2021-01              |
