@@ -4,7 +4,7 @@ This repository collects blockchain challenges in CTFs and wargames.
 
 These challenges are categorized by topic, not by difficulty or recommendation.
 Some of them include personal writeups and solutions (e.g., [Paradigm CTF 2022](src/ParadigmCTF2022/)).
-Please be aware that these contain spoilers. For contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.md).
+Please be aware that these contain spoilers.
 
 ---
 
@@ -145,7 +145,7 @@ Please be aware that these contain spoilers. For contribution guidelines, please
 | [DeFi-Security-Summit-Stanford](src/DeFiSecuritySummitStanford/)                                                           | 2022-08              |
 | [MapleCTF 2022](src/MapleCTF2022)                                                                                          | 2022-08              |
 | [Paradigm CTF 2022](src/ParadigmCTF2022/)                                                                                  | 2022-08              |
-| [TJCTF 2022](https://github.com/otter-sec/sol-ctf-framework/tree/main/examples/moar-horse-5)                               | 2022-05              |
+| [TJCTF 2022](https://github.com/otter-sec/sol-ctf-framework/tree/main/examples/moar-horse-5) 🔗                             | 2022-05              |
 | [ALLES! CTF 2021](https://github.com/sajjadium/ctf-archives/tree/main/ctfs/ALLES/2021/crypto) 🔗                            | 2021-09              |
 | [Paradigm CTF 2021](src/ParadigmCTF2021/)                                                                                  | 2021-02              |
 | [0x41414141 CTF](src/0x41414141CTF/)                                                                                       | 2021-01              |
